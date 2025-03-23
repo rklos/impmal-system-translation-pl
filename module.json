@@ -1,0 +1,54 @@
+{
+  "id": "impmal-system-translation-pl",
+  "title": "Imperium Maledictum - System - Tłumaczenie PL",
+  "description": "This module implements the Polish translation of the system created by Man Moon to play Warhammer 40k: Imperium Maledictum.",
+  "authors": [
+    {
+      "name": "rklos",
+      "discord": "_orkin",
+      "url": "https://github.com/rklos",
+      "flags": {}
+    }
+  ],
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "impmal",
+        "type": "system",
+        "compatibility": {
+          "minimum": "2.1.1",
+          "verified": "2.1.1"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "babele",
+        "type": "module"
+      },
+      {
+        "id": "PolishCore",
+        "type": "module"
+      }
+    ]
+  },
+  "coreTranslation": true,
+  "languages": [
+    {
+      "lang": "pl",
+      "name": "Polski",
+      "path": "lang/pl.json",
+      "flags": {}
+    }
+  ],
+  "license": "LICENSE",
+  "readme": "README.md",
+  "url": "https://github.com/rklos/impmal-system-translation-pl",
+  "manifest": "https://github.com/rklos/impmal-system-translation-pl/releases/download/1.0.0/module.json",
+  "download": "https://github.com/rklos/impmal-system-translation-pl/releases/download/1.0.0/impmal-system-translation-pl.zip"
+}
