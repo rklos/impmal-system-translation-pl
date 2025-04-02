@@ -1,13 +1,16 @@
 # [PL] FoundryVTT - Tłumaczenie systemu Imperium Maledictum
 
-## [PL] Opis Modułu
+## Opis Modułu
 Ten moduł tłumaczy na język polski kluczowe terminy zawarte w systemie stworzonym przez [Man Moon](https://github.com/moo-man) do obsługi gry [Warhammer 40k Roleplay: Imperium Maledictum](https://cubicle7games.com/our-games/warhammer-40k-roleplay-imperium-maledictum) na platformie [Foundry VTT](https://foundryvtt.com/)
 
 Tłumaczenie to dotyczy tylko samego systemu, a nie zawartości kompendium.
 
 Efekt będzie zatem widoczny głównie w ogólnych terminach używanych w kartach postaci (Agenci, NPC i Pojazdy), a także w wynikach rzutów kośćmi w oknie czatu.
 
-Uwaga: Niektóre terminy nadal będą wyświetlane w języku angielskim, ponieważ nie zostały jeszcze udostępnione do tłumaczenia.
+#### Uwaga
+Niektóre terminy nadal będą wyświetlane w języku angielskim, ponieważ nie zostały jeszcze udostępnione do tłumaczenia.
+
+Tłumaczenie zostało wykonane przy użyciu AI oraz dostosowane ręcznie, aby słownictwo nie odbiegało od Podręcznika Gracza. Nadal mogą występować pojedyncze "dziwne" tłumaczenia, które sukcesywnie będę poprawiał. Aby przyspieszyć moją pracę, zachęcam do zgłaszania błędów na GitHubie.
 
 ## Instalacja
 Przez menu Modułów w panelu administracyjnym Foundry:
