@@ -10,7 +10,7 @@ Efekt będzie zatem widoczny głównie w ogólnych terminach używanych w kartac
 #### Uwaga
 Niektóre terminy nadal będą wyświetlane w języku angielskim, ponieważ nie zostały jeszcze udostępnione do tłumaczenia.
 
-Tłumaczenie zostało wykonane przy użyciu AI oraz dostosowane ręcznie, aby słownictwo nie odbiegało od Podręcznika Gracza. Nadal mogą występować pojedyncze "dziwne" tłumaczenia, które sukcesywnie będę poprawiał. Aby przyspieszyć moją pracę, zachęcam do zgłaszania błędów na GitHubie.
+Tłumaczenie zostało wykonane automatycznie oraz dostosowane ręcznie, aby słownictwo nie odbiegało od Podręcznika Gracza. Nadal mogą występować pojedyncze "dziwne" tłumaczenia, które sukcesywnie będę poprawiał. Aby przyspieszyć moją pracę, zachęcam do zgłaszania błędów na GitHubie.
 
 ## Instalacja
 Przez menu Modułów w panelu administracyjnym Foundry:
