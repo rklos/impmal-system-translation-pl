@@ -34,6 +34,10 @@
       {
         "id": "PolishCore",
         "type": "module"
+      },
+      {
+        "id": "impmal",
+        "type": "system"
       }
     ]
   },
@@ -49,6 +53,6 @@
   "license": "LICENSE",
   "readme": "README.md",
   "url": "https://github.com/rklos/impmal-system-translation-pl",
-  "manifest": "https://github.com/rklos/impmal-system-translation-pl/releases/download/1.0.0/module.json",
-  "download": "https://github.com/rklos/impmal-system-translation-pl/releases/download/1.0.0/impmal-system-translation-pl.zip"
+  "manifest": "https://github.com/rklos/impmal-system-translation-pl/releases/latest/download/module.json",
+  "download": "https://github.com/rklos/impmal-system-translation-pl/releases/latest/download/impmal-system-translation-pl.zip"
 }
