@@ -23,7 +23,7 @@ Po uruchomieniu świata gry:
 - w ustawieniach gry:
   - Domyślny język (zakładka Core -> "Language Preference"): wybierz Polski
 - zarządzanie modułami
-  - wybierz "Imperium Maledictum - System - Tłumaczenie PL" i zapisz.
+  - wybierz "Imperium Maledictum - System - Nieoficjalne Tłumaczenie PL" i zapisz.
 
 ## Zależności
 - Oficjalny system IM dla Foundry VTT stworzony przez Man Moon: https://foundryvtt.com/packages/impmal/
