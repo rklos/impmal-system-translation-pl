@@ -1,10 +1,18 @@
 =======================================================================
 
 Since version 1.0.1 the following license applies to:
-* translations of the moo-man's ImpMal's core module
-* custom scripts that change behaviour of the moo-man's ImpMal's core module
-* custom templates extending the moo-man's ImpMal's core module
+* translations of the moo-man's ImpMal system module and the WarhammerLibrary module
+* custom scripts that change behaviour of the moo-man's ImpMal system module and the WarhammerLibrary module
+* custom templates extending the moo-man's ImpMal system module and the WarhammerLibrary module
 * the rest of the project not covered by any other license
+
+moo-man's ImpMal system module: https://github.com/moo-man/ImpMal-FoundryVTT
+moo-man's WarhammerLibrary module: https://github.com/moo-man/WarhammerLibrary-FVTT
+
+The following license DOES NOT apply to:
+* translations of modules other than mentioned above
+* custom scripts that change behaviour of modules other than mentioned above
+* custom templates extending modules other than mentioned above
 
 =======================================================================
 
