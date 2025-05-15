@@ -25,9 +25,12 @@ jobs:
         id: tag
         uses: dawidd6/action-get-tag@v1.1.0
 
-      - name: Create ZIP
-        working-directory: ./
-        run: zip -r ./${{steps.moduleID.outputs.prop}}.zip ./*
+      - name: Set Download Link
+        uses: jossef/action-set-json-field@v2
+        with:
+          file: './module.json'
+          field: 'version'
+          value: "${{steps.tag.outputs.tag}}"
           
       - name: Set Download Link
         uses: jossef/action-set-json-field@v2
@@ -43,6 +46,10 @@ jobs:
           field: 'manifest'
           value: "https://github.com/${{github.repository}}/releases/download/${{steps.tag.outputs.tag}}/module.json"
           
+      - name: Create ZIP
+        working-directory: ./
+        run: zip -r ./${{steps.moduleID.outputs.prop}}.zip ./*
+
       - name: Create Release
         uses: ncipollo/release-action@v1.9.0
         with:
