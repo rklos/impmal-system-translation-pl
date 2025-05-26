@@ -1,7 +1,7 @@
 {
   "id": "impmal-system-translation-pl",
   "title": "Imperium Maledictum - System - Nieoficjalne Tłumaczenie PL",
-  "description": "This module implements the unofficial Polish translation of the system created by Man Moon to play Warhammer 40k: Imperium Maledictum.",
+  "description": "The Polish translation of WH40k: Imperium Maledictum system by Moo-Man on FoundryVTT.",
   "authors": [
     {
       "name": "rklos",
