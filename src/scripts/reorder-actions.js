@@ -15,6 +15,7 @@ export function reorderActions() {
       seize,
       shove,
       cover,
+      ...rest
     }
   } = IMPMAL;
 
@@ -33,5 +34,6 @@ export function reorderActions() {
     charge,
     hide,
     dodge,
+    ...rest,
   }
 }
