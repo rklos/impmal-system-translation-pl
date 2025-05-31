@@ -1,6 +1,7 @@
 import { reorderSkills } from './reorder-skills.js';
 import { reorderActions } from './reorder-actions.js';
 import { useCustomLabels } from './use-custom-labels.js';
+import { patchTemplates } from './patch-templates.js';
 import '../styles/main.scss';
 
 Hooks.on('init', async () => {
@@ -8,6 +9,7 @@ Hooks.on('init', async () => {
   reorderSkills();
   reorderActions();
   useCustomLabels();
+  patchTemplates();
 
   // If something needs to wait, we can do it here
   // await wait(250);
