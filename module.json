@@ -13,7 +13,8 @@
   "version": "1.0.0",
   "compatibility": {
     "minimum": "11",
-    "verified": "12"
+    "verified": "12",
+    "maximum": "12"
   },
   "relationships": {
     "systems": [
@@ -32,12 +33,16 @@
         "type": "module"
       },
       {
-        "id": "PolishCore",
-        "type": "module"
-      },
-      {
         "id": "impmal",
         "type": "system"
+      },
+      {
+        "id": "warhammer-lib",
+        "type": "module",
+        "compatibility": {
+          "minimum": "1.7.1",
+          "verified": "1.7.1"
+        }
       }
     ]
   },
