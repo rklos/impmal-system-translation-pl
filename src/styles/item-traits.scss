@@ -1,6 +1,8 @@
 .impmal.item-traits {
-  .form-fields {
-    flex: 0;
+  min-width: 250px;
+
+  label {
+    min-width: fit-content;
   }
 
   input[type=text] {
