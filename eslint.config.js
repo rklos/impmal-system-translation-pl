@@ -14,4 +14,14 @@ export default [
       },
     },
   },
+  {
+    files: [ 'tools/**/*.js' ],
+    rules: {
+      'no-console': 0,
+      'no-underscore-dangle': 0,
+      'no-restricted-syntax': 0,
+      'guard-for-in': 0,
+      'no-continue': 0,
+    },
+  },
 ];
