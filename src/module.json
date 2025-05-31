@@ -47,6 +47,9 @@
     ]
   },
   "coreTranslation": true,
+  "scripts": [
+    "impmal-pl.js"
+  ],
   "languages": [
     {
       "lang": "pl",
