@@ -50,6 +50,9 @@
   "scripts": [
     "impmal-pl.js"
   ],
+  "styles": [
+    "impmal-pl.css"
+  ],
   "languages": [
     {
       "lang": "pl",

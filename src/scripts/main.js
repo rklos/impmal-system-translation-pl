@@ -1,6 +1,7 @@
 import { reorderSkills } from './reorder-skills.js';
 import { reorderActions } from './reorder-actions.js';
 import { useCustomLabels } from './use-custom-labels.js';
+import '../styles/main.scss';
 
 Hooks.on('init', async () => {
   // Without waiting at the beginning because we need to be faster than the system's init
