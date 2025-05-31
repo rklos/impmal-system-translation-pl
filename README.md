@@ -12,6 +12,8 @@ Niektóre terminy nadal będą wyświetlane w języku angielskim, ponieważ nie 
 
 Tłumaczenie zostało wykonane automatycznie oraz dostosowane ręcznie, aby słownictwo nie odbiegało od Podręcznika Gracza. Nadal mogą występować pojedyncze "dziwne" tłumaczenia, które sukcesywnie będę poprawiał. Aby przyspieszyć moją pracę, zachęcam do zgłaszania błędów na GitHubie.
 
+Tłumaczenie WarhammerLibrary zostało zapożyczone z [Oficjalnego tłumaczenia WFRP4e](https://github.com/silentmark/wfrp4e-core-pl), aby zachować spójność między systemami.
+
 **Polski wydawca Copernicus Corporation został poinformowany o istnieniu tego nieoficjalnego tłumaczenia.**
 
 ## Instalacja
