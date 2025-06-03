@@ -22,6 +22,8 @@ jobs:
 
       - name: Run sync script
         run: npm run sync
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9

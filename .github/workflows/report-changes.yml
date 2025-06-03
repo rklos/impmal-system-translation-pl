@@ -22,3 +22,5 @@ jobs:
         
       - name: Run report script
         run: npm run report
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
