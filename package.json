@@ -20,6 +20,7 @@
   "devDependencies": {
     "@rklos/eslint-configs": "https://github.com/rklos/eslint-configs.git#1.1.1",
     "chalk": "5.4.1",
+    "discord.js": "14.19.3",
     "eslint": "9.28.0",
     "fs-extra": "11.3.0",
     "sass": "1.89.0",

@@ -2,6 +2,7 @@ import fs from 'fs';
 import chalk from 'chalk';
 import { getLatestChanges } from './get-latest-changes.js';
 import { TEMPLATES_PATCHES } from '../src/scripts/patch-templates.js';
+import { sendNotification, reportError } from './discord.js';
 
 const repos = {
   system: 'moo-man/ImpMal-FoundryVTT',
@@ -102,6 +103,8 @@ async function checkTranslations(changes, name, repo) {
   if (missingKeys.length === 0 && extraKeys.length === 0) {
     console.log(chalk.green('\nNo translation differences found'));
   }
+
+  return missingKeys.length > 0 || extraKeys.length > 0;
 }
 
 async function checkChanges() {
@@ -109,10 +112,15 @@ async function checkChanges() {
     try {
       console.log(chalk.blue(`\n=== Checking ${name} ===`));
       const changes = await getLatestChanges(repo);
-      await checkTemplates(changes, name);
-      await checkTranslations(changes, name, repo);
+
+      let hasChanges = false;
+      hasChanges = await checkTemplates(changes, name) || hasChanges;
+      hasChanges = await checkTranslations(changes, name, repo) || hasChanges;
+
+      if (hasChanges) await sendNotification('Changes Check', `Changes found in ${name}`);
     } catch (error) {
       console.error(chalk.red(`Error processing ${name}:`), error);
+      await reportError('Changes Check', error.message);
     }
   }
 }

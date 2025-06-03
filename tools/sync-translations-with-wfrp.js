@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { sendNotification, reportError } from './discord.js';
 
 async function updateTranslations() {
   try {
@@ -50,11 +51,13 @@ async function updateTranslations() {
         console.log(`  New: "${newValue}"`);
       });
       console.log(`\nTotal translations updated: ${changedTranslations.length}`);
+      await sendNotification('Translation Sync', `Updated ${changedTranslations.length} translations`);
     } else {
       console.log('No translations were updated');
     }
   } catch (error) {
     console.error('Error updating translations:', error);
+    await reportError('Translation Sync', error.message);
   }
 }
 
