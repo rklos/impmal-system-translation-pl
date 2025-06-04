@@ -1,4 +1,6 @@
 {
+
+
   "TYPES.Actor.character": "Postać Gracza",
   "TYPES.Actor.npc": "Postać Niezależna",
   "TYPES.Actor.patron": "Patron",
@@ -44,7 +46,7 @@
   "IMPMAL.ApplyDutyContent": "<p>Zastosować tę Funkcję dla tej Postaci? Doda to określone Cechy, Umiejętności, Wpływy i Przedmioty</p>",
   "IMPMAL.ApplyOriginTitle": "Wybierz Cechę Pochodzenia",
   "IMPMAL.ApplyOriginPrompt": "Wybierz premię do Cechy zapewnianą przez Pochodzenie.",
-  "IMPMAL.ApplyFactionDutyContent": "<p>Wybrać Funkcję do zastosowania dla tej postaci?</p>",
+  "ApplyFactionDutyContent": "<p>Wybrać Funkcję do zastosowania dla tej postaci?</p>",
   "IMPMAL.Armour": "Pancerz",
   "IMPMAL.ArmourConfig": "Konfiguracja Pancerza",
   "IMPMAL.ArmourRoll": "Rzut na Pancerz",
@@ -174,7 +176,7 @@
       "Message": {
           "Start": "<p><b>{user}</b> rozpoczął tworzenie postaci!</p>",
           "Created": "<p><b>{name}</b> stworzony!",
-          "AllocateCharacteristics": "<p>Rozpoczęto Przydzielanie Cech</p>",
+          "AllocateCharacteristics": "<p>Rozpoczęto przydzielanie Cech</p>",
           "SwappedCharacteristics": "<p>Zamieniono {ch1} z {ch2}</p>",
           "Chosen": "<p>Wybrano: <b>{chosen}</b>!</p>",
           "Rolled": "<p>Wyrzucono: <b>{rolled}</b>!</p>",
@@ -193,8 +195,7 @@
           "TooManySkillAdvances": "Nowa Postać nie może mieć więcej niż 2 Rozwinięcia w jednej Umiejętności ({skill})",
           "TooManySpecAdvances": "Nowa Postać nie może mieć więcej niż 1 Rozwinięcie w jednej Specjalizacji",
           "CharacteristicAllocation": "Punkty przydzielania Cech nie mogą przekroczyć 90",
-          "CharacteristicAllocationBounds": "Nie można przydzielić mniej niż 4 lub więcej niż 18 w pojedynczej cesze",
-          "StageAlreadySubmitted": "Ten etap został już zatwierdzony"
+          "CharacteristicAllocationBounds": "Nie można przydzielić mniej niż 4 lub więcej niż 18 w pojedynczej cesze"
       },
 
       "Characteristics": {
@@ -211,10 +212,10 @@
   "IMPMAL.ActorConfig": {
       "Title": "Konfiguracja Aktora",
       "AutoCalc": {
-          "Wounds": "Automatyczne Obliczanie Ran",
-          "CriticalWounds": "Automatyczne Obliczanie Ran Krytycznych",
-          "Initiative": "Automatyczne Obliczanie Inicjatywy",
-          "Corruption": "Automatyczne Obliczanie Spaczenia"
+          "Wounds": "Automatyczne obliczanie Ran",
+          "CriticalWounds": "Automatyczne obliczanie Ran Krytycznych",
+          "Initiative": "Automatyczne obliczanie Inicjatywy",
+          "Corruption": "Automatyczne obliczanie Spaczenia"
       }
   },
 
