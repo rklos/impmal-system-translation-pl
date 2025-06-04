@@ -72,13 +72,13 @@ async function checkTranslations(changes, name, repo) {
     for (const key in remoteObj) {
       const currentPath = path ? `${path}.${key}` : key;
 
-      if (typeof remoteObj[key] === 'object' && remoteObj[key] !== null) {
-        if (!localObj[key]) {
+      if (typeof remoteObj[key] === 'object' && remoteObj[key] != null) {
+        if (localObj[key] == null) {
           missingKeys.push(currentPath);
         } else {
           findDifferences(localObj[key], remoteObj[key], currentPath);
         }
-      } else if (!localObj[key]) {
+      } else if (localObj[key] == null) {
         missingKeys.push(currentPath);
       }
     }
@@ -86,7 +86,7 @@ async function checkTranslations(changes, name, repo) {
     for (const key in localObj) {
       if (key.startsWith('//')) continue;
       const currentPath = path ? `${path}.${key}` : key;
-      if (!remoteObj[key]) extraKeys.push(currentPath);
+      if (remoteObj[key] == null) extraKeys.push(currentPath);
     }
   }
 

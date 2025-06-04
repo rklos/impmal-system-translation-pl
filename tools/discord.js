@@ -1,8 +1,11 @@
 import { WebhookClient, EmbedBuilder } from 'discord.js';
 
-const webhook = new WebhookClient({
-  url: process.env.DISCORD_WEBHOOK,
-});
+let webhook;
+if (process.env.DISCORD_WEBHOOK) {
+  webhook = new WebhookClient({
+    url: process.env.DISCORD_WEBHOOK,
+  });
+}
 
 export async function sendNotification(job, output) {
   if (!process.env.DISCORD_WEBHOOK) return console.log('No Discord webhook URL found');
