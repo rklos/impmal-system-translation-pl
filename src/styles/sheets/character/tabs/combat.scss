@@ -1,0 +1,15 @@
+.impmal.character .tab[data-tab="combat"] {
+  .attribute-box.single {
+    flex: 3;
+
+    // Speed box
+    &:last-child {
+      flex: 4;
+
+      .field {
+        font-size: var(--font-size-12);
+        line-height: 1;
+      }
+    }
+  }
+}

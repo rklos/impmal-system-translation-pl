@@ -1,0 +1,12 @@
+.impmal.npc {
+  .npc-header {
+    .attribute-row:last-child {
+      // Speed box
+      .attribute-box:nth-child(2) {
+        .field {
+          font-size: var(--font-size-12);
+        }
+      }
+    }
+  }
+}
