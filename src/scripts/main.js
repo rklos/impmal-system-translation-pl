@@ -1,5 +1,5 @@
-import { reorderSkills } from './reorder-skills.js';
-import { reorderActions } from './reorder-actions.js';
+import { reorderSkills } from './character-sheet/reorder-skills.js';
+import { reorderActions } from './character-sheet/reorder-actions.js';
 import { useCustomLabels } from './use-custom-labels.js';
 import { patchTemplates } from './patch-templates.js';
 import '../styles/main.scss';
