@@ -74,6 +74,7 @@
   "IMPMAL.Availability": "Dostępność",
   "IMPMAL.Awareness": "Spostrzegawczość",
   "IMPMAL.BS": "US",
+  "IMPMAL.BackArmour": "Pancerz tylny",
   "IMPMAL.BallisticSkill": "Umiejętności Strzeleckie",
   "IMPMAL.Barrier": "Bariera",
   "IMPMAL.Base": "Podstawa",
@@ -89,7 +90,8 @@
   "IMPMAL.Bulky": "Nieporęczny",
   "IMPMAL.BugReporter": "Zgłaszanie Błędów",
   "IMPMAL.Burst": "Seria",
-  "IMPMAL.Buy": "Kup ({cost})",
+  "IMPMAL.Buy": "Kup",
+  "IMPMAL.BuyCost": "Kup ({cost})",
   "IMPMAL.BuySuccessful": "<p>Kupiono <strong>{item}</strong> za <strong>{cost} Solarów</strong></p>",
   "IMPMAL.BuyAmmo": "Kup Amunicję",
   "IMPMAL.CalledShot": "Precyzyjny Strzał",
@@ -356,6 +358,7 @@
   "IMPMAL.Formula": "Formuła",
   "IMPMAL.Fortitude": "Hart",
   "IMPMAL.Free": "Darmowy",
+  "IMPMAL.FrontArmour": "Pancerz przedni",
   "IMPMAL.Fumble": "Pech",
   "IMPMAL.Gender": "Płeć",
   "IMPMAL.GMNotes": "Notatki MG",
@@ -392,7 +395,8 @@
   "IMPMAL.Influence": "Wpływy",
   "IMPMAL.Infl": "Wpł.",
   "IMPMAL.Initiative": "Inicjatywa",
-  "IMPMAL.Injury": "Urazy",
+  "IMPMAL.Injury": "Uraz",
+  "IMPMAL.Injuries": "Urazy",
   "IMPMAL.Instant": "Natychmiastowy",
   "IMPMAL.InStock": "Na Stanie!",
   "IMPMAL.InsufficentQuantity": "Niewystarczająca Ilość",
@@ -437,7 +441,7 @@
   "IMPMAL.Lore": "Wiedza",
   "IMPMAL.Loud": "Głośna",
   "IMPMAL.Mag": "Mag",
-  "IMPMAL.Main": "Główny",
+  "IMPMAL.Main": "Główne",
   "IMPMAL.Major": "Poważny",
   "IMPMAL.MajorHazard": "Poważne Zagrożenie",
   "IMPMAL.Malignancy": "Złośliwość",
@@ -502,6 +506,7 @@
   "IMPMAL.OriginApplied": "Zastosowano Pochodzenie {name}",
   "IMPMAL.Ornamental": "Ozdobny",
   "IMPMAL.Other": "Inne",
+  "IMPMAL.Offsets": "Pozostałe",
   "IMPMAL.OutOfStock": "Brak na Stanie!",
   "IMPMAL.OverburdenedThreshold": "Próg Przeciążenia",
   "IMPMAL.Overload": "Przeciążenie",
@@ -608,6 +613,8 @@
   "IMPMAL.SendingSocketRequest": "Wysyłanie Żądania Gniazda do {name}",
   "IMPMAL.SeizeTheInitiative": "Przejęcie Inicjatywy",
   "IMPMAL.SetPatron": "Ustaw jako Patrona",
+  "IMPMAL.SelfTest" : "Test Własny",
+  "IMPMAL.SelfTestTT" : "Właściciel tej Cechy powinien rzucić ten Test.",
   "IMPMAL.Shield": "Tarcza",
   "IMPMAL.Shock": "Porażająca",
   "IMPMAL.Shoddy": "Marny",
@@ -629,6 +636,7 @@
   "IMPMAL.Source": "Źródło",
   "IMPMAL.Special": "Specjalny",
   "IMPMAL.Specialisation": "Specjalizacja",
+  "IMPMAL.Specialisations": "Specjalizacje",
   "IMPMAL.SpecialisationAdvances": "Rozwinięcia Specjalizacji",
   "IMPMAL.Specialised": "Specjalistyczna",
   "IMPMAL.Species": "Gatunek",
@@ -653,6 +661,7 @@
   "IMPMAL.SupportAttachment": "Modyfikacja wsparcia",
   "IMPMAL.Sustained": "Podtrzymywany",
   "IMPMAL.TableSettings": "Ustawienia Tabeli",
+  "IMPMAL.TableConfigure": "Konfiguracja Tabel",
   "IMPMAL.TableSettingsHint": "Skonfiguruj, których tabel system używa w kontekstowych linkach.",
   "IMPMAL.TableSetting.critarm": "Trafienia Krytyczne - Ramię",
   "IMPMAL.TableSetting.critleg": "Trafienia Krytyczne - Noga",
@@ -798,5 +807,225 @@
   "IMPMAL.WorldShrine": "Sanktuarium",
   "IMPMAL.WorldHive": "Kopiec",
   "IMPMAL.WorldForge": "Kuźnia",
-  "IMPMAL.XP": "PD"
+  "IMPMAL.XP": "PD",
+  
+  "WH": {
+    "Models": {
+      "ammo": {
+        "FIELDS": {
+          "custom": {
+            "label": "Niestandardowa",
+            "hint": "Przeciągnij i upuść niestandardową amunicję na standardową, aby zastosować modyfikatory"
+          },
+          "priceMultiplier": {
+            "label": "Mnożnik Ceny"
+          },
+          "damage": {
+            "label": "Obrażenia"
+          },
+          "usedWith": {
+            "label": "Używana z"
+          }
+        }
+      },
+      "boonLiability": {
+        "FIELDS": {
+          "category": {
+            "label": "Kategoria"
+          },
+          "oneUse": {
+            "label": "Jednorazowe"
+          }
+        }
+      },
+      "duty": {
+        "FIELDS": {
+          "category": {
+            "label": "Kategoria"
+          },
+          "character.solars": {
+            "label": "Solary"
+          }
+        }
+      },
+      "corruption": {
+        "FIELDS": {
+          "category": {
+            "label": "Kategoria"
+          }
+        }
+      },
+      "equipment": {
+        "FIELDS": {}
+      },
+      "forceField": {
+        "FIELDS": {
+          "protection": {
+            "label": "Ochrona"
+          },
+          "overload": {
+            "value": {
+              "label": "Przeciążenie"
+            },
+            "collapsed": {
+              "label": "Opadnięte"
+            }
+          }
+        }
+      },
+      "modification": {
+        "FIELDS": {
+          "category": {
+            "label": "Kategoria"
+          },
+          "usedWith": {
+            "label": "Używana z"
+          }
+        }
+      },
+      "power": {
+        "FIELDS": {
+          "discipline": {
+            "label": "Dyscyplina"
+          },
+          "minorSpecialisation": {
+            "label": "Specjalizacja"
+          },
+          "difficulty": {
+            "label": "Trudność"
+          },
+          "rating": {
+            "label": "Współczynnik Osnowy"
+          },
+          "range": {
+            "label": "Zasięg"
+          },
+          "target": {
+            "label": "Cel"
+          },
+          "duration": {
+            "label": "Czas Trwania"
+          },
+          "overt": {
+            "label": "Jawne"
+          }
+        }
+      },
+      "protection": {
+        "FIELDS": {
+          "category": {
+            "label": "Kategoria"
+          },
+          "armour": {
+            "label": "Pancerz"
+          },
+          "locations": {
+            "label": {
+              "label": "Lokalizacje"
+            }
+          }
+        }
+      },
+      "specialisation": {
+        "FIELDS": {
+          "restricted": {
+            "label": "Ograniczona"
+          },
+          "skill": {
+            "label": "Umiejętność"
+          }
+        }
+      },
+      "talent": {
+        "FIELDS": {
+          "requirement": {
+            "value": {
+              "label": "Wymaganie"
+            },
+            "script": {
+              "label": "Skrypt Wymagania"
+            }
+          }
+        }
+      },
+      "origin": {
+        "FIELDS": {
+          "characteristics.base": {
+            "label": "Cecha"
+          }
+        }
+      },
+      "weapon": {
+        "FIELDS": {
+          "attackType": {
+            "label": "Typ Ataku"
+          },
+          "category": {
+            "label": "Kategoria"
+          },
+          "spec": {
+            "label": "Specjalizacja"
+          },
+          "range": {
+            "label": "Zasięg"
+          },
+          "mag": {
+            "value": {
+              "label": "Mag"
+            }
+          },
+          "ammoCost": {
+            "label": "Koszt Amunicji"
+          }
+        }
+      },
+      "faction": {
+        "FIELDS": {
+          "character": {
+            "characterisics": {
+              "base": {
+                "label": "Cecha"
+              }
+            }
+          }
+        }
+      },
+      "trait": {
+        "FIELDS": {
+          "attack": {
+            "type": {
+              "label": "Typ Ataku"
+            },
+            "characteristic": {
+              "label": "Cecha"
+            },
+            "damage": {
+              "characteristic": {
+                "label": "Cecha"
+              },
+              "ignoreAP": {
+                "label": "Ignoruj PZ"
+              }
+            },
+            "range": {
+              "label": "Zasięg"
+            }
+          }
+        }
+      }
+    },
+    "Components": {
+      "Locational": {
+        "FIELDS": {
+          "prompt": {
+            "label": "Zapytaj o Umiejscowienie",
+            "hint": "Zapytaj o umiejscowienie przy dodawaniu do Aktora."
+          },
+          "location.value": {
+            "label": "Umiejscowienie"
+          }
+        }
+      }
+    }
+  }
 }
