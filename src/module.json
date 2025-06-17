@@ -31,18 +31,6 @@
       {
         "id": "babele",
         "type": "module"
-      },
-      {
-        "id": "impmal",
-        "type": "system"
-      },
-      {
-        "id": "warhammer-lib",
-        "type": "module",
-        "compatibility": {
-          "minimum": "2.0.0",
-          "verified": "2.1.0"
-        }
       }
     ]
   },

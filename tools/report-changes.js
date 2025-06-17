@@ -4,10 +4,17 @@ import { getLatestChanges } from './get-latest-changes.js';
 import { TEMPLATES_PATCHES } from '../src/scripts/patch-templates.js';
 import { sendNotification, reportError } from './discord.js';
 
-const repos = {
-  system: 'moo-man/ImpMal-FoundryVTT',
-  'warhammer-library': 'moo-man/WarhammerLibrary-FVTT',
-};
+const modules = [
+  {
+    lang: 'system',
+    repo: 'moo-man/ImpMal-FoundryVTT',
+  },
+  {
+    lang: 'warhammer-library',
+    repo: 'moo-man/WarhammerLibrary-FVTT',
+    version: '2.1.0',
+  },
+];
 
 async function checkTemplates(changes, repoName) {
   const templateChanges = changes.changedFiles
@@ -108,18 +115,18 @@ async function checkTranslations(changes, name, repo) {
 }
 
 async function checkChanges() {
-  for (const [ name, repo ] of Object.entries(repos)) {
+  for (const module of modules) {
     try {
-      console.log(chalk.blue(`\n=== Checking ${name} ===`));
-      const changes = await getLatestChanges(repo);
+      console.log(chalk.blue(`\n=== Checking ${module.lang} ===`));
+      const changes = await getLatestChanges(module.repo, module.version);
 
       let hasChanges = false;
-      hasChanges = await checkTemplates(changes, name) || hasChanges;
-      hasChanges = await checkTranslations(changes, name, repo) || hasChanges;
+      hasChanges = await checkTemplates(changes, module.lang) || hasChanges;
+      hasChanges = await checkTranslations(changes, module.lang, module.repo) || hasChanges;
 
-      if (hasChanges) await sendNotification('Changes Check', `Changes found in ${name}`);
+      if (hasChanges) await sendNotification('Changes Check', `Changes found in ${module.lang}`);
     } catch (error) {
-      console.error(chalk.red(`Error processing ${name}:`), error);
+      console.error(chalk.red(`Error processing ${module.lang}:`), error);
       await reportError('Changes Check', error.message);
     }
   }

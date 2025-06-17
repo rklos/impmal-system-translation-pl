@@ -1,7 +1,7 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
-export async function getLatestChanges(repo) {
+export async function getLatestChanges(repo, version) {
   try {
     // Get latest release from GitHub API
     const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
@@ -31,12 +31,11 @@ export async function getLatestChanges(repo) {
     const relationship = localModuleJson.relationships.systems?.find((s) => s.id === moduleId)
                         || localModuleJson.relationships.requires?.find((r) => r.id === moduleId);
 
-    if (!relationship) {
-      throw new Error(`Could not find module ${moduleId} in relationships`);
+    if (!version && relationship) {
+      version = relationship.compatibility.verified;
     }
 
-    // Check if compatibility.verified exists
-    if (!relationship.compatibility?.verified) {
+    if (!version) {
       console.log(chalk.yellow('No compatibility version found - no Git changes to report'));
       return {
         tagName,
@@ -45,8 +44,8 @@ export async function getLatestChanges(repo) {
       };
     }
 
-    // Use the verified version as previousTag
-    const previousTag = relationship.compatibility.verified;
+    // Use the version as previousTag
+    const previousTag = version;
 
     // Check if versions are the same
     if (previousTag === tagName) {
