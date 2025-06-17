@@ -1,12 +1,48 @@
 {
+  "WORLD.GameSystem" : "System Gry",
   "WH": {
+    "Badge": {
+      "Notes": "NOTATKI",
+      "Issues": "PROBLEMY", 
+      "Wiki": "WIKI",
+      "Discord": "DISCORD"
+    },
+    "Initializer": {
+      "SettingName": "Zawartość Premium Warhammera",
+      "SettingLabel": "Zarządzaj Zawartością",
+      "SettingHint": "Zarządzaj zaimportowaną zawartością z modułów premium Warhammera",
+      "Title": "Inicjalizacja Modułu Warhammera",
+      "Text": "<h3>Inicjalizuj, zaktualizuj lub usuń zaimportowaną zawartość z oficjalnych modułów premium Warhammera</h3>",
+      "HelpText": "<p>Potrzebujesz pomocy? Sprawdź <a href=https://moo-man.github.io/WFRP4e-FoundryVTT/pages/premium.html#initializiation>Wiki</a></p>",
+      "Tooltips": {
+        "NotInstalled": "Moduł nie jest zainstalowany! Jeśli zakupiłeś ten moduł, upewnij się, że jest zainstalowany w <strong>Menu Konfiguracji</strong> Foundry",
+        "NotActive": "Moduł nie jest aktywny! Przejdź do <strong>Zarządzania Modułami</strong> w bocznym pasku Ustawień, aby aktywować ten moduł w świecie."
+      },
+      "Action": {
+        "Initialize": "Inicjalizuj Zawartość",
+        "Update": "Aktualizuj Zawartość",
+        "Delete": "Usuń Zawartość"
+      },
+      "UpdaterTitle": "Aktualizuj Zawartość {module}",
+      "UpdaterText": "<p>Ten proces zaimportuje nowe dokumenty i nadpisze wcześniej zaimportowane dokumenty ich zawartością z Kompendium.</p><p>TO OZNACZA, ŻE WSZYSTKIE WPROWADZONE ZMIANY ZOSTANĄ NADPISANE. Nie dotyczy to żadnego Dokumentu należącego do Gracza.</p><p>Używaj tego tylko wtedy, gdy wcześniej zainicjalizowałeś ten moduł.</p>",
+      "UpdaterExclude": "Wyklucz Zmianę Nazwy",
+      "UpdaterExcludeHint": "Zaznaczenie tego spowoduje, że dokumenty nie będą aktualizowane, jeśli ich nazwy zostały zmienione",
+      "OverwriteActors": "Nadpisz Aktorów",
+      "OverwriteMacros": "Nadpisz Makra",
+      "OverwriteJournals": "Nadpisz Dziennik",
+      "OverwriteTables": "Nadpisz Tabele",
+      "OverwriteScenes": "Nadpisz Sceny"
+    },
+    "AdvancedConfig": "Konfiguracja Zaawansowanego Efektu",
     "Scripts": "Skrypty",
     "CannotDeleteItemEffect": "Ten efekt pochodzi z Przedmiotu należącego do Aktora. Usuń przedmiot lub efekt z karty przedmiotu.",
     "ItemDialog": "Wybór Przedmiotu",
+    "ValueDialog": "Wybór Wartości",
     "Initialize": "Inicjalizacja",
     "ScriptConfig": "Konfiguracja Skryptu",
     "DiffEditor": "Edytor różnicowy",
     "ScriptEditor": "Edytor skryptów",
+    "RichEditor": "Bogaty Edytor",
     "AddScript": "Dodaj Skrypt",
     "EffectFiltered": "Efekt Pominięty",
     "EffectPrevented": "Tworzenie Efektu Przerwane",
@@ -61,9 +97,14 @@
       }
     },
     "ScriptLock": "Skrypt Zablokowany",
+    "ScriptLockTT": "Skrypty nie są edytowalne, gdy są odniesieniami. Jeśli chcesz wprowadzić zmiany: skopiuj skrypt, odblokuj, wklej, a następnie wprowadź żądane zmiany.",
     "Script": "Skrypt",
     "ScriptTrigger": "Wyzwalacz",
     "Targeter": "Dotyczy zaznaczonego Celu",
+    "TargeterTT" : "Uruchom ten skrypt w oknie dialogowym dowolnego Aktora, który zaznacza tego Aktora.",
+    "DefendingAgainst" : "Broniący się przeciwko",
+    "DefendingAgainstTT" : "Uruchom ten skrypt w oknie dialogowym Aktora, który został zaznaczony przez tego Aktora lub Przedmiotu",
+    "DialogScript" : "Skrypt Dialogowy",
     "HideScript": "Skrypt Ukrywający",
     "ActivateScript": "Skrypt Aktywujący",
     "SubmissionScript": "Skrypt wywoływany podczas zaznaczania",
@@ -153,7 +194,8 @@
       "SkipImmediatePlacement": "Pomiń natychmiastowe skrypty podczas umieszczania wzornika",
       "SkipImmediatePlacementHint": "Zapobiega uruchomieniu natychmiastowych skryptów po umieszczeniu wzornika.",
       "ZoneType": "Typ Strefy",
-      "ZoneTypeHint": "<strong>Efekt Strefy</strong> oznacza, że efekt jest powiązany ze strefą, <strong>Tokeny w Strefie</strong> oznacza, że dotyczy wszystkich Tokenów w tej Strefie, <strong>Podążanie za Tokenem</strong> oznacza, że dotyczy dowolnej Strefy, w której znajduje się docelowy Token"
+      "ZoneTypeHint": "<strong>Efekt Strefy</strong> oznacza, że efekt jest powiązany ze strefą, <strong>Tokeny w Strefie</strong> oznacza, że dotyczy wszystkich Tokenów w tej Strefie, <strong>Podążanie za Tokenem</strong> oznacza, że dotyczy dowolnej Strefy, w której znajduje się docelowy Token",
+      "AdvancedConfig": "Konfiguracja Zaawansowana"
     },
     "TransferType": {
       "Document": "Właściciel Efektu",
@@ -181,6 +223,7 @@
     "SendingSocketRequest": "Wysyłanie żądania",
     "ZoneConfig": "Konfiguracja strefy",
     "ZoneEffects": "Zastosowane efekty stref",
+    "RollMode": "Tryb Rzutu",
     "Warning": {
       "RenderAuraChange": "Aby odzwierciedlić zmianę w wyświetlaniu Aury , wyłącz i ponownie włącz efekt źródłowy lub zastąp istniejący Token w Scenie."
     },
@@ -244,6 +287,29 @@
       "Types": {
         "Label": "Types"
       }
+    },
+    "Theme": {
+      "Config": "Konfiguracja Motywu",
+      "ConfigButton": "Konfiguracja Motywu", 
+      "ConfigHint": "Włącz lub wyłącz stylizację dostarczoną przez system.",
+      "FIELDS": {
+        "actor.enabled.label": "Włącz Motyw",
+        "item.enabled.label": "Włącz Motyw",
+        "journal.enabled.label": "Włącz Motyw",
+        "sidebar.enabled.label": "Włącz Motyw",
+        "apps.enabled.label": "Włącz Motyw",
+
+        "actor.font.label": "Czcionka",
+        "item.font.label": "Czcionka",
+        "journal.font.label": "Czcionka",
+        "sidebar.font.label": "Czcionka",
+        "apps.font.label": "Czcionka"
+      },
+      "Font": {
+        "Classic": "Klasyczna",
+        "Readable": "Czytelna"
+      }
     }
-  }
+  },
+  "EFFECT.TABS.scripts": "Skrypt"
 }
