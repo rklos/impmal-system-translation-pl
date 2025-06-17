@@ -10,11 +10,11 @@
       "flags": {}
     }
   ],
-  "version": "1.1.1",
+  "version": "2.0.0",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12",
-    "maximum": "12"
+    "minimum": "13",
+    "verified": "13",
+    "maximum": "13"
   },
   "relationships": {
     "systems": [
@@ -22,8 +22,8 @@
         "id": "impmal",
         "type": "system",
         "compatibility": {
-          "minimum": "2.1.1",
-          "verified": "2.2.1"
+          "minimum": "3.0.0",
+          "verified": "3.0.2"
         }
       }
     ],
@@ -40,8 +40,8 @@
         "id": "warhammer-lib",
         "type": "module",
         "compatibility": {
-          "minimum": "1.7.1",
-          "verified": "1.7.1"
+          "minimum": "2.0.0",
+          "verified": "2.1.0"
         }
       }
     ]
