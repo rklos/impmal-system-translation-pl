@@ -1,9 +1,9 @@
 {
-  "WORLD.GameSystem" : "System Gry",
+  "WORLD.GameSystem": "System Gry",
   "WH": {
     "Badge": {
       "Notes": "NOTATKI",
-      "Issues": "PROBLEMY", 
+      "Issues": "PROBLEMY",
       "Wiki": "WIKI",
       "Discord": "DISCORD"
     },
@@ -101,10 +101,10 @@
     "Script": "Skrypt",
     "ScriptTrigger": "Wyzwalacz",
     "Targeter": "Dotyczy zaznaczonego Celu",
-    "TargeterTT" : "Uruchom ten skrypt w oknie dialogowym dowolnego Aktora, który zaznacza tego Aktora.",
-    "DefendingAgainst" : "Broniący się przeciwko",
-    "DefendingAgainstTT" : "Uruchom ten skrypt w oknie dialogowym Aktora, który został zaznaczony przez tego Aktora lub Przedmiotu",
-    "DialogScript" : "Skrypt Dialogowy",
+    "TargeterTT": "Uruchom ten skrypt w oknie dialogowym dowolnego Aktora, który zaznacza tego Aktora.",
+    "DefendingAgainst": "Broniący się przeciwko",
+    "DefendingAgainstTT": "Uruchom ten skrypt w oknie dialogowym Aktora, który został zaznaczony przez tego Aktora lub Przedmiotu",
+    "DialogScript": "Skrypt Dialogowy",
     "HideScript": "Skrypt Ukrywający",
     "ActivateScript": "Skrypt Aktywujący",
     "SubmissionScript": "Skrypt wywoływany podczas zaznaczania",
@@ -290,7 +290,7 @@
     },
     "Theme": {
       "Config": "Konfiguracja Motywu",
-      "ConfigButton": "Konfiguracja Motywu", 
+      "ConfigButton": "Konfiguracja Motywu",
       "ConfigHint": "Włącz lub wyłącz stylizację dostarczoną przez system.",
       "FIELDS": {
         "actor.enabled.label": "Włącz Motyw",
@@ -298,7 +298,6 @@
         "journal.enabled.label": "Włącz Motyw",
         "sidebar.enabled.label": "Włącz Motyw",
         "apps.enabled.label": "Włącz Motyw",
-
         "actor.font.label": "Czcionka",
         "item.font.label": "Czcionka",
         "journal.font.label": "Czcionka",
