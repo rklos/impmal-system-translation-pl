@@ -37,7 +37,13 @@ async function checkTemplates(changes, repoName) {
 
   if (templateChanges.length > 0) {
     console.log(chalk.yellow('\nModified templates:'));
-    templateChanges.forEach((file) => console.log(chalk.yellow(`${file.status === 'modified' ? 'M' : 'D'} ${file.filename}`)));
+    templateChanges.forEach((file) => {
+      let status = 'D';
+      if (file.status === 'modified') status = 'M';
+      if (file.status === 'renamed') status = 'R';
+      if (file.status === 'added') status = 'A';
+      console.log(chalk.yellow(`${status} ${file.filename}`));
+    });
 
     if (obsoletePatches.length > 0) {
       console.log(chalk.yellow('\nObsolete patches:'));
