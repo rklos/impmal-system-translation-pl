@@ -1,4 +1,6 @@
 {
   "// custom keys which are not present in ImpMal system nor WH library": "",
-  "IMPMAL.PowerWeapon": "Energetyczna"
+  "IMPMAL.PowerWeapon": "Energetyczna",
+  "Submit": "Zatwierdź",
+  "Roll": "Rzuć"
 }
