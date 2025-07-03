@@ -1,26 +1,29 @@
 import chalk from 'chalk';
-import { TEMPLATES_PATCHES } from '~/packages/impmal/scripts/patch-templates';
 import type { Package } from '~/packages';
+import * as diff from 'diff';
+import { loadPatches } from '../../../.vite/load-patches';
 import type { Changes } from '../types';
 
+const PATCHES = loadPatches();
+
 export async function checkTemplates(pkg: Package, changes: Changes) {
+  const TEMPLATES_PATCHES = PATCHES[pkg.PACKAGE];
+
   const templateChanges = changes.changedFiles
     .filter((file) => file.filename.endsWith('.hbs'))
-    .filter((file) => TEMPLATES_PATCHES[file.filename.replace('.hbs', '').replace('static/templates/', '')]);
+    .filter((file) => TEMPLATES_PATCHES[file.filename.replace('static/', '')]);
 
-  const obsoletePatches = [];
-  for (const file of templateChanges) {
-    const patches = TEMPLATES_PATCHES[file.filename.replace('.hbs', '').replace('static/templates/', '')];
-    let patchedContent = file.content;
-
-    for (const [ english, polish ] of Object.entries(patches)) {
-      const contentBefore = patchedContent;
-      patchedContent = patchedContent.replaceAll(english, polish);
-      if (patchedContent === contentBefore) {
-        obsoletePatches.push({ filename: file.filename, english, polish });
+  let conflicts = 0;
+  templateChanges.forEach((file) => {
+    const patches = TEMPLATES_PATCHES[file.filename.replace('static/', '')];
+    patches.forEach((patch) => {
+      const patchedContent = diff.applyPatch(file.content, patch);
+      if (!patchedContent) {
+        console.log(chalk.red(`Failed to apply patch: ${file.filename}`));
+        conflicts++;
       }
-    }
-  }
+    });
+  });
 
   if (templateChanges.length > 0) {
     console.log(chalk.yellow('\nModified templates:'));
@@ -31,15 +34,14 @@ export async function checkTemplates(pkg: Package, changes: Changes) {
       if (file.status === 'added') status = 'A';
       console.log(chalk.yellow(`${status} ${file.filename}`));
     });
-
-    if (obsoletePatches.length > 0) {
-      console.log(chalk.yellow('\nObsolete patches:'));
-      obsoletePatches.forEach((patch) => {
-        console.log(chalk.yellow(`- ${patch.filename}: "${patch.english}" -> "${patch.polish}"`));
-      });
-    }
   } else {
     console.log(chalk.green('No template changes found'));
+  }
+
+  if (conflicts > 0) {
+    console.log(chalk.red(`${conflicts} conflicts were found`));
+  } else {
+    console.log(chalk.green('No template conflicts found'));
   }
 
   return templateChanges.length > 0;

@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite';
 import fs from 'fs-extra';
 import path from 'path';
+import { injectPatches } from './.vite/load-patches';
 
 export default defineConfig({
   build: {
     lib: {
       entry: 'src/main.ts',
-      fileName: 'impmal-pl',
+      fileName: 'wng-pl',
       formats: [ 'es' ],
     },
     minify: false,
@@ -25,5 +26,6 @@ export default defineConfig({
         await fs.copy('src/module.json', 'dist/module.json');
       },
     },
+    injectPatches(),
   ],
 });

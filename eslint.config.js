@@ -3,7 +3,7 @@ import ts from '@rklos/eslint-configs/typescript';
 export default [
   ...ts,
   {
-    files: [ 'tools/**/*.ts' ],
+    files: [ 'tools/**/*.ts', '.vite/**/*.ts', 'vite.config.js' ],
     rules: {
       'no-console': 0,
       'no-underscore-dangle': 0,

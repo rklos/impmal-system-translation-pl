@@ -57,7 +57,7 @@ async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void>
       return;
     }
 
-    const targetFilePath = patches[0].newFileName;
+    const targetFilePath = patches[0].index!;
     const targetFullPath = join(PL_DIR, targetFilePath);
 
     // Check if target file exists
