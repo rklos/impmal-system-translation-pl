@@ -33,19 +33,8 @@ jobs:
       - name: Commit Bumped Version
         uses: EndBug/add-and-commit@v9
         with:
-          # The arguments for the `git add` command (see the paragraph below for more info)
-          # Default: '.'
           add: 'package.json package-lock.json src/module.json'
-
-          # The message for the commit.
-          # Default: 'Commit from GitHub Actions (name of the workflow)'
           message: 'Bump version to ${{ steps.tag.outputs.tag }}'
-
-          # The way the action should handle pathspec errors from the add and remove commands. Three options are available:
-          # - ignore -> errors will be logged but the step won't fail
-          # - exitImmediately -> the action will stop right away, and the step will fail
-          # - exitAtEnd -> the action will go on, every pathspec error will be logged at the end, the step will fail.
-          # Default: ignore
           pathspec_error_handling: exitImmediately
 
       - name: Build

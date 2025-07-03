@@ -1,0 +1,32 @@
+name: Sync repo with remote sources
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run at midnight every day
+  workflow_dispatch:      # Allow manual triggering
+
+jobs:
+  sync-wfrp4e:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+          
+      - name: Install dependencies
+        run: npm install
+
+      - name: Sync with WHRP4E
+        run: npm run sync:wfrp4e
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Sync Warhammer Library translations with WHRP4e'
+          pathspec_error_handling: exitImmediately

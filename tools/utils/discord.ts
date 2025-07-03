@@ -1,13 +1,13 @@
 import { WebhookClient, EmbedBuilder } from 'discord.js';
 
-let webhook;
+let webhook: WebhookClient;
 if (process.env.DISCORD_WEBHOOK) {
   webhook = new WebhookClient({
     url: process.env.DISCORD_WEBHOOK,
   });
 }
 
-export async function sendNotification(job, output) {
+export async function sendNotification(job: string, output: string): Promise<void> {
   if (!process.env.DISCORD_WEBHOOK) return console.log('No Discord webhook URL found');
 
   const embed = new EmbedBuilder()
@@ -26,7 +26,7 @@ export async function sendNotification(job, output) {
   await webhook.send({ embeds: [ embed ] });
 }
 
-export async function reportError(job, error) {
+export async function reportError(job: string, error: string): Promise<void> {
   if (!process.env.DISCORD_WEBHOOK) return console.log('No Discord webhook URL found');
 
   const embed = new EmbedBuilder()

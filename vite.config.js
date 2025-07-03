@@ -1,30 +1,29 @@
 import { defineConfig } from 'vite';
 import fs from 'fs-extra';
+import path from 'path';
 
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/scripts/main.js',
+      entry: 'src/main.ts',
       fileName: 'impmal-pl',
-      formats: ['es']
+      formats: [ 'es' ],
     },
     minify: false,
     emptyOutDir: true,
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      }
-    }
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src'),
+    },
   },
-  // Custom plugin to copy module.json
   plugins: [
+    // Custom plugin to copy module.json
     {
       name: 'copy-module-json',
       closeBundle: async () => {
         await fs.copy('src/module.json', 'dist/module.json');
-      }
-    }
-  ]
+      },
+    },
+  ],
 });

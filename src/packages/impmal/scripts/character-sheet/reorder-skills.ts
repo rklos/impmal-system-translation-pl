@@ -22,7 +22,6 @@ export function reorderSkills() {
       reflexes,
       stealth,
       tech,
-      willpower,
       // In case of additional skills
       ...rest
     } = originalDefineSchema();

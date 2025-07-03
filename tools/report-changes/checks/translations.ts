@@ -1,0 +1,64 @@
+import fs from 'fs';
+import chalk from 'chalk';
+import type { Package } from '~/packages';
+import { fetchGithubRawContent } from '../../utils/fetch-github-raw-content';
+import type { Changes } from '../types';
+
+export async function checkTranslations(pkg: Package, changes: Changes) {
+  const translationChanges = changes.changedFiles.filter((file) => file.filename.startsWith('lang/') && file.filename.endsWith('.json'));
+
+  if (translationChanges.length > 0) {
+    console.log(chalk.blue('\nModified translation files:'));
+    translationChanges.forEach((file) => console.log(chalk.yellow(`${file.status === 'modified' ? 'M' : 'D'} ${file.filename}`)));
+  }
+
+  const response = await fetchGithubRawContent(pkg.REPO, `refs/tags/${changes.tagName}`, 'static/lang/en.json');
+  const remoteJson = await response.json();
+
+  const localJson = JSON.parse(fs.readFileSync(`src/packages/${pkg.PACKAGE}/lang.json`, 'utf8'));
+
+  const missingKeys: string[] = [];
+  const extraKeys: string[] = [];
+
+  function findDifferences(localObj: Record<string, unknown>, remoteObj: Record<string, unknown>, path = '') {
+    for (const key in remoteObj) {
+      const currentPath = path ? `${path}.${key}` : key;
+
+      if (typeof remoteObj[key] === 'object' && remoteObj[key] != null) {
+        if (localObj[key] == null) {
+          missingKeys.push(currentPath);
+        } else {
+          findDifferences(
+            localObj[key] as Record<string, unknown>,
+            remoteObj[key] as Record<string, unknown>,
+            currentPath,
+          );
+        }
+      } else if (localObj[key] == null) {
+        missingKeys.push(currentPath);
+      }
+    }
+
+    for (const key in localObj) {
+      if (key.startsWith('//')) continue;
+      const currentPath = path ? `${path}.${key}` : key;
+      if (remoteObj[key] == null) extraKeys.push(currentPath);
+    }
+  }
+
+  findDifferences(localJson, remoteJson);
+
+  if (missingKeys.length > 0) {
+    console.log(chalk.red('\nMissing translations:'));
+    missingKeys.forEach((key) => console.log(chalk.red(`- ${key}`)));
+  }
+  if (extraKeys.length > 0) {
+    console.log(chalk.yellow('\nExtra translations:'));
+    extraKeys.forEach((key) => console.log(chalk.yellow(`+ ${key}`)));
+  }
+  if (missingKeys.length === 0 && extraKeys.length === 0) {
+    console.log(chalk.green('\nNo translation differences found'));
+  }
+
+  return missingKeys.length > 0 || extraKeys.length > 0;
+}
