@@ -1,6 +1,5 @@
 import * as diff from 'diff';
 import * as fs from 'fs';
-import * as path from 'path';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import type { Package } from '~/packages';
@@ -11,7 +10,7 @@ const ROOT_DIR = join(__dirname, '..', '..', '..');
 const PATCHES_DIR = join(ROOT_DIR, 'patches');
 
 async function getPatchFiles(pkg: Package): Promise<string[]> {
-  const SRC_PATCHES_DIR = path.join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
+  const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
   const patchFiles: string[] = [];
 
   if (!fs.existsSync(SRC_PATCHES_DIR)) {
@@ -24,8 +23,8 @@ async function getPatchFiles(pkg: Package): Promise<string[]> {
     const items = fs.readdirSync(dirPath);
 
     for (const item of items) {
-      const fullPath = path.join(dirPath, item);
-      const relativePath = path.join(basePath, item);
+      const fullPath = join(dirPath, item);
+      const relativePath = join(basePath, item);
       const stat = fs.statSync(fullPath);
 
       if (stat.isDirectory()) {
@@ -43,8 +42,8 @@ async function getPatchFiles(pkg: Package): Promise<string[]> {
 
 async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void> {
   const PL_DIR = join(PATCHES_DIR, pkg.PACKAGE, 'pl');
-  const SRC_PATCHES_DIR = path.join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
-  const FULL_PATCH_PATH = path.join(SRC_PATCHES_DIR, patchPath);
+  const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
+  const FULL_PATCH_PATH = join(SRC_PATCHES_DIR, patchPath);
 
   try {
     // Read patch content
@@ -59,7 +58,7 @@ async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void>
     }
 
     const targetFilePath = patches[0].newFileName;
-    const targetFullPath = path.join(PL_DIR, targetFilePath);
+    const targetFullPath = join(PL_DIR, targetFilePath);
 
     // Check if target file exists
     if (!fs.existsSync(targetFullPath)) {
