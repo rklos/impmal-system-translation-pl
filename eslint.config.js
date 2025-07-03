@@ -11,6 +11,7 @@ export default [
       'guard-for-in': 0,
       'no-continue': 0,
       'consistent-return': 0,
+      'import/no-extraneous-dependencies': 0,
     },
   },
 ];

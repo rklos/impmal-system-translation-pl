@@ -8,7 +8,8 @@
     "postbuild": "tsx tools/bundle-jsons.ts",
     "report": "tsx tools/report-changes/report-changes.ts",
     "sync:wfrp4e": "tsx tools/sync/wfrp4e.ts",
-    "auto-import-styles": "tsx tools/auto-import-styles.ts"
+    "auto-import-styles": "tsx tools/auto-import-styles.ts",
+    "patch": "tsx tools/patch/patch.ts"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "fs-extra": "11.3.0",
     "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
     "sass": "1.89.2",
+    "simple-git": "3.28.0",
     "tsx": "4.20.3",
     "typescript": "5.8.3",
     "vite": "7.0.0"

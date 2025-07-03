@@ -16,5 +16,5 @@
     },
     "types": ["fvtt-types"]
   },
-  "include": ["src", "tools", "vite-env.d.ts"]
+  "include": ["src", "tools", "vite-env.d.ts", "tools.config.ts"]
 }
