@@ -6,7 +6,7 @@ declare const INJECTED_PATCHES: Record<string, Record<string, StructuredPatch[]>
 
 function patchTemplates(pkgName: string) {
   const TEMPLATES_PATCHES = Object.fromEntries(
-    Object.entries(INJECTED_PATCHES[pkgName])
+    Object.entries(INJECTED_PATCHES[pkgName] || {})
       .filter(([ p ]) => p.startsWith('templates/')),
   );
 
