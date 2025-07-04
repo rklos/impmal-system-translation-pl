@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Bump Version
-        run: node tools/bump-version.js ${{ steps.tag.outputs.tag }}
+        run: npm run bump-version ${{ steps.tag.outputs.tag }}
 
       - name: Commit Bumped Version
         uses: EndBug/add-and-commit@v9

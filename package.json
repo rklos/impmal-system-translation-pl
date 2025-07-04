@@ -9,7 +9,8 @@
     "report": "tsx tools/report-changes/report-changes.ts",
     "sync:wfrp4e": "tsx tools/sync/wfrp4e.ts",
     "auto-import-styles": "tsx tools/auto-import-styles.ts",
-    "patch": "tsx tools/patch/patch.ts"
+    "patch": "tsx tools/patch/patch.ts",
+    "bump-version": "tsx tools/bump-version/bump-version.ts"
   },
   "repository": {
     "type": "git",
