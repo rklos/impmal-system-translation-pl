@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/main.ts',
-      fileName: 'wng-pl',
+      fileName: 'impmal-pl',
       formats: [ 'es' ],
     },
     minify: false,
