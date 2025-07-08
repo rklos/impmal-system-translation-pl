@@ -1,10 +1,10 @@
 import fs from 'fs';
 import chalk from 'chalk';
 import type { Package } from '~/packages';
-import { fetchGithubRawContent } from '../../utils/fetch-github-raw-content';
+import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
 import type { Changes } from '../types';
 
-export async function checkTranslations(pkg: Package, changes: Changes) {
+export default async function checkTranslations(pkg: Package, changes: Changes) {
   const translationChanges = changes.changedFiles.filter((file) => file.filename.startsWith('lang/') && file.filename.endsWith('.json'));
 
   if (translationChanges.length > 0) {

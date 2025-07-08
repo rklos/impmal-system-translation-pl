@@ -1,12 +1,12 @@
 import chalk from 'chalk';
 import type { Package } from '~/packages';
 import * as diff from 'diff';
-import { loadPatches } from '../../../.vite/load-patches';
+import { loadPatches } from '../../../../.vite/load-patches';
 import type { Changes } from '../types';
 
 const PATCHES = loadPatches();
 
-export async function checkTemplates(pkg: Package, changes: Changes) {
+export default async function checkTemplates(pkg: Package, changes: Changes) {
   const TEMPLATES_PATCHES = PATCHES[pkg.PACKAGE];
 
   const templateChanges = changes.changedFiles

@@ -1,9 +1,10 @@
 import chalk from 'chalk';
 import * as packages from '~/packages';
 import type { Package } from '~/packages';
-import { checkTemplates, checkTranslations } from './checks';
+import checkTemplates from './checks/templates';
+import checkTranslations from './checks/translations';
 import { getLatestChanges } from './get-latest-changes';
-import { sendNotification, reportError } from '../utils/discord';
+import { sendNotification, reportError } from '../../utils/discord';
 
 async function checkChanges() {
   for (const pkg of Object.values(packages) as Package[]) {

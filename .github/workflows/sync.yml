@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Sync with WHRP4E
-        run: npm run sync:wfrp4e
+        run: npm run sync wfrp4e
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 

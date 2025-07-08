@@ -17,13 +17,12 @@ if (!action) {
 }
 
 // eslint-disable-next-line no-shadow
-async function runAction(action: string) {
+async function run(action: string) {
   Object.values(packages).forEach(async (pkg) => {
     if (!('REPO' in pkg)) return;
 
     if (action === 'download') {
       await download(pkg);
-      // await apply(pkg);
     } else if (action === 'create') {
       await create(pkg);
     } else if (action === 'apply') {
@@ -35,4 +34,4 @@ async function runAction(action: string) {
   });
 }
 
-runAction(action);
+run(action);

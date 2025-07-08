@@ -6,11 +6,11 @@
     "prebuild": "npm run auto-import-styles && tsc --noEmit",
     "build": "vite build",
     "postbuild": "tsx tools/bundle-jsons.ts",
-    "report": "tsx tools/report-changes/report-changes.ts",
-    "sync:wfrp4e": "tsx tools/sync/wfrp4e.ts",
-    "auto-import-styles": "tsx tools/auto-import-styles.ts",
-    "patch": "tsx tools/patch/patch.ts",
-    "bump-version": "tsx tools/bump-version.ts"
+    "report": "tsx tools/commands/report/command.ts",
+    "sync": "tsx tools/commands/sync/command.ts",
+    "patch": "tsx tools/commands/patch/command.ts",
+    "bump-version": "tsx tools/bump-version.ts",
+    "auto-import-styles": "tsx tools/auto-import-styles.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "diff": "8.0.2"
   },
   "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "1.1.0",
     "@octokit/core": "7.0.2",
     "@rklos/eslint-configs": "github:rklos/eslint-configs#1.1.1",
     "chalk": "5.4.1",

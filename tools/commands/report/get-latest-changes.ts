@@ -1,7 +1,7 @@
 import fs from 'fs';
 import chalk from 'chalk';
 import { Octokit } from '@octokit/core';
-import { fetchGithubRawContent } from '../utils/fetch-github-raw-content';
+import { fetchGithubRawContent } from '../../utils/fetch-github-raw-content';
 import type { Changes } from './types';
 
 const octokit = new Octokit();

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { sendNotification, reportError } from '../utils/discord';
-import { fetchGithubRawContent } from '../utils/fetch-github-raw-content';
+import { sendNotification, reportError } from '../../../utils/discord';
+import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
 
 const REPO = 'foundryvttpl/wfrp4e-core-pl';
 const LANG_FILE = 'src/packages/warhammer-library/lang.json';
@@ -60,7 +60,7 @@ async function reportChanges(changedTranslations: Change[]) {
   }
 }
 
-async function updateTranslations() {
+export default async function updateTranslations() {
   try {
     const localJson = JSON.parse(fs.readFileSync(LANG_FILE, 'utf8'));
 
@@ -75,5 +75,3 @@ async function updateTranslations() {
     await reportError('Translation Sync', error instanceof Error ? error.message : 'Unknown error');
   }
 }
-
-updateTranslations();
