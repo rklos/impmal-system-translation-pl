@@ -142,11 +142,7 @@ Contains translations for shared Warhammer functionality, including:
 - Error messages and notifications
 
 ### Custom (`src/packages/custom/lang.json`)
-Contains custom translations not present in original modules:
-- Additional UI elements
-- Custom game mechanics
-- Override translations
-- Undocumented labels
+Contains custom translations not present in original modules. See [Custom Package Documentation](custom-package.md) for detailed information about the custom package and its usage guidelines.
 
 ## Quality Assurance
 
@@ -193,9 +189,12 @@ Use clear, descriptive commit messages:
 - Review the README for installation and usage instructions
 - Contact the maintainer through GitHub issues
 
+
+
 ## Related Files
 
 - `tools/bundle-jsons.ts` - Combines all lang.json files
 - `tools/commands/report/checks/translations.ts` - Translation validation
 - `tools/commands/sync/sources/wfrp4e.ts` - Sync with WFRP4e translations
-- `src/module.json` - Module configuration and language settings 
+- `src/module.json` - Module configuration and language settings
+- `docs/custom-package.md` - Custom package documentation and guidelines 
