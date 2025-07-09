@@ -1,0 +1,136 @@
+---
+description: Core architectural principles for the entire project
+globs: "**/*"
+alwaysApply: true
+---
+You are a skilled software engineer working on a modern FoundryVTT module. The project follows a clean, maintainable approach with clear separation of concerns.
+
+## Project Overview
+This is a FoundryVTT module translating other modules from English to Polish language.
+Tech stack:
+- TypeScript 5
+- Vite
+- FoundryVTT 13
+- Git
+
+## Repository Structure
+- `src/` - Main source code directory containing the FoundryVTT module
+  - `main.ts` - Module entry point and initialization
+  - `module.json` - FoundryVTT module manifest and metadata
+  - `packages/` - Translation packages for different modules
+    - `impmal/` - IMPmal system translations and customizations
+    - `custom/` - Custom translation package for user-defined content
+    - `warhammer-library/` - Warhammer Library module translations
+    - Additional packages may be added
+  - `utils/` - Shared utility functions and helpers
+- `tools/` - Development and build tools
+  - `commands/` - CLI commands for patch management, reporting, and synchronization etc.
+  - `utils/` - Tool-specific utility functions
+- `docs/` - Project documentation and guides
+- `patches/` - Module patches for applying translations and customizations
+- `dist/` - Built module output (generated)
+
+## Core Architecture Principles
+- **Type Safety**: TypeScript is used throughout with strict typing enabled
+- **Domain-Driven Design**: Code is organized around business domains rather than technical layers
+- **Clean Code**: Follow SOLID principles, write readable code, and maintain consistent patterns
+- **Testing**: All code should be testable and have appropriate test coverage
+- **Performance**: Optimize for performance without sacrificing maintainability
+- **Security**: Follow security best practices throughout the codebase
+
+## Code Style & Formatting
+- Follow AirBnB ESLint rules with project-specific overrides
+- Use spaces for indentation (2 spaces)
+- Use single quotes for strings (except to avoid escaping)
+- Always use semicolons to terminate statements
+- Use strict equality (===) instead of loose equality (==)
+- Proper spacing around operators, keywords, and commas
+- Limit line length to 120 characters
+- Use trailing commas in multiline object/array literals
+- Keep else statements on the same line as closing curly braces
+- Use curly braces for multi-line if statements
+- Every file should end with an empty line
+
+## Naming Conventions
+- Use PascalCase for:
+  - Classes
+  - Types
+  - Interfaces
+  - React components
+- Use camelCase for:
+  - Variables
+  - Functions
+  - Methods
+  - Properties
+- Use kebab-case for:
+  - File names
+  - Directory names
+- Use UPPER_SNAKE_CASE for:
+  - Constants
+  - Environment variables
+- Prefix boolean variables with is/has/can/should (e.g., isLoading, hasPermission)
+- Prefix event handlers with on (e.g., onSubmit, onChange)
+- Use complete words over abbreviations (except common ones like API, URL, etc.)
+
+## TypeScript Best Practices
+- Use strict mode in all TypeScript configurations
+- Define explicit types for variables, parameters, and return values
+- Avoid using `any` - use proper typing or `unknown` when necessary
+- Use interfaces for defining data contracts
+- Leverage TypeScript's utility types (Partial, Readonly, Pick, Omit, etc.)
+- Use type guards for narrowing types
+- Create reusable type definitions for common patterns
+
+## Function Design
+- Write small, focused functions with a single responsibility
+- Limit function complexity and length
+- Use descriptive function names that explain their purpose
+- Avoid deep nesting by using early returns and guard clauses
+- Minimize function parameters when possible
+- Document complex functions with JSDoc comments
+- Avoid side effects in pure functions
+
+## Error Handling
+- Use appropriate error handling mechanisms for each context
+- Provide meaningful error messages
+- Log errors with sufficient context for debugging
+- Handle edge cases explicitly
+- Use try/catch blocks for async operations
+- Validate inputs before processing
+
+## Testing
+- Follow the AAA pattern (Arrange-Act-Assert), but do not comment particular sections in tests
+- Write unit tests for business logic and utilities
+- Write integration tests for component interactions
+- Write end-to-end tests for critical user flows
+- Use mocks and stubs for external dependencies
+- Aim for high test coverage on critical paths
+- Use descriptive test names that explain what's being tested
+- Test private methods through public API of the service/class
+- For time-based tests use Jest's fake timers
+- Unit tests should be located in dedicated __tests__ directory next to the source file
+
+## Documentation
+- Document complex logic and architectural decisions
+- Include README files for libraries and major features
+- Keep documentation updated when changing code
+- Document known issues and workarounds
+- Every significant feature, project structure, CLI commands should be documented inside `docs` files
+
+## Security
+- Validate all user inputs
+- Protect against common web vulnerabilities (XSS, CSRF, etc.)
+- Implement proper authentication and authorization
+- Use secure communication protocols
+- Handle sensitive data carefully
+- Follow the principle of least privilege
+
+## Performance
+- Optimize for critical user paths
+- Minimize bundle sizes
+- Use proper caching strategies
+- Avoid premature optimization
+- Profile and measure before optimizing
+- Consider both frontend and backend performance
+
+When implementing new features or modifying existing code, follow these principles to maintain the integrity and maintainability of the codebase.

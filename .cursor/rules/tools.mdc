@@ -1,0 +1,123 @@
+---
+description: Rules for tool scripts
+globs: tools/**/*
+alwaysApply: false
+---
+You are developing tool scripts for a FoundryVTT module translation project. These scripts must be project-agnostic, maintainable, and follow established patterns for cross-project reusability.
+
+## Tool Scripts Overview
+Tool scripts are development utilities that support the translation workflow:
+- **Patch Management**: Download, create, and apply patches for different modules
+- **Reporting**: Generate reports on translation status and changes
+- **Synchronization**: Sync content between repositories
+- **Build Tools**: Version management, bundling, and style processing
+
+## Core Architecture Principles
+- **Project Agnostic**: Scripts should work with any project structure through configuration
+- **Configuration-Driven**: All project-specific settings handled through `tools.config.ts`
+- **Colored Output**: Use chalk for consistent, readable console output
+- **Single Responsibility**: Each script has one clear, focused purpose
+
+## File Structure
+- `tools/` - Development and build tools
+  - `commands/` - CLI commands organized by functionality
+    - `patch/` - Patch management commands
+      - `command.ts` - Main entry point
+      - `actions/` - Action implementations (download, create, apply)
+      - `types.d.ts` - Command-specific type definitions
+    - `report/` - Reporting commands
+      - `command.ts` - Main entry point
+      - `checks/` - Validation functions
+      - `types.d.ts` - Report-specific types
+    - `sync/` - Synchronization commands
+    - `{other-commands}` - Other commands
+  - `utils/` - Shared utility functions
+    - `discord.ts` - Discord webhook integration
+    - `fetch-github-raw-content.ts` - GitHub API utilities
+  - `{standalone-script}.ts` - Independent utility scripts
+
+## Configuration Structure
+```typescript
+export default {
+  patch: {
+    [packageName: string]: string[]  // File types to process
+  },
+  report: {
+    // Report-specific settings
+  },
+  sync: {
+    // Sync-specific settings
+  },
+  // other settings
+};
+```
+
+## Tool-Specific Guidelines
+
+### Logging & Output
+- Use chalk for consistent colored output:
+  - `chalk.blue()` for section headers and info
+  - `chalk.green()` for success messages
+  - `chalk.yellow()` for warnings
+  - `chalk.red()` for errors
+- Provide clear, actionable messages
+- Use consistent formatting for similar operations
+- Include relevant context in log messages
+
+### Path Resolution
+- Use relative paths with proper resolution
+- Calculate paths dynamically based on file location
+- Use `fileURLToPath` and `dirname` for ES module compatibility
+- Avoid hardcoded absolute paths
+- Use `join()` for cross-platform path construction
+
+### Configuration Usage
+- Import configuration from `tools.config.ts`
+- Validate configuration before use
+- Provide fallbacks for missing configuration
+- Use type assertions for configuration access
+- Document configuration structure and requirements
+
+### Command Structure
+- Use `parseArgs` from `node:util` for argument parsing
+- Validate required arguments early
+- Use switch statements for action routing
+- Handle unknown actions gracefully
+- Provide clear error messages for missing arguments
+
+### Utility Functions
+- Create reusable functions for common operations
+- Use environment variables for sensitive data
+- Implement proper error handling in utilities
+- Document utility function parameters and return values
+- Make utilities configurable through parameters
+
+### Testing & Validation
+- Validate all inputs before processing
+- Use type guards for runtime type checking
+- Test configuration validity
+- Validate file system operations
+- Check for required environment variables
+
+## Required Practices
+- Use configuration for all project-specific settings
+- Implement comprehensive error handling with colored output
+- Define TypeScript interfaces for all data structures
+- Use relative paths with proper resolution
+- Document complex functions with JSDoc
+- Validate inputs and configuration
+- Create reusable utility functions
+- Follow single responsibility principle
+- Use environment variables for sensitive data
+- Provide clear, actionable error messages
+
+## Avoided Practices
+- Hardcode project-specific paths or values
+- Ignore error handling
+- Use inconsistent logging patterns
+- Use `any` types without proper interfaces
+- Create monolithic scripts with multiple responsibilities
+- Hardcode sensitive information like API keys
+- Use absolute paths that won't work across systems
+
+When implementing new tool scripts or modifying existing ones, follow these principles to ensure they remain project-agnostic, maintainable, and reusable across different projects.
