@@ -29,6 +29,7 @@ Tech stack:
 - `docs/` - Project documentation and guides
 - `patches/` - Module patches for applying translations and customizations
 - `dist/` - Built module output (generated)
+If you notice that the structure has changed, update structure sections in docs and cursor rules.
 
 ## Core Architecture Principles
 - **Type Safety**: TypeScript is used throughout with strict typing enabled
