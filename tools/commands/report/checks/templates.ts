@@ -7,7 +7,7 @@ import type { Changes } from '../types';
 const PATCHES = loadPatches();
 
 export default async function checkTemplates(pkg: Package, changes: Changes) {
-  const TEMPLATES_PATCHES = PATCHES[pkg.PACKAGE];
+  const TEMPLATES_PATCHES = PATCHES[pkg.PACKAGE] || {};
 
   const templateChanges = changes.changedFiles
     .filter((file) => file.filename.endsWith('.hbs'))
