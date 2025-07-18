@@ -7,7 +7,7 @@ import type { Package } from '~/packages';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT_DIR = join(__dirname, '..', '..', '..', '..');
-const PATCHES_DIR = join(ROOT_DIR, 'patches');
+const PATCHES_DIR = join(ROOT_DIR, 'src', 'temp', 'patches');
 
 async function getPatchFiles(pkg: Package): Promise<string[]> {
   const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');

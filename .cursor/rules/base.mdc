@@ -22,12 +22,13 @@ Tech stack:
     - `custom/` - Custom translation package for user-defined content
     - `warhammer-library/` - Warhammer Library module translations
     - Additional packages may be added
+  - `temp/` - Temporary files used in development
+    - `patches/` - Module patches for applying translations and customizations
   - `utils/` - Shared utility functions and helpers
 - `tools/` - Development and build tools
   - `commands/` - CLI commands for patch management, reporting, and synchronization etc.
   - `utils/` - Tool-specific utility functions
 - `docs/` - Project documentation and guides
-- `patches/` - Module patches for applying translations and customizations
 - `dist/` - Built module output (generated)
 If you notice that the structure has changed, update structure sections in docs and cursor rules.
 
