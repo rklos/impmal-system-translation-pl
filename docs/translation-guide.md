@@ -1,6 +1,6 @@
 # Translation Guide
 
-This guide explains how to translate and maintain language files in the Imperium Maledictum System Translation project.
+This guide explains how to translate and maintain language files in the FoundryVTT System Translation project.
 
 ## Overview
 
@@ -12,7 +12,7 @@ The project translates FoundryVTT modules from English to Polish using JSON lang
 
 ```
 src/packages/
-├── impmal/lang.json              # Core system translations
+├── {core-system}/lang.json       # Core system translations
 ├── warhammer-library/lang.json   # Shared Warhammer functionality
 └── custom/lang.json              # Custom translations
 ```
@@ -24,9 +24,9 @@ Translation files use JSON format with key-value pairs:
 ```json
 {
   "// comment": "Documentation comment",
-  "IMPMAL.ActorType": "Typ Aktora",
+  "SYSTEM.ActorType": "Typ Aktora",
   "WH.Script": "Skrypt",
-  "IMPMAL.BuyCost": "Kup ({cost})"
+  "SYSTEM.BuyCost": "Kup ({cost})"
 }
 ```
 
@@ -34,7 +34,7 @@ Translation files use JSON format with key-value pairs:
 
 ### Key Naming
 - Use the same key structure as the original English file
-- Maintain namespace prefixes (e.g., `IMPMAL.`, `WH.`)
+- Maintain namespace prefixes (e.g., `SYSTEM.`, `WH.`)
 - Preserve hierarchical structure
 
 ### Content Rules
@@ -50,7 +50,7 @@ Preserve HTML structure while translating:
 
 ```json
 {
-  "IMPMAL.ApplyDutyContent": "<p>Zastosować tę Funkcję dla tej Postaci? Doda to określone Cechy, Umiejętności, Wpływy i Przedmioty</p>"
+  "SYSTEM.ApplyDutyContent": "<p>Zastosować tę Funkcję dla tej Postaci? Doda to określone Cechy, Umiejętności, Wpływy i Przedmioty</p>"
 }
 ```
 
@@ -103,8 +103,8 @@ Use `src/packages/custom/lang.json` for translations not present in original mod
 Example:
 ```json
 {
-  "// custom keys which are not present in ImpMal system nor WH library": "",
-  "IMPMAL.PowerWeapon": "Energetyczna",
+  "// custom keys which are not present in core system nor WH library": "",
+  "SYSTEM.PowerWeapon": "Energetyczna",
   "Submit": "Zatwierdź"
 }
 ```

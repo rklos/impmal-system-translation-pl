@@ -1,6 +1,6 @@
 # Documentation
 
-This directory contains comprehensive documentation for the Imperium Maledictum System Translation project.
+This directory contains comprehensive documentation for the FoundryVTT System Translation project.
 
 ## Quick Start
 
@@ -24,7 +24,7 @@ This project translates FoundryVTT modules from English to Polish using a modula
 
 ```
 src/packages/
-├── impmal/              # Core system translations
+├── {core-system}/        # Core system translations
 │   ├── temp/            # Temporary working directory
 │   └── patches/         # Generated patch files
 ├── warhammer-library/   # Shared Warhammer functionality

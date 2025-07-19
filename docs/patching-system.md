@@ -50,7 +50,7 @@ Configure patchable packages in `tools.config.ts`:
 ```typescript
 export default {
   patch: {
-    impmal: ['scripts', 'static/templates'],
+    '{core-system}': ['scripts', 'static/templates'],
     'warhammer-library': ['static/templates'],
   },
 };
@@ -61,8 +61,8 @@ export default {
 Packages must implement required exports:
 
 ```typescript
-export const PACKAGE = 'impmal';
-export const REPO = 'moo-man/ImpMal-FoundryVTT';
+export const PACKAGE = 'package-name';
+export const REPO = 'owner/repository';
 export const SUPPORTED_VERSION = module.relationships.systems[0].compatibility.verified;
 ```
 

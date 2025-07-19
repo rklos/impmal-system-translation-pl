@@ -18,8 +18,8 @@ Contains translation keys not present in original modules:
 
 ```json
 {
-  "// custom keys which are not present in ImpMal system nor WH library": "",
-  "IMPMAL.PowerWeapon": "Energetyczna",
+  "// custom keys which are not present in core system nor WH library": "",
+  "SYSTEM.PowerWeapon": "Energetyczna",
   "Submit": "Zatwierdź",
   "Roll": "Rzuć"
 }
@@ -37,13 +37,13 @@ Handles **differentiation cases** where English terms have the same name but req
 
 ```typescript
 // Polish translation differentiates between "power" and "energy" weapons
-IMPMAL.meleeTypes.power = 'IMPMAL.PowerWeapon';
+SYSTEM.meleeTypes.power = 'SYSTEM.PowerWeapon';
 ```
 
 The corresponding translation key is stored in `lang.json`:
 ```json
 {
-  "IMPMAL.PowerWeapon": "Energetyczna"
+  "SYSTEM.PowerWeapon": "Energetyczna"
 }
 ```
 
@@ -81,8 +81,8 @@ Edit `lang.json` to add new translation keys:
 
 ```json
 {
-  "// custom keys which are not present in ImpMal system nor WH library": "",
-  "IMPMAL.PowerWeapon": "Energetyczna",
+  "// custom keys which are not present in core system nor WH library": "",
+  "SYSTEM.PowerWeapon": "Energetyczna",
   "Custom.NewFeature": "Nowa Funkcja"
 }
 ```

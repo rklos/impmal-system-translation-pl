@@ -18,7 +18,7 @@ Tech stack:
   - `main.ts` - Module entry point and initialization
   - `module.json` - FoundryVTT module manifest and metadata
   - `packages/` - Translation packages for different modules
-    - `impmal/` - IMPmal system translations and customizations
+    - `{core-system}/` - System translations and customizations
       - `temp/` - Temporary files used in development
         - `patches/` - Module patches for applying translations and customizations
     - `custom/` - Custom translation package for user-defined content

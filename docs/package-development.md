@@ -1,6 +1,6 @@
 # Package Development
 
-This guide explains how to create and manage packages in the Imperium Maledictum System Translation project.
+This guide explains how to create and manage packages in the FoundryVTT System Translation project.
 
 ## Overview
 
@@ -26,7 +26,7 @@ src/packages/{package-name}/
 
 ### Package Types
 
-- **System Packages**: Core system translations (`impmal`, `warhammer-library`)
+- **System Packages**: Core system translations (`{core-system}`, `warhammer-library`)
 - **Custom Package**: Quality-of-life enhancements (`custom`)
 - **Future Packages**: Additional modules as the project grows
 
@@ -91,7 +91,7 @@ JSON files containing translation key-value pairs:
 ```json
 {
   "// comment": "Documentation comment",
-  "IMPMAL.ActorType": "Typ Aktora",
+  "SYSTEM.ActorType": "Typ Aktora",
   "WH.Script": "Skrypt"
 }
 ```
