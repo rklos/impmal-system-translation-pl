@@ -17,8 +17,11 @@ src/packages/{package-name}/
 ├── types.d.ts              # TypeScript declarations (optional)
 ├── scripts/                # TypeScript files
 │   └── {script-name}.ts
-└── styles/                 # SCSS files
-    └── {style-name}.scss
+├── styles/                 # SCSS files
+│   └── {style-name}.scss
+├── patches/                # Generated patch files (optional)
+└── temp/                   # Temporary working directory (optional)
+    └── patches/
 ```
 
 ### Package Types

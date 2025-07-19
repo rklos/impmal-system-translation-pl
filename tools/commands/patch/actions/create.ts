@@ -1,17 +1,11 @@
 import * as diff from 'diff';
 import * as fs from 'fs';
 import { dirname, join, relative } from 'path';
-import { fileURLToPath } from 'url';
 import type { Package } from '~/packages';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const ROOT_DIR = join(__dirname, '..', '..', '..', '..');
-const PATCHES_DIR = join(ROOT_DIR, 'src', 'temp', 'patches');
+import { getConstsOfPackage, ROOT_DIR } from '../../../utils/consts';
 
 async function getChangedFiles(pkg: Package): Promise<string[]> {
-  const EN_DIR = join(PATCHES_DIR, pkg.PACKAGE, 'en');
-  const PL_DIR = join(PATCHES_DIR, pkg.PACKAGE, 'pl');
+  const { TEMP_PATCHES_EN_DIR, TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
 
   // Get diff between pl and en directories by comparing files directly
   const changedFiles: string[] = [];
@@ -36,14 +30,14 @@ async function getChangedFiles(pkg: Package): Promise<string[]> {
   }
 
   // Get all files from both directories
-  const enFiles = scanDirectory(EN_DIR);
-  const plFiles = scanDirectory(PL_DIR);
+  const enFiles = scanDirectory(TEMP_PATCHES_EN_DIR);
+  const plFiles = scanDirectory(TEMP_PATCHES_PL_DIR);
 
   // Find files that exist in both directories and are different
   for (const file of enFiles) {
     if (plFiles.includes(file)) {
-      const enPath = join(EN_DIR, file);
-      const plPath = join(PL_DIR, file);
+      const enPath = join(TEMP_PATCHES_EN_DIR, file);
+      const plPath = join(TEMP_PATCHES_PL_DIR, file);
 
       try {
         const enContent = fs.readFileSync(enPath, 'utf8');
@@ -62,12 +56,11 @@ async function getChangedFiles(pkg: Package): Promise<string[]> {
 }
 
 async function createPatchForFile(pkg: Package, filePath: string): Promise<void> {
-  const EN_DIR = join(PATCHES_DIR, pkg.PACKAGE, 'en');
-  const PL_DIR = join(PATCHES_DIR, pkg.PACKAGE, 'pl');
+  const { PATCHES_DIR, TEMP_PATCHES_EN_DIR, TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
 
   try {
-    const enPath = join(EN_DIR, filePath);
-    const plPath = join(PL_DIR, filePath);
+    const enPath = join(TEMP_PATCHES_EN_DIR, filePath);
+    const plPath = join(TEMP_PATCHES_PL_DIR, filePath);
 
     // Read file contents
     const enContent = fs.readFileSync(enPath, 'utf8');
@@ -84,11 +77,10 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
     );
 
     // Create patches directory structure
-    const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
-    fs.mkdirSync(SRC_PATCHES_DIR, { recursive: true });
+    fs.mkdirSync(PATCHES_DIR, { recursive: true });
 
     // Save patch file
-    const patchPath = join(SRC_PATCHES_DIR, filePath.replace('.hbs', '.diff'));
+    const patchPath = join(PATCHES_DIR, filePath.replace('.hbs', '.diff'));
     const patchDir = dirname(patchPath);
     fs.mkdirSync(patchDir, { recursive: true });
     fs.writeFileSync(patchPath, patch);
@@ -101,10 +93,10 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
 
 export default async function create(pkg: Package): Promise<void> {
   // Remove existing patches directory if it exists
-  const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
-  if (fs.existsSync(SRC_PATCHES_DIR)) {
-    fs.rmSync(SRC_PATCHES_DIR, { recursive: true, force: true });
-    console.log(`Removed existing patches directory: ${relative(ROOT_DIR, SRC_PATCHES_DIR)}`);
+  const { PATCHES_DIR } = getConstsOfPackage(pkg);
+  if (fs.existsSync(PATCHES_DIR)) {
+    fs.rmSync(PATCHES_DIR, { recursive: true, force: true });
+    console.log(`Removed existing patches directory: ${relative(ROOT_DIR, PATCHES_DIR)}`);
   }
 
   // Get the list of changed files between pl and en directories

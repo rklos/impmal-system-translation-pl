@@ -30,16 +30,15 @@ This system enables applying Polish translations to HTML templates and other fil
 ## Directory Structure
 
 ```
-src/temp/patches/                 # Working directory
-├── {package}/                    # Package-specific directories
-│   ├── en/                       # Original English files
-│   ├── pl/                       # Modified Polish files
-│   └── temp/                     # Temporary clone directory
+src/packages/{package}/temp/patches/  # Working directory
+├── en/                               # Original English files
+├── pl/                               # Modified Polish files
+└── download/                             # Temporary clone directory
 
-src/packages/{package}/patches/   # Generated patch files
+src/packages/{package}/patches/       # Generated patch files
 ├── static/
 │   └── templates/
-│       └── {template}.diff       # Unified diff files
+│       └── {template}.diff           # Unified diff files
 ```
 
 ## Configuration
@@ -83,7 +82,7 @@ npm run patch download
 
 ### 2. Manual Translation
 
-Edit files in `src/temp/patches/{package}/pl/` to apply Polish translations. The `en/` directory serves as reference.
+Edit files in `src/packages/{package}/temp/patches/pl/` to apply Polish translations. The `en/` directory serves as reference.
 
 ### 3. Generate Patches
 

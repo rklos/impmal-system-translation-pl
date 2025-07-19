@@ -25,6 +25,8 @@ This project translates FoundryVTT modules from English to Polish using a modula
 ```
 src/packages/
 ├── impmal/              # Core system translations
+│   ├── temp/            # Temporary working directory
+│   └── patches/         # Generated patch files
 ├── warhammer-library/   # Shared Warhammer functionality
 ├── custom/              # Custom enhancements
 └── {future-packages}/   # Additional modules

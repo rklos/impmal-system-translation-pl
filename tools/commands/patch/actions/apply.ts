@@ -1,19 +1,14 @@
 import * as diff from 'diff';
 import * as fs from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import type { Package } from '~/packages';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const ROOT_DIR = join(__dirname, '..', '..', '..', '..');
-const PATCHES_DIR = join(ROOT_DIR, 'src', 'temp', 'patches');
+import { getConstsOfPackage } from '../../../utils/consts';
 
 async function getPatchFiles(pkg: Package): Promise<string[]> {
-  const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
+  const { PATCHES_DIR } = getConstsOfPackage(pkg);
   const patchFiles: string[] = [];
 
-  if (!fs.existsSync(SRC_PATCHES_DIR)) {
+  if (!fs.existsSync(PATCHES_DIR)) {
     console.log(`No patches directory found for package ${pkg.PACKAGE}`);
     return patchFiles;
   }
@@ -37,13 +32,12 @@ async function getPatchFiles(pkg: Package): Promise<string[]> {
     return files;
   }
 
-  return scanDirectory(SRC_PATCHES_DIR);
+  return scanDirectory(PATCHES_DIR);
 }
 
 async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void> {
-  const PL_DIR = join(PATCHES_DIR, pkg.PACKAGE, 'pl');
-  const SRC_PATCHES_DIR = join(ROOT_DIR, 'src', 'packages', pkg.PACKAGE, 'patches');
-  const FULL_PATCH_PATH = join(SRC_PATCHES_DIR, patchPath);
+  const { PATCHES_DIR, TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
+  const FULL_PATCH_PATH = join(PATCHES_DIR, patchPath);
 
   try {
     // Read patch content
@@ -58,7 +52,7 @@ async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void>
     }
 
     const targetFilePath = patches[0].index!;
-    const targetFullPath = join(PL_DIR, targetFilePath);
+    const targetFullPath = join(TEMP_PATCHES_PL_DIR, targetFilePath);
 
     // Check if target file exists
     if (!fs.existsSync(targetFullPath)) {
@@ -80,7 +74,7 @@ async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void>
     // Write the patched content back to the file
     fs.writeFileSync(targetFullPath, patchedContent);
 
-    console.log(`Applied patch: ${patchPath} -> ${targetFilePath}`);
+    console.log(`Applied patch: ${patchPath}`);
   } catch (error) {
     console.error(`Error applying patch ${patchPath}:`, error);
   }
