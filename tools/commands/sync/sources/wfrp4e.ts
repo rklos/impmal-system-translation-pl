@@ -1,9 +1,11 @@
 import fs from 'fs';
+import { join } from 'path';
 import { sendNotification, reportError } from '../../../utils/discord';
 import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
+import { PACKAGES_DIR } from '../../../utils/consts';
 
 const REPO = 'foundryvttpl/wfrp4e-core-pl';
-const LANG_FILE = 'src/packages/warhammer-library/lang.json';
+const LANG_FILE = join(PACKAGES_DIR, 'warhammer-library', 'lang.json');
 
 interface Change {
   path: string;

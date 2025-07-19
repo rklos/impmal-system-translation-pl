@@ -1,11 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { join } from 'path';
 import chalk from 'chalk';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const ROOT_DIR = join(__dirname, '..');
+import { ROOT_DIR, SRC_DIR } from './utils/consts';
 
 function bumpVersion(newVersionArg: string) {
   // Read package.json
@@ -38,7 +34,7 @@ function bumpVersion(newVersionArg: string) {
   writeFileSync(packageLockPath, `${JSON.stringify(packageLock, null, 2)}\n`);
 
   // Update module.json
-  const moduleJsonPath = join(ROOT_DIR, 'src', 'module.json');
+  const moduleJsonPath = join(SRC_DIR, 'module.json');
   const moduleJson = JSON.parse(readFileSync(moduleJsonPath, 'utf8'));
   moduleJson.version = newVersion;
   writeFileSync(moduleJsonPath, `${JSON.stringify(moduleJson, null, 2)}\n`);

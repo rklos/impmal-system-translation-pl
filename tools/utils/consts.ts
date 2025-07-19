@@ -6,7 +6,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export const ROOT_DIR = join(__dirname, '..', '..');
-export const PACKAGES_DIR = join(ROOT_DIR, 'src', 'packages');
+export const SRC_DIR = join(ROOT_DIR, 'src');
+export const PACKAGES_DIR = join(SRC_DIR, 'packages');
+export const DIST_DIR = join(ROOT_DIR, 'dist');
 
 export function getConstsOfPackage(pkg: Package) {
   const PACKAGE_DIR = join(PACKAGES_DIR, pkg.PACKAGE);

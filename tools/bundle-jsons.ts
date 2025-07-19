@@ -1,6 +1,6 @@
 import fs from 'fs';
-
-const PACKAGES_DIR = 'src/packages';
+import { join } from 'path';
+import { DIST_DIR, PACKAGES_DIR } from './utils/consts';
 
 // Deep merge objects instead of simple assign
 function deepMerge(target: Record<string, unknown>, source: Record<string, unknown>) {
@@ -18,7 +18,7 @@ function findLangJsons(dir: string, jsons: string[] = []) {
   const items = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const item of items) {
-    const fullPath = `${dir}/${item.name}`;
+    const fullPath = join(dir, item.name);
 
     if (item.isDirectory()) {
       findLangJsons(fullPath, jsons);
@@ -45,9 +45,9 @@ for (const json of jsons) {
 }
 
 // Ensure dist/lang directory exists
-if (!fs.existsSync('dist/lang')) {
-  fs.mkdirSync('dist/lang', { recursive: true });
+if (!fs.existsSync(join(DIST_DIR, 'lang'))) {
+  fs.mkdirSync(join(DIST_DIR, 'lang'), { recursive: true });
 }
 
 // Write combined JSON to file
-fs.writeFileSync('dist/lang/pl.json', JSON.stringify(combinedJson, null, 2));
+fs.writeFileSync(join(DIST_DIR, 'lang', 'pl.json'), JSON.stringify(combinedJson, null, 2));

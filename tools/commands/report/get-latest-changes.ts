@@ -1,6 +1,8 @@
 import fs from 'fs';
 import chalk from 'chalk';
 import { Octokit } from '@octokit/core';
+import { join } from 'path';
+import { SRC_DIR } from '../../utils/consts';
 import { fetchGithubRawContent } from '../../utils/fetch-github-raw-content';
 import type { Changes } from './types';
 
@@ -31,7 +33,7 @@ export async function getLatestChanges(repository: string, version: string): Pro
     const moduleId = moduleData.id;
 
     // Read local module.json
-    const localModuleJson = JSON.parse(fs.readFileSync('src/module.json', 'utf8'));
+    const localModuleJson = JSON.parse(fs.readFileSync(join(SRC_DIR, 'module.json'), 'utf8'));
 
     // Find the module in relationships
     const relationship = localModuleJson.relationships.systems?.find((s: { id: string }) => s.id === moduleId)

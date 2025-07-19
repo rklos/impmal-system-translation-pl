@@ -1,5 +1,6 @@
 import { parseArgs } from 'node:util';
 import * as packages from '~/packages';
+import type { Package } from '~/packages';
 import download from './actions/download';
 import create from './actions/create';
 import apply from './actions/apply';
@@ -18,8 +19,8 @@ if (!action) {
 
 // eslint-disable-next-line no-shadow
 async function run(action: string) {
-  Object.values(packages).forEach(async (pkg) => {
-    if (!('REPO' in pkg)) return;
+  for (const pkg of Object.values(packages) as Package[]) {
+    if (!('REPO' in pkg)) continue;
 
     if (action === 'download') {
       await download(pkg);
@@ -31,7 +32,7 @@ async function run(action: string) {
       console.error(`Error: Unknown action '${action}'`);
       process.exit(1);
     }
-  });
+  }
 }
 
 run(action);
