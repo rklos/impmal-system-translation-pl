@@ -2,5 +2,8 @@
   "// custom keys which are not present in ImpMal system nor WH library": "",
   "IMPMAL.PowerWeapon": "Energetyczna",
   "Submit": "Zatwierdź",
-  "Roll": "Rzuć"
+  "Roll": "Rzuć",
+  "Edit": "Edytuj",
+  "Remove": "Usuń",
+  "Post to Chat": "Wyślij na Czat"
 }
