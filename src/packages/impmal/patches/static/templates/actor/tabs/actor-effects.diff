@@ -1,0 +1,13 @@
+Index: static/templates/actor/tabs/actor-effects.hbs
+===================================================================
+--- static/templates/actor/tabs/actor-effects.hbs	en
++++ static/templates/actor/tabs/actor-effects.hbs	pl
+@@ -12,7 +12,7 @@
+                 </div>
+             {{/each}}
+             <select class="add-effect">
+-                <option>Add Effect</option>
++                <option>Dodaj Efekt</option>
+                 {{#each (config "zoneEffects")}}
+                     <option value="{{@key}}">{{this.name}}</option>
+                 {{/each}}
