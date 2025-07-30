@@ -1,4 +1,26 @@
 /* eslint-disable max-classes-per-file,@typescript-eslint/explicit-member-accessibility */
+interface ScriptData {
+  trigger: string;
+  label: string;
+  script: string;
+  options?: Record<string, unknown>;
+}
+
+interface EffectSystem {
+  system?: {
+    transferData: Record<string, string>;
+    scriptData?: ScriptData[];
+  };
+  effect?: {
+    name?: string;
+    label?: string;
+    system: {
+      transferData: Record<string, string>;
+      scriptData?: ScriptData[];
+    };
+  };
+  execute?: () => void;
+}
 
 declare global {
   class SkillsModel {
@@ -20,6 +42,10 @@ declare global {
     meleeTypes: {
       power: string;
     };
+
+    scriptTriggers: Record<string, string>;
+
+    vehicleActions: Record<string, CONFIG.StatusEffect & EffectSystem>;
 
     actions: {
       aim: unknown;
