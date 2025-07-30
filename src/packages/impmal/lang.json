@@ -214,7 +214,7 @@
       "Initiative": "Automatyczne obliczanie Inicjatywy",
       "Corruption": "Automatyczne obliczanie Spaczenia"
     },
-    "ShowPassengers": "Pokaż Tokeny Załogi"
+    "ShowPassengers": "Pokaż Tokeny Pasażerów"
   },
   "IMPMAL.CountEveryBullet": "Licz Każdą Kulę",
   "IMPMAL.CountEveryBulletHint": "Użyj opcjonalnej zasady 'Liczenie Każdej Kuli' zdefiniowanej na stronie 314.",
@@ -673,7 +673,7 @@
   "IMPMAL.Superiority": "Przewaga",
   "IMPMAL.SupportAttachment": "Modyfikacja wsparcia",
   "IMPMAL.Sustained": "Podtrzymywany",
-  "IMPMAL.Swift": "Wysoka",
+  "IMPMAL.Swift": "Bardzo Szybki",
   "IMPMAL.TableSettings": "Ustawienia Tabeli",
   "IMPMAL.TableConfigure": "Konfiguracja Tabel",
   "IMPMAL.TableSettingsHint": "Skonfiguruj, których tabel system używa w kontekstowych linkach.",
