@@ -3,49 +3,10 @@ import { join } from 'path';
 import { sendNotification, reportError } from '../../../utils/discord';
 import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
 import { PACKAGES_DIR } from '../../../utils/consts';
+import { updateNestedValues, type Change } from '../../../utils/update-nested-values';
 
 const REPO = 'foundryvttpl/wfrp4e-core-pl';
 const LANG_FILE = join(PACKAGES_DIR, 'warhammer-library', 'lang.json');
-
-interface Change {
-  path: string;
-  old: unknown;
-  new: unknown;
-}
-
-function updateNestedValues(
-  localObj: Record<string, unknown>,
-  remoteObj: Record<string, unknown>,
-  path = '',
-  changedTranslations: Change[] = [],
-): Change[] {
-  for (const key in localObj) {
-    const currentPath = path ? `${path}.${key}` : key;
-
-    if (typeof localObj[key] === 'object' && localObj[key] !== null) {
-      if (remoteObj[key]) {
-        updateNestedValues(
-          localObj[key] as Record<string, unknown>,
-          remoteObj[key] as Record<string, unknown>,
-          currentPath,
-          changedTranslations,
-        );
-      }
-    } else if (typeof localObj[key] === 'string' && remoteObj[key]) {
-      if (localObj[key] !== remoteObj[key]) {
-        changedTranslations.push({
-          path: currentPath,
-          old: localObj[key],
-          new: remoteObj[key],
-        });
-        // eslint-disable-next-line no-param-reassign
-        localObj[key] = remoteObj[key];
-      }
-    }
-  }
-
-  return changedTranslations;
-}
 
 async function reportChanges(changedTranslations: Change[]) {
   if (changedTranslations.length > 0) {
