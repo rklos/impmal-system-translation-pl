@@ -10,6 +10,13 @@ declare global {
   }
 
   const IMPMAL: {
+    vehicleCategory: {
+      wheeled: string;
+      tracked: string;
+      flyer: string;
+      walker: string;
+    };
+
     meleeTypes: {
       power: string;
     };
