@@ -1,11 +1,8 @@
 {
-
-
   "TYPES.Actor.character": "Postać Gracza",
   "TYPES.Actor.npc": "Postać Niezależna",
   "TYPES.Actor.patron": "Patron",
   "TYPES.Actor.vehicle": "Pojazd",
-
   "TYPES.Item.boonLiability": "Zalety / Brzemiona",
   "TYPES.Item.origin": "Pochodzenie",
   "TYPES.Item.faction": "Frakcja",
@@ -25,7 +22,7 @@
   "TYPES.Item.critical": "Rana Krytyczna",
   "TYPES.Item.injury": "Uraz",
   "TYPES.Item.trait": "Cecha",
-  
+  "TYPES.Item.pack": "Paczka",
   "IMPMAL.Aim": "Celowanie",
   "IMPMAL.AddPatron": "Dodaj Patrona poprzez przeciągnięcie go z paska bocznego lub kliknięcie prawym przyciskiem myszy i wybranie 'Ustaw jako Patrona'",
   "IMPMAL.AddInfluence": "Dodaj Wpływy",
@@ -58,8 +55,8 @@
   "IMPMAL.ArmourRightArm": "Pancerz (Prawe Ramię)",
   "IMPMAL.ArmourLeftLeg": "Pancerz (Lewa Noga)",
   "IMPMAL.ArmourRightLeg": "Pancerz (Prawa Noga)",
-  "IMPMAL.AstoundingFailure": "Zadziwiająca Porażka", 
-  "IMPMAL.AstoundingSuccess": "Zadziwiający Sukces", 
+  "IMPMAL.AstoundingFailure": "Zadziwiająca Porażka",
+  "IMPMAL.AstoundingSuccess": "Zadziwiający Sukces",
   "IMPMAL.Athletics": "Atletyka",
   "IMPMAL.AttackType": "Typ Ataku",
   "IMPMAL.Attacks": "Ataki",
@@ -75,6 +72,7 @@
   "IMPMAL.Availability": "Dostępność",
   "IMPMAL.Awareness": "Spostrzegawczość",
   "IMPMAL.BS": "US",
+  "IMPMAL.Back": "Tył",
   "IMPMAL.BackArmour": "Pancerz tylny",
   "IMPMAL.BallisticSkill": "Umiejętności Strzeleckie",
   "IMPMAL.Barrier": "Bariera",
@@ -121,6 +119,7 @@
   "IMPMAL.ChooseSpecialisation": "Wybierz Specjalizację. Jeśli nie dokonasz wyboru, zostanie utworzona pusta specjalizacja.",
   "IMPMAL.ChooseNum": "Wybierz {num}",
   "IMPMAL.Choose": "Wybierz",
+  "IMPMAL.ChooseActor": "Wybierz Aktora",
   "IMPMAL.ChooseFaction": "Wybierz Frakcję",
   "IMPMAL.Close": "Krótka",
   "IMPMAL.ClearRended": "Wyczyść Rozdarcie",
@@ -157,73 +156,66 @@
   "IMPMAL.ConditionStunnedMinor": "Oszołomienie (Lekkie)",
   "IMPMAL.ConditionUnconscious": "Utrata przytomności",
   "IMPMAL.Connections": "Powiązania",
-
   "IMPMAL.CHARGEN": {
-      "NoGMWarning": "",
-      "Stages": "Etapy",
-      "Title": "Tworzenie Postaci",
-
-      "StageTitle": {
-          "Characteristics": "Cechy",
-          "Origin": "Pochodzenie",
-          "Faction": "Frakcja",
-          "Role": "Rola",
-          "Details": "Szczegóły"
-      },
-
-      "Warn": {
-          "NoGM": "Aby stworzyć postać, Mistrz Gry musi być zalogowany lub gracze muszą mieć uprawnienie 'Tworzenie Nowych Aktorów'"
-      },
-
-
-      "UseExistingData": "Użyj Istniejących Danych",
-      "UseExistingDataContent": "Znaleziono istniejące dane z poprzedniej sesji. Czy chcesz ich użyć?",
-      "Message": {
-          "Start": "<p><b>{user}</b> rozpoczął tworzenie postaci!</p>",
-          "Created": "<p><b>{name}</b> stworzony!",
-          "AllocateCharacteristics": "<p>Rozpoczęto przydzielanie Cech</p>",
-          "SwappedCharacteristics": "<p>Zamieniono {ch1} z {ch2}</p>",
-          "Chosen": "<p>Wybrano: <b>{chosen}</b>!</p>",
-          "Rolled": "<p>Wyrzucono: <b>{rolled}</b>!</p>",
-          "RolledCharacteristics": "<p>Wyrzucono Cechy</p>",
-          "ReRolledCharacteristics": "<p>Ponownie wyrzucono Cechy</p>"
-      },
-      "ERROR": {
-          "Create": "Błąd Tworzenia Aktora: {error}",
-          "StageStart": "Nie można rozpocząć tego etapu: Najpierw należy ukończyć {stage}",
-          "Faction": "Rzuć na Frakcję lub wybierz ją ręcznie, przeciągając i upuszczając.",
-          "Origin": "Rzuć na Pochodzenie lub wybierz je ręcznie, przeciągając i upuszczając.",
-          "Role": "Dodaj Pochodzenie, przeciągając i upuszczając.",
-          "Choices": "Istnieją oczekujące wybory, które muszą zostać dokonane przed ukończeniem tego Etapu.",
-          "LowAdvances": "Nieprzydzielone Rozwinięcia ({allocated} z {total})",
-          "HighAdvances": "Nadmiernie przydzielone Rozwinięcia ({allocated} z {total})",
-          "TooManySkillAdvances": "Nowa Postać nie może mieć więcej niż 2 Rozwinięcia w jednej Umiejętności ({skill})",
-          "TooManySpecAdvances": "Nowa Postać nie może mieć więcej niż 1 Rozwinięcie w jednej Specjalizacji",
-          "CharacteristicAllocation": "Punkty przydzielania Cech nie mogą przekroczyć 90",
-          "CharacteristicAllocationBounds": "Nie można przydzielić mniej niż 4 lub więcej niż 18 w pojedynczej cesze"
-      },
-
-      "Characteristics": {
-          "AllocationPoints": "Przydziel 90 Punktów do cech (min. 4, maks: 18)",
-          "AllocationSpent": "Wydałeś {spent}",
-          "NotHappy": "Niezadowolony z tych liczb?",
-          "Rearrange": "Zmień układ",
-          "Reroll": "Przerzuć",
-          "Allocate": "Przydziel",
-          "Instructions": "Przeciągnij i upuść wartości rzutów, aby zmienić układ statystyk (ale daje to mniej PD). Możesz też przerzucić i nie otrzymać PD. Alternatywnie, przydziel 90 punktów według własnego uznania (bez PD)."
-      }
+    "NoGMWarning": "",
+    "Stages": "Etapy",
+    "Title": "Tworzenie Postaci",
+    "StageTitle": {
+      "Characteristics": "Cechy",
+      "Origin": "Pochodzenie",
+      "Faction": "Frakcja",
+      "Role": "Rola",
+      "Details": "Szczegóły"
+    },
+    "Warn": {
+      "NoGM": "Aby stworzyć postać, Mistrz Gry musi być zalogowany lub gracze muszą mieć uprawnienie 'Tworzenie Nowych Aktorów'"
+    },
+    "UseExistingData": "Użyj Istniejących Danych",
+    "UseExistingDataContent": "Znaleziono istniejące dane z poprzedniej sesji. Czy chcesz ich użyć?",
+    "Message": {
+      "Start": "<p><b>{user}</b> rozpoczął tworzenie postaci!</p>",
+      "Created": "<p><b>{name}</b> stworzony!",
+      "AllocateCharacteristics": "<p>Rozpoczęto przydzielanie Cech</p>",
+      "SwappedCharacteristics": "<p>Zamieniono {ch1} z {ch2}</p>",
+      "Chosen": "<p>Wybrano: <b>{chosen}</b>!</p>",
+      "Rolled": "<p>Wyrzucono: <b>{rolled}</b>!</p>",
+      "RolledCharacteristics": "<p>Wyrzucono Cechy</p>",
+      "ReRolledCharacteristics": "<p>Ponownie wyrzucono Cechy</p>"
+    },
+    "ERROR": {
+      "Create": "Błąd Tworzenia Aktora: {error}",
+      "StageStart": "Nie można rozpocząć tego etapu: Najpierw należy ukończyć {stage}",
+      "Faction": "Rzuć na Frakcję lub wybierz ją ręcznie, przeciągając i upuszczając.",
+      "Origin": "Rzuć na Pochodzenie lub wybierz je ręcznie, przeciągając i upuszczając.",
+      "Role": "Dodaj Pochodzenie, przeciągając i upuszczając.",
+      "Choices": "Istnieją oczekujące wybory, które muszą zostać dokonane przed ukończeniem tego Etapu.",
+      "LowAdvances": "Nieprzydzielone Rozwinięcia ({allocated} z {total})",
+      "HighAdvances": "Nadmiernie przydzielone Rozwinięcia ({allocated} z {total})",
+      "TooManySkillAdvances": "Nowa Postać nie może mieć więcej niż 2 Rozwinięcia w jednej Umiejętności ({skill})",
+      "TooManySpecAdvances": "Nowa Postać nie może mieć więcej niż 1 Rozwinięcie w jednej Specjalizacji",
+      "CharacteristicAllocation": "Punkty przydzielania Cech nie mogą przekroczyć 90",
+      "CharacteristicAllocationBounds": "Nie można przydzielić mniej niż 4 lub więcej niż 18 w pojedynczej cesze"
+    },
+    "Characteristics": {
+      "AllocationPoints": "Przydziel 90 Punktów do cech (min. 4, maks: 18)",
+      "AllocationSpent": "Wydałeś {spent}",
+      "NotHappy": "Niezadowolony z tych liczb?",
+      "Rearrange": "Zmień układ",
+      "Reroll": "Przerzuć",
+      "Allocate": "Przydziel",
+      "Instructions": "Przeciągnij i upuść wartości rzutów, aby zmienić układ statystyk (ale daje to mniej PD). Możesz też przerzucić i nie otrzymać PD. Alternatywnie, przydziel 90 punktów według własnego uznania (bez PD)."
+    }
   },
-
   "IMPMAL.ActorConfig": {
-      "Title": "Konfiguracja Aktora",
-      "AutoCalc": {
-          "Wounds": "Automatyczne obliczanie Ran",
-          "CriticalWounds": "Automatyczne obliczanie Ran Krytycznych",
-          "Initiative": "Automatyczne obliczanie Inicjatywy",
-          "Corruption": "Automatyczne obliczanie Spaczenia"
-      }
+    "Title": "Konfiguracja Aktora",
+    "AutoCalc": {
+      "Wounds": "Automatyczne obliczanie Ran",
+      "CriticalWounds": "Automatyczne obliczanie Ran Krytycznych",
+      "Initiative": "Automatyczne obliczanie Inicjatywy",
+      "Corruption": "Automatyczne obliczanie Spaczenia"
+    },
+    "ShowPassengers": "Pokaż Tokeny Załogi"
   },
-
   "IMPMAL.CountEveryBullet": "Licz Każdą Kulę",
   "IMPMAL.CountEveryBulletHint": "Użyj opcjonalnej zasady 'Liczenie Każdej Kuli' zdefiniowanej na stronie 314.",
   "IMPMAL.Corruption": "Spaczenie",
@@ -245,6 +237,7 @@
   "IMPMAL.Cover": "Osłona",
   "IMPMAL.Damage": "Obrażenia",
   "IMPMAL.DamageDisplay": "{damage} Obrażeń",
+  "IMPMAL.DamageTaken": "{damage} Obrażeń w {location}",
   "IMPMAL.Dark": "Ciemny",
   "IMPMAL.Dead": "Martwy",
   "IMPMAL.DeadlyHazard": "Śmiertelne Zagrożenie",
@@ -252,12 +245,16 @@
   "IMPMAL.Defended": "Obroniony",
   "IMPMAL.Defensive": "Parująca",
   "IMPMAL.Defend": "Postawa obronna",
+  "IMPMAL.Delete": "Usuń",
   "IMPMAL.DeleteItem": "Usuń Przedmiot",
   "IMPMAL.DeleteItemConfirmation": "Czy na pewno chcesz usunąć ten Przedmiot?",
   "IMPMAL.DeleteActiveEffect": "Usuń Aktywny Efekt",
   "IMPMAL.DeleteActiveEffectConfirmation": "Czy na pewno chcesz usunąć ten Aktywny Efekt?",
   "IMPMAL.DeleteFaction": "Usuń Frakcję",
   "IMPMAL.DeleteFactionConfirmation": "Czy na pewno chcesz usunąć tę Frakcję?",
+  "IMPMAL.DeleteVehicleWeapon": "Usuń lub przechowaj w Ładowni?",
+  "IMPMAL.DeletePackContents": "Usuń Zawartość Paczki",
+  "IMPMAL.DeletePackContentsPrompt": "Czy na pewno chcesz usunąć wszystkie Przedmioty z tej Paczki z Aktora?",
   "IMPMAL.DeletingEffectItems": "Usuwanie Przedmiotów Efektu: {items}",
   "IMPMAL.Demeanor": "Nastawienie",
   "IMPMAL.Description": "Opis",
@@ -268,8 +265,8 @@
   "IMPMAL.DetailsCharacter": "Szczegóły (Postać)",
   "IMPMAL.DetailsPatron": "Szczegóły (Patron)",
   "IMPMAL.Dexterity": "Finezja",
-  "IMPMAL.DialogModifiers": "Modyfikatory Dialogu",
-  "IMPMAL.DialogModifierTargeter": "Dialog Celownika",
+  "IMPMAL.DialogModifiers": "Okno Modyfikatorów Testu",
+  "IMPMAL.DialogModifierTargeter": "Okno Celownika",
   "IMPMAL.Difficult": "Problematyczny",
   "IMPMAL.Difficulty": "Trudność",
   "IMPMAL.DifficultTerrain": "Trudny Teren",
@@ -284,6 +281,7 @@
   "IMPMAL.Divination": "Przepowiednia",
   "IMPMAL.Dodge": "Unik",
   "IMPMAL.DragModifications": "Przeciągnij i upuść Przedmioty Modyfikacji na ten arkusz, aby dodać modyfikacje.",
+  "IMPMAL.Driver/Pilot": "Kierowca / Pilot",
   "IMPMAL.Durable": "Wytrzymały",
   "IMPMAL.Duration": "Czas Trwania",
   "IMPMAL.Duty": "Funkcja",
@@ -332,6 +330,9 @@
   "IMPMAL.ErrorSlotItemActor": "Zarówno ten, jak i umieszczony w slocie Przedmiot muszą być posiadane przez Aktora.",
   "IMPMAL.ErrorNoActorBuyItem": "Brak przypisanego Aktora do zakupu tego Przedmiotu.",
   "IMPMAL.ErrorNotEnoughSolars": "{name} nie ma wystarczającej liczby Solarów!",
+  "IMPMAL.ErrorOwnedItemInPack": "Posiadane Przedmioty nie mogą być umieszczone w Paczce, której nie posiada.",
+  "IMPMAL.ErrorTraitType": "Błędny typ Cechy",
+  "IMPMAL.ErrorNoAvailableActors": "Brak dostępnych Aktorów do wyboru.",
   "IMPMAL.Excellent": "Doskonały",
   "IMPMAL.ExposureMinor": "Niewielkie Narażenie na Spaczenie",
   "IMPMAL.ExposureModerate": "Umiarkowane Narażenie na Spaczenie",
@@ -362,6 +363,7 @@
   "IMPMAL.Fortitude": "Hart",
   "IMPMAL.Fraction": "Frakcja",
   "IMPMAL.Free": "Darmowy",
+  "IMPMAL.Front": "Front",
   "IMPMAL.FrontArmour": "Pancerz przedni",
   "IMPMAL.Fumble": "Pech",
   "IMPMAL.Gender": "Płeć",
@@ -387,11 +389,12 @@
   "IMPMAL.HowManyMags": "Ile magazynków?",
   "IMPMAL.Hunted": "Ścigany",
   "IMPMAL.IgnoreAP": "Ignoruj WP",
+  "IMPMAL.IgnoreEncumbrance": "Ignoruj Obciążenie",
   "IMPMAL.IgnorePrerequisite": "Ignoruj Wymaganie",
   "IMPMAL.IgnorePrerequisiteContent": "<p>Ten Aktor nie spełnia wymagania wstępnego dla tego Talentu. Kontynuować mimo to?</p>",
   "IMPMAL.Immediate": "Natychmiastowy",
-  "IMPMAL.ImpressiveFailure": "Imponująca Porażka", 
-  "IMPMAL.ImpressiveSuccess": "Imponujący Sukces", 
+  "IMPMAL.ImpressiveFailure": "Imponująca Porażka",
+  "IMPMAL.ImpressiveSuccess": "Imponujący Sukces",
   "IMPMAL.ImmediateDeleteEffect": "Usuń Efekt",
   "IMPMAL.ImmediateDeleteEffectHint": "Usuń Aktywny Efekt po uruchomieniu tego skryptu. Jeśli ten efekt ma wiele skryptów, WSZYSTKIE skrypty muszą mieć zaznaczoną tę opcję.",
   "IMPMAL.Ineffective": "Nieskuteczna",
@@ -453,8 +456,8 @@
   "IMPMAL.ManageItems": "Zarządzaj Przedmiotami",
   "IMPMAL.ManualEffectKeys": "Ręczne Klucze Efektu",
   "IMPMAL.Manual": "Ręczny",
-  "IMPMAL.MarginalFailure": "Marginalna Porażka", 
-  "IMPMAL.MarginalSuccess": "Marginalny Sukces", 
+  "IMPMAL.MarginalFailure": "Marginalna Porażka",
+  "IMPMAL.MarginalSuccess": "Marginalny Sukces",
   "IMPMAL.Mastercrafted": "Mistrzowsko Wykonany",
   "IMPMAL.Max": "Maks.",
   "IMPMAL.MaxAugmetics": "Maks. wszczepów",
@@ -468,7 +471,7 @@
   "IMPMAL.MeleeWeapons": "Broń do Walki Wręcz",
   "IMPMAL.Melta": "Termiczna",
   "IMPMAL.Mesh": "Splotowy",
-  "IMPMAL.Moderate": "Umiarkowany", 
+  "IMPMAL.Moderate": "Umiarkowany",
   "IMPMAL.Modification": "Modyfikacja",
   "IMPMAL.ModificationEffects": "Efekty Modyfikacji",
   "IMPMAL.Modifications": "Modyfikacje",
@@ -520,6 +523,7 @@
   "IMPMAL.Passengers": "Pasażerowie",
   "IMPMAL.Patron": "Patron",
   "IMPMAL.Path": "Ścieżka",
+  "IMPMAL.Packs": "Paczki",
   "IMPMAL.LightCover": "Lekka Osłona",
   "IMPMAL.MediumCover": "Średnia Osłona",
   "IMPMAL.HeavyCover": "Ciężka Osłona",
@@ -538,7 +542,7 @@
   "IMPMAL.Placeholder": "Zastępnik",
   "IMPMAL.Plasma": "Plazmowa",
   "IMPMAL.PlayerExperienceEditing": "Edycja Doświadczenia Gracza",
-  "IMPMAL.PlayerExperienceEditingHint":  "Pozwala graczom na ręczną edycję ich wartości punktów doświadczenia.",
+  "IMPMAL.PlayerExperienceEditingHint": "Pozwala graczom na ręczną edycję ich wartości punktów doświadczenia.",
   "IMPMAL.PlayerVisible": "Widoczne dla Gracza",
   "IMPMAL.Poor": "Słaby",
   "IMPMAL.PoorlyLit": "Słabo Oświetlony",
@@ -595,6 +599,7 @@
   "IMPMAL.Restricted": "Ograniczony",
   "IMPMAL.Reversed": "Odwrócony",
   "IMPMAL.Reward": "Nagroda",
+  "IMPMAL.RemoveFromPack": "Usuń z Paczki",
   "IMPMAL.Right": "Prawa",
   "IMPMAL.RightArm": "Prawe Ramię",
   "IMPMAL.RightArmAbbrev": "PR",
@@ -618,8 +623,8 @@
   "IMPMAL.SendingSocketRequest": "Wysyłanie Żądania Gniazda do {name}",
   "IMPMAL.SeizeTheInitiative": "Przejęcie Inicjatywy",
   "IMPMAL.SetPatron": "Ustaw jako Patrona",
-  "IMPMAL.SelfTest" : "Test Własny",
-  "IMPMAL.SelfTestTT" : "Właściciel tej Cechy powinien rzucić ten Test.",
+  "IMPMAL.SelfTest": "Test Własny",
+  "IMPMAL.SelfTestTT": "Właściciel tej Cechy powinien rzucić ten Test.",
   "IMPMAL.Shield": "Tarcza",
   "IMPMAL.Shock": "Porażająca",
   "IMPMAL.Shoddy": "Marny",
@@ -637,6 +642,7 @@
   "IMPMAL.Slots": "Sloty",
   "IMPMAL.Small": "Mały",
   "IMPMAL.Solars": "Solary",
+  "IMPMAL.SolarsAdded": "{solars} Solarów dodane",
   "IMPMAL.Solid": "Palna",
   "IMPMAL.Source": "Źródło",
   "IMPMAL.Special": "Specjalny",
@@ -667,6 +673,7 @@
   "IMPMAL.Superiority": "Przewaga",
   "IMPMAL.SupportAttachment": "Modyfikacja wsparcia",
   "IMPMAL.Sustained": "Podtrzymywany",
+  "IMPMAL.Swift": "Wysoka",
   "IMPMAL.TableSettings": "Ustawienia Tabeli",
   "IMPMAL.TableConfigure": "Konfiguracja Tabel",
   "IMPMAL.TableSettingsHint": "Skonfiguruj, których tabel system używa w kontekstowych linkach.",
@@ -675,6 +682,10 @@
   "IMPMAL.TableSetting.crithead": "Trafienia Krytyczne - Głowa",
   "IMPMAL.TableSetting.critbody": "Trafienia Krytyczne - Tułów",
   "IMPMAL.TableSetting.critvehicle": "Trafienia Krytyczne - Pojazd",
+  "IMPMAL.TableSetting.critwheeled": "Trafienia Krytyczne - Pojazd (Kołowy)",
+  "IMPMAL.TableSetting.critwalker": "Trafienia Krytyczne - Pojazd (Kroczący)",
+  "IMPMAL.TableSetting.critflyer": "Trafienia Krytyczne - Pojazd (Latający)",
+  "IMPMAL.TableSetting.crittracked": "Trafienia Krytyczne - Pojazd (Gąsienicowy)",
   "IMPMAL.TableSetting.fumble": "Ożeż!",
   "IMPMAL.TableSetting.perils": "Grozy Osnowy",
   "IMPMAL.TableSetting.phenomena": "Zjawiska Psioniczne",
@@ -719,7 +730,7 @@
   "IMPMAL.TriggerPrepareOwnedItemBaseData": "Przygotuj Podstawowe Dane Posiadanego Przedmiotu",
   "IMPMAL.TriggerPrePrepareOwnedItemDerivedData": "Przed-Przygotowaniem Pochodnych Danych Posiadanego Przedmiotu",
   "IMPMAL.TriggerPostPrepareOwnedItemDerivedData": "Po-Przygotowaniu Pochodnych Danych Posiadanego Przedmiotu",
-  "IMPMAL.TriggerDialog": "Dialog",
+  "IMPMAL.TriggerDialog": "Okno",
   "IMPMAL.TriggerApplyDamage": "Zastosuj Obrażenia",
   "IMPMAL.TriggerTakeDamage": "Przyjmij Obrażenia",
   "IMPMAL.TriggerComputeCharacteristics": "Oblicz Cechy",
@@ -751,6 +762,7 @@
   "IMPMAL.TriggerStartTurn": "Rozpocznij Turę",
   "IMPMAL.TriggerEndTurn": "Zakończ Turę",
   "IMPMAL.TriggerRollTable": "Rzut na Tabeli",
+  "IMPMAL.TriggerEquipToggle": "Przełącz Wyposażenie",
   "IMPMAL.Troop": "Żołnierz",
   "IMPMAL.Trusted": "Zaufany",
   "IMPMAL.TwoHanded": "Broń dwuręczna",
@@ -783,7 +795,10 @@
   "IMPMAL.Value": "Wartość",
   "IMPMAL.VeryEasy": "Bardzo łatwy",
   "IMPMAL.VeryHard": "Bardzo trudny",
+  "IMPMAL.Vehicle": "Pojazd",
   "IMPMAL.VehicleWeapons": "Broń Pojazdów",
+  "IMPMAL.VehicleDropTT": "Przeciągnij i upuść Aktora lub Broń",
+  "IMPMAL.VehicleControl": "Pilotaż Pojazdu",
   "IMPMAL.Vilified": "Znienawidzony",
   "IMPMAL.WR": "WO",
   "IMPMAL.WS": "WW",
@@ -815,7 +830,6 @@
   "IMPMAL.WorldHive": "Kopiec",
   "IMPMAL.WorldForge": "Kuźnia",
   "IMPMAL.XP": "PD",
-  
   "WH": {
     "Models": {
       "ammo": {
@@ -882,6 +896,9 @@
       },
       "modification": {
         "FIELDS": {
+          "type": {
+            "label": "Typ"
+          },
           "category": {
             "label": "Kategoria"
           },
@@ -999,6 +1016,9 @@
       },
       "trait": {
         "FIELDS": {
+          "category": {
+            "label": "Kategoria"
+          },
           "attack": {
             "type": {
               "label": "Typ Ataku"
@@ -1017,6 +1037,22 @@
             "range": {
               "label": "Zasięg"
             }
+          },
+          "vehicle": {
+            "maneuverable": {
+              "label": "Zwrotny",
+              "hint": "Bonus do Testów Polotażu Pojazdu"
+            }
+          }
+        }
+      },
+      "pack": {
+        "FIELDS": {
+          "ignoreEncumbrance": {
+            "label": "Ignoruj Obciążenie"
+          },
+          "solars": {
+            "label": "Solary"
           }
         }
       }
