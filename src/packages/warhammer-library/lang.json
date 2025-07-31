@@ -77,16 +77,16 @@
     },
     "CompendiumBrowser": {
       "Action": {
-        "Open": "Otwórz Przeglądarkę Kompendium"
+        "Open": "Otwórz przeglądarkę kompendium"
       },
       "Column": {
         "Results": "Wyniki",
         "Source": "Źródło"
       },
-      "FilterClear": "Wyczyść Filtry",
+      "FilterClear": "Wyczyść filtry",
       "Filters": {
-        "HasDarkvision": "Ma widzenie w ciemności",
-        "HasSpellcasting": "Ma rzucanie zaklęć",
+        "HasDarkvision": "Ma Widzenie w Ciemności",
+        "HasSpellcasting": "Ma zdolność rzucania zaklęć",
         "Label": "Filtry",
         "SearchResults": "Wyniki wyszukiwania"
       },
@@ -96,7 +96,7 @@
         "Summary": {
           "Max": "<span class=\"value\">{value}</span> z maksymalnie {max}",
           "Min": "<span class=\"value\">{value}</span> z co najmniej {min}",
-          "Range": "<span class=\"value\">{value}</span> z {min} do {max}",
+          "Range": "<span class=\"value\">{value}</span> od {min} do {max}",
           "Single": "<span class=\"value\">{value}</span> z {max}"
         },
         "Warning": {
@@ -104,34 +104,34 @@
             "one": "dokument",
             "other": "dokumenty"
           },
-          "Max": "Musisz wybrać maksymalnie {max} {document}, {value} wybranych.",
-          "Min": "Musisz wybrać co najmniej {min} {document}, {value} wybranych.",
-          "Range": "Musisz wybrać między {min} i {max} dokumentów, {value} wybranych.",
-          "Single": "Musisz wybrać {max} {document}, {value} wybranych."
+          "Max": "Musisz wybrać maksymalnie {max} {document}, {value} wybrano.",
+          "Min": "Musisz wybrać co najmniej {min} {document}, {value} wybrano.",
+          "Range": "Musisz wybrać od {min} do {max} dokumentów, {value} wybrano.",
+          "Single": "Musisz wybrać {max} {document}, {value} wybrano."
         }
       },
       "Sources": {
-        "FilterPackages": "Filtruj Paczki",
-        "Hint": "Konfiguruj, które paczki kompendium mają swoją zawartość dostępną w przeglądarce kompendium.",
-        "Label": "Konfiguracja Źródeł",
-        "Name": "Źródła Przeglądarki Kompendium"
+        "FilterPackages": "Filtruj pakiety",
+        "Hint": "Skonfiguruj, które pakiety kompendium mają swoje treści dostępne w przeglądarce kompendium.",
+        "Label": "Skonfiguruj źródła",
+        "Name": "Źródła przeglądarki kompendium"
       },
       "Tabs": {
         "Feat.other": "Cechy",
         "Item.other": "Przedmioty",
         "Monster.other": "Potwory"
       },
-      "Title": "Przeglądarka Kompendium",
+      "Title": "Przeglądarka kompendium",
       "Types": {
         "Label": "Typy"
       },
-      "WorldItems": "Pokaż Przedmioty Świata w Przeglądarce"
+      "WorldItems": "Show World Items in Browser"
     },
     "Configuration": "Konfiguracja",
     "ConfigureZoneTT": "Konfiguracja Strefy",
     "ConvertDrawings": "Konwertuj Rysunki na Strefy",
-    "DefendingAgainst": "Broniący się przeciwko",
-    "DefendingAgainstTT": "Uruchom ten skrypt w oknie dialogowym Aktora, który został zaznaczony przez tego Aktora lub Przedmiotu",
+    "DefendingAgainst": "Defending Against",
+    "DefendingAgainstTT": "Run this script in the dialog of an Actor that has been targeted with this Actor or Item",
     "DeleteEffect": "Usuń Efekt",
     "DeleteEffectHint": "Usuń Aktywny Efekt po uruchomieniu tego skryptu.",
     "DeletingEffectItems": "Usuwanie Efektu Przedmiotu: {items}",
@@ -155,12 +155,12 @@
     "EnableScript": "Włącz Skrypt dla {name}",
     "Error": {
       "CreateZoneEffect": "Efekty muszą być tworzone za pomocą aktywnego efektu z typem transferu \"Strefa\"",
-      "ID": "ID dla {name} już istnieje w kolekcji. Ten Dokument otrzymał unikalny ID.",
+      "ID": "ID dla {name} istnieje już w kolekcji. Temu dokumentowi nadano unikatowy ID.",
       "LibraryOutaded": "Biblioteka Warhammera jest nieaktualna. {system} definiuje minimalną wersję biblioteki wersji na {minimum}.",
       "MismatchedItemType": "Niewłaściwy typ Przedmiotu",
-      "NoActorAssigned": "Nie przypisano Aktorów. Możesz przypisać Aktorów poprzez Konfigurację Gracza na dole lewego rogu ekranu.",
-      "NoTargetedActors": "Nie wybrano Aktorów!",
-      "NoTargets": "Nie wybrano Aktorów!",
+      "NoActorAssigned": "ak przypisanego aktora, możesz przypisywać aktorów za pomocą konfiguracji Gracza w lewym dolnym rogu ekranu",
+      "NoTargetedActors": "Brak celów!",
+      "NoTargets": "Brak celów!",
       "NotValidChoiceType": "Niewłaściwy wybór",
       "NoDrawingsToConvert": "Nie ma rysunków do konwersji!"
     },
@@ -221,7 +221,7 @@
     "Initialize": "Inicjalizacja",
     "Item": {
       "Category": {
-        "Physical": "Fizyczny",
+        "Physical": "Fizyczne",
         "Vehicle": "Pojazd"
       }
     },
@@ -249,7 +249,7 @@
     "SubmitChoices": "Wyślij Wybór",
     "Target": "Cel",
     "Targeter": "Dotyczy zaznaczonego Celu",
-    "TargeterTT": "Uruchom ten skrypt w oknie dialogowym dowolnego Aktora, który zaznacza tego Aktora.",
+    "TargeterTT": "Run this script in the dialog of any Actor that is targeting this Actor.",
     "TemplateCustomization": "Dostosowanie Szablonu",
     "Theme": {
       "Config": "Konfiguracja Motywu",
