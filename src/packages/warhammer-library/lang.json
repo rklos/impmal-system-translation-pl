@@ -135,16 +135,17 @@
     "DeleteEffect": "Usuń Efekt",
     "DeleteEffectHint": "Usuń Aktywny Efekt po uruchomieniu tego skryptu.",
     "DeletingEffectItems": "Usuwanie Efektu Przedmiotu: {items}",
+    "DereferenceTooltip": "W pełni definiuje Przedmiot wewnątrz różnicy, umożliwiając usunięcie oryginalnego Przedmiotu.",
     "Dialog": {
+      "DragDialog": "Okno Przeciągania",
+      "DragFilter": "Przekazany Dokument nie jest dozwolony.",
+      "DragText": "Przekaż Dokument",
       "EnterValue": "Wprowadź Wartość",
       "Initial": "Początek",
       "Modifiers": "Okno Modyfikatorów Testu",
       "SelectValue": "Wybierz Wartość",
       "UserEntry": "Wpis użytkownika",
-      "ValueDialog": "Okno Wartości",
-      "DragDialog": "Okno Przeciągania",
-      "DragText": "Przekaż Dokument",
-      "DragFilter": "Przekazany Dokument nie jest dozwolony."
+      "ValueDialog": "Okno Wartości"
     },
     "DialogScript": "Skrypt Dialogowy",
     "DiffDescription": "\"Różnica\" reprezentuje zmiany, które powinny zostać wprowadzone w oryginalnym przedmiocie. Można to zrobić ręcznie lub wygenerować, przeciągając i upuszczając element tego samego typu.",
@@ -159,16 +160,16 @@
       "LibraryOutaded": "Biblioteka Warhammera jest nieaktualna. {system} definiuje minimalną wersję biblioteki wersji na {minimum}.",
       "MismatchedItemType": "Niewłaściwy typ Przedmiotu",
       "NoActorAssigned": "ak przypisanego aktora, możesz przypisywać aktorów za pomocą konfiguracji Gracza w lewym dolnym rogu ekranu",
+      "NoDrawingsToConvert": "Nie ma rysunków do konwersji!",
       "NoTargetedActors": "Brak celów!",
       "NoTargets": "Brak celów!",
       "NotValidChoiceType": "Niewłaściwy wybór",
-      "NoDrawingsToConvert": "Nie ma rysunków do konwersji!"
+      "WrongChoiceOptionType": "Ten typ Przedmiotu nie jest dozwolony. Dozwolone Typy: {types}"
     },
     "ErrorNoZones": "Nie wybrano Strefy. Dodaj Obszar do Sceny by stworzyć Strefę.",
     "ErrorUnableToFindEffect": "Nie można znaleźć efektu do zastosowania.",
     "FollowToken": "Podążaj za Tokenem",
     "HideScript": "Skrypt Ukrywający",
-    "ToggleEffect": "Przełącz Efekt",
     "Initialization": {
       "Actors": "Inicjalizacja Aktorów",
       "Complete": "Inicjalizacja Zakończona",
@@ -197,6 +198,7 @@
       },
       "DeleteModuleContent": "Usuń Zawartość {module}",
       "DeleteModuleContentDesc": "<p>Ten proces usuwa wszystkie Dokumenty z <strong>{module}</strong>, które zostały zaimportowane podczas Inicjalizacji.</p><p>Zwróć uwagę na następujące kwestie:</p><ul><li>Dokumenty ręcznie zaimportowane z Kompendium nie zostaną usunięte.</li><li>Żaden Dokument będący własnością Gracza nie zostanie usunięty.</li></ul><p>Pamiętaj, że ten proces usuwa tylko zaimportowane Dokumenty. Możesz ponownie zaimportować wszystko, co zostało usunięte, z Kompendium.</p>",
+      "DialogContent": "<p class='centered'><strong>{title}</strong></p><p>{description}",
       "HelpText": "<p>Potrzebujesz pomocy? Sprawdź <a href=https://moo-man.github.io/WFRP4e-FoundryVTT/pages/premium.html#initializiation>Wiki</a></p>",
       "OverwriteActors": "Nadpisz Aktorów",
       "OverwriteJournals": "Nadpisz Dziennik",
@@ -227,10 +229,13 @@
     },
     "ItemDialog": "Wybór Przedmiotu",
     "ItemsNotAllowed": "Nie można dodać wybranego Przedmiotu do danego typu Aktora",
+    "KeepDrawings": "Zachować Rysunki?",
+    "MakeZonesVisible": "Ustawić Strefy jako widoczne?",
     "ManualEffectKeys": "Wprowadź ręcznie ścieżki do modyfikowanych pól",
     "NewEffect": "Nowy Efekt",
     "NewItem": "Nowy Przedmiot",
     "NewScript": "Nowy Skrypt",
+    "OriginalDocument": "Oryginalny Dokument",
     "PickZone": "Wybierz Strefę na którą chcesz nałożyć Aktywny Efekt.",
     "PlaceEffect": "Umieść {name}",
     "PreApplyScript": "Skrypt przed wywołaniem dla {name}",
@@ -272,6 +277,7 @@
         "Readable": "Czytelna"
       }
     },
+    "ToggleEffect": "Przełącz Efekt",
     "TokensInZone": "Tokeny w Strefie",
     "TransferData": {
       "AdvancedConfig": "Konfiguracja Zaawansowana",
@@ -319,6 +325,8 @@
       "TransferTypeHint": "Wybierz sposób, w jaki efekt jest przenoszony lub aplikowany na cel.",
       "TransferredAura": "Aplikowalna Aura",
       "TransferredAuraHint": "Przypisz Aurę do zaznaczoego celu (lub siebie) zamiast automatycznie zastosować ją na siebie",
+      "TransferredFollow": "Podążanie za Tokenem",
+      "TransferredFollowHint": "Zastosuj ten Efekt Podążania do celu (lub siebie), zamiast stałego nałożenia na siebie",
       "ZoneType": "Typ Strefy",
       "ZoneTypeHint": "<strong>Efekt Strefy</strong> oznacza, że efekt jest powiązany ze strefą, <strong>Tokeny w Strefie</strong> oznacza, że dotyczy wszystkich Tokenów w tej Strefie, <strong>Podążanie za Tokenem</strong> oznacza, że dotyczy dowolnej Strefy, w której znajduje się docelowy Token"
     },
