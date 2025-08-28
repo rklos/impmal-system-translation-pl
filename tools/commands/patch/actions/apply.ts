@@ -64,7 +64,7 @@ async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void>
     const originalContent = fs.readFileSync(targetFullPath, 'utf8');
 
     // Apply the patch
-    const patchedContent = diff.applyPatch(originalContent, patchContent);
+    const patchedContent = diff.applyPatch(originalContent, patchContent, { fuzzFactor: 10 });
 
     if (patchedContent === false) {
       console.error(`Failed to apply patch: ${patchPath}`);

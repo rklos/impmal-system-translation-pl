@@ -17,7 +17,7 @@ export default async function checkTemplates(pkg: Package, changes: Changes) {
   templateChanges.forEach((file) => {
     const patches = TEMPLATES_PATCHES[file.filename.replace('static/', '')];
     patches.forEach((patch) => {
-      const patchedContent = diff.applyPatch(file.content, patch);
+      const patchedContent = diff.applyPatch(file.content, patch, { fuzzFactor: 10 });
       if (!patchedContent) {
         console.log(chalk.red(`Failed to apply patch: ${file.filename}`));
         conflicts++;

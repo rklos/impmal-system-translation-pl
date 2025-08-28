@@ -22,7 +22,7 @@ function patchTemplates(pkgName: string) {
     });
 
     Object.values(diffs).forEach((diff) => {
-      const patchedHtml = applyPatch(htmlString, diff);
+      const patchedHtml = applyPatch(htmlString, diff, { fuzzFactor: 10 });
       if (!patchedHtml) {
         log(`Failed to apply patch to ${originalPath}`);
         return;
