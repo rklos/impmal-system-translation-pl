@@ -1,0 +1,12 @@
+Index: scripts/UQxQergUCitNBd1r.js
+===================================================================
+--- scripts/UQxQergUCitNBd1r.js	en
++++ scripts/UQxQergUCitNBd1r.js	pl
+@@ -17,4 +17,4 @@
+         }
+ 
+         await item.update({["system.damage." + location] : this.effect.sourceTest.result.SL});
+-        this.script.scriptMessage(item.name + " damaged by " + this.effect.sourceTest.result.SL);
+\ No newline at end of file
++        this.script.scriptMessage(item.name + " uszkodzone przez " + this.effect.sourceTest.result.SL);
+\ No newline at end of file

@@ -1,0 +1,13 @@
+Index: scripts/TXrDK69XPELaeIpf.js
+===================================================================
+--- scripts/TXrDK69XPELaeIpf.js	en
++++ scripts/TXrDK69XPELaeIpf.js	pl
+@@ -33,6 +33,6 @@
+     id : randomID()
+ })
+ 
+-let choice = await ItemDialog.create([heavyBolter, plasmaCannon, multimelta], 1, "Choose Weapon");
++let choice = await ItemDialog.create([heavyBolter, plasmaCannon, multimelta], 1, "Wybierz Broń");
+ 
+ this.actor.createEmbeddedDocuments("Item", choice);
+\ No newline at end of file

@@ -1,0 +1,13 @@
+Index: scripts/7Tcztd11eII353oG.js
+===================================================================
+--- scripts/7Tcztd11eII353oG.js	en
++++ scripts/7Tcztd11eII353oG.js	pl
+@@ -3,7 +3,7 @@
+ let data = item.toObject()
+ data.system.advances = 1;
+ 
+-let spec = await ValueDialog.create({title : this.item.name, text : "Enter Linguistics Specialisation based on the xenos species you are familiar with."});
++let spec = await ValueDialog.create({title : this.item.name, text : "Wprowadź Specjalizację Lingwistyki na podstawie znajomości gatunków xenos."});
+ 
+ if (spec)
+ {

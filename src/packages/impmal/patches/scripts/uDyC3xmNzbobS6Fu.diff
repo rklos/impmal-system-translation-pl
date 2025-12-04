@@ -1,0 +1,18 @@
+Index: scripts/uDyC3xmNzbobS6Fu.js
+===================================================================
+--- scripts/uDyC3xmNzbobS6Fu.js	en
++++ scripts/uDyC3xmNzbobS6Fu.js	pl
+@@ -2,11 +2,11 @@
+ 
+ if (!weapons.length)
+ {
+-  return this.script.notification("No eligible weapons (pistols) on this Actor.", "error")
++  return this.script.notification("Brak zgodnych broni (pistoletów) na tej Postaci.", "error")
+ }
+ else
+ {
+-  let chosen = await ItemDialog.create(weapons, 1, {title: this.effect.name, text : "Choose Weapon"})
++  let chosen = await ItemDialog.create(weapons, 1, {title: this.effect.name, text : "Wybierz Broń"})
+ 
+   if (chosen[0])
+   {

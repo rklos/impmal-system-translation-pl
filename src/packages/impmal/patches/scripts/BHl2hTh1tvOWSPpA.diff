@@ -1,0 +1,12 @@
+Index: scripts/BHl2hTh1tvOWSPpA.js
+===================================================================
+--- scripts/BHl2hTh1tvOWSPpA.js	en
++++ scripts/BHl2hTh1tvOWSPpA.js	pl
+@@ -1,5 +1,5 @@
+ if (args.failed)
+ {
+   this.actor.addCondition("fatigued");
+-  this.script.notification("Gained Fatigued")
++  this.script.notification("Otrzymano Zmęczenie")
+ }
+\ No newline at end of file

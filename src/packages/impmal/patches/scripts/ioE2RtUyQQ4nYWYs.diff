@@ -1,0 +1,13 @@
+Index: scripts/ioE2RtUyQQ4nYWYs.js
+===================================================================
+--- scripts/ioE2RtUyQQ4nYWYs.js	en
++++ scripts/ioE2RtUyQQ4nYWYs.js	pl
+@@ -3,7 +3,7 @@
+ if (poisoned)
+ {
+   poisone.delete();
+-  this.script.notification("Removed Poisoned")
++  this.script.notification("Usunięto stan Zatrucia")
+ }
+ 
+ let test = await this.actor.setupCharacteristicTest("tgh", {appendTitle : this.effect.name})

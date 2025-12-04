@@ -1,0 +1,23 @@
+Index: scripts/waMaO6MWHMHZ3cJC.js
+===================================================================
+--- scripts/waMaO6MWHMHZ3cJC.js	en
++++ scripts/waMaO6MWHMHZ3cJC.js	pl
+@@ -2,14 +2,14 @@
+ 
+ if (!skills.length)
+ {
+-    return this.script.notification(`This Actor does not have any of the valid specialisations`, "error")
++    return this.script.notification(`Ta Postać nie ma żadnej z prawidłowych specjalizacji`, "error")
+ }
+ 
+-let chosen = (await ItemDialog.create(skills, 1, {text : "Select the Specialisation to train", title : this.effect.name}))[0]
++let chosen = (await ItemDialog.create(skills, 1, {text : "Wybierz Specjalizację do trenowania", title : this.effect.name}))[0]
+ 
+ if (chosen)
+ {
+-    this.script.message(`Trained ${chosen.name} for ${(chosen.system.advances + 1) * 50 - 20} XP`)
++    this.script.message(`Wytrenowano ${chosen.name} za ${(chosen.system.advances + 1) * 50 - 20} PD`)
+     await chosen.update({"system.advances" : chosen.system.advances + 1});
+     await args.actor.update({"system.xp" : args.actor.system.xp.other.add({description : `${this.effect.name} (${chosen.name})`, xp: -20})})
+ }
+\ No newline at end of file

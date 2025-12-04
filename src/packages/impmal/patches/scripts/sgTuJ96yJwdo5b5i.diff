@@ -1,0 +1,13 @@
+Index: scripts/sgTuJ96yJwdo5b5i.js
+===================================================================
+--- scripts/sgTuJ96yJwdo5b5i.js	en
++++ scripts/sgTuJ96yJwdo5b5i.js	pl
+@@ -1,6 +1,6 @@
+         let wounds = this.actor.system.combat.wounds;
+         if (wounds.value > 0)
+         {
+-            this.script.scriptMessage("Regenerates 1 Wound");
++            this.script.scriptMessage("Regeneruje 1 Ranę");
+             this.actor.update({"system.combat.wounds.value" : wounds.value - 1});
+         }
+\ No newline at end of file

@@ -1,0 +1,11 @@
+Index: scripts/1rWtxAEubAvPIbJ9.js
+===================================================================
+--- scripts/1rWtxAEubAvPIbJ9.js	en
++++ scripts/1rWtxAEubAvPIbJ9.js	pl
+@@ -1,4 +1,4 @@
+ if (args.result.critical && args.result.hitLocation != "body")
+ { 
+-args.result.text[this.item.id] = "Roll Twice on the Critical Table, choosing the higher result"
++args.result.text[this.item.id] = "Rzuć dwa razy na Tabeli Krytycznej, wybierz wyższą wartość"
+ }
+\ No newline at end of file

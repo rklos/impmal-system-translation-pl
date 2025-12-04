@@ -1,0 +1,13 @@
+Index: scripts/wmXn7WjZvQGP5kyx.js
+===================================================================
+--- scripts/wmXn7WjZvQGP5kyx.js	en
++++ scripts/wmXn7WjZvQGP5kyx.js	pl
+@@ -2,6 +2,6 @@
+ 
+ if (effectsToDisable.length)
+ {
+-    this.script.notification(`Enabling ${effectsToDisable.map(i => i.name).join(", ")}.`);
++    this.script.notification(`Włączono ${effectsToDisable.map(i => i.name).join(", ")}.`);
+     effectsToDisable.forEach(i => i.update({disabled : false}));
+ }
+\ No newline at end of file

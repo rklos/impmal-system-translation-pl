@@ -1,0 +1,10 @@
+Index: scripts/w6NPAgwewIA93B3v.js
+===================================================================
+--- scripts/w6NPAgwewIA93B3v.js	en
++++ scripts/w6NPAgwewIA93B3v.js	pl
+@@ -1,4 +1,4 @@
+-this.actor.applyDamage(5).then(data => ui.notifications.notify("Took " + data.woundsGained + " Damage from Hazard"));
++this.actor.applyDamage(5).then(data => ui.notifications.notify("Otrzymano " + data.woundsGained + " Obrażeń od Zagrożenia"));
+ 
+ let test = await this.actor.setupSkillTest({key : "reflexes", name : "Dodge"}, {fields : {difficulty : "hard"}, appendTitle : ` – ${this.effect.name}`})
+ 

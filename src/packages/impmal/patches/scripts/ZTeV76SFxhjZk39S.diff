@@ -1,0 +1,14 @@
+Index: scripts/ZTeV76SFxhjZk39S.js
+===================================================================
+--- scripts/ZTeV76SFxhjZk39S.js	en
++++ scripts/ZTeV76SFxhjZk39S.js	pl
+@@ -1,6 +1,6 @@
+ if (args.context.resist.includes("power")) 
+ {
+     args.result.SL = (args.context.resistingTest?.result?.SL + 1) || args.result.SL;
+-    args.result.text.blank = "Automatically win opposed tests against Psychic Powers";
+-    args.result.outcomeDescription = "Success"
++    args.result.text.blank = "Automatycznie wygrywa testy przeciwstawne przeciwko Mocom Psionicznym";
++    args.result.outcomeDescription = "Sukces"
+ }
+\ No newline at end of file

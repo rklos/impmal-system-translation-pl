@@ -1,0 +1,13 @@
+Index: scripts/FL5M0Wrw7lx652DX.js
+===================================================================
+--- scripts/FL5M0Wrw7lx652DX.js	en
++++ scripts/FL5M0Wrw7lx652DX.js	pl
+@@ -7,6 +7,6 @@
+ 
+ 	this.actor.update({effects : update})
+ 
+-	this.script.notification("Re-enabling " + effects.map(i => i.name).join(", "));
++	this.script.notification("Wznowienie " + effects.map(i => i.name).join(", "));
+ 
+ }
+\ No newline at end of file

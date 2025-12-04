@@ -1,0 +1,9 @@
+Index: scripts/UZR3vCBBN6EFXudA.js
+===================================================================
+--- scripts/UZR3vCBBN6EFXudA.js	en
++++ scripts/UZR3vCBBN6EFXudA.js	pl
+@@ -1,2 +1,2 @@
+-ui.notifications.notify("<strong>Field Medicae: </strong> Difficulty cannot be lower than <strong>Challenging</strong");
++ui.notifications.notify("<strong>Medyk polowy: </strong> Trudność nie może być niższa niż <strong>Wymagająca</strong>");
+ args.fields.difficulty = "challenging";
+\ No newline at end of file

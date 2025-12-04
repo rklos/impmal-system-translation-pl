@@ -1,0 +1,10 @@
+Index: scripts/8FhCa2JB86daVsuo.js
+===================================================================
+--- scripts/8FhCa2JB86daVsuo.js	en
++++ scripts/8FhCa2JB86daVsuo.js	pl
+@@ -1,4 +1,4 @@
+-let location = this.effect.getFlag("impmal", "location")?.split("Arm")[0];
++let location = this.effect.getFlag("impmal", "location")?.split("Ramię")[0];
+ if (this.actor.type == "character")
+ {
+     return this.actor.system.hands[location].id == args.weapon?.id

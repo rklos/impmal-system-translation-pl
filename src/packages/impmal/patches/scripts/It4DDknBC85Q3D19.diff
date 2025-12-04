@@ -1,0 +1,13 @@
+Index: scripts/It4DDknBC85Q3D19.js
+===================================================================
+--- scripts/It4DDknBC85Q3D19.js	en
++++ scripts/It4DDknBC85Q3D19.js	pl
+@@ -4,7 +4,7 @@
+ let xenos = game.tables.get("9quYsnavFYvVyFFS")
+ let universal = game.tables.get("1JJRYMCf0w0I6m3H")
+ 
+-let table = await ItemDialog.create([hereticus, malleus, xenos, universal], 1, {text : "Choose Rosette Type", title : this.effect.name});
++let table = await ItemDialog.create([hereticus, malleus, xenos, universal], 1, {text : "Wybierz Typ Rozety", title : this.effect.name});
+ 
+ let resultIcons = {
+     "JcSbae8YAvpvjxea" : "modules/impmal-inquisition/assets/misc/rosette-silver.webp",

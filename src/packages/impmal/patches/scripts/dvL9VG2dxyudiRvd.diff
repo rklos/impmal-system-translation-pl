@@ -1,0 +1,23 @@
+Index: scripts/dvL9VG2dxyudiRvd.js
+===================================================================
+--- scripts/dvL9VG2dxyudiRvd.js	en
++++ scripts/dvL9VG2dxyudiRvd.js	pl
+@@ -3,7 +3,7 @@
+ 
+ let roll = await foundry.applications.api.Dialog.confirm({
+   window: {title : this.effect.name},
+-  content : "<p>Roll additional Life Expectancy?</p>"
++  content : "<p>Rzucić dodatkową przewidywaną długość życia?</p>"
+ })
+ 
+ if (!roll)
+@@ -13,5 +13,5 @@
+ 
+ await this.item.setFlag("impmal", "years", years);
+ 
+-this.item.update({"system.notes.gm" : `<p><strong>Additional Life Expectancy</strong>: ${years} years</p>`})
+-this.script.notification("Life expectancy result placed in Item GM Notes")
+\ No newline at end of file
++this.item.update({"system.notes.gm" : `<p><strong>Dodatkowa Przewidywana Długość Życia</strong>: ${years} lat</p>`})
++this.script.notification("Wynik przewidywanej długości życia umieszczony w Notatkach GM Przedmiotu")
+\ No newline at end of file

@@ -1,0 +1,13 @@
+Index: scripts/M3LMNRahDT8nsBik.js
+===================================================================
+--- scripts/M3LMNRahDT8nsBik.js	en
++++ scripts/M3LMNRahDT8nsBik.js	pl
+@@ -1,7 +1,7 @@
+ if (this.actor.uuid == ChatMessage.getSpeakerActor(this.effect.sourceTest?.context.speaker).uuid)
+ 	return;
+ 
+-this.actor.applyDamage(5).then(data => ui.notifications.notify("Took " + data.woundsGained + " Damage from Hazard"));
++this.actor.applyDamage(5).then(data => ui.notifications.notify("Otrzymano " + data.woundsGained + " Obrażeń od Zagrożenia"));
+ 
+ if (this.actor.hasCondition("blinded"))
+ {

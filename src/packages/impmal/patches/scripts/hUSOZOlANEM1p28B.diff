@@ -1,0 +1,9 @@
+Index: scripts/hUSOZOlANEM1p28B.js
+===================================================================
+--- scripts/hUSOZOlANEM1p28B.js	en
++++ scripts/hUSOZOlANEM1p28B.js	pl
+@@ -1,1 +1,1 @@
+-this.actor.applyDamage(1, {ignoreAP : true}).then(data => this.script.scriptMessage("Took " + data.woundsGained + " Damage"));
+\ No newline at end of file
++this.actor.applyDamage(1, {ignoreAP : true}).then(data => this.script.scriptMessage("Otrzymano " + data.woundsGained + " Obrażeń"));
+\ No newline at end of file

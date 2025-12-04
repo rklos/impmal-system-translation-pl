@@ -80,7 +80,7 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
     fs.mkdirSync(PATCHES_DIR, { recursive: true });
 
     // Save patch file
-    const patchPath = join(PATCHES_DIR, filePath.replace('.hbs', '.diff'));
+    const patchPath = join(PATCHES_DIR, filePath.replace(/\.(hbs|js)/, '.diff'));
     const patchDir = dirname(patchPath);
     fs.mkdirSync(patchDir, { recursive: true });
     fs.writeFileSync(patchPath, patch);

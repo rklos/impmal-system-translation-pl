@@ -1,0 +1,10 @@
+Index: scripts/Vy22D24QO425BQ1w.js
+===================================================================
+--- scripts/Vy22D24QO425BQ1w.js	en
++++ scripts/Vy22D24QO425BQ1w.js	pl
+@@ -1,4 +1,4 @@
+-if (await foundry.applications.api.DialogV2.confirm({ window: { title: this.effect.name }, content: "Are you sure you wish to modify the target's characteristics? This is not reversible." })) {
++if (await foundry.applications.api.DialogV2.confirm({ window: { title: this.effect.name }, content: "Czy na pewno chcesz zmienić cechy postaci? Ta operacja jest nieodwracalna." })) {
+     let target = Array.from(game.user.targets)[0]
+ 
+     await target.actor.update({

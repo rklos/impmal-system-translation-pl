@@ -4,6 +4,7 @@ import type { Package } from '~/packages';
 import download from './actions/download';
 import create from './actions/create';
 import apply from './actions/apply';
+import tidyUp from './actions/tidy-up';
 
 const { values: _, positionals } = parseArgs({
   args: process.argv.slice(2),
@@ -28,6 +29,8 @@ async function run(action: string) {
       await create(pkg);
     } else if (action === 'apply') {
       await apply(pkg);
+    } else if (action === 'tidy-up') {
+      await tidyUp(pkg);
     } else {
       console.error(`Error: Unknown action '${action}'`);
       process.exit(1);

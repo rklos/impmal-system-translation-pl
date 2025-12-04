@@ -1,0 +1,25 @@
+Index: scripts/7LmbaEKe1QpImusG.js
+===================================================================
+--- scripts/7LmbaEKe1QpImusG.js	en
++++ scripts/7LmbaEKe1QpImusG.js	pl
+@@ -1,7 +1,7 @@
+         let minor = [];
+         if (this.item.system.taken < 2)
+         {
+-            minor = await ItemDialog.create((await game.impmal.utility.getAllItems(["power"])).filter(i => i.system.discipline == "minor"), 1, {text : "Select a Minor Power", title : this.item.name});
++            minor = await ItemDialog.create((await game.impmal.utility.getAllItems(["power"])).filter(i => i.system.discipline == "minor"), 1, {text : "Wybierz Pomniejszą Moc", title : this.item.name});
+         }
+ 
+         let disciplines = foundry.utils.deepClone(game.impmal.config.disciplines);
+@@ -11,9 +11,9 @@
+             delete disciplines[power.system.discipline];
+         }
+ 
+-        let discipline = (await ItemDialog.create(disciplines, 1, {text : "Select a Discipline", title : this.item.name}))[0];
++        let discipline = (await ItemDialog.create(disciplines, 1, {text : "Wybierz Dyscyplinę", title : this.item.name}))[0];
+ 
+-        let major = await ItemDialog.create((await game.impmal.utility.getAllItems(["power"])).filter(i => i.system.discipline == discipline.id), 1, {text : "Select a Pyschic Power", title : this.item.name});
++        let major = await ItemDialog.create((await game.impmal.utility.getAllItems(["power"])).filter(i => i.system.discipline == discipline.id), 1, {text : "Wybierz Moc Psioniczną", title : this.item.name});
+ 
+         return this.actor.createEmbeddedDocuments("Item", minor.concat(major).map(i => {
+             i = i.toObject();

@@ -1,0 +1,13 @@
+Index: scripts/6s425hs4qalFCzRr.js
+===================================================================
+--- scripts/6s425hs4qalFCzRr.js	en
++++ scripts/6s425hs4qalFCzRr.js	pl
+@@ -3,7 +3,7 @@
+ let teethRoll = new Roll("1d10");
+ await teethRoll.roll();
+ 
+-teethRoll.toMessage({speaker : {alias : this.effect.name}, flavor : "Teeth Lost"});
++teethRoll.toMessage({speaker : {alias : this.effect.name}, flavor : "Stracone Zęby"});
+ 
+ teeth.name = teeth.name.replace("Teeth", `${teethRoll.total} Teeth`);
+ 

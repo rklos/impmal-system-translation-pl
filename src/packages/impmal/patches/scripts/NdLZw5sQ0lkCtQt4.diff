@@ -1,0 +1,11 @@
+Index: scripts/NdLZw5sQ0lkCtQt4.js
+===================================================================
+--- scripts/NdLZw5sQ0lkCtQt4.js	en
++++ scripts/NdLZw5sQ0lkCtQt4.js	pl
+@@ -1,3 +1,3 @@
+         let damage = this.effect.flags.impmal?.damage || 0;
+         this.actor.applyDamage(damage, {ignoreAP : true});
+-        this.script.scriptMessage(damage + " applied to <strong>" + this.actor.name + "</strong>");
+\ No newline at end of file
++        this.script.scriptMessage(damage + " zastosowano do <strong>" + this.actor.name + "</strong>");
+\ No newline at end of file

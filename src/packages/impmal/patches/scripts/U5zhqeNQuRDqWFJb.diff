@@ -1,0 +1,13 @@
+Index: scripts/U5zhqeNQuRDqWFJb.js
+===================================================================
+--- scripts/U5zhqeNQuRDqWFJb.js	en
++++ scripts/U5zhqeNQuRDqWFJb.js	pl
+@@ -10,7 +10,7 @@
+                     blinded.setFlag("impmal", "sunburst", num);
+                     if (num >= 3)
+                     {
+-                        this.script.scriptMessage("<strong>Blinded</strong> is now permanent");
++                        this.script.scriptMessage("<strong>Oślepienie</strong> jest teraz stałe");
+                         this.effect.delete();
+                     }
+                 } 

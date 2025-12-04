@@ -1,0 +1,14 @@
+Index: scripts/UjQg8d2lSb0p0Svc.js
+===================================================================
+--- scripts/UjQg8d2lSb0p0Svc.js	en
++++ scripts/UjQg8d2lSb0p0Svc.js	pl
+@@ -5,7 +5,7 @@
+             let test = await this.actor.setupSkillTest({key : "fortitude", name : "Endurance"}, {appendTitle : " - " + this.effect.name})
+             if (test.succeeded)
+             {
+-                this.script.scriptMessage("Removed Stunned");
++                this.script.scriptMessage("Usunięto Oszołomienie");
+                 stunned.delete();
+             }
+         }
+\ No newline at end of file

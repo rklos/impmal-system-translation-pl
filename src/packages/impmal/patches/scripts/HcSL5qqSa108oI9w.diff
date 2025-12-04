@@ -1,0 +1,13 @@
+Index: scripts/HcSL5qqSa108oI9w.js
+===================================================================
+--- scripts/HcSL5qqSa108oI9w.js	en
++++ scripts/HcSL5qqSa108oI9w.js	pl
+@@ -5,7 +5,7 @@
+         if (choice.length) {
+             if (choice[0].system.cost > this.actor.system.solars)
+             {
+-                return ui.notifications.error("Not Enough Solars!");
++                return ui.notifications.error("Nie wystarczająca ilość Solarów!");
+             }
+             this.actor.createEmbeddedDocuments("Item", choice).then(items => {
+                 this.actor.update({

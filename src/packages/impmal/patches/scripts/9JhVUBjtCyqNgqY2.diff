@@ -1,0 +1,17 @@
+Index: scripts/9JhVUBjtCyqNgqY2.js
+===================================================================
+--- scripts/9JhVUBjtCyqNgqY2.js	en
++++ scripts/9JhVUBjtCyqNgqY2.js	pl
+@@ -2,10 +2,10 @@
+ 
+ if (names.length)
+ {
+-  this.script.notification(`Current Names: ${names.join(", ")}`)
++  this.script.notification(`Aktualne Nazwy: ${names.join(", ")}`)
+ }
+ 
+-let name = await ValueDialog.create({text: "Enter the name of a Daemon", title : this.effect.name})
++let name = await ValueDialog.create({text: "Wprowadź nazwę Demona", title : this.effect.name})
+ 
+ if (name) {
+ this.effect.setFlag("impmal", "trueNames", names.concat(name))
