@@ -25,26 +25,35 @@
       "Wiki": "WIKI"
     },
     "BugReporter": {
-      "AlertHint": "Ten problem albo nie był możliwy do odtworzenia, albo wymaga więcej informacji. Kliknij na tytuł, aby zobaczyć szczegóły.",
-      "APIReached": "Osiągnąłeś użytkowy limit Github's API. Musisz poczekać godzinę przed wysłaniem zgłoszenia lub stworzyć zgłoszenie ręcznie na stronie Github.",
-      "BugReportFormError": "Proszę wypełnić formularz",
-      "BugReportNameError": "Proszę uwzględnić swoją nazwę użytkownika Discord lub email w sekcji Imię.",
-      "Contact": "Informacje kontaktowe",
-      "ContactPlaceholder": "Nazwa użytkownika Discord lub Email.",
-      "DescriptionPlaceholder": "Co się stało, jak to odtworzyć, itp.",
-      "GeneralBugReportError": "Coś poszło nie tak",
-      "LoadingIssues": "Problemy z załadowaniem",
-      "ManyModules": "Masz aktywowane moduły inne niż WFRP4e, może jeden z nich powoduje problemy? Wyłącz proszę nieoficjalne moduły Warhammera i tłumaczenia.",
-      "MatchingIssues": "Czy twój problem został już zgłoszony?",
-      "NeedsAttention": "WYMAGA UWAGI",
-      "NotUpdated": "<p>Poniższe paczki związane z Warhammerem wymagają aktualizacji</p>",
-      "PostError": "Wystąpił błąd podczas próby zgłoszenia błędu. Proszę sprawdzić konsolę by dowiedzieć się więcej.",
-      "PostSuccess": "Zgłoszenie błędu wysłane! Sprawdź konsolę by znaleźć link do zgłoszenia.",
-      "Resolved": "ROZWIĄZANY",
       "Title": "Zgłaszanie Błędów",
-      "Troubleshooting": "Przed wysłaniem zgłoszenia, proszę przejrzeć stronę poświęconą <a href='{url}'>Troubleshooting</a>.",
-      "Updated": "<p>Wszystkie paczki związane z Warhammerem są aktualne!</p>",
-      "Warning": "<b>Uwaga</b>: To zgłoszenie zostanie upublicznione na stronie GitHub poświęconej błędom, dlatego preferowana jest nazwa użytkownika Discord. W innym przypadku, skontaktuj się z (<a href='mailto:russellt@cubicle7games.com'>Moo Manem</a>) osobiście."
+      "Report": "Zgłoś",
+      "SubmittedIssues": "Zgłoszone Problemy",
+      "APILimitReached": "Osiągnąłeś limit użycia API GitHub. Musisz poczekać godzinę przed zgłoszeniem lub zgłosić go ręcznie na stronie GitHub.",
+      "LoadingIssues": "Problemy z załadowaniem",
+      "Form": {
+        "Title": "Tytuł Zgłoszenia",
+        "Module": "Moduł",
+        "Type": "Typ",
+        "Contact": "Kontakt",
+        "Description": "Opis",
+        "PAT": "PAT",
+        "MatchingIssues": "Czy ktoś już zgłosił podobny problem?"
+      },
+      "Error": {
+        "Incomplete": "Wypełnij formularz tytułem, wybierz typ, odpowiedni moduł oraz podaj opis",
+        "Generic": "Coś poszło nie tak",
+        "Report": "Błąd podczas wysyłania zgłoszenia. Sprawdź konsolę, aby uzyskać więcej szczegółów.",
+        "APIReached": "Osiągnąłeś limit użycia API GitHub. Musisz poczekać godzinę przed zgłoszeniem lub zgłosić go ręcznie na stronie GitHub."
+      },
+      "Warning": {
+        "Email": "<b>Uwaga</b>: Twój email zostanie opublikowany na stronie zgłoszeń błędów systemu na GitHub. Jeśli nie chcesz tego, użyj swojego tagu Discord lub skontaktuj się z nami (<a href='mailto:russellt@cubicle7games.com'>Moo Man</a>) bezpośrednio.",
+        "NeedHelp": "Nie używaj Zgłaszania Błędów, jeśli potrzebujesz natychmiastowej pomocy lub chcesz zadać ogólne pytania. Sprawdź <a href='{url}'>Rozwiązywanie Problemów</a>",
+        "PAT": "PAT jest uważany za poufną informację i jest zapisywany w ustawieniach świata na potrzeby przyszłych zgłoszeń. Może zostać znaleziony przez innych użytkowników tego świata, jeśli wiedzą, gdzie szukać."
+      },
+      "Closed": "Zamknięte",
+      "NeedsAttention": "WYMAGA UWAGI",
+      "AlertHint": "Ten problem albo nie był możliwy do odtworzenia, albo wymaga więcej informacji. Kliknij na tytuł, aby zobaczyć szczegóły.",
+      "ReportSuccess": "Zgłoszenie wysłane! Sprawdź konsolę, aby uzyskać link."
     },
     "CannotDeleteItemEffect": "Ten efekt pochodzi z Przedmiotu należącego do Aktora. Usuń przedmiot lub efekt z karty przedmiotu.",
     "Chat": {
@@ -125,13 +134,13 @@
       "Types": {
         "Label": "Typy"
       },
-      "WorldItems": "Show World Items in Browser"
+      "WorldItems": "Pokaż elementy świata w przeglądarce"
     },
     "Configuration": "Konfiguracja",
     "ConfigureZoneTT": "Konfiguracja Strefy",
     "ConvertDrawings": "Konwertuj Rysunki na Strefy",
-    "DefendingAgainst": "Defending Against",
-    "DefendingAgainstTT": "Run this script in the dialog of an Actor that has been targeted with this Actor or Item",
+    "DefendingAgainst": "Obrona przed",
+    "DefendingAgainstTT": "Uruchom ten skrypt w oknie dialogowym Aktora, który został wskazany jako cel przez tego Aktora lub Przedmiot",
     "DeleteEffect": "Usuń Efekt",
     "DeleteEffectHint": "Usuń Aktywny Efekt po uruchomieniu tego skryptu.",
     "DeletingEffectItems": "Usuwanie Efektu Przedmiotu: {items}",
@@ -164,7 +173,8 @@
       "NoTargetedActors": "Brak celów!",
       "NoTargets": "Brak celów!",
       "NotValidChoiceType": "Niewłaściwy wybór",
-      "WrongChoiceOptionType": "Ten typ Przedmiotu nie jest dozwolony. Dozwolone Typy: {types}"
+      "WrongChoiceOptionType": "Ten typ Przedmiotu nie jest dozwolony. Dozwolone Typy: {types}",
+      "AppliedEffectNoItems": "Żaden przedmiot nie przeszedł przez filtr Aktywnego Efektu!"
     },
     "ErrorNoZones": "Nie wybrano Strefy. Dodaj Obszar do Sceny by stworzyć Strefę.",
     "ErrorUnableToFindEffect": "Nie można znaleźć efektu do zastosowania.",
@@ -242,6 +252,8 @@
     "Resist": "Odporność",
     "RichEditor": "Bogaty Edytor",
     "RollMode": "Tryb Rzutu",
+    "RunIfDisabled": "Uruchom gdy wyłączony",
+    "RunIfDisabledHint": "Uruchom ten skrypt nawet gdy efekt jest wyłączony",
     "Script": "Skrypt",
     "ScriptConfig": "Konfiguracja Skryptu",
     "ScriptEditor": "Edytor skryptów",
@@ -250,11 +262,13 @@
     "ScriptTrigger": "Wyzwalacz",
     "Scripts": "Skrypty",
     "SendingSocketRequest": "Wysyłanie żądania",
+    "ShowDuplicates": "Pokaż Duplikaty",
+    "ShowDuplicatesHint": "Zaznacz, aby pokazać przycisk tego skryptu nawet jeśli są inne ręczne skrypty o tej samej nazwie",
     "SubmissionScript": "Skrypt wywoływany podczas zaznaczania",
     "SubmitChoices": "Wyślij Wybór",
     "Target": "Cel",
     "Targeter": "Dotyczy zaznaczonego Celu",
-    "TargeterTT": "Run this script in the dialog of any Actor that is targeting this Actor.",
+    "TargeterTT": "Uruchom ten skrypt w oknie dialogowym dowolnego Aktora, który celuje w tego Aktora.",
     "TemplateCustomization": "Dostosowanie Szablonu",
     "Theme": {
       "Config": "Konfiguracja Motywu",
