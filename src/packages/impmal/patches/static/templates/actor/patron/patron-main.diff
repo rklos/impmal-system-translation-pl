@@ -1,0 +1,19 @@
+Index: static/templates/actor/patron/patron-main.hbs
+===================================================================
+--- static/templates/actor/patron/patron-main.hbs	en
++++ static/templates/actor/patron/patron-main.hbs	pl
+@@ -49,12 +49,12 @@
+                                 </div>
+                                 {{#unless this.system.visible}}
+                                     <a data-action="toggleProperty" data-path="system.visible"
+-                                        style="color: var(--impmal-orange)" data-tooltip="Not visible to Players"><i
++                                        style="color: var(--impmal-orange)" data-tooltip="Niewidoczne dla Graczy"><i
+                                             class="fa-solid fa-eye-slash"></i></a>
+                                 {{else}}
+                                     {{#if (isGM)}}
+                                         <a data-action="toggleProperty" data-path="system.visible"
+-                                            data-tooltip="Visible to Players"><i class="fa-solid fa-eye"></i></a>
++                                            data-tooltip="Widoczne dla Graczy"><i class="fa-solid fa-eye"></i></a>
+                                     {{/if}}
+                                 {{/unless}}
+                             </div>

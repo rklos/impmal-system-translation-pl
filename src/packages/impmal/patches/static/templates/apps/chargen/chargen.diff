@@ -1,0 +1,11 @@
+Index: static/templates/apps/chargen/chargen.hbs
+===================================================================
+--- static/templates/apps/chargen/chargen.hbs	en
++++ static/templates/apps/chargen/chargen.hbs	pl
+@@ -1,5 +1,5 @@
+ <form>
+-<p class="note warn" style="text-align:center">Character Creation has not been updated to AppV2 yet, you may experience styling issues!</p>
++<p class="note warn" style="text-align:center">Tworzenie Postaci nie zostało jeszcze zaktualizowane do AppV2, możesz napotykać problemy z wyświetlaniem!</p>
+   <div class="chargen-content">
+ 
+     <div class="stage-buttons">

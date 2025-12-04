@@ -1,0 +1,31 @@
+Index: static/templates/apps/advancement.hbs
+===================================================================
+--- static/templates/apps/advancement.hbs	en
++++ static/templates/apps/advancement.hbs	pl
+@@ -56,7 +56,7 @@
+ </section>
+ <section class="tab {{tabs.items.cssClass}}" data-group="sheet" data-tab="items">
+     <div class="advancement-list">
+-        <p>All Owned Items that have an associated XP Cost</p>
++        <p>Wszystkie posiadane Przedmioty, które mają powiązany Koszt XP</p>
+         <div class="header">
+             <div class="name">{{localize "Name"}}</div>
+             <div class="xp">{{localize "IMPMAL.XP"}}</div>
+@@ -71,7 +71,7 @@
+ </section>
+ <section class="tab {{tabs.log.cssClass}}" data-group="sheet" data-tab="log">
+     <div class="advancement-list">
+-        <p>Record of all the changes in XP Total and the associated reason.</p>
++        <p>Rejestr wszystkich zmian w sumie PD i powiązanych z nimi powodów.</p>
+         <div class="header">
+             <div class="name">{{localize "IMPMAL.Reason"}}</div>
+             <div class="xp">{{localize "IMPMAL.XP"}}</div>
+@@ -90,7 +90,7 @@
+ </section>
+ <section class="tab {{tabs.other.cssClass}}" data-group="sheet" data-tab="other">
+     <div class="advancement-list">
+-        <p>Miscellaneous modifications to total spent XP</p>
++        <p>Różne modyfikacje ogólnej liczby wydanych XP</p>
+         <div class="header">
+             <div class="name">{{localize "IMPMAL.Description"}}</div>
+             <div class="xp">{{localize "IMPMAL.XP"}}</div>

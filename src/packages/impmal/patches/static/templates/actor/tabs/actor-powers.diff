@@ -1,0 +1,13 @@
+Index: static/templates/actor/tabs/actor-powers.hbs
+===================================================================
+--- static/templates/actor/tabs/actor-powers.hbs	en
++++ static/templates/actor/tabs/actor-powers.hbs	pl
+@@ -1,6 +1,6 @@
+ <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="{{tab.id}}">
+-  <div class="sustaining droppable" data-tooltip="Drag and drop a Power to Sustain it">
+-    <label>Sustained Powers</label>
++  <div class="sustaining droppable" data-tooltip="Przeciągnij i upuść Moc, aby ją podtrzymać">
++    <label>Podtrzymywane Moce</label>
+     <div class="sustained-list">
+         {{#each system.warp.sustaining.documents}}
+         <div class="power" data-index="{{@key}}">

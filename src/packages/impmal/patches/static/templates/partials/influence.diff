@@ -1,0 +1,13 @@
+Index: static/templates/partials/influence.hbs
+===================================================================
+--- static/templates/partials/influence.hbs	en
++++ static/templates/partials/influence.hbs	pl
+@@ -72,7 +72,7 @@
+                         </div>
+                     {{/each}}
+                     {{#unless this.patron}}
+-                    <button type="button" data-action="createSource"><i class="fa-solid fa-plus"></i> Add Source</button>
++                    <button type="button" data-action="createSource"><i class="fa-solid fa-plus"></i> Dodaj Źródło</button>
+                     {{/unless}}
+                     </div>
+                     </div>

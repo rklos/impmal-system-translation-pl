@@ -1,0 +1,40 @@
+Index: static/templates/apps/chargen/faction.hbs
+===================================================================
+--- static/templates/apps/chargen/faction.hbs	en
++++ static/templates/apps/chargen/faction.hbs	pl
+@@ -21,7 +21,7 @@
+       {{#if context.faction}}
+       <div class="choice-section">
+         <h4 class="centered">{{localize "IMPMAL.Choices"}}</h4>
+-        <p class="centered">{{localize "Gain +5 to selected Characteristics"}}</p>
++        <p class="centered">{{localize "Zdobądź +5 do wybranych Cech"}}</p>
+         <div class="choices">
+           <select disabled>
+             <option>{{configLookup "characteristics" context.faction.system.character.characteristics.base}}</option>
+@@ -35,7 +35,7 @@
+           </select>
+             {{/select}}
+         </div>
+-          <p class="centered">Allocate {{context.faction.system.character.advances.value}} Advances to the following Skills</p>
++          <p class="centered">Przydziel {{context.faction.system.character.advances.value}} Rozwinięć do następujących Umiejętności</p>
+         <div class="choices skills wrap">
+           {{#each context.faction.system.character.advances.skills}}
+           <div class="choice-group">
+@@ -52,7 +52,7 @@
+             {{#if equipmentList}}
+               <p class="centered">{{equipmentList}}</p>
+              {{else}}
+-             <a class="choose choice-menu content-link" data-path="equipment"><i class="fas fa-suitcase"></i> Choose Equipment</a>
++             <a class="choose choice-menu content-link" data-path="equipment"><i class="fas fa-suitcase"></i> Wybierz Wyposażenie</a>
+             {{/if}}
+         </div>
+         {{/if}}
+@@ -63,7 +63,7 @@
+                       {{#if talentList}}
+               <p class="centered">{{talentList}}</p>
+               {{else}}
+-            <a class="choose choice-menu content-link" data-path="talents"><i class="fas fa-suitcase"></i> Choose Talents</a>
++            <a class="choose choice-menu content-link" data-path="talents"><i class="fas fa-suitcase"></i> Wybierz Talenty</a>
+             {{/if}}
+         </div>
+         {{/if}}

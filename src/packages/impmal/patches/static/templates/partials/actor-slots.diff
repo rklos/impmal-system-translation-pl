@@ -1,0 +1,20 @@
+Index: static/templates/partials/actor-slots.hbs
+===================================================================
+--- static/templates/partials/actor-slots.hbs	en
++++ static/templates/partials/actor-slots.hbs	pl
+@@ -1,13 +1,13 @@
+ {{#if this.system.slots.list.length}}
+ <div class="slots">
+     {{#each this.system.slots.list}}
+-        <div class="slot {{#unless this.document}}empty{{/unless}}" data-index="{{@key}}" {{#unless this.document}}data-tooltip="Drag and drop an Item to consider it Equipped"{{/unless}}>
++        <div class="slot {{#unless this.document}}empty{{/unless}}" data-index="{{@key}}" {{#unless this.document}}data-tooltip="Przeciągnij i upuść Przedmiot, aby uwzględnić go w wyposażeniu"{{/unless}}>
+             <div class="slot-details" data-id="{{this.id}}">
+                 {{#if this.document}}
+                     <img src="{{document.img}}"/>
+                     <a class="slotted-item" data-action="editEmbedded" data-uuid="{{document.uuid}}">{{document.name}}</a>
+                 {{else}}
+-                    <label><a class="empty-slot" data-action="slotItem">Empty</a></label>
++                    <label><a class="empty-slot" data-action="slotItem">Pusty</a></label>
+                 {{/if}}
+             </div>
+                 {{#if this.document}}

@@ -1,0 +1,18 @@
+Index: static/templates/apps/theme-config.hbs
+===================================================================
+--- static/templates/apps/theme-config.hbs	en
++++ static/templates/apps/theme-config.hbs	pl
+@@ -1,8 +1,8 @@
+ <section class="standard-form scrollable">
+     <fieldset>
+-        <legend>Imperium Maledictum Theme</legend>
+-        {{formGroup fields.enabled value=setting.enabled localize=true label="Enabled"}}
+-        {{formGroup fields.font value=setting.font localize=true disabled=(not setting.enabled) label="Font"}}
+-        {{formGroup fields.scan value=setting.scan localize=true disabled=(not setting.enabled) label="Scan Effect"}}
++        <legend>Motyw Imperium Maledictum</legend>
++        {{formGroup fields.enabled value=setting.enabled localize=true label="Włączone"}}
++        {{formGroup fields.font value=setting.font localize=true disabled=(not setting.enabled) label="Czcionka"}}
++        {{formGroup fields.scan value=setting.scan localize=true disabled=(not setting.enabled) label="Skan Efektów"}}
+     </fieldset>
+ </section>
+\ No newline at end of file

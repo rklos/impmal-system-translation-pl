@@ -1,0 +1,13 @@
+Index: static/templates/item/partials/item-damage.hbs
+===================================================================
+--- static/templates/item/partials/item-damage.hbs	en
++++ static/templates/item/partials/item-damage.hbs	pl
+@@ -8,7 +8,7 @@
+         </select>
+         {{#unless hideSL}}
+             <input type="checkbox" name="system.damage.SL" {{checked system.damage.SL}}>
+-            <label class="{{#unless system.damage.SL}}inactive{{/unless}}">+SL</label>
++            <label class="{{#unless system.damage.SL}}inactive{{/unless}}">+{{localize "IMPMAL.SL"}}</label>
+         {{/unless}}
+     </div>
+ 

@@ -1,0 +1,13 @@
+Index: static/templates/partials/slots.hbs
+===================================================================
+--- static/templates/partials/slots.hbs	en
++++ static/templates/partials/slots.hbs	pl
+@@ -15,7 +15,7 @@
+                         <img src="{{document.img}}"/>
+                         <a class="slotted-item">{{document.name}}</a>
+                     {{else}}
+-                        <label>Empty</label>
++                        <label>Pusty</label>
+                     {{/if}}
+                 </div>
+                     {{#if this.document}}

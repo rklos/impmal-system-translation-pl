@@ -1,0 +1,45 @@
+Index: static/templates/apps/chargen/role.hbs
+===================================================================
+--- static/templates/apps/chargen/role.hbs	en
++++ static/templates/apps/chargen/role.hbs	pl
+@@ -18,11 +18,11 @@
+   </div>
+ 
+   {{#unless context.role}}
+-  <p>Drag and drop a Role. If your Patron has selected your role for you, enter the XP received (usually 50) below.</p>
++  <p>Przeciągnij i upuść Role. Jeśli Twój Patron wybrał dla Ciebie rolę, wprowadź otrzymane XP (zazwyczaj 50) poniżej.</p>
+   {{else}}
+   <hr>
+ 
+-          <p class="centered">Allocate {{context.role.system.skills.value}} Advances to the following Skills</p>
++          <p class="centered">Przydziel {{context.role.system.skills.value}} Rozwinięć do następujących Umiejętności</p>
+         <div class="choices skills wrap">
+           {{#each context.role.system.skills.list}}
+           <div class="choice-group">
+@@ -32,7 +32,7 @@
+           {{/each}}
+         </div>
+ 
+-          <h4 class="centered">{{localize "Select Specialisations"}}</h4>
++          <h4 class="centered">{{localize "Wybierz Specjalizacje"}}</h4>
+         <div class="choices">
+           {{#each context.specialisations}}
+             <a class="choose-spec choice content-link" data-index="{{@key}}"><i class="fas fa-suitcase"></i> {{this.text}} {{#if this.chosen}}+1{{/if}}</a>
+@@ -45,7 +45,7 @@
+             {{#if equipmentList}}
+               <p class="centered">{{equipmentList}}</p>
+              {{else}}
+-             <a class="choose choice-menu content-link" data-path="equipment"><i class="fas fa-suitcase"></i> Equipment</a>
++             <a class="choose choice-menu content-link" data-path="equipment"><i class="fas fa-suitcase"></i> {{localize "IMPMAL.Equipment"}}</a>
+             {{/if}}
+         </div>
+         {{/if}}
+@@ -56,7 +56,7 @@
+                       {{#if talentList}}
+               <p class="centered">{{talentList}}</p>
+               {{else}}
+-            <a class="choose choice-menu content-link" data-path="talents"><i class="fas fa-suitcase"></i> Talents</a>
++            <a class="choose choice-menu content-link" data-path="talents"><i class="fas fa-suitcase"></i> {{localize "IMPMAL.Talents"}}</a>
+             {{/if}}
+         </div>
+         {{/if}}
