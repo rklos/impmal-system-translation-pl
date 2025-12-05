@@ -10,12 +10,3 @@ Index: scripts/Bi27fBq8NniB45vH.js
  
          let injury = (await game.impmal.utility.findId("bHbJPwCbgCVkCbif")).toObject()
          this.effect.updateSource({name : `${this.effect.name} (${locationName})`, "flags.impmal.hand" : hand});
-@@ -13,7 +13,7 @@
-         let roll = new Roll("max(1d10 - 5, 0)");
-         await roll.roll();
- 
--        roll.toMessage({speaker : {alias : this.item.name}, flavor : "Fingers Lost"})
-+        roll.toMessage({speaker : {alias : this.item.name}, flavor : "Stracone Palce"})
- 
-         let amputation
-         if (roll.total > 0)
