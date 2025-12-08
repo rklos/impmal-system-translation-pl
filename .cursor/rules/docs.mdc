@@ -4,21 +4,21 @@ globs: docs/**/*
 alwaysApply: false
 ---
 # Documentation Rules
-You are creating documentation for a FoundryVTT module translation project. All documentation must follow established patterns for consistency, clarity, and maintainability.
 
-## Documentation Overview
-Documentation serves as a comprehensive guide for contributors, translators, and users of the translation system. Each document should be focused, practical, and easy to navigate.
+You are creating documentation for a FoundryVTT module translation project. All documentation must be consistent, simple, and practical.
 
 ## Core Principles
-- **Simplicity**: Keep content concise and focused on essential information
-- **Consistency**: Follow established patterns and formatting across all docs
-- **Practicality**: Focus on actionable information and real-world usage
-- **Maintainability**: Structure content for easy updates and cross-referencing
-- **Accessibility**: Use clear language and logical organization
+
+- **Simplicity**: Use clear, straightforward language suitable for junior developers
+- **Consistency**: Follow the same structure, terminology, and style across all docs
+- **No Duplication**: Each piece of information should exist in exactly one place
+- **Practicality**: Focus on what users need to do, not theory
+- **Brevity**: Keep explanations concise and to the point
 
 ## File Structure
 
-### Required Files
+### Existing Files
+
 - `docs/README.md` - Main documentation index and navigation hub
 - `docs/translation-guide.md` - Core translation workflow and guidelines
 - `docs/package-development.md` - Package creation and management
@@ -26,203 +26,159 @@ Documentation serves as a comprehensive guide for contributors, translators, and
 - `docs/custom-package.md` - Custom functionality guidelines
 
 ### File Naming
-- Use kebab-case for file names
-- Use descriptive, action-oriented names
-- Keep names short but clear
-- Avoid abbreviations unless universally understood
 
-## Content Structure
+- Use kebab-case (e.g., `translation-guide.md`)
+- Use descriptive names that clearly indicate content
+- Keep names short but meaningful
 
-### Standard Document Layout
+## Standard Document Structure
+
+Every document should follow this exact structure:
 
 ```markdown
-# Document Title
+# Title
 
-Brief one-sentence description of what this document covers.
+Brief one-paragraph description of what this document covers.
 
-## Overview
+## Overview (if needed)
 
-2-3 paragraph explanation of the topic, its purpose, and importance in the project context.
+High-level explanation when the topic requires context.
 
-## Key Components/Features
+## Main Content Sections
 
-Bullet list of main elements covered in the document.
+Organized by topic, not by technical implementation.
 
-## Detailed Sections
+## Troubleshooting (if applicable)
 
-### Section Title
-
-Clear, focused content with practical examples.
-
-### Another Section
-
-More detailed information following the same pattern.
-
-## Best Practices
-
-Practical guidelines and recommendations.
-
-## Troubleshooting
-
-Common issues and solutions in table format.
+Common issues table with Problem | Solution columns.
 
 ## Related Documentation
 
-Links to related documents with brief descriptions.
+Links to related docs using relative paths.
 ```
 
-### Section Guidelines
+## Formatting Rules
 
-#### Overview Section
-- **Length**: 2-3 paragraphs maximum
-- **Content**: Purpose, context, and importance
-- **Tone**: Informative but not overwhelming
+### Headings
 
-#### Main Content Sections
-- **Focus**: One clear topic per section
-- **Examples**: Include practical code examples
-- **Length**: Keep sections concise (max 200-300 words each)
-- **Structure**: Use consistent heading levels (H2 for main sections, H3 for subsections)
-
-#### Best Practices Section
-- **Format**: Bullet points or numbered lists
-- **Content**: Actionable, specific guidance
-- **Scope**: Focus on common scenarios and important considerations
-
-#### Troubleshooting Section
-- **Format**: Table with Problem/Solution columns
-- **Content**: Most common issues and clear solutions
-- **Length**: 3-5 common problems maximum
-
-## Writing Style
-
-### Tone and Voice
-- **Professional but approachable**: Technical but not intimidating
-- **Active voice**: Use direct, clear language
-- **Consistent terminology**: Use established project terms
-- **Inclusive language**: Address diverse audience
-
-### Language Guidelines
-- **Clarity**: Prefer simple, direct sentences
-- **Conciseness**: Remove unnecessary words and redundancy
-- **Specificity**: Use precise terms and avoid vague language
-- **Consistency**: Use same terms for same concepts throughout
-
-### Code Examples
-- **Format**: Use appropriate syntax highlighting
-- **Context**: Provide sufficient context for understanding
-- **Completeness**: Include complete, runnable examples when possible
-- **Comments**: Add explanatory comments for complex examples
-
-## Formatting Standards
-
-### Headers
-- **H1**: Document title only
-- **H2**: Main sections (Overview, Key Components, etc.)
-- **H3**: Subsections within main sections
-- **H4+**: Avoid deeper nesting
-
-### Lists
-- **Bullet points**: For unordered lists and features
-- **Numbered lists**: For step-by-step processes
-- **Consistent indentation**: Use 2 spaces for nested items
+- Use `#` for document title (only one per document)
+- Use `##` for main sections
+- Use `###` for subsections
+- Use `####` sparingly, only when necessary
+- Never skip heading levels
+- Keep headings short and descriptive
 
 ### Code Blocks
-- **Language specification**: Always specify language for syntax highlighting
-- **Inline code**: Use backticks for short code references
-- **Block code**: Use triple backticks with language specification
+
+- Always specify the language for syntax highlighting
+- Use `bash` for terminal commands
+- Use `json` for configuration examples
+- Use `typescript` for code examples
+- Keep code examples minimal and focused
+
+### Lists
+
+- Use `-` for unordered lists
+- Use `1.` for ordered lists (numbered steps)
+- Keep list items concise
+- Use bold for key terms: `- **Key term**: Brief explanation`
 
 ### Tables
-- **Headers**: Clear, descriptive column headers
-- **Content**: Concise, scannable information
-- **Alignment**: Left-align text, center-align when appropriate
+
+- Use tables for structured data (command references, troubleshooting)
+- Keep tables simple with 2-3 columns maximum
+- Always include header row
+
+```markdown
+| Problem | Solution |
+|---------|----------|
+| Issue description | How to fix it |
+```
+
+### Links
+
+- Use relative paths for internal documentation links
+- Format: `[Display Text](filename.md)`
+- Place related documentation links at the end of the document
 
 ## Content Guidelines
 
-### What to Include
-- **Essential information**: Core concepts and workflows
-- **Practical examples**: Real-world usage scenarios
-- **Common patterns**: Established practices and conventions
-- **Error handling**: Typical issues and solutions
+### Writing Style
 
-### What to Avoid
-- **Redundancy**: Don't repeat information available elsewhere
-- **Over-documentation**: Don't document obvious or trivial details
-- **Implementation details**: Focus on usage, not internal workings
-- **Outdated information**: Keep content current and relevant
+- Write in second person ("you") when giving instructions
+- Use present tense
+- Use active voice
+- Avoid jargon unless necessary (define it if used)
+- One idea per sentence
+- One topic per paragraph
 
-### Cross-Referencing
-- **Internal links**: Link to related documentation sections
-- **External references**: Include relevant external resources
-- **Consistent linking**: Use same link text for same targets
-- **Descriptive links**: Use meaningful link text, not "click here"
+### Instructions
 
-## Maintenance Guidelines
+- Start action items with a verb
+- Number sequential steps
+- Include expected outcomes where helpful
+- Show command examples in code blocks
 
-### Update Frequency
-- **Regular reviews**: Update docs when features change
-- **Version alignment**: Keep docs in sync with code changes
-- **User feedback**: Incorporate feedback and common questions
+### Examples
 
-### Quality Assurance
-- **Accuracy**: Verify all information is current and correct
-- **Completeness**: Ensure all necessary information is covered
-- **Clarity**: Test readability with target audience
-- **Consistency**: Check formatting and style adherence
+- Provide practical, real-world examples
+- Keep examples minimal but complete
+- Annotate complex examples with comments
 
-## README.md Requirements
+## Section Templates
 
-### Structure
+### Command Reference
+
 ```markdown
-# Documentation
+## Commands
 
-Brief description of documentation purpose.
+### Command Name
 
-## Quick Start
-
-Numbered list of essential documents for different user types.
-
-## Project Overview
-
-High-level explanation of project and key components.
-
-## Getting Started
-
-User-type specific guidance with document links.
-
-## Tools and Commands
-
-Table of available commands and their purposes.
+```bash
+npm run command-name
 ```
 
-### Navigation
-- **Quick Start**: Essential documents for immediate needs
-- **Project Overview**: High-level context and architecture
-- **Getting Started**: Role-specific guidance
-- **Tools and Commands**: Reference for available utilities
+Brief description of what the command does.
+```
 
-### Link Management
-- **Consistent formatting**: Use same link style throughout
-- **Descriptive text**: Clear indication of link destination
-- **Regular updates**: Keep links current and working
-- **Cross-references**: Link related documents appropriately
+### Troubleshooting
 
-## Quality Standards
+```markdown
+## Troubleshooting
 
-### Before Publishing
-- [ ] Content is accurate and current
-- [ ] Formatting follows established patterns
-- [ ] Links are working and appropriate
-- [ ] Examples are complete and functional
-- [ ] Language is clear and accessible
-- [ ] Length is appropriate (not too long or short)
-- [ ] Cross-references are properly maintained
+### Common Issues
 
-### Review Criteria
-- **Completeness**: All necessary information included
-- **Clarity**: Information is easy to understand
-- **Consistency**: Follows established patterns
-- **Relevance**: Content serves intended purpose
-- **Maintainability**: Easy to update and extend
+| Problem | Solution |
+|---------|----------|
+| Description | Solution steps |
 
-When creating or updating documentation, follow these principles to maintain consistency, clarity, and usefulness across all project documentation.
+### Getting Help
+
+- Check existing GitHub issues
+- Review related documentation
+- Contact maintainers through GitHub issues
+```
+
+### Related Documentation
+
+```markdown
+## Related Documentation
+
+- [Document Name](document-name.md) - Brief description
+- [Another Document](another-document.md) - Brief description
+```
+
+## Quality Checklist
+
+Before finalizing any documentation, verify:
+
+- [ ] Document has a clear, descriptive title
+- [ ] Opening paragraph explains the document's purpose
+- [ ] Headings follow the hierarchy rules
+- [ ] Code blocks have language specified
+- [ ] All internal links use relative paths
+- [ ] Related documentation section is present
+- [ ] No duplicate information from other docs
+- [ ] Language is clear and concise
+- [ ] Steps are numbered and actionable
+- [ ] Examples are minimal but complete
