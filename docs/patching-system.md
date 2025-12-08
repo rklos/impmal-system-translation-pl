@@ -53,11 +53,25 @@ npm run patch download
 
 Downloads files from the repository to `en/` and `pl/` directories.
 
-### 2. Translate Files
+### 2. Clean Up Unnecessary Files (Optional)
+
+```bash
+npm run patch tidy-up
+```
+
+Removes JavaScript files from `temp/patches/` that don't contain any string literals. This optimization step:
+- Analyzes all `.js` files in the temp directory
+- Identifies files without translatable strings
+- Deletes files that don't need translation
+- Reports the number of deleted files
+
+Run this after downloading to reduce the number of files you need to review for translation.
+
+### 3. Translate Files
 
 Edit files in `temp/patches/pl/`. The `en/` directory serves as reference.
 
-### 3. Generate Patches
+### 4. Generate Patches
 
 ```bash
 npm run patch create
@@ -65,7 +79,7 @@ npm run patch create
 
 Creates diff files by comparing `en/` and `pl/` directories.
 
-### 4. Test Patches
+### 5. Test Patches
 
 ```bash
 npm run patch apply

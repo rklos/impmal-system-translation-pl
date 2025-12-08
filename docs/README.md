@@ -17,5 +17,6 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 | `npm run report` | Check for missing or extra translations |
 | `npm run sync wfrp4e` | Sync with official WFRP4e translations |
 | `npm run patch download` | Download original files for patching |
+| `npm run patch tidy-up` | Remove JS files without translatable strings |
 | `npm run patch create` | Generate patches from modified files |
 | `npm run patch apply` | Apply patches to test files |
