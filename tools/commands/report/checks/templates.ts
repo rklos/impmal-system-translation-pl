@@ -19,29 +19,30 @@ export default async function checkTemplates(pkg: Package, changes: Changes) {
     patches.forEach((patch) => {
       const patchedContent = diff.applyPatch(file.content, patch, { fuzzFactor: 10 });
       if (!patchedContent) {
-        console.log(chalk.red(`Failed to apply patch: ${file.filename}`));
+        console.log(chalk.red(`  ✗ Failed to apply patch: ${file.filename}`));
         conflicts++;
       }
     });
   });
 
   if (templateChanges.length > 0) {
-    console.log(chalk.yellow('\nModified templates:'));
+    console.log(chalk.cyan('\n📄 Modified templates:'));
     templateChanges.forEach((file) => {
       let status = 'D';
-      if (file.status === 'modified') status = 'M';
-      if (file.status === 'renamed') status = 'R';
-      if (file.status === 'added') status = 'A';
-      console.log(chalk.yellow(`${status} ${file.filename}`));
+      let emoji = '🗑️';
+      if (file.status === 'modified') { status = 'M'; emoji = '✏️'; }
+      if (file.status === 'renamed') { status = 'R'; emoji = '🔄'; }
+      if (file.status === 'added') { status = 'A'; emoji = '➕'; }
+      console.log(chalk.yellow(`  ${emoji} ${status} ${file.filename}`));
     });
   } else {
-    console.log(chalk.green('No template changes found'));
+    console.log(chalk.green('✓ No template changes found'));
   }
 
   if (conflicts > 0) {
-    console.log(chalk.red(`${conflicts} conflicts were found`));
+    console.log(chalk.red(`\n⚠ ${conflicts} conflict(s) were found`));
   } else {
-    console.log(chalk.green('No template conflicts found'));
+    console.log(chalk.green('✓ No template conflicts found'));
   }
 
   return templateChanges.length > 0;

@@ -1,6 +1,7 @@
 import * as ts from 'typescript';
 import { readdirSync, statSync, unlinkSync, readFileSync } from 'fs';
 import { join } from 'path';
+import chalk from 'chalk';
 import type { Package } from '~/packages';
 import { getConstsOfPackage } from '../../../utils/consts';
 
@@ -45,10 +46,19 @@ async function tidyUpPackage(pkg: Package): Promise<void> {
   const { TEMP_PATCHES_DIR } = getConstsOfPackage(pkg);
 
   if (!statSync(TEMP_PATCHES_DIR, { throwIfNoEntry: false })?.isDirectory()) {
+    console.log(chalk.yellow(`No temp patches directory found for ${pkg.PACKAGE}`));
     return;
   }
 
   const jsFiles = findJsFiles(TEMP_PATCHES_DIR);
+  
+  if (jsFiles.length === 0) {
+    console.log(chalk.yellow('No JavaScript files found'));
+    return;
+  }
+
+  console.log(chalk.blue(`Analyzing ${jsFiles.length} JavaScript file(s)...`));
+
   let deletedCount = 0;
 
   for (const file of jsFiles) {
@@ -66,20 +76,21 @@ async function tidyUpPackage(pkg: Package): Promise<void> {
       if (!hasStringLiteral(sourceFile)) {
         unlinkSync(filePath);
         deletedCount++;
-        console.log(`Deleted file without strings: ${file}`);
+        console.log(chalk.yellow(`🗑️  Deleted file without strings: ${file}`));
       }
     } catch (error) {
-      console.warn(`Error processing file ${file}:`, error);
+      console.warn(chalk.yellow(`⚠ Error processing file ${file}:`), error);
     }
   }
 
   if (deletedCount > 0) {
-    console.log(`Package ${pkg.PACKAGE}: Deleted ${deletedCount} file(s) without strings`);
+    console.log(chalk.green.bold(`\n✓ Deleted ${deletedCount} file(s) without strings`));
   } else {
-    console.log(`Package ${pkg.PACKAGE}: No files to delete`);
+    console.log(chalk.green('\n✓ No files to delete (all files contain strings)'));
   }
 }
 
 export default async function tidyUp(pkg: Package): Promise<void> {
+  console.log(chalk.bold.cyan(`\n🧹 Tidying up package: ${pkg.PACKAGE}\n`));
   await tidyUpPackage(pkg);
 }

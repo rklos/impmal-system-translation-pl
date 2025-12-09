@@ -6,21 +6,27 @@ import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
 import { updateNestedValues } from '../../../utils/update-nested-values';
 
 export default async function syncWithSource() {
+  console.log(chalk.bold.cyan('\n🔄 Syncing packages with source...\n'));
+
   for (const pkg of Object.values(packages) as Package[]) {
     if (!('SUPPORTED_VERSION' in pkg)) continue;
 
     try {
-      console.log(chalk.blue(`\n=== Syncing ${pkg.PACKAGE} ===`));
+      console.log(chalk.bold.blue(`\n📦 Syncing ${pkg.PACKAGE}`));
       const langFile = `src/packages/${pkg.PACKAGE}/lang.json`;
       const langJson = JSON.parse(fs.readFileSync(langFile, 'utf8'));
 
+      console.log(chalk.cyan(`  ⬇️  Fetching remote translations...`));
       const response = await fetchGithubRawContent(pkg.REPO, 'master', 'static/lang/en.json');
       const langJsonRemote = await response.json();
 
       updateNestedValues(langJsonRemote, langJson);
       fs.writeFileSync(langFile, JSON.stringify(langJsonRemote, null, 2));
+      console.log(chalk.green(`  ✓ Synced successfully`));
     } catch (error) {
-      console.error(chalk.red(`Error syncing ${pkg.PACKAGE}:`), error);
+      console.error(chalk.red(`  ✗ Error syncing ${pkg.PACKAGE}:`), error);
     }
   }
+
+  console.log(chalk.green.bold('\n✓ Sync completed for all packages'));
 }

@@ -1,6 +1,7 @@
 import * as diff from 'diff';
 import * as fs from 'fs';
 import { dirname, join, relative } from 'path';
+import chalk from 'chalk';
 import type { Package } from '~/packages';
 import { getConstsOfPackage, ROOT_DIR } from '../../../utils/consts';
 
@@ -47,7 +48,7 @@ async function getChangedFiles(pkg: Package): Promise<string[]> {
           changedFiles.push(file);
         }
       } catch (error) {
-        console.warn(`Could not compare file ${file}:`, error);
+        console.warn(chalk.yellow(`⚠ Could not compare file ${file}:`), error);
       }
     }
   }
@@ -85,24 +86,35 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
     fs.mkdirSync(patchDir, { recursive: true });
     fs.writeFileSync(patchPath, patch);
 
-    console.log(`Created patch: ${pkg.PACKAGE}/patches/${filePath}`);
+    console.log(chalk.green(`✓ Created patch: ${pkg.PACKAGE}/patches/${filePath}`));
   } catch (error) {
-    console.error(`Error creating patch for ${pkg.PACKAGE}/patches/${filePath}:`, error);
+    console.error(chalk.red(`✗ Error creating patch for ${pkg.PACKAGE}/patches/${filePath}:`), error);
   }
 }
 
 export default async function create(pkg: Package): Promise<void> {
+  console.log(chalk.bold.cyan(`\n📝 Creating patches for package: ${pkg.PACKAGE}\n`));
+
   // Remove existing patches directory if it exists
   const { PATCHES_DIR } = getConstsOfPackage(pkg);
   if (fs.existsSync(PATCHES_DIR)) {
     fs.rmSync(PATCHES_DIR, { recursive: true, force: true });
-    console.log(`Removed existing patches directory: ${relative(ROOT_DIR, PATCHES_DIR)}`);
+    console.log(chalk.yellow(`🗑️  Removed existing patches directory: ${relative(ROOT_DIR, PATCHES_DIR)}`));
   }
 
   // Get the list of changed files between pl and en directories
   const changedFiles = await getChangedFiles(pkg);
 
+  if (changedFiles.length === 0) {
+    console.log(chalk.yellow('\nNo changed files found'));
+    return;
+  }
+
+  console.log(chalk.blue(`\nFound ${changedFiles.length} changed file(s)\n`));
+
   for (const filePath of changedFiles) {
     await createPatchForFile(pkg, filePath);
   }
+
+  console.log(chalk.green.bold(`\n✓ Patch creation completed (${changedFiles.length} patches created)`));
 }

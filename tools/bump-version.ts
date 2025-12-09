@@ -4,9 +4,14 @@ import chalk from 'chalk';
 import { ROOT_DIR, SRC_DIR } from './utils/consts';
 
 function bumpVersion(newVersionArg: string) {
+  console.log(chalk.bold.cyan('\n🔢 Bumping version...\n'));
+
   // Read package.json
   const packageJsonPath = join(ROOT_DIR, 'package.json');
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+
+  const oldVersion = packageJson.version;
+  console.log(chalk.blue(`Current version: ${oldVersion}`));
 
   // Determine new version
   let newVersion: string;
@@ -16,15 +21,18 @@ function bumpVersion(newVersionArg: string) {
       throw new Error('Version must be in format x.y.z');
     }
     newVersion = newVersionArg;
+    console.log(chalk.cyan(`Using specified version: ${newVersion}`));
   } else {
     // Split version into parts and increment patch
     const [ major, minor, patch ] = packageJson.version.split('.').map(Number);
     newVersion = `${major}.${minor}.${patch + 1}`;
+    console.log(chalk.cyan(`Auto-incrementing patch version: ${newVersion}`));
   }
 
   // Update package.json
   packageJson.version = newVersion;
   writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
+  console.log(chalk.green('✓ Updated package.json'));
 
   // Update package-lock.json
   const packageLockPath = join(ROOT_DIR, 'package-lock.json');
@@ -32,14 +40,16 @@ function bumpVersion(newVersionArg: string) {
   packageLock.version = newVersion;
   packageLock.packages[''].version = newVersion;
   writeFileSync(packageLockPath, `${JSON.stringify(packageLock, null, 2)}\n`);
+  console.log(chalk.green('✓ Updated package-lock.json'));
 
   // Update module.json
   const moduleJsonPath = join(SRC_DIR, 'module.json');
   const moduleJson = JSON.parse(readFileSync(moduleJsonPath, 'utf8'));
   moduleJson.version = newVersion;
   writeFileSync(moduleJsonPath, `${JSON.stringify(moduleJson, null, 2)}\n`);
+  console.log(chalk.green('✓ Updated module.json'));
 
-  console.log(chalk.green(`Version bumped to ${newVersion}`));
+  console.log(chalk.green.bold(`\n✓ Version successfully bumped: ${oldVersion} → ${newVersion}`));
 }
 
 // Get version from CLI argument if provided

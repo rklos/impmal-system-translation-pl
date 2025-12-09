@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as ts from 'typescript';
 import { join } from 'path';
+import chalk from 'chalk';
 import type { Package } from '~/packages';
 import { getConstsOfPackage } from '../../../utils/consts';
 
@@ -89,22 +90,24 @@ function validateFile(filePath: string): { hasErrors: boolean; errors: ts.Diagno
 }
 
 export default async function validate(pkg: Package): Promise<void> {
+  console.log(chalk.bold.cyan(`\n🔍 Validating patches for package: ${pkg.PACKAGE}\n`));
+
   const { TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
   const scriptsDir = join(TEMP_PATCHES_PL_DIR, 'scripts');
 
   if (!fs.existsSync(scriptsDir)) {
-    console.log(`No scripts directory found for package ${pkg.PACKAGE}`);
+    console.log(chalk.yellow(`No scripts directory found for package ${pkg.PACKAGE}`));
     return;
   }
 
   const scriptFiles = scanScriptsDirectory(scriptsDir);
 
   if (scriptFiles.length === 0) {
-    console.log(`No script files found in ${scriptsDir}`);
+    console.log(chalk.yellow(`No script files found in ${scriptsDir}`));
     return;
   }
 
-  console.log(`\nValidating ${scriptFiles.length} script files in ${pkg.PACKAGE}...`);
+  console.log(chalk.blue(`Validating ${scriptFiles.length} script file(s)...\n`));
 
   let errorCount = 0;
   const filesWithErrors: Array<{ file: string; errors: ts.Diagnostic[] }> = [];
@@ -120,25 +123,26 @@ export default async function validate(pkg: Package): Promise<void> {
   }
 
   if (filesWithErrors.length === 0) {
-    console.log(`✓ All ${scriptFiles.length} files passed validation`);
+    console.log(chalk.green.bold(`✓ All ${scriptFiles.length} file(s) passed validation`));
   } else {
-    console.error(`\n✗ Found ${errorCount} error(s) in ${filesWithErrors.length} file(s):\n`);
+    console.error(chalk.red.bold(`\n✗ Found ${errorCount} error(s) in ${filesWithErrors.length} file(s):\n`));
 
     for (const { file, errors } of filesWithErrors) {
-      console.error(`\n${file}:`);
+      console.error(chalk.red(`\n📄 ${file}:`));
 
       for (const error of errors) {
         if (error.file) {
           const { line, character } = error.file.getLineAndCharacterOfPosition(error.start || 0);
           const message = ts.flattenDiagnosticMessageText(error.messageText, '\n');
-          console.error(`  Line ${line + 1}, Column ${character + 1}: ${message}`);
+          console.error(chalk.yellow(`  ⚠ Line ${line + 1}, Column ${character + 1}: ${message}`));
         } else {
           const message = ts.flattenDiagnosticMessageText(error.messageText, '\n');
-          console.error(`  ${message}`);
+          console.error(chalk.yellow(`  ⚠ ${message}`));
         }
       }
     }
 
+    console.error(chalk.red.bold('\n✗ Validation failed'));
     process.exitCode = 1;
   }
 }
