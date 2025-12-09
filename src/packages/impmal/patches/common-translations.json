@@ -1,0 +1,25 @@
+{
+  "// texts that are used in many scripts/templates with their translations": "",
+  "scripts": {
+    "Must be GM perform this action": "Musisz być GM, aby wykonać tę akcję",
+    "</strong> already owns <strong>": "</strong> już posiada <strong>",
+    "Added <strong>": "Dodano <strong>",
+    "location.split(\"Leg\")": "location.split(\"Noga\")",
+    "location.split(\"Arm\")": "location.split(\"Ramię\")",
+    "Select a Liability": "Wybierz Brzemię",
+    "Select a Boon": "Wybierz Zaletę",
+    "This Actor does not have any of the valid specialisations": "Ta Postać nie ma żadnej z prawidłowych specjalizacji",
+    "Trained ${...} for ${...} XP": "Wytrenowano ${...} za ${...} PD",
+    "Select the Specialisation to train": "Wybierz Specjalizację do trenowania",
+    "Took \"...\" Damage from Hazard": "Otrzymano \"...\" Obrażeń od Zagrożenia",
+    "`Unarmed (${...})`": "`Nieuzbrojony (${...})`",
+    "Choose Arm": "Wybierz Ramię",
+    "Left Arm": "Lewe Ramię",
+    "Right Arm": "Prawe Ramię",
+    "Teeth Lost": "Stracone Zęby",
+    "// replace(\"Teeth\", `${...} Teeth`)": "replace(\"Zęby\", `${...} Zęby`)",
+    "</strong> healed \" + ... + \" wounds": "</strong> wyleczył \" + ... + \" Ran",
+    "// replace(\"Finger\", ... + \" Finger\")": "replace(\"Palec\", ... + \" Palec\")"
+  },
+  "templates": {}
+}

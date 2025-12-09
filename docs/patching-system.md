@@ -67,9 +67,69 @@ Removes JavaScript files from `temp/patches/` that don't contain any string lite
 
 Run this after downloading to reduce the number of files you need to review for translation.
 
+### 2.1. Find Duplicated Lines (Optional)
+
+```bash
+npm run patch find-duplicated-lines
+```
+
+Analyzes English source files to find lines of code that appear multiple times. This analysis:
+- Parses all `.js` files in the `temp/patches/en/scripts` directory
+- Identifies lines that contain at least one string literal
+- Finds lines that appear at least twice across different files
+- Reports each common line with:
+  - The complete line of code
+  - Number of occurrences
+  - List of files and line numbers where it appears
+- Provides summary statistics
+
+This is useful for:
+- Identifying commonly duplicated code patterns before translation
+- Planning consistent translations for repeated code
+- Spotting opportunities for code consolidation
+- Creating translation templates for common patterns
+
 ### 3. Translate Files
 
 Edit files in `temp/patches/pl/`. The `en/` directory serves as reference.
+
+#### 3.1. Apply Common Translations (Optional)
+
+```bash
+npm run patch apply -- --common
+```
+
+Automatically applies common translations from `patches/common-translations.json` to files in `temp/patches/pl/`. This is useful for:
+- Translating frequently repeated strings across many files
+- Maintaining consistency in translations
+- Speeding up the initial translation process
+
+The common translations file uses a simple JSON format:
+
+```json
+{
+  "scripts": {
+    "Source text": "Translated text",
+    "Text with ${...} placeholder": "Tłumaczenie z ${...} placeholder"
+  },
+  "templates": {
+    "Template text": "Tłumaczony tekst"
+  }
+}
+```
+
+**Pattern Matching:**
+- Exact strings are matched literally
+- Use `...` as a placeholder to capture dynamic content
+- The `...` placeholder matches any content except newlines, quotes, and braces
+- Captured content is preserved in the translation
+
+**Examples:**
+- `"Choose Arm": "Wybierz Ramię"` - Simple text replacement
+- `"Trained ${...} for ${...} XP": "Wytrenowano ${...} za ${...} PD"` - Preserves template literal expressions
+- `"Added <strong>": "Dodano <strong>"` - Works with HTML tags
+
+After applying common translations, review the changes and manually translate any remaining text.
 
 ### 4. Generate Patches
 
