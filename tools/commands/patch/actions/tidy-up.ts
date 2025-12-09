@@ -4,24 +4,7 @@ import { join } from 'path';
 import chalk from 'chalk';
 import type { Package } from '~/packages';
 import { getConstsOfPackage } from '../../../utils/consts';
-
-function hasStringLiteral(sourceFile: ts.SourceFile): boolean {
-  let hasString = false;
-
-  function visit(node: ts.Node) {
-    if (hasString) return;
-
-    if (ts.isStringLiteral(node) || ts.isTemplateExpression(node)) {
-      hasString = true;
-      return;
-    }
-
-    ts.forEachChild(node, visit);
-  }
-
-  visit(sourceFile);
-  return hasString;
-}
+import { hasStringLiteral } from '../../../utils/has-string-literal';
 
 function findJsFiles(dirPath: string, basePath: string = ''): string[] {
   const files: string[] = [];

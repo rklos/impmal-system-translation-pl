@@ -3,6 +3,7 @@ import * as packages from '~/packages';
 import type { Package } from '~/packages';
 import checkTemplates from './checks/templates';
 import checkTranslations from './checks/translations';
+import checkScripts from './checks/scripts';
 import { getLatestChanges } from './get-latest-changes';
 import { sendNotification, reportError } from '../../utils/discord';
 
@@ -19,6 +20,7 @@ async function checkChanges() {
       let hasChanges = false;
       hasChanges = await checkTemplates(pkg, changes) || hasChanges;
       hasChanges = await checkTranslations(pkg, changes) || hasChanges;
+      hasChanges = await checkScripts(pkg, changes) || hasChanges;
 
       if (hasChanges) {
         console.log(chalk.yellow(`\n⚠ Changes detected in ${pkg.PACKAGE}`));
