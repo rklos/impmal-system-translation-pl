@@ -91,14 +91,18 @@ async function applyPatchForFile(pkg: Package, patchPath: string): Promise<void>
 }
 
 function transformKeyToRegex(key: string): RegExp {
-  // First, replace "..." with a placeholder to protect it during escaping
-  const withPlaceholder = key.replace(/\.\.\./g, '___CAPTURE___');
+  // First, replace __N__ patterns with placeholders to protect them during escaping
+  const placeholders: string[] = [];
+  const withPlaceholder = key.replace(/__(\d+)__/g, (match, num) => {
+    placeholders.push(match);
+    return `___CAPTURE_${num}___`;
+  });
 
   // Escape all special regex characters
   const escaped = withPlaceholder.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  // Replace placeholder with the capture group pattern
-  const pattern = escaped.replace(/___CAPTURE___/g, '([^\\n}"\'`]+)');
+  // Replace placeholders with capture group pattern
+  const pattern = escaped.replace(/___CAPTURE_\d+___/g, '([^\\n}"\'`]+)');
 
   return new RegExp(pattern, 'g');
 }
@@ -119,11 +123,14 @@ function applyTranslation(content: string, sourcePattern: string, targetPattern:
     const fullMatch = match[0];
     const capturedGroups = match.slice(1);
 
-    // Build the replacement by substituting "..." with captured groups
+    // Build the replacement by substituting _N_ with captured groups
     let replacement = targetPattern;
-    for (const group of capturedGroups) {
-      replacement = replacement.replace('...', group);
-    }
+    
+    // Replace numbered placeholders (__1__, __2__, etc.) with their corresponding captured groups
+    replacement = replacement.replace(/__(\d+)__/g, (_, num) => {
+      const index = parseInt(num, 10) - 1;
+      return capturedGroups[index] || '';
+    });
 
     result = result.replace(fullMatch, replacement);
   }

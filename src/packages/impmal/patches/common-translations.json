@@ -9,17 +9,17 @@
     "Select a Liability": "Wybierz Brzemię",
     "Select a Boon": "Wybierz Zaletę",
     "This Actor does not have any of the valid specialisations": "Ta Postać nie ma żadnej z prawidłowych specjalizacji",
-    "Trained ${...} for ${...} XP": "Wytrenowano ${...} za ${...} PD",
+    "Trained ${__1__} for ${__2__} XP": "Wytrenowano ${__1__} za ${__2__} PD",
     "Select the Specialisation to train": "Wybierz Specjalizację do trenowania",
-    "Took \"...\" Damage from Hazard": "Otrzymano \"...\" Obrażeń od Zagrożenia",
-    "`Unarmed (${...})`": "`Nieuzbrojony (${...})`",
+    "Took \"__1__\" Damage from Hazard": "Otrzymano \"__1__\" Obrażeń od Zagrożenia",
+    "`Unarmed (${__1__})`": "`Nieuzbrojony (${__1__})`",
     "Choose Arm": "Wybierz Ramię",
     "Left Arm": "Lewe Ramię",
     "Right Arm": "Prawe Ramię",
     "Teeth Lost": "Stracone Zęby",
-    "// replace(\"Teeth\", `${...} Teeth`)": "replace(\"Zęby\", `${...} Zęby`)",
-    "</strong> healed \" + ... + \" wounds": "</strong> wyleczył \" + ... + \" Ran",
-    "// replace(\"Finger\", ... + \" Finger\")": "replace(\"Palec\", ... + \" Palec\")"
+    "// replace(\"Teeth\", `${__1__} Teeth`)": "replace(\"Zęby\", `${__1__} Zęby`)",
+    "</strong> healed \" + __1__ + \" wounds": "</strong> wyleczył \" + __1__ + \" Ran",
+    "// replace(\"Finger\", __1__ + \" Finger\")": "replace(\"Palec\", __1__ + \" Palec\")"
   },
   "templates": {}
 }

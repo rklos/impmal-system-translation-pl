@@ -110,7 +110,7 @@ The common translations file uses a simple JSON format:
 {
   "scripts": {
     "Source text": "Translated text",
-    "Text with ${...} placeholder": "Tłumaczenie z ${...} placeholder"
+    "Text with ${__1__} placeholder": "Tłumaczenie z ${__1__} placeholder"
   },
   "templates": {
     "Template text": "Tłumaczony tekst"
@@ -120,14 +120,17 @@ The common translations file uses a simple JSON format:
 
 **Pattern Matching:**
 - Exact strings are matched literally
-- Use `...` as a placeholder to capture dynamic content
-- The `...` placeholder matches any content except newlines, quotes, and braces
-- Captured content is preserved in the translation
+- Use `__N__` (where N is 1, 2, 3, etc.) as numbered placeholders to capture dynamic content
+- Each `__N__` placeholder matches any content except newlines, quotes, and braces
+- Numbered placeholders allow reordering captured content in translations
+- Placeholders are replaced with their corresponding captured groups
 
 **Examples:**
 - `"Choose Arm": "Wybierz Ramię"` - Simple text replacement
-- `"Trained ${...} for ${...} XP": "Wytrenowano ${...} za ${...} PD"` - Preserves template literal expressions
+- `"Trained ${__1__} for ${__2__} XP": "Wytrenowano ${__1__} za ${__2__} PD"` - Preserves template literal expressions in order
+- `"${__1__} owns ${__2__}": "${__2__} posiada ${__1__}"` - Reordering captured groups (swaps order)
 - `"Added <strong>": "Dodano <strong>"` - Works with HTML tags
+- `"Took \"__1__\" Damage": "Otrzymano \"__1__\" Obrażeń"` - Works inside quotes
 
 After applying common translations, review the changes and manually translate any remaining text.
 
