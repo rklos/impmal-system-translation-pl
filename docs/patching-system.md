@@ -51,23 +51,13 @@ export const SUPPORTED_VERSION = '1.0.0';
 npm run patch download
 ```
 
-Downloads files from the repository to `en/` and `pl/` directories.
+Downloads files from the repository to `en/` and `pl/` directories. This command automatically:
+- Clones the repository
+- Copies configured file types
+- Removes JavaScript files that don't contain any string literals (optimization to reduce files needing review)
+- Reports the number of files deleted
 
-### 2. Clean Up Unnecessary Files (Optional)
-
-```bash
-npm run patch tidy-up
-```
-
-Removes JavaScript files from `temp/patches/` that don't contain any string literals. This optimization step:
-- Analyzes all `.js` files in the temp directory
-- Identifies files without translatable strings
-- Deletes files that don't need translation
-- Reports the number of deleted files
-
-Run this after downloading to reduce the number of files you need to review for translation.
-
-### 2.1. Find Duplicated Lines (Optional)
+### 2. Find Duplicated Lines (Optional)
 
 ```bash
 npm run patch find-duplicated-lines

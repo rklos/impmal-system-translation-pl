@@ -4,7 +4,6 @@ import type { Package } from '~/packages';
 import download from './actions/download';
 import create from './actions/create';
 import apply from './actions/apply';
-import tidyUp from './actions/tidy-up';
 import findDuplicatedLines from './actions/find-duplicated-lines';
 
 const { values, positionals } = parseArgs({
@@ -36,8 +35,6 @@ async function run(action: string) {
       await create(pkg);
     } else if (action === 'apply') {
       await apply(pkg, { common: values.common as boolean });
-    } else if (action === 'tidy-up') {
-      await tidyUp(pkg);
     } else if (action === 'find-duplicated-lines') {
       await findDuplicatedLines(pkg);
     } else {
