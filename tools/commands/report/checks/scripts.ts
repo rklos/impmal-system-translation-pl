@@ -4,6 +4,7 @@ import * as diff from 'diff';
 import { loadPatches } from '../../../../.vite/load-patches';
 import type { Changes } from '../types';
 import { hasStringLiteralInContent } from '../../../utils/has-string-literal';
+import { PATH_STATIC_SCRIPTS, PATH_STATIC, EXT_JS } from '../../../utils/consts';
 
 const PATCHES = loadPatches();
 
@@ -11,7 +12,7 @@ export default async function checkScripts(pkg: Package, changes: Changes) {
   const SCRIPTS_PATCHES = PATCHES[pkg.PACKAGE] || {};
 
   const scriptChanges = changes.changedFiles
-    .filter((file) => file.filename.startsWith('static/scripts/') && file.filename.endsWith('.js'))
+    .filter((file) => file.filename.startsWith(`${PATH_STATIC_SCRIPTS}/`) && file.filename.endsWith(EXT_JS))
     .filter((file) => hasStringLiteralInContent(file.content, file.filename));
 
   let conflicts = 0;
@@ -19,7 +20,7 @@ export default async function checkScripts(pkg: Package, changes: Changes) {
   const scriptsWithoutPatches: string[] = [];
 
   scriptChanges.forEach((file) => {
-    const normalizedFilename = file.filename.replace('static/', '');
+    const normalizedFilename = file.filename.replace(`${PATH_STATIC}/`, '');
     const patches = SCRIPTS_PATCHES[normalizedFilename];
 
     if (patches) {
@@ -45,7 +46,7 @@ export default async function checkScripts(pkg: Package, changes: Changes) {
       if (file.status === 'renamed') { status = 'R'; emoji = '🔄'; }
       if (file.status === 'added') { status = 'A'; emoji = '➕'; }
 
-      const normalizedFilename = file.filename.replace('static/', '');
+      const normalizedFilename = file.filename.replace(`${PATH_STATIC}/`, '');
       const hasPatch = SCRIPTS_PATCHES[normalizedFilename];
       const patchInfo = hasPatch ? chalk.green(' [patched]') : chalk.gray(' [no patch]');
 

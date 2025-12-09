@@ -3,7 +3,13 @@ import * as fs from 'fs';
 import { join } from 'path';
 import chalk from 'chalk';
 import type { Package } from '~/packages';
-import { getConstsOfPackage } from '../../../utils/consts';
+import {
+  getConstsOfPackage,
+  FILE_COMMON_TRANSLATIONS,
+  EXT_DIFF,
+  EXT_JS,
+  EXT_HBS,
+} from '../../../utils/consts';
 
 interface ApplyOptions {
   common?: boolean;
@@ -34,7 +40,7 @@ async function getPatchFiles(pkg: Package): Promise<string[]> {
 
       if (stat.isDirectory()) {
         files.push(...scanDirectory(fullPath, relativePath));
-      } else if (item.endsWith('.diff')) {
+      } else if (item.endsWith(EXT_DIFF)) {
         files.push(relativePath);
       }
     }
@@ -139,11 +145,11 @@ function applyTranslation(content: string, sourcePattern: string, targetPattern:
 }
 
 async function applyCommonTranslations(pkg: Package): Promise<void> {
-  const { PACKAGE_DIR, TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
-  const commonTranslationsPath = join(PACKAGE_DIR, 'patches', 'common-translations.json');
+  const { PATCHES_DIR, TEMP_PATCHES_PL_SCRIPTS_DIR, TEMP_PATCHES_PL_TEMPLATES_DIR } = getConstsOfPackage(pkg);
+  const commonTranslationsPath = join(PATCHES_DIR, FILE_COMMON_TRANSLATIONS);
 
   if (!fs.existsSync(commonTranslationsPath)) {
-    console.log(chalk.yellow('No common-translations.json found for this package'));
+    console.log(chalk.yellow(`No ${FILE_COMMON_TRANSLATIONS} found for this package`));
     return;
   }
 
@@ -155,10 +161,10 @@ async function applyCommonTranslations(pkg: Package): Promise<void> {
   console.log(chalk.cyan('\nApplying common translations...'));
 
   // Process scripts
-  const scriptsDir = join(TEMP_PATCHES_PL_DIR, 'scripts');
+  const scriptsDir = TEMP_PATCHES_PL_SCRIPTS_DIR;
   let scriptUpdatedCount = 0;
   if (fs.existsSync(scriptsDir)) {
-    const scriptFiles = fs.readdirSync(scriptsDir).filter((f) => f.endsWith('.js'));
+    const scriptFiles = fs.readdirSync(scriptsDir).filter((f) => f.endsWith(EXT_JS));
     console.log(chalk.blue(`\nProcessing ${scriptFiles.length} script files...`));
 
     for (const scriptFile of scriptFiles) {
@@ -186,10 +192,10 @@ async function applyCommonTranslations(pkg: Package): Promise<void> {
   }
 
   // Process templates
-  const templatesDir = join(TEMP_PATCHES_PL_DIR, 'templates');
+  const templatesDir = TEMP_PATCHES_PL_TEMPLATES_DIR;
   let templateUpdatedCount = 0;
   if (fs.existsSync(templatesDir)) {
-    const templateFiles = fs.readdirSync(templatesDir).filter((f) => f.endsWith('.hbs'));
+    const templateFiles = fs.readdirSync(templatesDir).filter((f) => f.endsWith(EXT_HBS));
     console.log(chalk.blue(`\nProcessing ${templateFiles.length} template files...`));
 
     for (const templateFile of templateFiles) {
@@ -216,7 +222,7 @@ async function applyCommonTranslations(pkg: Package): Promise<void> {
     }
   }
 
-  console.log(chalk.green.bold(`\n✓ Common translations applied successfully`));
+  console.log(chalk.green.bold('\n✓ Common translations applied successfully'));
   console.log(chalk.cyan(`  Scripts updated: ${scriptUpdatedCount}`));
   console.log(chalk.cyan(`  Templates updated: ${templateUpdatedCount}`));
   console.log(chalk.cyan(`  Total files updated: ${scriptUpdatedCount + templateUpdatedCount}`));

@@ -2,7 +2,7 @@ import fs from 'fs';
 import chalk from 'chalk';
 import { Octokit } from '@octokit/core';
 import { join } from 'path';
-import { SRC_DIR } from '../../utils/consts';
+import { SRC_DIR, FILE_MODULE_JSON, FILE_SYSTEM_JSON } from '../../utils/consts';
 import { fetchGithubRawContent } from '../../utils/fetch-github-raw-content';
 import type { Changes } from './types';
 
@@ -19,13 +19,13 @@ export async function getLatestChanges(repository: string, version: string): Pro
     const tagName = release.tag_name;
 
     // Get module.json or system.json from the latest release
-    const moduleResponse = await fetchGithubRawContent(repository, tagName, 'module.json');
+    const moduleResponse = await fetchGithubRawContent(repository, tagName, FILE_MODULE_JSON);
     let moduleData;
     try {
       moduleData = await moduleResponse.json();
     } catch {
       // If module.json not found, try system.json
-      const systemResponse = await fetchGithubRawContent(repository, tagName, 'system.json');
+      const systemResponse = await fetchGithubRawContent(repository, tagName, FILE_SYSTEM_JSON);
       moduleData = await systemResponse.json();
     }
 
@@ -33,7 +33,7 @@ export async function getLatestChanges(repository: string, version: string): Pro
     const moduleId = moduleData.id;
 
     // Read local module.json
-    const localModuleJson = JSON.parse(fs.readFileSync(join(SRC_DIR, 'module.json'), 'utf8'));
+    const localModuleJson = JSON.parse(fs.readFileSync(join(SRC_DIR, FILE_MODULE_JSON), 'utf8'));
 
     // Find the module in relationships
     const relationship = localModuleJson.relationships.systems?.find((s: { id: string }) => s.id === moduleId)

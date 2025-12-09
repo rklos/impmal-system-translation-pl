@@ -1,13 +1,19 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import chalk from 'chalk';
-import { ROOT_DIR, SRC_DIR } from './utils/consts';
+import {
+  ROOT_DIR,
+  SRC_DIR,
+  FILE_PACKAGE_JSON,
+  FILE_PACKAGE_LOCK_JSON,
+  FILE_MODULE_JSON,
+} from './utils/consts';
 
 function bumpVersion(newVersionArg: string) {
   console.log(chalk.bold.cyan('\n🔢 Bumping version...\n'));
 
   // Read package.json
-  const packageJsonPath = join(ROOT_DIR, 'package.json');
+  const packageJsonPath = join(ROOT_DIR, FILE_PACKAGE_JSON);
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
 
   const oldVersion = packageJson.version;
@@ -32,22 +38,22 @@ function bumpVersion(newVersionArg: string) {
   // Update package.json
   packageJson.version = newVersion;
   writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
-  console.log(chalk.green('✓ Updated package.json'));
+  console.log(chalk.green(`✓ Updated ${FILE_PACKAGE_JSON}`));
 
   // Update package-lock.json
-  const packageLockPath = join(ROOT_DIR, 'package-lock.json');
+  const packageLockPath = join(ROOT_DIR, FILE_PACKAGE_LOCK_JSON);
   const packageLock = JSON.parse(readFileSync(packageLockPath, 'utf8'));
   packageLock.version = newVersion;
   packageLock.packages[''].version = newVersion;
   writeFileSync(packageLockPath, `${JSON.stringify(packageLock, null, 2)}\n`);
-  console.log(chalk.green('✓ Updated package-lock.json'));
+  console.log(chalk.green(`✓ Updated ${FILE_PACKAGE_LOCK_JSON}`));
 
   // Update module.json
-  const moduleJsonPath = join(SRC_DIR, 'module.json');
+  const moduleJsonPath = join(SRC_DIR, FILE_MODULE_JSON);
   const moduleJson = JSON.parse(readFileSync(moduleJsonPath, 'utf8'));
   moduleJson.version = newVersion;
   writeFileSync(moduleJsonPath, `${JSON.stringify(moduleJson, null, 2)}\n`);
-  console.log(chalk.green('✓ Updated module.json'));
+  console.log(chalk.green(`✓ Updated ${FILE_MODULE_JSON}`));
 
   console.log(chalk.green.bold(`\n✓ Version successfully bumped: ${oldVersion} → ${newVersion}`));
 }

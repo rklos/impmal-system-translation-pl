@@ -14,7 +14,7 @@ import chalk from 'chalk';
 import { simpleGit } from 'simple-git';
 import * as ts from 'typescript';
 import config from '../../../../tools.config';
-import { getConstsOfPackage } from '../../../utils/consts';
+import { getConstsOfPackage, DIR_DOWNLOAD, EXT_JS } from '../../../utils/consts';
 import { hasStringLiteral } from '../../../utils/has-string-literal';
 
 function findJsFiles(dirPath: string, basePath: string = ''): string[] {
@@ -26,9 +26,9 @@ function findJsFiles(dirPath: string, basePath: string = ''): string[] {
     const relativePath = join(basePath, item);
     const stat = statSync(fullPath);
 
-    if (stat.isDirectory()) {
+    if (stat.isDirectory() && item !== DIR_DOWNLOAD) {
       files.push(...findJsFiles(fullPath, relativePath));
-    } else if (item.endsWith('.js')) {
+    } else if (item.endsWith(EXT_JS)) {
       files.push(relativePath);
     }
   }

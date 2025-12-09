@@ -3,11 +3,19 @@ import { join } from 'path';
 import chalk from 'chalk';
 import { sendNotification, reportError } from '../../../utils/discord';
 import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
-import { PACKAGES_DIR } from '../../../utils/consts';
+import {
+  PACKAGES_DIR,
+  REPO_WFRP4E_CORE_PL,
+  PACKAGE_WARHAMMER_LIBRARY,
+  FILE_LANG_JSON,
+  GIT_REF_MAIN,
+  PATH_LANG,
+  FILE_PL_JSON,
+} from '../../../utils/consts';
 import { updateNestedValues, type Change } from '../../../utils/update-nested-values';
 
-const REPO = 'foundryvttpl/wfrp4e-core-pl';
-const LANG_FILE = join(PACKAGES_DIR, 'warhammer-library', 'lang.json');
+const REPO = REPO_WFRP4E_CORE_PL;
+const LANG_FILE = join(PACKAGES_DIR, PACKAGE_WARHAMMER_LIBRARY, FILE_LANG_JSON);
 
 async function reportChanges(changedTranslations: Change[]) {
   if (changedTranslations.length > 0) {
@@ -33,7 +41,7 @@ export default async function updateTranslations() {
     console.log(chalk.green('✓ Local translations loaded'));
 
     console.log(chalk.blue(`\n⬇️  Fetching remote translations from ${REPO}...`));
-    const response = await fetchGithubRawContent(REPO, 'main', 'lang/pl.json');
+    const response = await fetchGithubRawContent(REPO, GIT_REF_MAIN, `${PATH_LANG}/${FILE_PL_JSON}`);
     const remoteJson = await response.json();
     console.log(chalk.green('✓ Remote translations fetched'));
 

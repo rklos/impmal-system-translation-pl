@@ -3,7 +3,14 @@ import * as fs from 'fs';
 import { dirname, join, relative } from 'path';
 import chalk from 'chalk';
 import type { Package } from '~/packages';
-import { getConstsOfPackage, ROOT_DIR } from '../../../utils/consts';
+import {
+  getConstsOfPackage,
+  ROOT_DIR,
+  EXT_DIFF,
+  LANG_EN,
+  LANG_PL,
+  DIR_PATCHES,
+} from '../../../utils/consts';
 
 async function getChangedFiles(pkg: Package): Promise<string[]> {
   const { TEMP_PATCHES_EN_DIR, TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
@@ -72,8 +79,8 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
       filePath,
       enContent,
       plContent,
-      'en',
-      'pl',
+      LANG_EN,
+      LANG_PL,
       { context: 3 },
     );
 
@@ -81,14 +88,14 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
     fs.mkdirSync(PATCHES_DIR, { recursive: true });
 
     // Save patch file
-    const patchPath = join(PATCHES_DIR, filePath.replace(/\.(hbs|js)/, '.diff'));
+    const patchPath = join(PATCHES_DIR, filePath.replace(/\.(hbs|js)/, EXT_DIFF));
     const patchDir = dirname(patchPath);
     fs.mkdirSync(patchDir, { recursive: true });
     fs.writeFileSync(patchPath, patch);
 
-    console.log(chalk.green(`✓ Created patch: ${pkg.PACKAGE}/patches/${filePath}`));
+    console.log(chalk.green(`✓ Created patch: ${pkg.PACKAGE}/${DIR_PATCHES}/${filePath}`));
   } catch (error) {
-    console.error(chalk.red(`✗ Error creating patch for ${pkg.PACKAGE}/patches/${filePath}:`), error);
+    console.error(chalk.red(`✗ Error creating patch for ${pkg.PACKAGE}/${DIR_PATCHES}/${filePath}:`), error);
   }
 }
 

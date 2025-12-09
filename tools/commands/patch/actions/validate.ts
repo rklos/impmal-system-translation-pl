@@ -3,7 +3,7 @@ import * as ts from 'typescript';
 import { join } from 'path';
 import chalk from 'chalk';
 import type { Package } from '~/packages';
-import { getConstsOfPackage } from '../../../utils/consts';
+import { getConstsOfPackage, DIR_SCRIPTS, EXT_JS } from '../../../utils/consts';
 
 function scanScriptsDirectory(dirPath: string): string[] {
   const files: string[] = [];
@@ -20,7 +20,7 @@ function scanScriptsDirectory(dirPath: string): string[] {
 
     if (stat.isDirectory()) {
       files.push(...scanScriptsDirectory(fullPath));
-    } else if (item.endsWith('.js')) {
+    } else if (item.endsWith(EXT_JS)) {
       files.push(fullPath);
     }
   }
@@ -93,10 +93,10 @@ export default async function validate(pkg: Package): Promise<void> {
   console.log(chalk.bold.cyan(`\n🔍 Validating patches for package: ${pkg.PACKAGE}\n`));
 
   const { TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
-  const scriptsDir = join(TEMP_PATCHES_PL_DIR, 'scripts');
+  const scriptsDir = join(TEMP_PATCHES_PL_DIR, DIR_SCRIPTS);
 
   if (!fs.existsSync(scriptsDir)) {
-    console.log(chalk.yellow(`No scripts directory found for package ${pkg.PACKAGE}`));
+    console.log(chalk.yellow(`No ${DIR_SCRIPTS} directory found for package ${pkg.PACKAGE}`));
     return;
   }
 

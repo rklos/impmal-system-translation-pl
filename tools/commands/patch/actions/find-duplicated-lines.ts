@@ -3,7 +3,15 @@ import { readdirSync, statSync, readFileSync } from 'fs';
 import { join } from 'path';
 import chalk from 'chalk';
 import type { Package } from '~/packages';
-import { getConstsOfPackage } from '../../../utils/consts';
+import {
+  getConstsOfPackage,
+  DIR_SCRIPTS,
+  DIR_PATCHES,
+  DIR_TEMP,
+  EXT_JS,
+  LANG_EN,
+  PATH_SRC_PACKAGES,
+} from '../../../utils/consts';
 
 interface LineLocation {
   file: string;
@@ -90,7 +98,7 @@ function findJsFiles(dirPath: string, basePath: string = ''): string[] {
 
     if (stat.isDirectory()) {
       files.push(...findJsFiles(fullPath, relativePath));
-    } else if (item.endsWith('.js')) {
+    } else if (item.endsWith(EXT_JS)) {
       files.push(relativePath);
     }
   }
@@ -102,14 +110,14 @@ async function findDuplicatedLinesInPackage(pkg: Package): Promise<void> {
   const { TEMP_PATCHES_EN_DIR } = getConstsOfPackage(pkg);
 
   if (!statSync(TEMP_PATCHES_EN_DIR, { throwIfNoEntry: false })?.isDirectory()) {
-    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No temp/patches/en directory found`));
+    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No ${DIR_TEMP}/${DIR_PATCHES}/${LANG_EN} directory found`));
     return;
   }
 
-  const scriptsDir = join(TEMP_PATCHES_EN_DIR, 'scripts');
+  const scriptsDir = join(TEMP_PATCHES_EN_DIR, DIR_SCRIPTS);
 
   if (!statSync(scriptsDir, { throwIfNoEntry: false })?.isDirectory()) {
-    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No scripts directory found in temp/patches/en`));
+    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No ${DIR_SCRIPTS} directory found in ${DIR_TEMP}/${DIR_PATCHES}/${LANG_EN}`));
     return;
   }
 
@@ -121,7 +129,7 @@ async function findDuplicatedLinesInPackage(pkg: Package): Promise<void> {
   }
 
   console.log(chalk.bold.blue(`\n🔍 Analyzing ${pkg.PACKAGE}`));
-  console.log(chalk.gray(`Found ${jsFiles.length} JavaScript files in temp/patches/en/scripts`));
+  console.log(chalk.gray(`Found ${jsFiles.length} JavaScript files in ${DIR_TEMP}/${DIR_PATCHES}/${LANG_EN}/${DIR_SCRIPTS}`));
 
   // Collect all lines and their locations
   const lineMap = new Map<string, LineLocation[]>();
@@ -169,7 +177,7 @@ async function findDuplicatedLinesInPackage(pkg: Package): Promise<void> {
     console.log(chalk.yellow(`(${common.count} occurrences):`));
     for (const location of common.locations) {
       console.log(
-        chalk.dim(`  - ./src/packages/${pkg.PACKAGE}/temp/patches/en/scripts/${location.file}:${location.lineNumber}`),
+        chalk.dim(`  - ./${PATH_SRC_PACKAGES}/${pkg.PACKAGE}/${DIR_TEMP}/${DIR_PATCHES}/${LANG_EN}/${DIR_SCRIPTS}/${location.file}:${location.lineNumber}`),
       );
     }
   }
