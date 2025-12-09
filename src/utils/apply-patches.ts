@@ -1,4 +1,4 @@
-import { log } from '~/utils/log';
+import { impmalLog } from '~/utils/log';
 import type { StructuredPatch } from 'diff';
 import { applyPatch } from 'diff';
 
@@ -24,7 +24,7 @@ function patchTemplates(pkgName: string) {
     Object.values(diffs).forEach((diff) => {
       const patchedHtml = applyPatch(htmlString, diff, { fuzzFactor: 10 });
       if (!patchedHtml) {
-        log(`Failed to apply patch to ${originalPath}`);
+        impmalLog(`Failed to apply patch to ${originalPath}`);
         return;
       }
       htmlString = patchedHtml;
@@ -33,7 +33,7 @@ function patchTemplates(pkgName: string) {
     const compiled = Handlebars.compile(htmlString);
     Handlebars.registerPartial(originalPath, compiled);
 
-    log(`Overridden template: ${originalPath}`);
+    impmalLog(`Overridden template: ${originalPath}`);
   });
 }
 
@@ -52,14 +52,14 @@ function patchScripts(pkgName: string) {
     const path = p.replace('scripts/', '').replace('.js', '');
     let script = impmal.config.effectScripts[path];
     if (!script) {
-      log(`Failed to find original script: ${path}`);
+      impmalLog(`Failed to find original script: ${path}`);
       return;
     }
 
     Object.values(diffs).forEach((diff) => {
       const patchedScript = applyPatch(script, diff, { fuzzFactor: 10 });
       if (!patchedScript) {
-        log(`Failed to apply patch to ${path}`);
+        impmalLog(`Failed to apply patch to ${path}`);
         return;
       }
       script = patchedScript;
