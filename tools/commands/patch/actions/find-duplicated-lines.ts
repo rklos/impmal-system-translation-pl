@@ -102,25 +102,25 @@ async function findDuplicatedLinesInPackage(pkg: Package): Promise<void> {
   const { TEMP_PATCHES_EN_DIR } = getConstsOfPackage(pkg);
 
   if (!statSync(TEMP_PATCHES_EN_DIR, { throwIfNoEntry: false })?.isDirectory()) {
-    console.log(`Package ${pkg.PACKAGE}: No temp/patches/en directory found`);
+    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No temp/patches/en directory found`));
     return;
   }
 
   const scriptsDir = join(TEMP_PATCHES_EN_DIR, 'scripts');
 
   if (!statSync(scriptsDir, { throwIfNoEntry: false })?.isDirectory()) {
-    console.log(`Package ${pkg.PACKAGE}: No scripts directory found in temp/patches/en`);
+    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No scripts directory found in temp/patches/en`));
     return;
   }
 
   const jsFiles = findJsFiles(scriptsDir);
 
   if (jsFiles.length === 0) {
-    console.log(`Package ${pkg.PACKAGE}: No JavaScript files found`);
+    console.log(chalk.yellow(`⚠ Package ${pkg.PACKAGE}: No JavaScript files found`));
     return;
   }
 
-  console.log(chalk.bold.blue(`\n=== Analyzing ${pkg.PACKAGE} ===`));
+  console.log(chalk.bold.blue(`\n🔍 Analyzing ${pkg.PACKAGE}`));
   console.log(chalk.gray(`Found ${jsFiles.length} JavaScript files in temp/patches/en/scripts`));
 
   // Collect all lines and their locations
@@ -158,11 +158,11 @@ async function findDuplicatedLinesInPackage(pkg: Package): Promise<void> {
 
   // Report results
   if (commonLines.length === 0) {
-    console.log(`Package ${pkg.PACKAGE}: No common lines found`);
+    console.log(chalk.green(`✓ Package ${pkg.PACKAGE}: No common lines found`));
     return;
   }
 
-  console.log(chalk.bold.green(`\nPackage ${pkg.PACKAGE}: Found ${commonLines.length} common lines of code\n`));
+  console.log(chalk.bold.green(`\n📊 Package ${pkg.PACKAGE}: Found ${commonLines.length} common lines of code\n`));
 
   for (const common of commonLines) {
     console.log(chalk.cyan(`\n${common.lineContent}`));
@@ -176,7 +176,7 @@ async function findDuplicatedLinesInPackage(pkg: Package): Promise<void> {
 
   // Summary statistics
   const totalOccurrences = commonLines.reduce((sum, d) => sum + d.count, 0);
-  console.log(chalk.bold.green('\n--- Summary ---'));
+  console.log(chalk.bold.green('\n📊 Summary'));
   console.log(chalk.green(`Total unique common lines: ${commonLines.length}`));
   console.log(chalk.green(`Total occurrences: ${totalOccurrences}`));
 }
