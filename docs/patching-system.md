@@ -57,6 +57,18 @@ Downloads files from the repository to `en/` and `pl/` directories. This command
 - Removes JavaScript files that don't contain any string literals (optimization to reduce files needing review)
 - Reports the number of files deleted
 
+#### Aggressive Mode
+
+```bash
+npm run patch download -- --aggressive
+```
+
+Enables aggressive file cleanup that removes additional JavaScript files containing only:
+- Simple lowercase identifiers without spaces (e.g., `"itemtype"`, `"actorname"`)
+- Property path patterns (e.g., `"item.description"`, `"actor.name.first"`)
+
+These files typically don't require translation and can be safely removed to reduce manual review effort. Use this mode when you want to minimize the number of files to translate.
+
 ### 2. Find Duplicated Lines (Optional)
 
 ```bash
@@ -147,6 +159,11 @@ When upstream releases new versions:
 1. Download updated files:
    ```bash
    npm run patch download
+   ```
+   
+   Optionally use `--aggressive` flag to remove additional non-translatable files:
+   ```bash
+   npm run patch download -- --aggressive
    ```
 
 2. Apply existing patches:
