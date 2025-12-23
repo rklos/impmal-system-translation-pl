@@ -15,7 +15,7 @@ import { simpleGit } from 'simple-git';
 import * as ts from 'typescript';
 import config from '../../../../tools.config';
 import { getConstsOfPackage, DIR_DOWNLOAD, EXT_JS } from '../../../utils/consts';
-import { hasStringLiteral } from '../../../utils/has-string-literal';
+import { hasStringLiteral, extractStrings } from '../../../utils/ast';
 
 function findJsFiles(dirPath: string, basePath: string = ''): string[] {
   const files: string[] = [];
@@ -36,8 +36,31 @@ function findJsFiles(dirPath: string, basePath: string = ''): string[] {
   return files;
 }
 
-function tidyUpFiles(tempPatchesDir: string): void {
-  console.log(chalk.blue('\n🧹 Tidying up files (removing JS files without strings)...'));
+function shouldDeleteAggressively(sourceFile: ts.SourceFile): boolean {
+  const strings = extractStrings(sourceFile);
+
+  if (strings.length === 0) return false;
+
+  // Check if all strings match the aggressive patterns
+  const allMatch = strings.every((str) => {
+    // Pattern 1: Starts with lowercase letter and has no spaces
+    if (/^[a-z][^\s]*$/.test(str)) {
+      return true;
+    }
+
+    // Pattern 2: Matches \w+\.(\w+\.?)+ (e.g., "item.description", "actor.name.first")
+    if (/^\w+\.(\w+\.?)+$/.test(str)) {
+      return true;
+    }
+
+    return false;
+  });
+
+  return allMatch;
+}
+
+function tidyUpFiles(tempPatchesDir: string, aggressive: boolean = false): void {
+  console.log(chalk.blue(`\n🧹 Tidying up files (removing JS files without strings${aggressive ? ' - AGGRESSIVE MODE' : ''})...`));
 
   if (!statSync(tempPatchesDir, { throwIfNoEntry: false })?.isDirectory()) {
     console.log(chalk.yellow('No temp patches directory found'));
@@ -67,7 +90,15 @@ function tidyUpFiles(tempPatchesDir: string): void {
         true,
       );
 
-      if (!hasStringLiteral(sourceFile)) {
+      const hasStrings = hasStringLiteral(sourceFile);
+      let shouldDelete = !hasStrings;
+
+      // If file has strings but aggressive mode is on, check if it should still be deleted
+      if (hasStrings && aggressive && shouldDeleteAggressively(sourceFile)) {
+        shouldDelete = true;
+      }
+
+      if (shouldDelete) {
         unlinkSync(filePath);
         deletedCount++;
         console.log(chalk.gray(`  🗑️  Deleted: ${file}`));
@@ -84,7 +115,12 @@ function tidyUpFiles(tempPatchesDir: string): void {
   }
 }
 
-export default async function download(pkg: Package) {
+interface DownloadOptions {
+  aggressive?: boolean;
+}
+
+export default async function download(pkg: Package, options: DownloadOptions = {}) {
+  const { aggressive = false } = options;
   console.log(chalk.bold.cyan(`\n⬇️  Downloading files for package: ${pkg.PACKAGE}\n`));
 
   const { TEMP_PATCHES_DOWNLOAD_DIR, TEMP_PATCHES_EN_DIR, TEMP_PATCHES_PL_DIR } = getConstsOfPackage(pkg);
@@ -126,7 +162,7 @@ export default async function download(pkg: Package) {
 
     // Tidy up files by removing JS files without strings
     const { TEMP_PATCHES_DIR } = getConstsOfPackage(pkg);
-    tidyUpFiles(TEMP_PATCHES_DIR);
+    tidyUpFiles(TEMP_PATCHES_DIR, aggressive);
 
     // Clean up download directory
     console.log(chalk.blue('\n🧹 Cleaning up temporary files...'));

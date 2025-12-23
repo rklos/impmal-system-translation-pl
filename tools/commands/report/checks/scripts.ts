@@ -3,7 +3,7 @@ import type { Package } from '~/packages';
 import * as diff from 'diff';
 import { loadPatches } from '../../../../.vite/load-patches';
 import type { Changes } from '../types';
-import { hasStringLiteralInContent } from '../../../utils/has-string-literal';
+import { hasStringLiteralInContent } from '../../../utils/ast';
 import { PATH_STATIC_SCRIPTS, PATH_STATIC, EXT_JS } from '../../../utils/consts';
 
 const PATCHES = loadPatches();

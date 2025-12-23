@@ -14,6 +14,10 @@ const { values, positionals } = parseArgs({
       type: 'boolean',
       default: false,
     },
+    aggressive: {
+      type: 'boolean',
+      default: false,
+    },
   },
 });
 // eslint-disable-next-line prefer-const
@@ -30,7 +34,7 @@ async function run(action: string) {
     if (!('REPO' in pkg)) continue;
 
     if (action === 'download') {
-      await download(pkg);
+      await download(pkg, { aggressive: values.aggressive as boolean });
     } else if (action === 'create') {
       await create(pkg);
     } else if (action === 'apply') {
