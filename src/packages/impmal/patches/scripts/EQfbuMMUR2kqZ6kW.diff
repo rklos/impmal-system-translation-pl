@@ -1,0 +1,13 @@
+Index: scripts/EQfbuMMUR2kqZ6kW.js
+===================================================================
+--- scripts/EQfbuMMUR2kqZ6kW.js	en
++++ scripts/EQfbuMMUR2kqZ6kW.js	pl
+@@ -3,7 +3,7 @@
+ let data = item.toObject()
+ data.system.advances = 1;
+ 
+-let spec = await ValueDialog.create({title : this.item.name, text : "Enter Lore Specialisation related to one of the Iron Archipelago’s Xenos factions (e.g., Kroot, Aeldari)"});
++let spec = await ValueDialog.create({title : this.item.name, text : "Wprowadź Specjalizację Wiedzy związaną z jedną z frakcji Xenos na Żelaznym Archipelagu (np. Kroot, Aeldari)"});
+ 
+ if (spec)
+ {

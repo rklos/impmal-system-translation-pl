@@ -1,0 +1,16 @@
+Index: scripts/bQHx23AfuFsHToda.js
+===================================================================
+--- scripts/bQHx23AfuFsHToda.js	en
++++ scripts/bQHx23AfuFsHToda.js	pl
+@@ -1,8 +1,8 @@
+         if (!args.context.psychicFlood)
+         {
+ 
+-            let gain = Number((await ValueDialog.create({title : this.effect.name, text : "Warp Charge / SL Gained"}))) || 0;
++            let gain = Number((await ValueDialog.create({title : this.effect.name, text : "Ładunek Osnowy / Otrzymane PS"}))) || 0;
+             args.context.psychicFlood = gain;
+-            args.context.tags.push("Psychic Flood: " + gain);
++            args.context.tags.push("Napływ Mocy: " + gain);
+             await this.actor.update({"system.warp.charge" : this.actor.system.warp.charge += gain});
+         }
+\ No newline at end of file

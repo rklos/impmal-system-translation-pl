@@ -1,0 +1,12 @@
+Index: scripts/vEmrAi2As49u9oLY.js
+===================================================================
+--- scripts/vEmrAi2As49u9oLY.js	en
++++ scripts/vEmrAi2As49u9oLY.js	pl
+@@ -2,5 +2,5 @@
+         if (frightened)
+         {
+             frightened.delete();
+-            ui.notifications.notify(`<strong>${this.effect.name}</strong> - Immune to Frightened`);
++            ui.notifications.notify(`<strong>${this.effect.name}</strong> - Odporny na Przerażenie`);
+         }
+\ No newline at end of file

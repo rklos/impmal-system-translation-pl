@@ -1,0 +1,22 @@
+Index: scripts/508Ft1nurCFDPF0j.js
+===================================================================
+--- scripts/508Ft1nurCFDPF0j.js	en
++++ scripts/508Ft1nurCFDPF0j.js	pl
+@@ -1,14 +1,14 @@
+ let leg = await foundry.applications.api.Dialog.wait({
+     window: { title: this.item.name },
+-    content: "<p class='centered'>Choose Leg</p>",
++    content: "<p class='centered'>Wybierz Nogę</p>",
+     buttons: [
+         {
+             action: "leftLeg",
+-            label: "Left Leg",
++            label: "Lewa Noga",
+         },
+         {
+             action: "rightLeg",
+-            label: "Right Leg",
++            label: "Prawa Noga",
+         }
+     ]
+ });

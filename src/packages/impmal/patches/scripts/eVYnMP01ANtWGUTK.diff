@@ -1,0 +1,12 @@
+Index: scripts/eVYnMP01ANtWGUTK.js
+===================================================================
+--- scripts/eVYnMP01ANtWGUTK.js	en
++++ scripts/eVYnMP01ANtWGUTK.js	pl
+@@ -2,5 +2,5 @@
+         {
+             delete args.data.system?.skills?.athletics?.advances;
+             delete args.data.system?.skills?.fortitude?.advances;
+-            this.script.scriptNotification("Cannot advance this skill, use the Advance manual script to advance with the increased XP cost");
++            this.script.scriptNotification("Nie można rozwijać tej umiejętności, użyj skryptu Ręcznego Rozwijania, aby rozwijać z zwiększonym kosztem PD");
+         }
+\ No newline at end of file

@@ -1,0 +1,10 @@
+Index: scripts/hGdpVTZxsusa990t.js
+===================================================================
+--- scripts/hGdpVTZxsusa990t.js	en
++++ scripts/hGdpVTZxsusa990t.js	pl
+@@ -1,3 +1,3 @@
+-this.script.notification("Automatically succeeds on resisting Fatigue, effect now disabled.");
++this.script.notification("Automatyczny sukces przy opieraniu się Zmęczeniu, efekt teraz wyłączony.");
+ this.effect.update({"disabled" : true});
+ args.abort = true;
+\ No newline at end of file

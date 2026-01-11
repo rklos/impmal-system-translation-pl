@@ -1,0 +1,21 @@
+Index: scripts/KhYkdm8m6o8615st.js
+===================================================================
+--- scripts/KhYkdm8m6o8615st.js	en
++++ scripts/KhYkdm8m6o8615st.js	pl
+@@ -5,7 +5,7 @@
+ 
+         let applyBleeding = await foundry.applications.api.Dialog.confirm({
+             window : {title : this.effect.name},
+-            content : `Inflict Bleeding intead of Damage?`,
++            content : `Wywołać Krwawienie zamiast Obrażeń?`,
+         });
+ 
+         if (applyBleeding)
+@@ -13,5 +13,5 @@
+             await args.actor.addCondition("bleeding");
+             args.critical = false;
+             args.woundsGained = 0;
+-            args.text = `0 Wounds, Applied Bleeding (${this.effect.name})`
++            args.text = `0 Obrażeń, Zastosowane Krwawienie (${this.effect.name})`
+         }
+\ No newline at end of file

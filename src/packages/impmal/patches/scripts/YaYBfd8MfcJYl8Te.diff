@@ -1,0 +1,13 @@
+Index: scripts/YaYBfd8MfcJYl8Te.js
+===================================================================
+--- scripts/YaYBfd8MfcJYl8Te.js	en
++++ scripts/YaYBfd8MfcJYl8Te.js	pl
+@@ -1,5 +1,5 @@
+ if (args.woundsGained > 0)
+ {
+-	this.script.scriptMessage(`All creatures within Immediate Range suffer 
+-[[/r ${args.woundSGained}]] Damage`)
++	this.script.scriptMessage(`Wszystkie stworzenia w bezpośrednim zasięgu otrzymują 
++[[/r ${args.woundSGained}]] Obrażeń`)
+ }
+\ No newline at end of file

@@ -1,0 +1,13 @@
+Index: scripts/z8nozhd8zjMjbqgg.js
+===================================================================
+--- scripts/z8nozhd8zjMjbqgg.js	en
++++ scripts/z8nozhd8zjMjbqgg.js	pl
+@@ -2,7 +2,7 @@
+ 	return;        
+ 
+ 
+-this.actor.applyDamage(5).then(data => ui.notifications.notify("Took " + data.woundsGained + " Damage from Hazard"));
++this.actor.applyDamage(5).then(data => ui.notifications.notify("Otrzymano " + data.woundsGained + " Obrażeń od Zagrożenia"));
+ 
+ if (this.actor.hasCondition("blinded"))
+ {

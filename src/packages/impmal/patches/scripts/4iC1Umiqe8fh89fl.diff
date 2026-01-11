@@ -1,0 +1,13 @@
+Index: scripts/4iC1Umiqe8fh89fl.js
+===================================================================
+--- scripts/4iC1Umiqe8fh89fl.js	en
++++ scripts/4iC1Umiqe8fh89fl.js	pl
+@@ -9,7 +9,7 @@
+ 
+         if (!choice[0])
+         {
+-            choice = [{name : await ValueDialog.create({title : this.effect.name, text : "Enter Specialisation"})}]
++            choice = [{name : await ValueDialog.create({title : this.effect.name, text : "Wprowadź Specjalizację"})}]
+         }
+ 
+ 

@@ -1,0 +1,17 @@
+Index: scripts/o2swzX2Ct8ZBEEbT.js
+===================================================================
+--- scripts/o2swzX2Ct8ZBEEbT.js	en
++++ scripts/o2swzX2Ct8ZBEEbT.js	pl
+@@ -4,10 +4,10 @@
+         {
+             let damage = this.effect.sourceTest.result.SL - test.result.SL;
+             let damageData = await this.actor.applyDamage(damage, {ignoreAP : true});
+-            let message = `<p>Takes ${damage} Damage</p>`;
++            let message = `<p>Otrzymano ${damage} Obrażeń</p>`;
+             if (damage > this.actor.system.characteristics.tgh.bonus)
+             {
+-                message += `<p>Gains the <em>Poisoned</em> Condition</p>`;
++                message += `<p>Otrzymano stan <em>Zatrucia</em></p>`;
+                 await this.actor.addCondition("poisoned");
+             }
+             this.script.scriptMessage(message);

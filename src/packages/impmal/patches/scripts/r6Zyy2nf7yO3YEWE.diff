@@ -1,0 +1,13 @@
+Index: scripts/r6Zyy2nf7yO3YEWE.js
+===================================================================
+--- scripts/r6Zyy2nf7yO3YEWE.js	en
++++ scripts/r6Zyy2nf7yO3YEWE.js	pl
+@@ -4,6 +4,6 @@
+         }
+         else 
+         {   
+-            ui.notifications.error("Not enough ammo for " + this.effect.name);
+-            throw new Error("Not enough ammo for " + this.effect.name);
++            ui.notifications.error("Niewystarczająca ilość amunicji dla " + this.effect.name);
++            throw new Error("Niewystarczająca ilość amunicji dla " + this.effect.name);
+         }

@@ -1,0 +1,13 @@
+Index: scripts/KlaESspjOoVqiJZz.js
+===================================================================
+--- scripts/KlaESspjOoVqiJZz.js	en
++++ scripts/KlaESspjOoVqiJZz.js	pl
+@@ -4,6 +4,6 @@
+ 
+ if (!this.effect.disabled && !this.item.system.isEquipped)
+ {
+-	ui.notification.error("Cannot activate while Item is unequipped");
++	ui.notification.error("Nie można aktywować, gdy Przedmiot nie jest w użyciu");
+ 	this.effect.update({disabled : true});
+ }
+\ No newline at end of file

@@ -1,0 +1,12 @@
+Index: scripts/Fw9Fvq2W2qmpVwTf.js
+===================================================================
+--- scripts/Fw9Fvq2W2qmpVwTf.js	en
++++ scripts/Fw9Fvq2W2qmpVwTf.js	pl
+@@ -1,5 +1,5 @@
+ if (args.context.mutation)
+ {
+-	this.script.notification("Immune to the mutating effects of Corruption")
++	this.script.notification("Odporny na mutujące efekty Spaczenia")
+ 	args.abort = true;
+ }
+\ No newline at end of file

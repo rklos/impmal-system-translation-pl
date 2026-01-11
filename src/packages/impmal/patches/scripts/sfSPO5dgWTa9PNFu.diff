@@ -1,0 +1,13 @@
+Index: scripts/sfSPO5dgWTa9PNFu.js
+===================================================================
+--- scripts/sfSPO5dgWTa9PNFu.js	en
++++ scripts/sfSPO5dgWTa9PNFu.js	pl
+@@ -2,6 +2,6 @@
+ 
+ if (frightened)
+ {
+-	this.script.notification("Immune to Frightened");
++	this.script.notification("Odporny na Przerażenie");
+ 	frightened.delete();
+ }
+\ No newline at end of file

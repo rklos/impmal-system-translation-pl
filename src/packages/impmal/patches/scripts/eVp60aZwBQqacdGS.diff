@@ -1,0 +1,13 @@
+Index: scripts/eVp60aZwBQqacdGS.js
+===================================================================
+--- scripts/eVp60aZwBQqacdGS.js	en
++++ scripts/eVp60aZwBQqacdGS.js	pl
+@@ -1,6 +1,6 @@
+         if (args.context.fullAutoFanatic) 
+         {
+             args.result.tags.fullAutoFanatic = this.effect.name;
+-	    args.result.text.fullAutoFanatic = "Affects all creatures within Close Range of the target"
++	    args.result.text.fullAutoFanatic = "Wpływa na wszystkie istoty w bliskim zasięgu celu"
+             args.context.additionalAmmoUsed += args.computeAmmoUsed();
+         }
+\ No newline at end of file

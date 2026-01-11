@@ -1,0 +1,11 @@
+Index: scripts/Vd8pIJfoqZk5LHb1.js
+===================================================================
+--- scripts/Vd8pIJfoqZk5LHb1.js	en
++++ scripts/Vd8pIJfoqZk5LHb1.js	pl
+@@ -1,4 +1,4 @@
+ if (args.woundsGained > 0)
+ {
+-	this.script.message("<p><strong>Soporific Toxin</strong>: The first time this blade strikes a creature, they are affected by a hallucinogenic poison for 1d10 rounds. Each round therein, they must roll on the @UUID[Compendium.impmal-inquisition.tables.RollTable.Dy8XzuHFhHpVFytC]{Hallucinogenic Effects}Table.</p>")
++	this.script.message("<p><strong>Nasenna Toksyna</strong>: Gdy ostrze pierwszy raz trafi postać, jest ona pod wpływem halucynogennej toksyny na 1d10 rund. W każdej rundzie, musi rzucić na Tabelę @UUID[Compendium.impmal-inquisition.tables.RollTable.Dy8XzuHFhHpVFytC]{Efekty Halucynogenne}.</p>")
+ }
+\ No newline at end of file

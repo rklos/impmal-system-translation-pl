@@ -1,0 +1,12 @@
+Index: scripts/rRBwyNHRXJjoPIeQ.js
+===================================================================
+--- scripts/rRBwyNHRXJjoPIeQ.js	en
++++ scripts/rRBwyNHRXJjoPIeQ.js	pl
+@@ -9,5 +9,5 @@
+ 	fatigued?.delete();
+ 	frightened?.delete();
+ 	poisoned?.delete();
+-	this.script.notification("Immune to <em>Blinded</em>, <em>Fatigued</em>, <em>Frightened</em>, <em>Poisoned</em>")
++	this.script.notification("Odporny na <em>Oślepienie</em>, <em>Zmęczenie</em>, <em>Przerażenie</em>, <em>Zatrucie</em>")
+ }
+\ No newline at end of file

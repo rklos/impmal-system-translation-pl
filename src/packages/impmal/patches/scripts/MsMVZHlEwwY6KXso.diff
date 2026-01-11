@@ -1,0 +1,48 @@
+Index: scripts/MsMVZHlEwwY6KXso.js
+===================================================================
+--- scripts/MsMVZHlEwwY6KXso.js	en
++++ scripts/MsMVZHlEwwY6KXso.js	pl
+@@ -1,6 +1,6 @@
+ 
+     let weapons = [{
+-        "name": "Heavy Bolter",
++        "name": "Ciężki bolter",
+         "type": "trait",
+         "id": "CNsINQvyrV8iWNni",
+         "img": "modules/impmal-core/assets/icons/weapons/boltgun.webp",
+@@ -67,7 +67,7 @@
+         },
+     }, 
+     {
+-        "name": "Lascannon",
++        "name": "Działko laserowe",
+         "id": "ccGr4w9dRxGr1A5Z",
+         "type": "trait",
+         "img": "modules/impmal-core/assets/icons/weapons/lascannon.webp",
+@@ -127,7 +127,7 @@
+         },
+     }, 
+     {
+-        "name": "Missile Launcher (Frag Missile)",
++        "name": "Wyrzutnia (Odłamkowy pocisk rakietowy)",
+         "id": "Qpvdm09qz6PapboN",
+         "type": "trait",
+         "img": "modules/impmal-core/assets/icons/weapons/portable-missile-launcher.webp",
+@@ -190,7 +190,7 @@
+     },
+     {
+         "id": "R6uf5zdRPdgWJNWm",
+-        "name": "Missile Launcher (Krak Missile)",
++        "name": "Wyrzutnia (Przeciwpancerny pocisk rakietowy)",
+         "type": "trait",
+         "img": "modules/impmal-core/assets/icons/weapons/portable-missile-launcher.webp",
+         "system": {
+@@ -253,7 +253,7 @@
+     }
+ ]
+ 
+-    let choice = (await ItemDialog.create(weapons, 1, {text : "Choose the weapon used by the Heavy Weapons Team"}))
++    let choice = (await ItemDialog.create(weapons, 1, {text : "Wybierz broń używaną przez Drużynę Wsparcia"}))
+ 
+     if (choice && choice.length)
+     {

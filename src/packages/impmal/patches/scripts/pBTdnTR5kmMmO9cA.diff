@@ -1,0 +1,11 @@
+Index: scripts/pBTdnTR5kmMmO9cA.js
+===================================================================
+--- scripts/pBTdnTR5kmMmO9cA.js	en
++++ scripts/pBTdnTR5kmMmO9cA.js	pl
+@@ -1,3 +1,3 @@
+ this.item.update({"system.traits.list" : this.item.system.traits.list.filter(i => i.key != "ineffective")})
+ 
+-this.script.notification("Ineffective Removed")
+\ No newline at end of file
++this.script.notification("Nieskuteczna usunięta")
+\ No newline at end of file

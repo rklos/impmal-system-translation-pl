@@ -1,0 +1,9 @@
+Index: scripts/6DyxrjhrdlJ32KTN.js
+===================================================================
+--- scripts/6DyxrjhrdlJ32KTN.js	en
++++ scripts/6DyxrjhrdlJ32KTN.js	pl
+@@ -1,1 +1,1 @@
+-this.actor.applyDamage(5).then(data => ui.notifications.notify("Took " + data.woundsGained + " Damage from Hazard (Blank)"));
+\ No newline at end of file
++this.actor.applyDamage(5).then(data => ui.notifications.notify("Otrzymano " + data.woundsGained + " Obrażeń od Zagrożenia (Puste)"));
+\ No newline at end of file

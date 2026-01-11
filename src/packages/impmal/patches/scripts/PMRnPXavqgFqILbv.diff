@@ -1,0 +1,12 @@
+Index: scripts/PMRnPXavqgFqILbv.js
+===================================================================
+--- scripts/PMRnPXavqgFqILbv.js	en
++++ scripts/PMRnPXavqgFqILbv.js	pl
+@@ -6,5 +6,5 @@
+         }
+ else 
+ {
+-	this.script.scriptMessage("No Damage - Item is unequipped");
++	this.script.scriptMessage("Brak Obrażeń - Przedmiot nie jest w użyciu");
+ }
+\ No newline at end of file

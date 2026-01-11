@@ -1,0 +1,10 @@
+Index: scripts/9Wl1lU6OSQ9mihRq.js
+===================================================================
+--- scripts/9Wl1lU6OSQ9mihRq.js	en
++++ scripts/9Wl1lU6OSQ9mihRq.js	pl
+@@ -1,2 +1,2 @@
+ this.actor.update({"system.fate.max" : this.actor.system.fate.max + 1});
+-        this.script.scriptNotification("Gained 1 Fate");
+\ No newline at end of file
++        this.script.scriptNotification("Otrzymano 1 Punkt Przeznaczenia");
+\ No newline at end of file

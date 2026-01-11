@@ -1,0 +1,18 @@
+Index: scripts/OZ4wWayvcgmTJjKW.js
+===================================================================
+--- scripts/OZ4wWayvcgmTJjKW.js	en
++++ scripts/OZ4wWayvcgmTJjKW.js	pl
+@@ -1,11 +1,11 @@
+ if (args.equipped && !this.item.getFlag("impmal", "weapon")) 
+ {
+ 
+-  let weapon = await DragDialog.create({ text: "Provide the Weapon to be implanted", title: this.effect.name, filter: (item) => item.type == "weapon" && item.system.encumbrance.value <= 3, onError: "Must provide a Weapon with 3 or less Encumbrance." })
++  let weapon = await DragDialog.create({ text: "Podaj Broń do wszczepienia", title: this.effect.name, filter: (item) => item.type == "weapon" && item.system.encumbrance.value <= 3, onError: "Musisz podać Broń z 3 lub miejszym Obciążeniem." })
+ 
+   let hitLocations = [{ id: "none", name: "None" }].concat(Object.keys(this.actor.system.combat.hitLocations).map(loc => { return { id: loc, name: game.i18n.localize(this.actor.system.combat.hitLocations[loc].label) } }))
+ 
+-  let location = (await ItemDialog.create(hitLocations, 1, { title: this.effect.name, text: "Select a Hit Location" }))[0]
++  let location = (await ItemDialog.create(hitLocations, 1, { title: this.effect.name, text: "Wybierz Miejsce Trafienia" }))[0]
+ 
+   let specifier = weapon.name;
+   if (location.id != "none") 

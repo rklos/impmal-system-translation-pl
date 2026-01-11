@@ -1,0 +1,13 @@
+Index: scripts/NfUgAbkCq8TjOipe.js
+===================================================================
+--- scripts/NfUgAbkCq8TjOipe.js	en
++++ scripts/NfUgAbkCq8TjOipe.js	pl
+@@ -3,6 +3,6 @@
+ if (bleeding)
+ {
+   bleeding.delete();
+-  this.script.notification("Removed Bleeding");
++  this.script.notification("Usunięto Krwawienie");
+   this.effect.updateSource({"flags.impmal.bleedingRemoved" : true});
+ }
+\ No newline at end of file

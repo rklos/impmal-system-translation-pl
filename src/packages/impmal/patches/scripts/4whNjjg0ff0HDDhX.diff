@@ -1,0 +1,23 @@
+Index: scripts/4whNjjg0ff0HDDhX.js
+===================================================================
+--- scripts/4whNjjg0ff0HDDhX.js	en
++++ scripts/4whNjjg0ff0HDDhX.js	pl
+@@ -1,15 +1,15 @@
+ if (args.equipped) {
+     let arm = await foundry.applications.api.Dialog.wait({
+         window: { title: this.item.name },
+-        content: "<p class='centered'>Choose Arm</p>",
++        content: "<p class='centered'>Wybierz Rękę</p>",
+         buttons: [
+             {
+                 action: "leftArm",
+-                label: "Left Arm",
++                label: "Lewa Ręka",
+             },
+             {
+                 action: "rightArm",
+-                label: "Right Arm",
++                label: "Prawa Ręka",
+             }
+         ]
+     });

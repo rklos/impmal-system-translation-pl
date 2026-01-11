@@ -1,0 +1,21 @@
+Index: scripts/TAWdO9KLH6T8BCI0.js
+===================================================================
+--- scripts/TAWdO9KLH6T8BCI0.js	en
++++ scripts/TAWdO9KLH6T8BCI0.js	pl
+@@ -5,7 +5,7 @@
+ 
+         let applyRestrained = await foundry.applications.api.Dialog.confirm({
+             window : {title : this.effect.name},
+-            content : `Attempt to inflict Restrained intead of Damage?`,
++            content : `Spróbować wywołać stan Unieruchomienia zamiast Obrażeń?`,
+         });
+ 
+         if (applyRestrained)
+@@ -19,5 +19,5 @@
+             });
+             args.critical = false;
+             args.woundsGained = 0;
+-            args.text = `0 Wounds, Applied Restrained (${this.effect.name})`;
++            args.text = `0 Obrażeń, Zastosowany stan Unieruchomienia (${this.effect.name})`;
+         }
+\ No newline at end of file

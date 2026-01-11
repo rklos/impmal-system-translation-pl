@@ -1,0 +1,10 @@
+Index: scripts/jcQ5vGbeLcO3KR56.js
+===================================================================
+--- scripts/jcQ5vGbeLcO3KR56.js	en
++++ scripts/jcQ5vGbeLcO3KR56.js	pl
+@@ -1,4 +1,4 @@
+-let choice = await ItemDialog.create(ItemDialog.objectToArray(game.impmal.config.skills), 1, {title : this.effect.name, text : "Choose Implanted Skill"})
++let choice = await ItemDialog.create(ItemDialog.objectToArray(game.impmal.config.skills), 1, {title : this.effect.name, text : "Wybierz wszczepioną umiejętność"})
+ 
+ if (choice[0])
+ {

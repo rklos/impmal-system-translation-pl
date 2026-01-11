@@ -1,0 +1,24 @@
+Index: scripts/ZvHWXNS3NmRwZNAo.js
+===================================================================
+--- scripts/ZvHWXNS3NmRwZNAo.js	en
++++ scripts/ZvHWXNS3NmRwZNAo.js	pl
+@@ -3,7 +3,7 @@
+ 
+             let use = await foundry.applications.api.Dialog.confirm({
+                 window : {title : this.effect.name},
+-                content : "Suffer 1d10 Damage to automatically pass?",
++                content : "Otrzymać 1d10 Obrażeń, aby automatycznie zdać test?",
+             });
+ 
+             if (use)
+@@ -17,7 +17,7 @@
+             if (args.context.sanityIsForTheWeak)
+             {
+                 args.result.outcome = "success";
+-		        args.result.outcomeDescription = "Success";
++		        args.result.outcomeDescription = "Sukces";
+                 args.result.SL = 1;
+-                args.result.text.sanityIsForTheWeak = `<strong>${this.effect.name}</strong>: Automatically Pass. Takes ${args.context.sanityIsForTheWeak} Damage`;
++                args.result.text.sanityIsForTheWeak = `<strong>${this.effect.name}</strong>: Automatycznie Zdany. Otrzymuje ${args.context.sanityIsForTheWeak} Obrażeń`;
+             }
+\ No newline at end of file

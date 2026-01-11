@@ -1,0 +1,13 @@
+Index: scripts/mrC7mwoBW38Wm6cU.js
+===================================================================
+--- scripts/mrC7mwoBW38Wm6cU.js	en
++++ scripts/mrC7mwoBW38Wm6cU.js	pl
+@@ -2,7 +2,7 @@
+ "Compendium.impmal-core.items.Item.CslpAA241OSUVaGF",
+ "Compendium.impmal-core.items.Item.DEguAzj8uwUgVTs8"].map(fromUuid));
+ 
+-let choice = await ItemDialog.create(weapons, 1, {title : this.effect.name, text : "Choose Digital Weapon"})
++let choice = await ItemDialog.create(weapons, 1, {title : this.effect.name, text : "Wybierz Broń Cyfrową"})
+ 
+ if (choice[0])
+ {

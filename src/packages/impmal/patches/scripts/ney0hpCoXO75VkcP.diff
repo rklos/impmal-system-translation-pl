@@ -1,0 +1,14 @@
+Index: scripts/ney0hpCoXO75VkcP.js
+===================================================================
+--- scripts/ney0hpCoXO75VkcP.js	en
++++ scripts/ney0hpCoXO75VkcP.js	pl
+@@ -3,7 +3,7 @@
+     let frightened = this.actor.hasCondition("frightened");
+     if (frightened)
+     {
+-        this.script.scriptMessage("No longer Frightened")
++        this.script.scriptMessage("Nie jest już Przerażony")
+         frightened.delete();
+     }
+ }
+\ No newline at end of file

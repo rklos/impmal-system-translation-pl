@@ -1,0 +1,12 @@
+Index: scripts/eb9AhgnfGJ95mE3w.js
+===================================================================
+--- scripts/eb9AhgnfGJ95mE3w.js	en
++++ scripts/eb9AhgnfGJ95mE3w.js	pl
+@@ -1,6 +1,6 @@
+  	let location = Math.ceil(CONFIG.Dice.randomUniform() * 2) == 1 ? "leftArm" : "rightArm"  // Get location chosen
+         let locationName = game.i18n.localize(this.actor.system.combat.hitLocations[location].label); // Get location label
+-        let hand = location.split("Arm")[0]; // Get hand side - "left" or "right"
++        let hand = location.split("Ramię")[0]; // Get hand side - "left" or "right"
+ 
+         let injury = (await game.impmal.utility.findId("FqNmgPQo3it7Wlgf")).toObject()
+         this.effect.updateSource({name : `${this.effect.name} (${locationName})`, "flags.impmal.hand" : hand});

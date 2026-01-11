@@ -1,0 +1,13 @@
+Index: scripts/Qn9HPrV6eFIj1ef5.js
+===================================================================
+--- scripts/Qn9HPrV6eFIj1ef5.js	en
++++ scripts/Qn9HPrV6eFIj1ef5.js	pl
+@@ -2,6 +2,6 @@
+ 
+ if (effectsToDisable.length)
+ {
+-    this.script.notification(`Disabling ${effectsToDisable.map(i => i.name).join(", ")}.`);
++    this.script.notification(`Wyłączono ${effectsToDisable.map(i => i.name).join(", ")}.`);
+     effectsToDisable.forEach(i => i.update({disabled : true}));
+ }
+\ No newline at end of file

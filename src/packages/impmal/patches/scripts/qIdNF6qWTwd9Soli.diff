@@ -1,0 +1,10 @@
+Index: scripts/qIdNF6qWTwd9Soli.js
+===================================================================
+--- scripts/qIdNF6qWTwd9Soli.js	en
++++ scripts/qIdNF6qWTwd9Soli.js	pl
+@@ -1,4 +1,4 @@
+-let action = await ItemDialog.create(ItemDialog.objectToArray(game.impmal.config.vehicleActions).map(i => {i.name = i.name.name; return i}), 1, {title : this.effect.name, text : "Select an Action"})
++let action = await ItemDialog.create(ItemDialog.objectToArray(game.impmal.config.vehicleActions).map(i => {i.name = i.name.name; return i}), 1, {title : this.effect.name, text : "Wybierz Akcję"})
+ 
+ if (action[0])
+ {

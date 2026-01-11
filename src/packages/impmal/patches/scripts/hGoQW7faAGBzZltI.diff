@@ -1,0 +1,12 @@
+Index: scripts/hGoQW7faAGBzZltI.js
+===================================================================
+--- scripts/hGoQW7faAGBzZltI.js	en
++++ scripts/hGoQW7faAGBzZltI.js	pl
+@@ -1,5 +1,5 @@
+         if (this.actor.system.corruption.value > 0)
+         {
+             this.actor.update({"system.corruption.value" : 0});
+-            ui.notifications.notify(`<strong>${this.effect.name}</strong>: Cannot gain Corruption Points`);
++            ui.notifications.notify(`<strong>${this.effect.name}</strong>: Nie można otrzymać Punktów Spaczenia`);
+         }
+\ No newline at end of file

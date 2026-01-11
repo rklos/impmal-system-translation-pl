@@ -46,7 +46,9 @@ export function loadPatches() {
       const patch = diff.parsePatch(content);
       const index = patch[0]?.index;
 
-      const fileName = (index || diffFile).replace('static/templates/', 'templates/');
+      const fileName = (index || diffFile)
+        .replace('static/templates/', 'templates/')
+        .replace('static/scripts/', 'scripts/');
       patches[pkgName][fileName] = diff.parsePatch(content);
     });
   });
