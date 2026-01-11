@@ -1,0 +1,19 @@
+Index: scripts/vdcj2ZREX8a66Gbv.js
+===================================================================
+--- scripts/vdcj2ZREX8a66Gbv.js	en
++++ scripts/vdcj2ZREX8a66Gbv.js	pl
+@@ -9,11 +9,11 @@
+                 let damageData = await actor.applyDamage(3 + this.actor.system.characteristics.wil.bonus, {ignoreAP : true, update: false});
+                 let healed = Math.ceil(damageData.woundsGained / 2);
+                 await this.actor.update({"system.combat.wounds.value" : this.actor.system.combat.wounds.value - healed});
+-                this.script.scriptMessage(`<p><strong>${actor.name}</strong> takes ${damageData.woundsGained} Damage.</p> <p><strong>${this.actor.name}</strong> heals ${healed} Wounds</p>`);
++                this.script.scriptMessage(`<p><strong>${actor.name}</strong> otrzymuje ${damageData.woundsGained} Obrażeń.</p> <p><strong>${this.actor.name}</strong> wyleczył ${healed} Ran</p>`);
+                 SocketHandlers.executeOnOwner(actor, "updateActor", {update : damageData.updateData, speaker : ChatMessage.getSpeaker({actor})});
+             }
+         }
+ 	else 
+ 	{
+-		ui.notifications.error("No linked effect!")
++		ui.notifications.error("Brak połączonego efektu!")
+ 	}
+\ No newline at end of file

@@ -1,4 +1,5 @@
 import { parseArgs } from 'node:util';
+import chalk from 'chalk';
 import wfrp4e from './sources/wfrp4e';
 import syncWithSource from './sources/source';
 
@@ -10,7 +11,9 @@ const { values: _, positionals } = parseArgs({
 let [ source ] = positionals;
 
 if (!source) {
-  console.error('Error: Source is required');
+  console.error(chalk.red('✗ Error: Source is required'));
+  console.log(chalk.yellow('\nUsage: npm run sync <source>'));
+  console.log(chalk.cyan('Available sources: wfrp4e, source'));
   process.exit(1);
 }
 
@@ -21,7 +24,8 @@ async function run(source: string) {
   } else if (source === 'source') {
     await syncWithSource();
   } else {
-    console.error(`Error: Unknown source '${source}'`);
+    console.error(chalk.red(`✗ Error: Unknown source '${source}'`));
+    console.log(chalk.yellow('\nAvailable sources: wfrp4e, source'));
     process.exit(1);
   }
 }

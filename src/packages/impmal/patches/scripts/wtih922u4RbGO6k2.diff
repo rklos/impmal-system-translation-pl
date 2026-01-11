@@ -1,0 +1,22 @@
+Index: scripts/wtih922u4RbGO6k2.js
+===================================================================
+--- scripts/wtih922u4RbGO6k2.js	en
++++ scripts/wtih922u4RbGO6k2.js	pl
+@@ -1,14 +1,14 @@
+ let arm = await foundry.applications.api.Dialog.wait({
+     window: { title: this.item.name },
+-    content: "<p class='centered'>Choose Arm</p>",
++    content: "<p class='centered'>Wybierz Ramię</p>",
+     buttons: [
+         {
+             action: "leftArm",
+-            label: "Left Arm",
++            label: "Lewe Ramię",
+         },
+         {
+             action: "rightArm",
+-            label: "Right Arm",
++            label: "Prawe Ramię",
+         }
+     ]
+ });

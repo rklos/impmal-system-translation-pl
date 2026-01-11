@@ -1,0 +1,10 @@
+Index: scripts/YYhLHmr2K1QT3SMw.js
+===================================================================
+--- scripts/YYhLHmr2K1QT3SMw.js	en
++++ scripts/YYhLHmr2K1QT3SMw.js	pl
+@@ -1,2 +1,2 @@
+ this.effect.update({"flags.impmal.-=relentlessPursuitIds" : null});
+-ui.notifications.notify("Quarry Cleared");
+\ No newline at end of file
++ui.notifications.notify("Cel usunięty");
+\ No newline at end of file

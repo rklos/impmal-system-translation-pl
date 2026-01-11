@@ -1,0 +1,13 @@
+Index: scripts/xPwRWkCqpvFdi5zG.js
+===================================================================
+--- scripts/xPwRWkCqpvFdi5zG.js	en
++++ scripts/xPwRWkCqpvFdi5zG.js	pl
+@@ -1,6 +1,6 @@
+ if (args.actor.system.statuses.has("bleeding"))
+ {
+-	this.script.message("Healed 1 Wound");
++	this.script.message("Wyleczono 1 Ranę");
+ 	this.actor.update({"system.combat.wounds.value" : args.actor.system.combat.wounds.value - 1})
+ 
+ }
+\ No newline at end of file

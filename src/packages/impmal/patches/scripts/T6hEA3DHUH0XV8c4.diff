@@ -1,0 +1,13 @@
+Index: scripts/T6hEA3DHUH0XV8c4.js
+===================================================================
+--- scripts/T6hEA3DHUH0XV8c4.js	en
++++ scripts/T6hEA3DHUH0XV8c4.js	pl
+@@ -5,6 +5,6 @@
+             if (ones <= lostFingers)
+             {
+                 args.result.fumble = true;
+-		        args.result.text["lostFingerFumble"] = "Fumbled due to lost fingers"
++		        args.result.text["lostFingerFumble"] = "Skucha z powodu straconych palców"
+             }
+         }
+\ No newline at end of file

@@ -1,0 +1,17 @@
+Index: scripts/hQPODEneCvkso8Tz.js
+===================================================================
+--- scripts/hQPODEneCvkso8Tz.js	en
++++ scripts/hQPODEneCvkso8Tz.js	pl
+@@ -3,9 +3,9 @@
+ {
+   poisoned.delete();
+   this.effect.update({"disabled" : true});
+-  this.script.notification("Removed Poisoned");
++  this.script.notification("Usunięto stan Zatrucia");
+ }
+ else 
+ {
+-  this.script.notification("No Poisoned Condition")
++  this.script.notification("Brak stanu Zatrucia")
+ }
+\ No newline at end of file

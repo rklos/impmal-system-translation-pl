@@ -1,0 +1,13 @@
+Index: scripts/oRIVt6AkhhvVnIfv.js
+===================================================================
+--- scripts/oRIVt6AkhhvVnIfv.js	en
++++ scripts/oRIVt6AkhhvVnIfv.js	pl
+@@ -21,7 +21,7 @@
+         {
+             item = this.actor.items.get("Lhwa7OvB2p8z7zLs")
+             await this.actor.setupTraitTest(item.id);
+-            ui.notifications.notify("Resolve this attack with the target before rolling the next attack")
++            ui.notifications.notify("Rozpatrz ten atak z celem przed rzuceniem następnego ataku")
+         }
+ 
+         this.actor.setupTraitTest(item.id);

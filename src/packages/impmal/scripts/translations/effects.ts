@@ -1,5 +1,5 @@
 /* eslint-disable no-new-func */
-import { log } from '~/utils/log';
+import { impmalLog } from '~/utils/log';
 
 // TODO: remove when PR is merged: https://github.com/moo-man/ImpMal-FoundryVTT/pull/122
 function translateVehicleActions() {
@@ -56,7 +56,7 @@ function executeTranslation(type: 'vehicleActions', translations: Record<string,
         }
       });
     } catch (error) {
-      log(`Error translating ${type} ${key}: ${error}`);
+      impmalLog(`Error translating ${type} ${key}: ${error}`);
     }
   });
 }

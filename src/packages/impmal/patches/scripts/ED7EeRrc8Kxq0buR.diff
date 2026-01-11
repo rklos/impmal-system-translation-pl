@@ -1,0 +1,12 @@
+Index: scripts/ED7EeRrc8Kxq0buR.js
+===================================================================
+--- scripts/ED7EeRrc8Kxq0buR.js	en
++++ scripts/ED7EeRrc8Kxq0buR.js	pl
+@@ -1,5 +1,5 @@
+ if (this.actor.hasCondition("blinded"))
+ {
+-	ui.notifications.notify("Immune to the Blinded Condition")
++	ui.notifications.notify("Odporny na stan Oślepienia")
+ 	this.actor.hasCondition("blinded")?.delete();
+ }
+\ No newline at end of file

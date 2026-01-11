@@ -1,0 +1,13 @@
+Index: scripts/p4Likz0SxFhS7Pm4.js
+===================================================================
+--- scripts/p4Likz0SxFhS7Pm4.js	en
++++ scripts/p4Likz0SxFhS7Pm4.js	pl
+@@ -1,6 +1,6 @@
+ let helped = this.actor.effects.find(i => i.statuses.has("helped"))
+ if (helped)
+ {
+-	this.script.scriptMessage("Cannot be helped");
++	this.script.scriptMessage("Nie można pomóc");
+ 	await helped.delete();
+ }
+\ No newline at end of file

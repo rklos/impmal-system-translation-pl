@@ -1,0 +1,10 @@
+Index: scripts/QXbwUwNLc5e5on8g.js
+===================================================================
+--- scripts/QXbwUwNLc5e5on8g.js	en
++++ scripts/QXbwUwNLc5e5on8g.js	pl
+@@ -1,4 +1,4 @@
+-        this.actor.applyDamage(5).then(data => ui.notifications.notify("Took " + data.woundsGained + " Damage from Hazard"));
++        this.actor.applyDamage(5).then(data => ui.notifications.notify("Otrzymano " + data.woundsGained + " Obrażeń od Zagrożenia"));
+ 
+         this.actor.setupSkillTest({key : "reflexes", name : "Dodge"}, {fields : {difficulty : "hard"}, appendTitle : ` – ${this.effect.name}`}).then(test => {if (!test.succeeded)
+         {

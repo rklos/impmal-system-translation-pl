@@ -1,0 +1,9 @@
+Index: scripts/VFugNpuvUGjj27kf.js
+===================================================================
+--- scripts/VFugNpuvUGjj27kf.js	en
++++ scripts/VFugNpuvUGjj27kf.js	pl
+@@ -1,1 +1,1 @@
+-ui.notifications.notify("Cannot target Heavily Obscured target with Ranged Attacks");
+\ No newline at end of file
++ui.notifications.notify("Nie można trafić Mocno Przysłoniętej Postaci dystansowymi atakami");
+\ No newline at end of file

@@ -1,0 +1,13 @@
+Index: scripts/0EDx913MUa8OIlF1.js
+===================================================================
+--- scripts/0EDx913MUa8OIlF1.js	en
++++ scripts/0EDx913MUa8OIlF1.js	pl
+@@ -5,7 +5,7 @@
+ 
+ let add = await foundry.applications.api.Dialog.confirm({
+   window : {title : this.effect.name},
+-  content : "<p>Re-Apply Bleeding Condition?</p>"
++  content : '<p>Nałożyć ponownie stan Krwawienia?</p>'
+ })
+ 
+ if (add)

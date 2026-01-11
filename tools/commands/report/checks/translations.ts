@@ -4,22 +4,34 @@ import type { Package } from '~/packages';
 import { join } from 'path';
 import { fetchGithubRawContent } from '../../../utils/fetch-github-raw-content';
 import type { Changes } from '../types';
-import { getConstsOfPackage } from '../../../utils/consts';
+import {
+  getConstsOfPackage,
+  PATH_LANG,
+  PATH_STATIC_LANG,
+  FILE_LANG_JSON,
+  FILE_EN_JSON,
+  EXT_JSON,
+  GIT_REFS_TAGS,
+} from '../../../utils/consts';
 
 export default async function checkTranslations(pkg: Package, changes: Changes) {
   const { PACKAGE_DIR } = getConstsOfPackage(pkg);
 
-  const translationChanges = changes.changedFiles.filter((file) => file.filename.startsWith('lang/') && file.filename.endsWith('.json'));
+  const translationChanges = changes.changedFiles.filter((file) => file.filename.startsWith(`${PATH_LANG}/`) && file.filename.endsWith(EXT_JSON));
 
   if (translationChanges.length > 0) {
-    console.log(chalk.blue('\nModified translation files:'));
-    translationChanges.forEach((file) => console.log(chalk.yellow(`${file.status === 'modified' ? 'M' : 'D'} ${file.filename}`)));
+    console.log(chalk.cyan('\n🌐 Modified translation files:'));
+    translationChanges.forEach((file) => {
+      const emoji = file.status === 'modified' ? '✏️' : '🗑️';
+      const status = file.status === 'modified' ? 'M' : 'D';
+      console.log(chalk.yellow(`  ${emoji} ${status} ${file.filename}`));
+    });
   }
 
-  const response = await fetchGithubRawContent(pkg.REPO, `refs/tags/${changes.tagName}`, 'static/lang/en.json');
+  const response = await fetchGithubRawContent(pkg.REPO, `${GIT_REFS_TAGS}/${changes.tagName}`, `${PATH_STATIC_LANG}/${FILE_EN_JSON}`);
   const remoteJson = await response.json();
 
-  const localJson = JSON.parse(fs.readFileSync(join(PACKAGE_DIR, 'lang.json'), 'utf8'));
+  const localJson = JSON.parse(fs.readFileSync(join(PACKAGE_DIR, FILE_LANG_JSON), 'utf8'));
 
   const missingKeys: string[] = [];
   const extraKeys: string[] = [];
@@ -53,15 +65,15 @@ export default async function checkTranslations(pkg: Package, changes: Changes) 
   findDifferences(localJson, remoteJson);
 
   if (missingKeys.length > 0) {
-    console.log(chalk.red('\nMissing translations:'));
-    missingKeys.forEach((key) => console.log(chalk.red(`- ${key}`)));
+    console.log(chalk.red('\n❌ Missing translations:'));
+    missingKeys.forEach((key) => console.log(chalk.red(`  - ${key}`)));
   }
   if (extraKeys.length > 0) {
-    console.log(chalk.yellow('\nExtra translations:'));
-    extraKeys.forEach((key) => console.log(chalk.yellow(`+ ${key}`)));
+    console.log(chalk.yellow('\n➕ Extra translations:'));
+    extraKeys.forEach((key) => console.log(chalk.yellow(`  + ${key}`)));
   }
   if (missingKeys.length === 0 && extraKeys.length === 0) {
-    console.log(chalk.green('\nNo translation differences found'));
+    console.log(chalk.green('\n✓ No translation differences found'));
   }
 
   return missingKeys.length > 0 || extraKeys.length > 0;

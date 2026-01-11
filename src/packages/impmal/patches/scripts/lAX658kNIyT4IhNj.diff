@@ -1,0 +1,13 @@
+Index: scripts/lAX658kNIyT4IhNj.js
+===================================================================
+--- scripts/lAX658kNIyT4IhNj.js	en
++++ scripts/lAX658kNIyT4IhNj.js	pl
+@@ -8,7 +8,7 @@
+ 	    i.id = i._id;
+         });
+ 
+-        let choice = await ItemDialog.create(skills, 1, {text : "Select the Specialisation to train", title : this.effect.name});
++        let choice = await ItemDialog.create(skills, 1, {text : "Wybierz Specjalizację do trenowania", title : this.effect.name});
+ 
+ 	choice[0].name = "Forbidden"
+ 

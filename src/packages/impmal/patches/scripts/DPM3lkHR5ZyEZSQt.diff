@@ -1,0 +1,9 @@
+Index: scripts/DPM3lkHR5ZyEZSQt.js
+===================================================================
+--- scripts/DPM3lkHR5ZyEZSQt.js	en
++++ scripts/DPM3lkHR5ZyEZSQt.js	pl
+@@ -1,1 +1,1 @@
+-if (args.round == 0) {this.script.scriptMessage("You can draw and fire a Pistol before anyone else")}
+\ No newline at end of file
++if (args.round == 0) {this.script.scriptMessage("Możesz wyciągnąć i wystrzelić z Pistoletu przed innymi")}
+\ No newline at end of file

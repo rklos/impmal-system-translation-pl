@@ -1,0 +1,17 @@
+Index: scripts/P1MJobBm8Zkkr0yQ.js
+===================================================================
+--- scripts/P1MJobBm8Zkkr0yQ.js	en
++++ scripts/P1MJobBm8Zkkr0yQ.js	pl
+@@ -3,9 +3,9 @@
+ {
+   fatigued.delete();
+   this.effect.update({"disabled" : true});
+-  this.script.notification("Removed Fatigued");
++  this.script.notification("Usunięto Zmęczenie");
+ }
+ else 
+ {
+-  this.script.notification("No Fatigued Condition")
++  this.script.notification("Brak stanu Zmęczenia")
+ }
+\ No newline at end of file

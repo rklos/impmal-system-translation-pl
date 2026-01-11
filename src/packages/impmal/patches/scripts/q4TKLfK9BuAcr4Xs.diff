@@ -1,0 +1,12 @@
+Index: scripts/q4TKLfK9BuAcr4Xs.js
+===================================================================
+--- scripts/q4TKLfK9BuAcr4Xs.js	en
++++ scripts/q4TKLfK9BuAcr4Xs.js	pl
+@@ -1,5 +1,5 @@
+         if (args.woundsGained > 0)
+         {
+ 	        await this.effect.update({["flags.impmal.relentlessPursuitIds." + args.actor.id] :  true})
+-		ui.notifications.notify(`<strong>${this.effect.name}</strong>: Quarry added`)
++		ui.notifications.notify(`<strong>${this.effect.name}</strong>: Dodano Cel`)
+         }
+\ No newline at end of file

@@ -1,0 +1,13 @@
+Index: scripts/5RpxQP0a0h3177zr.js
+===================================================================
+--- scripts/5RpxQP0a0h3177zr.js	en
++++ scripts/5RpxQP0a0h3177zr.js	pl
+@@ -7,6 +7,6 @@
+ 
+ 	this.actor.update({effects : update})
+ 
+-	this.script.notification("Disabling " + effects.map(i => i.name).join(", "));
++	this.script.notification("Wyłączono " + effects.map(i => i.name).join(", "));
+ 
+ }
+\ No newline at end of file

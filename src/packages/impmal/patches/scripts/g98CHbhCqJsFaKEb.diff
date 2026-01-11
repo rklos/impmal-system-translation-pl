@@ -1,0 +1,12 @@
+Index: scripts/g98CHbhCqJsFaKEb.js
+===================================================================
+--- scripts/g98CHbhCqJsFaKEb.js	en
++++ scripts/g98CHbhCqJsFaKEb.js	pl
+@@ -1,6 +1,6 @@
+ let effects = this.item.effects.contents.filter(i => i.id != this.effect.id);
+ 
+-let choice = await ItemDialog.create(effects, 1, {title : this.effect.name, text : "Choose Drug"})
++let choice = await ItemDialog.create(effects, 1, {title : this.effect.name, text : "Wybierz Lek"})
+ 
+ let duration = Math.ceil(CONFIG.Dice.randomUniform() * 10)
+ 

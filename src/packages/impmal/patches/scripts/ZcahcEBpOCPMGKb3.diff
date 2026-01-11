@@ -1,0 +1,14 @@
+Index: scripts/ZcahcEBpOCPMGKb3.js
+===================================================================
+--- scripts/ZcahcEBpOCPMGKb3.js	en
++++ scripts/ZcahcEBpOCPMGKb3.js	pl
+@@ -1,6 +1,6 @@
+ if (args.data.system?.corruption?.value > this.actor.system.corruption?.value)
+ {
+ 	args.data.system.corruption.value++;
+-	this.script.scriptMessage("Extra Corruption Point Gained");
+-	this.script.scriptNotification("Extra Corruption Point Gained");
++	this.script.scriptMessage("Dodatkowy Punkt Spaczenia Otrzymany");
++	this.script.scriptNotification("Dodatkowy Punkt Spaczenia Otrzymany");
+ }
+\ No newline at end of file

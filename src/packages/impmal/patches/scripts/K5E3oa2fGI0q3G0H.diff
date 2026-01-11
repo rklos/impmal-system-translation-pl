@@ -1,0 +1,13 @@
+Index: scripts/K5E3oa2fGI0q3G0H.js
+===================================================================
+--- scripts/K5E3oa2fGI0q3G0H.js	en
++++ scripts/K5E3oa2fGI0q3G0H.js	pl
+@@ -3,7 +3,7 @@
+ let data = item.toObject()
+ data.system.advances = 1;
+ 
+-let spec = await ValueDialog.create({title : this.item.name, text : "Enter Lore Specialisation related to Illisear’s daemonic presence"});
++let spec = await ValueDialog.create({title : this.item.name, text : "Wprowadź Specjalizację Wiedzy związaną z obecnością demonicznych sił Illisear"});
+ 
+ if (spec)
+ {

@@ -1,0 +1,11 @@
+Index: scripts/RtRyBYt8657Pz4vA.js
+===================================================================
+--- scripts/RtRyBYt8657Pz4vA.js	en
++++ scripts/RtRyBYt8657Pz4vA.js	pl
+@@ -1,5 +1,5 @@
+         let healed = this.actor.system.characteristics.tgh.bonus + this.effect.sourceTest.result.SL + this.effect.sourceActor.system.characteristics.wil.bonus;
+-        this.script.scriptMessage("<strong>" + this.actor.name + "</strong> healed " + healed + " wounds");
++        this.script.scriptMessage("<strong>" + this.actor.name + "</strong> wyleczył " + healed + " obrażeń");
+         await this.actor.update({"system.combat.wounds.value" : this.actor.system.combat.wounds.value - healed});
+         await this.actor.hasCondition("bleeding")?.delete()
+         

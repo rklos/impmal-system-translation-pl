@@ -1,0 +1,12 @@
+Index: scripts/qZlOT56r0XDLCbSX.js
+===================================================================
+--- scripts/qZlOT56r0XDLCbSX.js	en
++++ scripts/qZlOT56r0XDLCbSX.js	pl
+@@ -5,5 +5,5 @@
+         }
+         if (protection.length > 0)
+         {
+-            this.script.scriptMessage(protection.map(i => i.name).join(", ") + " damaged by " + this.actor.system.characteristics.wil.bonus);
++            this.script.scriptMessage(protection.map(i => i.name).join(", ") + " uszkodzone przez " + this.actor.system.characteristics.wil.bonus);
+         }
+\ No newline at end of file

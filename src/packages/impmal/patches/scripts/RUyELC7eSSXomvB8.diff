@@ -1,0 +1,12 @@
+Index: scripts/RUyELC7eSSXomvB8.js
+===================================================================
+--- scripts/RUyELC7eSSXomvB8.js	en
++++ scripts/RUyELC7eSSXomvB8.js	pl
+@@ -1,5 +1,5 @@
+ 
+                             let roll = new Roll("1d5").roll().then(async roll => {
+-                                this.actor.applyDamage(roll.total, {ignoreAP : true}).then(data => this.script.scriptMessage("Took " + data.woundsGained + " Damage from Ablaze"));
++                                this.actor.applyDamage(roll.total, {ignoreAP : true}).then(data => this.script.scriptMessage("Otrzymano " + data.woundsGained + " Obrażeń od Podpalenia"));
+                             })
+                             
+\ No newline at end of file

@@ -1,0 +1,12 @@
+Index: scripts/wViGwSuq6ZxiHYLY.js
+===================================================================
+--- scripts/wViGwSuq6ZxiHYLY.js	en
++++ scripts/wViGwSuq6ZxiHYLY.js	pl
+@@ -13,5 +13,5 @@
+             }
+             let damageData = await this.actor.applyDamage(damage, {ignoreAP : true});
+ 
+-            this.script.scriptMessage(`Suffers ${damage} Damage ${damageData.woundsGained != damage ? `(${damageData.woundsGained} Wounds)` : ""}`);
++            this.script.scriptMessage(`Otrzymuje ${damage} Obrażeń ${damageData.woundsGained != damage ? `(${damageData.woundsGained} Ran)` : ""}`);
+         }
+\ No newline at end of file

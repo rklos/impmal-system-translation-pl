@@ -1,0 +1,9 @@
+Index: scripts/IhB1lsvJZcVB44kW.js
+===================================================================
+--- scripts/IhB1lsvJZcVB44kW.js	en
++++ scripts/IhB1lsvJZcVB44kW.js	pl
+@@ -1,2 +1,2 @@
+-this.script.notification("Effect disabled, re-enable in the next scene");
++this.script.notification("Efekt wyłączony, zostanie wznowiony w następnej scenie");
+ this.effect.update({disabled: true})
+\ No newline at end of file

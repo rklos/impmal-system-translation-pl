@@ -51,13 +51,92 @@ export const SUPPORTED_VERSION = '1.0.0';
 npm run patch download
 ```
 
-Downloads files from the repository to `en/` and `pl/` directories.
+Downloads files from the repository to `en/` and `pl/` directories. This command automatically:
+- Clones the repository
+- Copies configured file types
+- Removes JavaScript files that don't contain any string literals (optimization to reduce files needing review)
+- Reports the number of files deleted
 
-### 2. Translate Files
+#### Aggressive Mode
+
+```bash
+npm run patch download -- --aggressive
+```
+
+Enables aggressive file cleanup that removes additional JavaScript files containing only:
+- Simple lowercase identifiers without spaces (e.g., `"itemtype"`, `"actorname"`)
+- Property path patterns (e.g., `"item.description"`, `"actor.name.first"`)
+
+These files typically don't require translation and can be safely removed to reduce manual review effort. Use this mode when you want to minimize the number of files to translate.
+
+### 2. Find Duplicated Lines (Optional)
+
+```bash
+npm run patch find-duplicated-lines
+```
+
+Analyzes English source files to find lines of code that appear multiple times. This analysis:
+- Parses all `.js` files in the `temp/patches/en/scripts` directory
+- Identifies lines that contain at least one string literal
+- Finds lines that appear at least twice across different files
+- Reports each common line with:
+  - The complete line of code
+  - Number of occurrences
+  - List of files and line numbers where it appears
+- Provides summary statistics
+
+This is useful for:
+- Identifying commonly duplicated code patterns before translation
+- Planning consistent translations for repeated code
+- Spotting opportunities for code consolidation
+- Creating translation templates for common patterns
+
+### 3. Translate Files
 
 Edit files in `temp/patches/pl/`. The `en/` directory serves as reference.
 
-### 3. Generate Patches
+#### 3.1. Apply Common Translations (Optional)
+
+```bash
+npm run patch apply -- --common
+```
+
+Automatically applies common translations from `patches/common-translations.json` to files in `temp/patches/pl/`. This is useful for:
+- Translating frequently repeated strings across many files
+- Maintaining consistency in translations
+- Speeding up the initial translation process
+
+The common translations file uses a simple JSON format:
+
+```json
+{
+  "scripts": {
+    "Source text": "Translated text",
+    "Text with ${__1__} placeholder": "Tłumaczenie z ${__1__} placeholder"
+  },
+  "templates": {
+    "Template text": "Tłumaczony tekst"
+  }
+}
+```
+
+**Pattern Matching:**
+- Exact strings are matched literally
+- Use `__N__` (where N is 1, 2, 3, etc.) as numbered placeholders to capture dynamic content
+- Each `__N__` placeholder matches any content except newlines, quotes, and braces
+- Numbered placeholders allow reordering captured content in translations
+- Placeholders are replaced with their corresponding captured groups
+
+**Examples:**
+- `"Choose Arm": "Wybierz Ramię"` - Simple text replacement
+- `"Trained ${__1__} for ${__2__} XP": "Wytrenowano ${__1__} za ${__2__} PD"` - Preserves template literal expressions in order
+- `"${__1__} owns ${__2__}": "${__2__} posiada ${__1__}"` - Reordering captured groups (swaps order)
+- `"Added <strong>": "Dodano <strong>"` - Works with HTML tags
+- `"Took \"__1__\" Damage": "Otrzymano \"__1__\" Obrażeń"` - Works inside quotes
+
+After applying common translations, review the changes and manually translate any remaining text.
+
+### 4. Generate Patches
 
 ```bash
 npm run patch create
@@ -65,7 +144,7 @@ npm run patch create
 
 Creates diff files by comparing `en/` and `pl/` directories.
 
-### 4. Test Patches
+### 5. Test Patches
 
 ```bash
 npm run patch apply
@@ -80,6 +159,11 @@ When upstream releases new versions:
 1. Download updated files:
    ```bash
    npm run patch download
+   ```
+   
+   Optionally use `--aggressive` flag to remove additional non-translatable files:
+   ```bash
+   npm run patch download -- --aggressive
    ```
 
 2. Apply existing patches:
