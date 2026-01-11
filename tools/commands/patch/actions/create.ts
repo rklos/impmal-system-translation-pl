@@ -10,6 +10,7 @@ import {
   LANG_EN,
   LANG_PL,
   DIR_PATCHES,
+  FILE_COMMON_TRANSLATIONS,
 } from '../../../utils/consts';
 
 async function getChangedFiles(pkg: Package): Promise<string[]> {
@@ -102,8 +103,18 @@ async function createPatchForFile(pkg: Package, filePath: string): Promise<void>
 export default async function create(pkg: Package): Promise<void> {
   console.log(chalk.bold.cyan(`\n📝 Creating patches for package: ${pkg.PACKAGE}\n`));
 
-  // Remove existing patches directory if it exists
+  // Remove existing patches directory if it exists, but preserve common-translations.json
   const { PATCHES_DIR } = getConstsOfPackage(pkg);
+  let commonTranslationsContent: string | null = null;
+  const commonTranslationsPath = join(PATCHES_DIR, FILE_COMMON_TRANSLATIONS);
+
+  // Backup common-translations.json if it exists
+  if (fs.existsSync(commonTranslationsPath)) {
+    commonTranslationsContent = fs.readFileSync(commonTranslationsPath, 'utf8');
+    console.log(chalk.blue(`💾 Backed up ${FILE_COMMON_TRANSLATIONS}`));
+  }
+
+  // Remove existing patches directory
   if (fs.existsSync(PATCHES_DIR)) {
     fs.rmSync(PATCHES_DIR, { recursive: true, force: true });
     console.log(chalk.yellow(`🗑️  Removed existing patches directory: ${relative(ROOT_DIR, PATCHES_DIR)}`));
@@ -121,6 +132,12 @@ export default async function create(pkg: Package): Promise<void> {
 
   for (const filePath of changedFiles) {
     await createPatchForFile(pkg, filePath);
+  }
+
+  // Restore common-translations.json if it was backed up
+  if (commonTranslationsContent) {
+    fs.writeFileSync(commonTranslationsPath, commonTranslationsContent, 'utf8');
+    console.log(chalk.green(`✓ Restored ${FILE_COMMON_TRANSLATIONS}`));
   }
 
   console.log(chalk.green.bold(`\n✓ Patch creation completed (${changedFiles.length} patches created)`));

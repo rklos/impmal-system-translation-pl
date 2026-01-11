@@ -1,0 +1,13 @@
+Index: static/templates/apps/chargen/origin.hbs
+===================================================================
+--- static/templates/apps/chargen/origin.hbs	en
++++ static/templates/apps/chargen/origin.hbs	pl
+@@ -27,7 +27,7 @@
+       <div class="choice-section">
+         {{#if (or context.origin.system.characteristics.base context.origin.system.characteristics.choices.length)}}
+         <h4 class="centered">{{localize "IMPMAL.Choices"}}</h4>
+-        <p class="centered">{{localize "Gain +5 to selected Characteristics"}}</p>
++        <p class="centered">{{localize "Zdobądź +5 do wybranych Cech"}}</p>
+         <div class="choices">
+           {{#if context.origin.system.characteristics.base}}
+             <select disabled>
