@@ -1,6 +1,6 @@
 {
   "name": "impmal-system-translation-pl",
-  "version": "2.4.2",
+  "version": "3.0.0-alpha",
   "type": "module",
   "scripts": {
     "prebuild": "npm run auto-import-styles && tsc --noEmit",

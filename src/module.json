@@ -10,7 +10,7 @@
       "flags": {}
     }
   ],
-  "version": "2.4.2",
+  "version": "3.0.0-alpha",
   "compatibility": {
     "minimum": "13",
     "verified": "13",
