@@ -20,7 +20,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    // Custom plugin to copy module.json
     {
       name: 'copy-module-json',
       closeBundle: async () => {

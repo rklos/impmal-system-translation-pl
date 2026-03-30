@@ -160,7 +160,7 @@ When upstream releases new versions:
    ```bash
    npm run patch download
    ```
-   
+
    Optionally use `--aggressive` flag to remove additional non-translatable files:
    ```bash
    npm run patch download -- --aggressive

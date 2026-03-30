@@ -8,18 +8,18 @@ on:
 jobs:
   report:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Nodejs
         uses: actions/setup-node@v3
         with:
           node-version: "22"
-          
+
       - name: Install dependencies
         run: npm install
-        
+
       - name: Run report script
         run: npm run report
         env:

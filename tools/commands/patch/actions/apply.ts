@@ -131,7 +131,7 @@ function applyTranslation(content: string, sourcePattern: string, targetPattern:
 
     // Build the replacement by substituting _N_ with captured groups
     let replacement = targetPattern;
-    
+
     // Replace numbered placeholders (__1__, __2__, etc.) with their corresponding captured groups
     replacement = replacement.replace(/__(\d+)__/g, (_, num) => {
       const index = parseInt(num, 10) - 1;

@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    tags: 
+    tags:
       - "*"
 
 jobs:
@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "22"
-          
-      - name: Get tag    
+
+      - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1.1.0
 
@@ -28,7 +28,9 @@ jobs:
         run: npm install
 
       - name: Bump Version
-        run: npm run bump-version ${{ steps.tag.outputs.tag }}
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: npm run bump-version "$TAG"
 
       - name: Commit Bumped Version
         uses: EndBug/add-and-commit@v9
@@ -39,14 +41,14 @@ jobs:
 
       - name: Build
         run: npm run build
-        
+
       - name: Get Module ID
         id: moduleID
         uses: notiz-dev/github-action-json-property@release
-        with: 
+        with:
           path: './dist/module.json'
           prop_path: 'id'
-          
+
       - name: Get mininum
         id: minimum
         uses: notiz-dev/github-action-json-property@release
@@ -61,30 +63,25 @@ jobs:
           path: './dist/module.json'
           prop_path: 'compatibility.verified'
 
-      - name: Get maximum
-        id: maximum
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: './dist/module.json'
-          prop_path: 'compatibility.maximum'
-          
       - name: Set Download Link
         uses: jossef/action-set-json-field@v2
         with:
           file: './dist/module.json'
           field: 'download'
           value: "https://github.com/${{github.repository}}/releases/download/${{steps.tag.outputs.tag}}/${{steps.moduleID.outputs.prop}}.zip"
-          
+
       - name: Set Manifest Link
         uses: jossef/action-set-json-field@v2
         with:
           file: './dist/module.json'
           field: 'manifest'
           value: "https://github.com/${{github.repository}}/releases/download/${{steps.tag.outputs.tag}}/module.json"
-          
+
       - name: Create ZIP
         working-directory: ./dist
-        run: zip -r ./${{steps.moduleID.outputs.prop}}.zip ./*
+        env:
+          MODULE_ID: ${{ steps.moduleID.outputs.prop }}
+        run: zip -r "./$MODULE_ID.zip" ./*
 
       - name: Create Release
         uses: ncipollo/release-action@v1.9.0
@@ -105,5 +102,5 @@ jobs:
           url: 'https://api.foundryvtt.com/_api/packages/release_version'
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json", "Authorization" : "${{ secrets.FOUNDRY_KEY }}"}'
-          data: '{"dry_run": false, "id": "${{steps.moduleID.outputs.prop}}", "release": {"version":  "${{steps.tag.outputs.tag}}", "manifest": "https://github.com/${{github.repository}}/releases/download/${{steps.tag.outputs.tag}}/module.json", "notes": "https://github.com/${{github.repository}}/releases/tag/${{steps.tag.outputs.tag}}", "compatibility" : {"minimum": "${{steps.minimum.outputs.prop}}", "verified": "${{steps.verified.outputs.prop}}", "maximum": "${{steps.maximum.outputs.prop}}"}}}'
+          data: '{"dry_run": false, "id": "${{steps.moduleID.outputs.prop}}", "release": {"version":  "${{steps.tag.outputs.tag}}", "manifest": "https://github.com/${{github.repository}}/releases/download/${{steps.tag.outputs.tag}}/module.json", "notes": "https://github.com/${{github.repository}}/releases/tag/${{steps.tag.outputs.tag}}", "compatibility" : {"minimum": "${{steps.minimum.outputs.prop}}", "verified": "${{steps.verified.outputs.prop}}"}}}'
           timeout: 20000

@@ -1,0 +1,18 @@
+{
+  "generator-fvtt": {
+    "type": "warhammer-translation",
+    "id": "wng-system-translation-pl",
+    "title": "Wrath & Glory - System - Nieoficjalne Tłumaczenie PL",
+    "description": "The Polish translation of WH40k: Wrath & Glory system by Moo-Man on FoundryVTT.",
+    "author": "Radosław Kłos",
+    "email": "radoslaw@klos.dev",
+    "license": "GPL-3.0",
+    "outputFilename": "wng-pl",
+    "packagesStr": "custom, wrath-and-glory, warhammer-library",
+    "requiredSystemId": "wrath-and-glory",
+    "requiredSystemMinVersion": "7.3.0",
+    "patchConfigStr": "wrath-and-glory=effects,static/templates;warhammer-library=static/templates",
+    "logPrefix": "WNG-PL",
+    "logColor": "#ff0000"
+  }
+}

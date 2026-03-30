@@ -52,4 +52,3 @@ export function hasStringLiteralInContent(content: string, filename: string = 'f
 
   return hasStringLiteral(sourceFile);
 }
-

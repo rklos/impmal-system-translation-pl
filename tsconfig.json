@@ -10,11 +10,10 @@
     "useDefineForClassFields": true,
     "moduleResolution": "bundler",
     "noImplicitAny": true,
-
     "paths": {
       "~/*": ["./src/*"]
     },
     "types": ["fvtt-types"]
   },
-  "include": ["src", "tools", "tools.config.ts", ".vite", "vite-env.d.ts" ]
+  "include": ["src", "tools", "tools.config.ts", ".vite", "vite-env.d.ts"]
 }
