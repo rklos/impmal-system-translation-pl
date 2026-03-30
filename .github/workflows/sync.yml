@@ -8,15 +8,15 @@ on:
 jobs:
   sync-wfrp4e:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Nodejs
         uses: actions/setup-node@v3
         with:
           node-version: "22"
-          
+
       - name: Install dependencies
         run: npm install
 

@@ -1,69 +1,57 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import chalk from 'chalk';
-import {
-  ROOT_DIR,
-  SRC_DIR,
-  FILE_PACKAGE_JSON,
-  FILE_PACKAGE_LOCK_JSON,
-  FILE_MODULE_JSON,
-} from './utils/consts';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+const ROOT_DIR = join(dirname(fileURLToPath(import.meta.url)), '..');
+const SRC_DIR = join(ROOT_DIR, 'src');
 
 function bumpVersion(newVersionArg: string) {
-  console.log(chalk.bold.cyan('\n🔢 Bumping version...\n'));
+  console.log('\nBumping version...\n');
 
-  // Read package.json
-  const packageJsonPath = join(ROOT_DIR, FILE_PACKAGE_JSON);
+  const packageJsonPath = join(ROOT_DIR, 'package.json');
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
 
   const oldVersion = packageJson.version;
-  console.log(chalk.blue(`Current version: ${oldVersion}`));
+  console.log(`Current version: ${oldVersion}`);
 
-  // Determine new version
   let newVersion: string;
   if (newVersionArg) {
-    // Validate version format
     if (!/^\d+\.\d+\.\d+(-alpha|-beta|-rc\.\d+)?$/.test(newVersionArg)) {
       throw new Error('Version must be in format x.y.z or x.y.z-alpha, x.y.z-beta, x.y.z-rc.N');
     }
     newVersion = newVersionArg;
-    console.log(chalk.cyan(`Using specified version: ${newVersion}`));
+    console.log(`Using specified version: ${newVersion}`);
   } else {
-    // Split version into parts and increment patch
     const [ major, minor, patch ] = packageJson.version.split('.').map(Number);
     newVersion = `${major}.${minor}.${patch + 1}`;
-    console.log(chalk.cyan(`Auto-incrementing patch version: ${newVersion}`));
+    console.log(`Auto-incrementing patch version: ${newVersion}`);
   }
 
-  // Update package.json
   packageJson.version = newVersion;
   writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
-  console.log(chalk.green(`✓ Updated ${FILE_PACKAGE_JSON}`));
+  console.log('Updated package.json');
 
-  // Update package-lock.json
-  const packageLockPath = join(ROOT_DIR, FILE_PACKAGE_LOCK_JSON);
+  const packageLockPath = join(ROOT_DIR, 'package-lock.json');
   const packageLock = JSON.parse(readFileSync(packageLockPath, 'utf8'));
   packageLock.version = newVersion;
   packageLock.packages[''].version = newVersion;
   writeFileSync(packageLockPath, `${JSON.stringify(packageLock, null, 2)}\n`);
-  console.log(chalk.green(`✓ Updated ${FILE_PACKAGE_LOCK_JSON}`));
+  console.log('Updated package-lock.json');
 
-  // Update module.json
-  const moduleJsonPath = join(SRC_DIR, FILE_MODULE_JSON);
-  const moduleJson = JSON.parse(readFileSync(moduleJsonPath, 'utf8'));
-  moduleJson.version = newVersion;
-  writeFileSync(moduleJsonPath, `${JSON.stringify(moduleJson, null, 2)}\n`);
-  console.log(chalk.green(`✓ Updated ${FILE_MODULE_JSON}`));
+  const manifestJsonPath = join(SRC_DIR, 'module.json');
+  const manifestJson = JSON.parse(readFileSync(manifestJsonPath, 'utf8'));
+  manifestJson.version = newVersion;
+  writeFileSync(manifestJsonPath, `${JSON.stringify(manifestJson, null, 2)}\n`);
+  console.log('Updated module.json');
 
-  console.log(chalk.green.bold(`\n✓ Version successfully bumped: ${oldVersion} → ${newVersion}`));
+  console.log(`\nVersion bumped: ${oldVersion} -> ${newVersion}`);
 }
 
-// Get version from CLI argument if provided
 const newVersionArg = process.argv[2];
 
 try {
   bumpVersion(newVersionArg);
 } catch (error) {
-  console.error(chalk.red('Error bumping version:'), error);
+  console.error('Error bumping version:', error);
   process.exit(1);
 }
