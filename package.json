@@ -1,6 +1,6 @@
 {
   "name": "wng-system-translation-pl",
-  "version": "0.1.0",
+  "version": "2.4.2",
   "type": "module",
   "scripts": {
     "prebuild": "npm run auto-import-styles && tsc --noEmit",
