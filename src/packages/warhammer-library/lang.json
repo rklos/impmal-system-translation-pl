@@ -134,13 +134,13 @@
       "Types": {
         "Label": "Typy"
       },
-      "WorldItems": "Pokaż elementy świata w przeglądarce"
+      "WorldItems": "Show World Items in Browser"
     },
     "Configuration": "Konfiguracja",
     "ConfigureZoneTT": "Konfiguracja Strefy",
     "ConvertDrawings": "Konwertuj Rysunki na Strefy",
-    "DefendingAgainst": "Obrona przed",
-    "DefendingAgainstTT": "Uruchom ten skrypt w oknie dialogowym Aktora, który został wskazany jako cel przez tego Aktora lub Przedmiot",
+    "DefendingAgainst": "Defending Against",
+    "DefendingAgainstTT": "Run this script in the dialog of an Actor that has been targeted with this Actor or Item",
     "DeleteEffect": "Usuń Efekt",
     "DeleteEffectHint": "Usuń Aktywny Efekt po uruchomieniu tego skryptu.",
     "DeletingEffectItems": "Usuwanie Efektu Przedmiotu: {items}",
@@ -268,7 +268,7 @@
     "SubmitChoices": "Wyślij Wybór",
     "Target": "Cel",
     "Targeter": "Dotyczy zaznaczonego Celu",
-    "TargeterTT": "Uruchom ten skrypt w oknie dialogowym dowolnego Aktora, który celuje w tego Aktora.",
+    "TargeterTT": "Run this script in the dialog of any Actor that is targeting this Actor.",
     "TemplateCustomization": "Dostosowanie Szablonu",
     "Theme": {
       "Config": "Konfiguracja Motywu",
