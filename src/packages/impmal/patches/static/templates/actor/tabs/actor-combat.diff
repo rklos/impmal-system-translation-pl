@@ -1,0 +1,13 @@
+Index: static/templates/actor/tabs/actor-combat.hbs
+===================================================================
+--- static/templates/actor/tabs/actor-combat.hbs	en
++++ static/templates/actor/tabs/actor-combat.hbs	pl
+@@ -294,7 +294,7 @@
+                             {{#each this.items}}
+                             <div class="protection-item" data-id="{{this.id}}" data-uuid="{{this.uuid}}">
+                                 <label>– {{this.name}} </label>
+-                                <a data-action="damageArmour" class="damage-armour {{#if (lookup this.system.damage ../this.key)}}damaged{{/if}}">{{#if (lookup this.system.destroyed ../this.key)}}Destroyed{{else}}{{calc this.system.armour "-" (lookup this.system.damage ../this.key)}}{{/if}}</a>
++                                <a data-action="damageArmour" class="damage-armour {{#if (lookup this.system.damage ../this.key)}}damaged{{/if}}">{{#if (lookup this.system.destroyed ../this.key)}}Zniszczony{{else}}{{calc this.system.armour "-" (lookup this.system.damage ../this.key)}}{{/if}}</a>
+                                 {{!-- <div class="traits">{{this.system.traits.displayString}}
+                             </div> --}}
+                                 </div>
