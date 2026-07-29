@@ -9,6 +9,10 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 - [Patching System](patching-system.md) - How to modify templates
 - [Custom Package](custom-package.md) - How to add custom functionality
 
+## AI Instructions
+
+- [AI Instruction Library](ai/README.md) - Task-focused guidance for AI agents
+
 ## Commands
 
 | Command | Description |
