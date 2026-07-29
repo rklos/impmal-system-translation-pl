@@ -1,9 +1,9 @@
 export default {
   vite: {
-    output: 'wng-pl',
+    output: 'impmal-pl',
   },
   patch: {
-    'wrath-and-glory': [ 'effects', 'static/templates' ],
+    impmal: [ 'scripts', 'static/templates' ],
     'warhammer-library': [ 'static/templates' ],
   },
 };

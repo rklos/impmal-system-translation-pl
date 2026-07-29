@@ -1,13 +1,3 @@
-// TODO: remove when PR is merged: https://github.com/moo-man/ImpMal-FoundryVTT/pull/121
-function translateVehicleTraits() {
-  IMPMAL.vehicleCategory = {
-    wheeled: 'Kołowy',
-    tracked: 'Gąsienicowy',
-    flyer: 'Latający',
-    walker: 'Kroczący',
-  };
-}
-
 function translateScriptTriggers() {
   IMPMAL.scriptTriggers.computeCharacteristics = 'Oblicz Cechy';
   IMPMAL.scriptTriggers.computeEncumbrance = 'Oblicz Obciążenie';
@@ -18,6 +8,5 @@ function translateScriptTriggers() {
 }
 
 export function translateConfig() {
-  translateVehicleTraits();
   translateScriptTriggers();
 }

@@ -12,9 +12,9 @@
   ],
   "version": "3.0.0-alpha",
   "compatibility": {
-    "minimum": "13",
-    "verified": "13",
-    "maximum": "13"
+    "minimum": "14",
+    "verified": "14",
+    "maximum": "14"
   },
   "relationships": {
     "systems": [
@@ -22,15 +22,19 @@
         "id": "impmal",
         "type": "system",
         "compatibility": {
-          "minimum": "3.1.0",
-          "verified": "3.2.0"
+          "minimum": "4.0.1",
+          "verified": "4.0.1"
         }
       }
     ],
     "requires": [
       {
         "id": "babele",
-        "type": "module"
+        "type": "module",
+        "compatibility": {
+          "minimum": "2.9.1",
+          "verified": "2.9.1"
+        }
       }
     ]
   },
