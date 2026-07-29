@@ -6,8 +6,8 @@ Index: scripts/eVp60aZwBQqacdGS.js
          if (args.context.fullAutoFanatic) 
          {
              args.result.tags.fullAutoFanatic = this.effect.name;
--	    args.result.text.fullAutoFanatic = "Affects all creatures within Close Range of the target"
-+	    args.result.text.fullAutoFanatic = "Wpływa na wszystkie istoty w bliskim zasięgu celu"
+-	        args.result.text.fullAutoFanatic = "Affects all creatures within Close Range of the target"
++	        args.result.text.fullAutoFanatic = "Wpływa na wszystkie istoty w bliskim zasięgu celu"
              args.context.additionalAmmoUsed += args.computeAmmoUsed();
          }
 \ No newline at end of file

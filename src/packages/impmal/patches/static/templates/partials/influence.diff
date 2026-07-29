@@ -2,7 +2,19 @@ Index: static/templates/partials/influence.hbs
 ===================================================================
 --- static/templates/partials/influence.hbs	en
 +++ static/templates/partials/influence.hbs	pl
-@@ -72,7 +72,7 @@
+@@ -36,9 +36,9 @@
+                         <div class="list-controls">
+                             {{#if (and ../showVisibility (isGM))}}
+                                 {{#if this.hidden}}  
+-                                        <a class="list-control" data-action="toggleFactionVisibility" style="color: var(--impmal-orange)" data-tooltip="Not visible to Players"><i class="fa-solid fa-eye-slash"></i></a>
++                                        <a class="list-control" data-action="toggleFactionVisibility" style="color: var(--impmal-orange)" data-tooltip="Niewidoczne dla Graczy"><i class="fa-solid fa-eye-slash"></i></a>
+                                 {{else}}
+-                                        <a class="list-control" data-action="toggleFactionVisibility" data-tooltip="Visible to Players"><i class="fa-solid fa-eye"></i></a> 
++                                        <a class="list-control" data-action="toggleFactionVisibility" data-tooltip="Widoczne dla Graczy"><i class="fa-solid fa-eye"></i></a>
+                                 {{/if}}
+                             {{/if}}
+                             <a class="list-control" data-action="deleteFaction" data-path="{{../path}}"><i class="fa-solid fa-xmark"></i></a>
+@@ -88,7 +88,7 @@
                          </div>
                      {{/each}}
                      {{#unless this.patron}}
