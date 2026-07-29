@@ -1,0 +1,10 @@
+Index: scripts/nvng0pO8I3XGxIOj.js
+===================================================================
+--- scripts/nvng0pO8I3XGxIOj.js	en
++++ scripts/nvng0pO8I3XGxIOj.js	pl
+@@ -1,2 +1,2 @@
+ args.context.doubleWarp = true;
+-args.context.tags.unrestrainedPower = "Unrestrained Power";
+\ No newline at end of file
++args.context.tags.unrestrainedPower = "Niepohamowana Moc";
+\ No newline at end of file
