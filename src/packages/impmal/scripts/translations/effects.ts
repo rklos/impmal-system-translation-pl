@@ -1,18 +1,6 @@
 /* eslint-disable no-new-func */
 import { impmalLog } from '~/utils/log';
 
-// TODO: remove when PR is merged: https://github.com/moo-man/ImpMal-FoundryVTT/pull/122
-function translateVehicleActions() {
-  IMPMAL.vehicleActions.crush.name = 'Rozwałka';
-  IMPMAL.vehicleActions.emergencyLanding.name = 'Lądowanie awaryjne';
-  IMPMAL.vehicleActions.evasiveManeuvers.name = 'Manewry unikowe';
-  IMPMAL.vehicleActions.getInClose.name = 'Jazda na zderzaku';
-  IMPMAL.vehicleActions.makeTheJump.name = 'Skok';
-  IMPMAL.vehicleActions.ram.name = 'Taranowanie';
-  IMPMAL.vehicleActions.takeTheWheel.name = 'Przejęcie sterowania';
-  IMPMAL.vehicleActions.threadTheNeedle.name = 'Ciasny manewr';
-}
-
 function hackVehicleActionsExecutions() {
   if (IMPMAL.vehicleActions.ram.execute) {
     const functionString = IMPMAL.vehicleActions.ram.execute.toString();
@@ -48,8 +36,9 @@ function executeTranslation(type: 'vehicleActions', translations: Record<string,
       }
 
       Object.entries<string>(values).forEach(([ index, value ]) => {
-        if (typeof index === 'number') {
-          IMPMAL[type][key].effect!.system.scriptData![index as unknown as number].label = value;
+        const scriptIndex = Number(index);
+        if (Number.isInteger(scriptIndex)) {
+          IMPMAL[type][key].effect!.system.scriptData![scriptIndex].label = value;
         } else {
           IMPMAL[type][key].effect!.label = value;
           IMPMAL[type][key].effect!.name = value;
@@ -62,7 +51,6 @@ function executeTranslation(type: 'vehicleActions', translations: Record<string,
 }
 
 export function translateEffects() {
-  translateVehicleActions();
   executeTranslation('vehicleActions', VEHICLE_EFFECTS_TRANSLATIONS);
   hackVehicleActionsExecutions();
 }
