@@ -18,7 +18,10 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 
 | Command | Description |
 |---------|-------------|
+| `npm test` | Run all Foundry-independent unit tests |
 | `npm run build` | Build packages and combine translations |
+| `npm run typecheck:foundry` | Type-check the Playwright suite |
+| `npm run test:foundry:docker` | Run module-owned tests against the isolated Foundry instance |
 | `npm run report` | Check for missing or extra translations |
 | `npm run sync wfrp4e` | Sync with official WFRP4e translations |
 | `npm run patch download` | Download original files and remove JS files without translatable strings |

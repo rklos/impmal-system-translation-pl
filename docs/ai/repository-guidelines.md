@@ -26,6 +26,7 @@ upstream repositories and versions belong in their `src/packages/<package>/index
 | `.vite/` | Build-time patch loading |
 | `.devcontainer/` | Isolated Foundry VTT runtime and package bootstrap |
 | `tests/foundry/` | Foundry fixture setup and module-owned browser smoke tests |
+| `**/__tests__/` | Adjacent Vitest tests for Foundry-independent project code |
 | `docs/` | Human documentation |
 | `docs/ai/` | Task-focused AI instructions |
 
@@ -80,7 +81,10 @@ The established change boundaries are:
 | Command | Purpose |
 |---------|---------|
 | `npm ci` | Install the exact dependency set from `package-lock.json` |
+| `npm test` | Run all Foundry-independent Vitest tests |
 | `npm run build` | Type-check, build, and combine translation JSON files |
+| `npm run typecheck:foundry` | Type-check the Playwright suite |
+| `npm run test:foundry:docker` | Run module-owned browser tests against the isolated Foundry instance |
 | `npx eslint .` | Attempt to lint TypeScript and JavaScript with the repository configuration |
 | `npm run report` | Compare supported upstream versions with their latest releases |
 | `npm run sync wfrp4e` | Import WHLib translations from the WFRP4e Polish project |
@@ -111,11 +115,11 @@ Choose checks based on the changed files:
 |--------|-----------------|
 | Documentation only | `git diff --check`, headings, and internal links |
 | Language JSON | `npm run build` and review placeholders and HTML |
-| TypeScript or JavaScript | `npx eslint .` and `npm run build` |
+| TypeScript or JavaScript | `npm test`, `npx eslint .`, and `npm run build` |
 | SCSS or build configuration | `npm run build` |
 | Patch files | Exact-release patch audit, `npm run build`, and runtime smoke test |
 | Compatibility metadata | Upstream release verification and `npm run build` |
-| Devcontainer or Foundry browser tests | Managed tests, browser-test type-check, project build, and live smoke test |
+| Devcontainer or Foundry browser tests | `npm test`, browser-test type-check, project build, and live smoke test |
 
 The current ESLint command exits while loading `import/no-unresolved` with ESLint 10.0.3,
 before it checks project files. Run it so a future configuration fix is detected. Until

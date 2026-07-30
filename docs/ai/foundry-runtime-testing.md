@@ -16,7 +16,7 @@ Use the setup project to verify fixture preconditions once:
 - required module activation;
 - the configured world language.
 
-Use the smoke-test project only for behavior owned by this repository:
+Use the Playwright project only for behavior owned by this repository:
 
 - the local translation module is present at the locally built version and active;
 - localization keys resolve through the Polish module;
@@ -33,6 +33,8 @@ would identify a regression that this repository is responsible for fixing.
 Collect every browser page error and console error as a diagnostic attachment. Fail
 the suite automatically only for errors attributable to the local translation module,
 such as errors whose stack or source URL points to its module directory or bundle.
+Treat an explicit `IMPMAL-PL Failed` log as a failure even when it was emitted at a
+non-error console level. Apply this monitor during setup and normal browser tests.
 
 Do not maintain exact-message allowlists for upstream errors. An upstream error should
 fail the suite only when it prevents fixture setup or breaks the module behavior under
@@ -46,20 +48,32 @@ Keep responsibilities separated:
 |------|----------------|
 | `tests/foundry/setup/` | Verify the configured fixture and create the disposable world |
 | `tests/foundry/fixtures.ts` | Open the prepared world and collect module-attributable browser errors |
-| `tests/foundry/smoke.spec.ts` | Assert installation and runtime behavior owned by this module |
+| `tests/foundry/specs/<domain>/` | Store executable checks grouped by product domain |
 | `tests/foundry/pages/` | Store selectors and reusable browser actions |
+| `**/__tests__/` | Store adjacent Vitest tests for Foundry-independent project code |
 | `.devcontainer/managed/` | Implement reusable bootstrap and runtime support |
 
 In page objects, expose locators as public lazy functions based on `this.page`. Put
 reusable actions in public methods. Keep assertions in setup or test files so failures
 state the expected behavior.
 
+Organize Playwright specs by product domain, such as `character`, `effects`, `patches`,
+`theme`, or `vehicles`. Keep programmatic and UI checks for the same domain together.
+Do not create broad `runtime.spec.ts` or `ui.spec.ts` files. When the required behavior
+is presentation in Foundry, prefer a direct UI assertion instead of duplicating it with
+a lower-level runtime assertion.
+
+Use Vitest for standalone project code that does not need Foundry. Place these tests in
+an adjacent `__tests__` directory. Do not unit-test Playwright helpers or page objects;
+exercise them through the live suite. Do not import test files from production entry
+points, and verify that no test code is emitted into `dist`.
+
 ## Validation
 
-Run the managed runtime unit tests:
+Run all Foundry-independent unit tests:
 
 ```bash
-npm run test:devcontainer
+npm test
 ```
 
 Type-check the browser suite:

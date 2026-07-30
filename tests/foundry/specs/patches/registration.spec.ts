@@ -1,65 +1,49 @@
-import { test, expect } from './fixtures';
-import {
-  isRemotePackage,
-  loadFoundryTestConfig,
-  loadLocalModuleVersion,
-} from './helpers/config';
+import { expect, test } from '../../fixtures';
+import { loadImpmalPatchInventory } from '../../helpers/patch-inventory';
 
-test('installs and activates the Polish translation module', async ({
+test('registers every tracked template and script patch', async ({
   foundryPage,
 }) => {
-  const config = loadFoundryTestConfig();
-  const localModuleConfig = config.modules.find(
-    (moduleConfig) => !isRemotePackage(moduleConfig),
-  );
-  if (!localModuleConfig) {
-    throw new Error('Foundry test configuration has no local module');
-  }
-
-  const installedModule = await foundryPage.evaluate((moduleId) => {
-    const game = (window as unknown as {
-      game: {
-        modules: Map<string, {
-          active: boolean;
-          version: string;
-        }>;
+  const inventory = loadImpmalPatchInventory();
+  const registration = await foundryPage.evaluate((expected) => {
+    const handlebars = (window as unknown as {
+      Handlebars: {
+        partials: Record<string, unknown>;
       };
-    }).game;
-
-    const module = game.modules.get(moduleId);
-    return module
-      ? {
-        active: module.active,
-        version: module.version,
-      }
-      : null;
-  }, localModuleConfig.id);
-
-  expect(installedModule).toEqual({
-    active: true,
-    version: loadLocalModuleVersion(),
-  });
-});
-
-test('resolves ImpMal localization through the Polish module', async ({
-  foundryPage,
-}) => {
-  const aim = await foundryPage.evaluate(() => {
+    }).Handlebars;
     const game = (window as unknown as {
       game: {
-        i18n: {
-          localize(key: string): string;
+        impmal: {
+          config: {
+            effectScripts: Record<string, string>;
+          };
         };
       };
     }).game;
 
-    return game.i18n.localize('IMPMAL.Aim');
-  });
+    return {
+      missingAliases: [
+        'actorInfluence',
+        'actorSlots',
+        'slotsDisplay',
+      ].filter((alias) => !handlebars.partials[alias]),
+      missingScripts: expected.scriptIds.filter(
+        (id) => !game.impmal.config.effectScripts[id],
+      ),
+      missingTemplates: expected.templatePaths.filter(
+        (templatePath) => !handlebars.partials[templatePath],
+      ),
+    };
+  }, inventory);
 
-  expect(aim).toBe('Celowanie');
+  expect(registration).toEqual({
+    missingAliases: [],
+    missingScripts: [],
+    missingTemplates: [],
+  });
 });
 
-test('registers the translated influence partial under its named alias', async ({
+test('renders the translated influence partial through its named alias', async ({
   foundryPage,
 }) => {
   const templateAlias = 'actorInfluence';
@@ -140,25 +124,4 @@ test('registers the translated influence partial under its named alias', async (
 
   expect(renderedAlias).toContain(expectedText);
   expect(renderedAlias).not.toContain('Add Source');
-});
-
-test('loads the translated Unrestrained Power effect script', async ({
-  foundryPage,
-}) => {
-  const script = await foundryPage.evaluate(() => {
-    const game = (window as unknown as {
-      game: {
-        impmal: {
-          config: {
-            effectScripts: Record<string, string>;
-          };
-        };
-      };
-    }).game;
-
-    return game.impmal.config.effectScripts.nvng0pO8I3XGxIOj;
-  });
-
-  expect(script).toContain('Niepohamowana Moc');
-  expect(script).not.toContain('Unrestrained Power');
 });

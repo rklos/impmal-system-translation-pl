@@ -12,9 +12,9 @@
     "bump-version": "tsx tools/bump-version.ts",
     "auto-import-styles": "tsx tools/auto-import-styles.ts",
     "scaffold": "npx yo fvtt:warhammer-translation",
-    "test:devcontainer": "node --test .devcontainer/managed/*.test.mjs",
     "typecheck:foundry": "tsc --noEmit -p tests/foundry/tsconfig.json",
     "pretest:foundry": "npm run build",
+    "test": "vitest run",
     "test:foundry": "playwright test -c tests/foundry/playwright.config.ts",
     "test:foundry:docker": "docker compose -f .devcontainer/compose.yaml --profile test run --rm smoke-tests",
     "test:foundry:ui": "playwright test -c tests/foundry/playwright.config.ts --ui"
@@ -50,6 +50,7 @@
     "eslint-import-resolver-typescript": "4.4.4",
     "typescript-eslint": "8.57.0",
     "generator-fvtt": "github:rklos/fvtt-generator",
+    "vitest": "4.1.10",
     "yo": "7.0.0"
   },
   "license": "GPL-3.0"

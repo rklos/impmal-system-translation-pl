@@ -52,11 +52,15 @@ The package bootstrap and Foundry services use the same pinned image and run wit
 
 ## Run the checks
 
-Run the managed runtime unit tests:
+Run all Foundry-independent unit tests with Vitest:
 
 ```bash
-npm run test:devcontainer
+npm test
 ```
+
+Unit tests live next to the code they cover in `__tests__` directories. They cover
+the standalone package bootstrap and installer code without starting Foundry. Test
+files are outside the production entry graph and are not included in `dist`.
 
 Type-check the browser test suite:
 
@@ -80,17 +84,24 @@ creates a disposable world, activates the required modules, and selects Polish. 
 checks confirm that the expected fixture is ready. They do not retest upstream
 features.
 
-The smoke-test project then verifies behavior owned by this repository:
+The Playwright suite then verifies behavior owned by this repository:
 
 1. The current local translation build is installed with the expected version and is active.
 2. An ImpMal language key resolves to its Polish translation.
-3. A patched template is registered under the alias used by ImpMal and renders Polish text.
-4. A patched ImpMal effect script contains the translated content.
+3. Every tracked template and effect-script patch is registered by the running module.
+4. Polish configuration, ordering, script-trigger, and vehicle-action overrides are active.
+5. Selected patched labels render in the real character sheet and theme configuration UI.
 
-All browser page errors and console errors are attached to the Playwright results for
-diagnosis. The suite fails automatically only when an error is attributable to the
-Polish translation module. Upstream errors still fail a test when they prevent fixture
-setup or the module behavior under test.
+Browser test cases are grouped by product domain under `tests/foundry/specs`. A domain
+contains both its programmatic integration checks and its direct UI checks. The
+character skills domain verifies the exact ordered keys and Polish labels rendered on
+the sheet.
+
+Browser page errors, console errors, and explicit `IMPMAL-PL Failed` logs are attached
+to the Playwright results for diagnosis during both world setup and normal tests. The
+suite fails automatically when an error is attributable to the Polish translation
+module. Upstream errors still fail a test when they prevent fixture setup or the module
+behavior under test.
 
 Use Playwright UI mode when investigating a browser failure:
 

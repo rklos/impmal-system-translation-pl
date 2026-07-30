@@ -1,10 +1,9 @@
-import assert from 'node:assert/strict';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
 import { pathToFileURL } from 'node:url';
-import { loadFoundryTestConfig } from './config.mjs';
+import { expect, test } from 'vitest';
+import { loadFoundryTestConfig } from '../config.mjs';
 
 test('loads a valid config and resolves repository-relative paths', async () => {
   const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'foundry-config-'));
@@ -39,10 +38,7 @@ test('loads a valid config and resolves repository-relative paths', async () => 
       repositoryRoot,
     );
 
-    assert.equal(
-      config.modules[0].localPath,
-      path.join(repositoryRoot, 'dist'),
-    );
+    expect(config.modules[0].localPath).toBe(path.join(repositoryRoot, 'dist'));
   } finally {
     await rm(repositoryRoot, { recursive: true, force: true });
   }
@@ -76,10 +72,9 @@ test('rejects paths that escape the repository', async () => {
   }));
 
   try {
-    await assert.rejects(
+    await expect(
       loadFoundryTestConfig(pathToFileURL(configPath), repositoryRoot),
-      /must stay inside the repository/,
-    );
+    ).rejects.toThrow(/must stay inside the repository/);
   } finally {
     await rm(repositoryRoot, { recursive: true, force: true });
   }
@@ -107,10 +102,9 @@ test('rejects unsafe package and world identifiers', async () => {
   }));
 
   try {
-    await assert.rejects(
+    await expect(
       loadFoundryTestConfig(pathToFileURL(configPath), repositoryRoot),
-      /system.id must contain only/,
-    );
+    ).rejects.toThrow(/system.id must contain only/);
   } finally {
     await rm(repositoryRoot, { recursive: true, force: true });
   }
@@ -138,10 +132,9 @@ test('rejects a world ID that is not explicitly marked as disposable', async () 
   }));
 
   try {
-    await assert.rejects(
+    await expect(
       loadFoundryTestConfig(pathToFileURL(configPath), repositoryRoot),
-      /world.id must end with -test/,
-    );
+    ).rejects.toThrow(/world.id must end with -test/);
   } finally {
     await rm(repositoryRoot, { recursive: true, force: true });
   }
@@ -180,10 +173,9 @@ test('rejects duplicate package IDs', async () => {
   }));
 
   try {
-    await assert.rejects(
+    await expect(
       loadFoundryTestConfig(pathToFileURL(configPath), repositoryRoot),
-      /duplicate package ID: babele/,
-    );
+    ).rejects.toThrow(/duplicate package ID: babele/);
   } finally {
     await rm(repositoryRoot, { recursive: true, force: true });
   }

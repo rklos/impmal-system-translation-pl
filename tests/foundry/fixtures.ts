@@ -3,56 +3,46 @@ import {
   test as base,
   type Page,
 } from '@playwright/test';
+import {
+  BrowserErrorMonitor,
+  isModuleBrowserFailure,
+} from './helpers/browser-errors';
 import { loadFoundryTestConfig } from './helpers/config';
 import { FoundryGamePage } from './pages/game-page';
 
 type FoundryFixtures = {
+  browserErrorMonitor: void;
   foundryPage: Page;
 };
 
-const MODULE_ERROR_MARKERS = [
-  '/modules/impmal-system-translation-pl/',
-  'impmal-pl.js',
-];
-
 export const test = base.extend<FoundryFixtures>({
-  foundryPage: async ({ page }, use, testInfo) => {
-    const config = loadFoundryTestConfig();
-    const browserErrors: string[] = [];
+  browserErrorMonitor: [async ({ page }, use, testInfo) => {
+    const monitor = new BrowserErrorMonitor(page);
 
-    page.on('pageerror', (error) => {
-      browserErrors.push(`pageerror: ${error.stack ?? error.message}`);
-    });
-    page.on('console', (message) => {
-      if (message.type() === 'error') {
-        const location = message.location();
-        const source = location.url
-          ? ` (${location.url}:${location.lineNumber}:${location.columnNumber})`
-          : '';
-        browserErrors.push(`console.error: ${message.text()}${source}`);
-      }
-    });
+    await use();
 
-    const gamePage = new FoundryGamePage(page);
-    await gamePage.open(config);
-    await use(page);
-
-    if (browserErrors.length) {
-      await testInfo.attach('browser-errors.txt', {
-        body: browserErrors.join('\n\n'),
-        contentType: 'text/plain',
+    const diagnostics = await monitor.complete();
+    if (diagnostics.length) {
+      await testInfo.attach('browser-errors.json', {
+        body: JSON.stringify(diagnostics, null, 2),
+        contentType: 'application/json',
       });
     }
 
     if (testInfo.status === testInfo.expectedStatus) {
-      const moduleBrowserErrors = browserErrors.filter((error) => (
-        MODULE_ERROR_MARKERS.some((marker) => error.includes(marker))
-      ));
+      const moduleFailures = diagnostics.filter(isModuleBrowserFailure);
       expect(
-        moduleBrowserErrors,
+        moduleFailures,
         'unexpected Polish translation module browser errors',
       ).toEqual([]);
     }
+  }, { auto: true }],
+  foundryPage: async ({ page }, use) => {
+    const config = loadFoundryTestConfig();
+
+    const gamePage = new FoundryGamePage(page);
+    await gamePage.open(config);
+    await use(page);
   },
 });
 

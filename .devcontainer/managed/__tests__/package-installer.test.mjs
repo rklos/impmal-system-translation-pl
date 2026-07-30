@@ -1,4 +1,3 @@
-import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import {
   lstat,
@@ -11,19 +10,19 @@ import {
 } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
 import { promisify } from 'node:util';
+import { expect, test } from 'vitest';
 import {
   assertPackageManifest,
   installRemotePackage,
   linkLocalModule,
   waitForLocalModuleBuild,
-} from './package-installer.mjs';
+} from '../package-installer.mjs';
 
 const execFileAsync = promisify(execFile);
 
 test('rejects a manifest whose package ID does not match the config', () => {
-  assert.throws(
+  expect(
     () => assertPackageManifest(
       {
         id: 'different-system',
@@ -36,12 +35,11 @@ test('rejects a manifest whose package ID does not match the config', () => {
       },
       'system',
     ),
-    /expected package ID impmal, received different-system/,
-  );
+  ).toThrow(/expected package ID impmal, received different-system/);
 });
 
 test('rejects a manifest whose version does not match the config', () => {
-  assert.throws(
+  expect(
     () => assertPackageManifest(
       {
         id: 'impmal',
@@ -54,12 +52,11 @@ test('rejects a manifest whose version does not match the config', () => {
       },
       'system',
     ),
-    /expected impmal version 4.0.1, received 4.1.0/,
-  );
+  ).toThrow(/expected impmal version 4.0.1, received 4.1.0/);
 });
 
 test('rejects a manifest without an HTTPS download URL', () => {
-  assert.throws(
+  expect(
     () => assertPackageManifest(
       {
         id: 'impmal',
@@ -72,8 +69,7 @@ test('rejects a manifest without an HTTPS download URL', () => {
       },
       'system',
     ),
-    /download URL must use HTTPS/,
-  );
+  ).toThrow(/download URL must use HTTPS/);
 });
 
 test('installs the exact remote package into its Foundry data directory', async () => {
@@ -129,10 +125,9 @@ test('installs the exact remote package into its Foundry data directory', async 
       fetchImpl: fetchPackage,
     });
 
-    assert.equal(
+    expect(
       await readFile(path.join(dataRoot, 'systems/impmal/marker.txt'), 'utf8'),
-      'installed',
-    );
+    ).toBe('installed');
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -165,8 +160,8 @@ test('links the built local module into the Foundry data directory', async () =>
       dataRoot,
     });
 
-    assert.equal((await lstat(targetPath)).isSymbolicLink(), true);
-    assert.equal(await readlink(targetPath), localPath);
+    expect((await lstat(targetPath)).isSymbolicLink()).toBe(true);
+    expect(await readlink(targetPath)).toBe(localPath);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -176,7 +171,7 @@ test('reports which local module did not finish building', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'foundry-module-'));
 
   try {
-    await assert.rejects(
+    await expect(
       waitForLocalModuleBuild(
         {
           id: 'impmal-system-translation-pl',
@@ -187,6 +182,7 @@ test('reports which local module did not finish building', async () => {
           pollIntervalMs: 1,
         },
       ),
+    ).rejects.toThrow(
       /Timed out waiting for local module impmal-system-translation-pl/,
     );
   } finally {

@@ -1,4 +1,3 @@
-import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
 import {
   lstat,
@@ -11,9 +10,9 @@ import {
 } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
 import { promisify } from 'node:util';
-import { prepareFoundryPackages } from './package-bootstrap.mjs';
+import { expect, test } from 'vitest';
+import { prepareFoundryPackages } from '../package-bootstrap.mjs';
 
 const execFileAsync = promisify(execFile);
 
@@ -112,11 +111,10 @@ test('prepares every configured Foundry package', async () => {
       fetchImpl: fetchPackage,
     });
 
-    assert.equal(
+    expect(
       await readFile(path.join(dataPath, 'Data/systems/impmal/marker.txt'), 'utf8'),
-      'installed',
-    );
-    assert.equal(
+    ).toBe('installed');
+    expect(
       await readFile(
         path.join(
           dataPath,
@@ -124,14 +122,13 @@ test('prepares every configured Foundry package', async () => {
         ),
         'utf8',
       ),
-      'module installed',
-    );
+    ).toBe('module installed');
     const localModulePath = path.join(
       dataPath,
       'Data/modules/impmal-system-translation-pl',
     );
-    assert.equal((await lstat(localModulePath)).isSymbolicLink(), true);
-    assert.equal(await readlink(localModulePath), localPath);
+    expect((await lstat(localModulePath)).isSymbolicLink()).toBe(true);
+    expect(await readlink(localModulePath)).toBe(localPath);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

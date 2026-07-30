@@ -1,7 +1,7 @@
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { expect, test as setup } from '@playwright/test';
+import { expect, test as setup } from '../fixtures';
 import { isRemotePackage, loadFoundryTestConfig } from '../helpers/config';
 import { FoundryGamePage } from '../pages/game-page';
 import { FoundrySetupPage } from '../pages/setup-page';
