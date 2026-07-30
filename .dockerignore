@@ -1,0 +1,4 @@
+*
+!.devcontainer/
+!.devcontainer/managed/
+!.devcontainer/managed/**

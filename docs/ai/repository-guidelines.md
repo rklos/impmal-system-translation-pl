@@ -24,6 +24,8 @@ upstream repositories and versions belong in their `src/packages/<package>/index
 | `tools/commands/` | Reporting, synchronization, and patch CLI commands |
 | `tools.config.ts` | Tool configuration for patchable packages |
 | `.vite/` | Build-time patch loading |
+| `.devcontainer/` | Isolated Foundry VTT runtime and package bootstrap |
+| `tests/foundry/` | Foundry fixture setup and module-owned browser smoke tests |
 | `docs/` | Human documentation |
 | `docs/ai/` | Task-focused AI instructions |
 
@@ -113,6 +115,7 @@ Choose checks based on the changed files:
 | SCSS or build configuration | `npm run build` |
 | Patch files | Exact-release patch audit, `npm run build`, and runtime smoke test |
 | Compatibility metadata | Upstream release verification and `npm run build` |
+| Devcontainer or Foundry browser tests | Managed tests, browser-test type-check, project build, and live smoke test |
 
 The current ESLint command exits while loading `import/no-unresolved` with ESLint 10.0.3,
 before it checks project files. Run it so a future configuration fix is detected. Until

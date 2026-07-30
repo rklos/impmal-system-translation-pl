@@ -1,0 +1,107 @@
+name: impmal-translation-dev
+
+x-foundry-admin-password: &foundry-admin-password impmal-test-admin
+
+services:
+  workspace:
+    build:
+      context: ..
+      dockerfile: .devcontainer/managed/workspace.Dockerfile
+    command:
+      - sh
+      - -c
+      - npm ci && npm run build && touch /tmp/impmal-workspace-ready && exec sleep infinity
+    environment:
+      FOUNDRY_ADMIN_PASSWORD: *foundry-admin-password
+      FOUNDRY_BASE_URL: http://foundry:30000
+    healthcheck:
+      test:
+        - CMD
+        - test
+        - -f
+        - /tmp/impmal-workspace-ready
+      interval: 2s
+      timeout: 2s
+      retries: 150
+      start_period: 5s
+    init: true
+    volumes:
+      - ..:/workspace:cached
+      - workspace-node-modules:/workspace/node_modules
+
+  package-bootstrap:
+    image: docker.io/felddy/foundryvtt:14.365.0
+    depends_on:
+      workspace:
+        condition: service_healthy
+    entrypoint:
+      - node
+      - /workspace/.devcontainer/managed/run-package-bootstrap.mjs
+    environment:
+      FOUNDRY_DATA_PATH: /data
+      FOUNDRY_REPOSITORY_ROOT: /workspace
+      FOUNDRY_TEST_CONFIG: /workspace/.devcontainer/foundry-test.config.json
+    volumes:
+      - ..:/workspace:ro
+      - ../.foundry/cache:/workspace/.foundry/cache
+      - ../.foundry/data:/data
+
+  foundry:
+    image: docker.io/felddy/foundryvtt:14.365.0
+    hostname: impmal-foundry-v14
+    init: true
+    depends_on:
+      package-bootstrap:
+        condition: service_completed_successfully
+    environment:
+      CONTAINER_CACHE: /data/container_cache
+      CONTAINER_PRESERVE_CONFIG: "true"
+      FOUNDRY_ADMIN_KEY: *foundry-admin-password
+      FOUNDRY_HOT_RELOAD: "true"
+      FOUNDRY_IP_DISCOVERY: "false"
+      FOUNDRY_MINIFY_STATIC_FILES: "false"
+      FOUNDRY_TELEMETRY: "false"
+      FOUNDRY_VERSION: "14.365"
+    volumes:
+      - ..:/workspace:ro
+      - ../.foundry/cache:/data/container_cache
+      - ../.foundry/data:/data
+    ports:
+      - 127.0.0.1:30000:30000
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - --fail
+        - --silent
+        - --show-error
+        - http://localhost:30000
+      interval: 5s
+      timeout: 3s
+      retries: 24
+      start_period: 30s
+    stop_grace_period: 30s
+
+  smoke-tests:
+    build:
+      context: ..
+      dockerfile: .devcontainer/managed/workspace.Dockerfile
+    command:
+      - npm
+      - run
+      - test:foundry
+    depends_on:
+      foundry:
+        condition: service_healthy
+    environment:
+      FOUNDRY_ADMIN_PASSWORD: *foundry-admin-password
+      FOUNDRY_BASE_URL: http://foundry:30000
+    init: true
+    profiles:
+      - test
+    volumes:
+      - ..:/workspace:cached
+      - workspace-node-modules:/workspace/node_modules
+
+volumes:
+  workspace-node-modules:

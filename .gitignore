@@ -2,4 +2,8 @@
 /node_modules
 /dist
 /fvtt
+/.foundry
+/playwright-report
+/test-results
+/tests/foundry/.auth
 temp

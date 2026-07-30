@@ -11,7 +11,13 @@
     "patch": "tsx tools/commands/patch/command.ts",
     "bump-version": "tsx tools/bump-version.ts",
     "auto-import-styles": "tsx tools/auto-import-styles.ts",
-    "scaffold": "npx yo fvtt:warhammer-translation"
+    "scaffold": "npx yo fvtt:warhammer-translation",
+    "test:devcontainer": "node --test .devcontainer/managed/*.test.mjs",
+    "typecheck:foundry": "tsc --noEmit -p tests/foundry/tsconfig.json",
+    "pretest:foundry": "npm run build",
+    "test:foundry": "playwright test -c tests/foundry/playwright.config.ts",
+    "test:foundry:docker": "docker compose -f .devcontainer/compose.yaml --profile test run --rm smoke-tests",
+    "test:foundry:ui": "playwright test -c tests/foundry/playwright.config.ts --ui"
   },
   "repository": {
     "type": "git",
@@ -28,7 +34,9 @@
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "1.1.0",
     "@octokit/core": "7.0.3",
+    "@playwright/test": "1.62.0",
     "@rklos/eslint-configs": "github:rklos/eslint-configs#3.1.5",
+    "@types/node": "24.13.3",
     "chalk": "5.4.1",
     "discord.js": "14.21.0",
     "eslint": "10.0.3",

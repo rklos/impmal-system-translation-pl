@@ -8,6 +8,7 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 - [Package Development](package-development.md) - How to create and manage packages
 - [Patching System](patching-system.md) - How to modify templates
 - [Custom Package](custom-package.md) - How to add custom functionality
+- [Foundry V14 Devcontainer](foundry-v14-devcontainer.md) - Run the translation in an isolated Foundry test instance
 
 ## AI Instructions
 

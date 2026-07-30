@@ -1,0 +1,26 @@
+{
+  "name": "ImpMal translation development",
+  "dockerComposeFile": "compose.yaml",
+  "service": "workspace",
+  "runServices": [
+    "workspace",
+    "foundry"
+  ],
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "initializeCommand": [
+    "mkdir",
+    "-p",
+    "${localWorkspaceFolder}/.foundry/cache",
+    "${localWorkspaceFolder}/.foundry/data"
+  ],
+  "forwardPorts": [
+    30000
+  ],
+  "portsAttributes": {
+    "30000": {
+      "label": "Foundry VTT 14 test instance",
+      "onAutoForward": "notify"
+    }
+  }
+}

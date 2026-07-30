@@ -4,6 +4,14 @@ import { applyPatch } from 'diff';
 
 declare const INJECTED_PATCHES: Record<string, Record<string, StructuredPatch[]>>;
 
+const TEMPLATE_ALIASES: Record<string, Record<string, string[]>> = {
+  impmal: {
+    'partials/actor-slots.hbs': ['actorSlots'],
+    'partials/influence.hbs': ['actorInfluence'],
+    'partials/slots.hbs': ['slotsDisplay'],
+  },
+};
+
 function patchTemplates(pkgName: string) {
   const TEMPLATES_PATCHES = Object.fromEntries(
     Object.entries(INJECTED_PATCHES[pkgName] || {})
@@ -32,6 +40,8 @@ function patchTemplates(pkgName: string) {
 
     const compiled = Handlebars.compile(htmlString);
     Handlebars.registerPartial(originalPath, compiled);
+    TEMPLATE_ALIASES[pkgName]?.[path]
+      ?.forEach((name) => Handlebars.registerPartial(name, compiled));
 
     impmalLog(`Overridden template: ${originalPath}`);
   });
