@@ -48,8 +48,8 @@ export default defineConfig({
       testMatch: /setup\/.*\.setup\.ts/,
     },
     {
-      name: 'chromium',
-      testMatch: /.*\.spec\.ts/,
+      name: 'base',
+      testMatch: /specs\/.*\.spec\.ts/,
       dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],

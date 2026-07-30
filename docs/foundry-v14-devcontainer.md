@@ -68,7 +68,8 @@ Type-check the browser test suite:
 npm run typecheck:foundry
 ```
 
-From a host terminal, start a disposable container that runs the complete Foundry smoke test:
+From a host terminal, start a disposable container that runs the base Foundry smoke
+profile:
 
 ```bash
 npm run test:foundry:docker
@@ -84,18 +85,38 @@ creates a disposable world, activates the required modules, and selects Polish. 
 checks confirm that the expected fixture is ready. They do not retest upstream
 features.
 
-The Playwright suite then verifies behavior owned by this repository:
+The base Playwright profile then verifies behavior owned by this repository:
 
 1. The current local translation build is installed with the expected version and is active.
 2. An ImpMal language key resolves to its Polish translation.
 3. Every tracked template and effect-script patch is registered by the running module.
-4. Polish configuration, ordering, script-trigger, and vehicle-action overrides are active.
-5. Selected patched labels render in the real character sheet and theme configuration UI.
+4. Every patched effect script compiles in the Foundry browser runtime.
+5. Polish configuration, action and skill ordering, script-trigger, and vehicle-action
+   overrides are active.
+6. Patched labels render in the real character, patron, NPC, item, effect, advancement,
+   character-generation, chat, and theme UI.
+7. Module-owned character, NPC, and item-trait layout rules are applied.
 
 Browser test cases are grouped by product domain under `tests/foundry/specs`. A domain
 contains both its programmatic integration checks and its direct UI checks. The
 character skills domain verifies the exact ordered keys and Polish labels rendered on
 the sheet.
+
+### Base and licensed profiles
+
+Only the `base` Playwright project is implemented. It runs
+`tests/foundry/specs/**/*.spec.ts` and uses the public packages installed by the
+bootstrap. The normal `npm run test:foundry:docker` command therefore requires no paid
+ImpMal content.
+
+`tests/foundry/licensed` is reserved for a future opt-in profile. It currently contains
+no executable tests, has no Playwright project, and is not selected by the base profile.
+Paid ImpMal modules must not be downloaded by the public package bootstrap.
+
+Foundry packages installed manually through the Setup UI persist under `.foundry/data`.
+This provides the installation path for a future licensed profile without storing
+license keys or private manifest URLs in the repository. Adding that profile will also
+require explicit missing-module checks and a separate command or project selection.
 
 Browser page errors, console errors, and explicit `IMPMAL-PL Failed` logs are attached
 to the Playwright results for diagnosis during both world setup and normal tests. The

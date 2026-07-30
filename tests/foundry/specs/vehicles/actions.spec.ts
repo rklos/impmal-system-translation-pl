@@ -1,7 +1,8 @@
 import { expect, test } from '../../fixtures';
+import { ChatPage } from '../../pages/chat-page';
 
-test('applies Polish vehicle-action overrides', async ({ foundryPage }) => {
-  const vehicleActions = await foundryPage.evaluate(() => {
+test('applies Polish labels to evasive maneuvers', async ({ foundryPage }) => {
+  const evasiveManeuvers = await foundryPage.evaluate(() => {
     const actions = (window as unknown as {
       game: {
         impmal: {
@@ -17,12 +18,6 @@ test('applies Polish vehicle-action overrides', async ({ foundryPage }) => {
                   };
                 };
               };
-              ram: {
-                execute?: () => unknown;
-              };
-              takeTheWheel: {
-                execute?: () => unknown;
-              };
             };
           };
         };
@@ -30,25 +25,116 @@ test('applies Polish vehicle-action overrides', async ({ foundryPage }) => {
     }).game.impmal.config.vehicleActions;
 
     return {
-      evasiveManeuvers: {
-        name: actions.evasiveManeuvers.effect.name,
-        scriptLabels: actions.evasiveManeuvers.effect.system.scriptData.map(
-          ({ label }) => label,
-        ),
-      },
-      ram: actions.ram.execute?.toString() ?? '',
-      takeTheWheel: actions.takeTheWheel.execute?.toString() ?? '',
+      name: actions.evasiveManeuvers.effect.name,
+      scriptLabels: actions.evasiveManeuvers.effect.system.scriptData.map(
+        ({ label }) => label,
+      ),
     };
   });
 
-  expect(vehicleActions.evasiveManeuvers).toEqual({
+  expect(evasiveManeuvers).toEqual({
     name: 'Manewry unikowe',
     scriptLabels: [
       'Test Pilota',
       'Kara za manewry unikowe',
     ],
   });
-  expect(vehicleActions.ram).toContain('Taranowanie');
-  expect(vehicleActions.ram).toContain('Obrażenia od taranowania');
-  expect(vehicleActions.takeTheWheel).toContain('Przejęcie sterowania');
+});
+
+test('uses Polish text when ramming a vehicle', async ({ foundryPage }) => {
+  const chat = new ChatPage(foundryPage);
+  const appendTitle = await foundryPage.evaluate(async () => {
+    const actions = (window as unknown as {
+      game: {
+        impmal: {
+          config: {
+            vehicleActions: {
+              ram: {
+                execute(vehicle: unknown): Promise<void>;
+              };
+            };
+          };
+        };
+      };
+    }).game.impmal.config.vehicleActions;
+    let title = '';
+    const vehicle = {
+      name: 'Base profile vehicle',
+      system: {
+        combat: {
+          size: 'small',
+        },
+        driver: {
+          setupSkillTest: async (
+            _test: unknown,
+            options: { appendTitle: string },
+          ) => {
+            title = options.appendTitle;
+            return {
+              result: {
+                SL: 0,
+              },
+            };
+          },
+        },
+      },
+    };
+
+    await actions.ram.execute(vehicle);
+    return title;
+  });
+
+  expect(appendTitle).toBe(' - Taranowanie');
+  await expect(chat.ramDamage()).toBeVisible();
+});
+
+test('uses Polish text when taking the wheel', async ({ foundryPage }) => {
+  const result = await foundryPage.evaluate(async () => {
+    const actions = (window as unknown as {
+      game: {
+        impmal: {
+          config: {
+            vehicleActions: {
+              takeTheWheel: {
+                execute(vehicle: unknown): Promise<void>;
+              };
+            };
+          };
+        };
+      };
+    }).game.impmal.config.vehicleActions;
+    let appendTitle = '';
+    let assignedDriver = '';
+    const passenger = {
+      setupSkillTest: async (
+        _test: unknown,
+        options: { appendTitle: string },
+      ) => {
+        appendTitle = options.appendTitle;
+        return {
+          succeeded: true,
+        };
+      },
+      uuid: 'Actor.base-profile-driver',
+    };
+    const vehicle = {
+      system: {
+        assignDriver: (uuid: string) => {
+          assignedDriver = uuid;
+        },
+        choose: async () => passenger,
+      },
+    };
+
+    await actions.takeTheWheel.execute(vehicle);
+    return {
+      appendTitle,
+      assignedDriver,
+    };
+  });
+
+  expect(result).toEqual({
+    appendTitle: ' - Przejęcie sterowania',
+    assignedDriver: 'Actor.base-profile-driver',
+  });
 });

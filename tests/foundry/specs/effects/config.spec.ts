@@ -1,0 +1,17 @@
+import { expect, test } from '../../fixtures';
+import { EffectConfigPage } from '../../pages/effect-config-page';
+
+test('shows translated effect configuration labels', async ({ foundryPage }) => {
+  const effectConfig = new EffectConfigPage(foundryPage);
+  const effect = await effectConfig.openDisposableZoneEffect();
+
+  try {
+    await effectConfig.selectScripts(effect.applicationId);
+    await expect(effectConfig.scriptTrigger(effect.applicationId)).toBeVisible();
+
+    await effectConfig.openAdvancedConfig(effect.applicationId);
+    await expect(effectConfig.zoneTraits()).toBeVisible();
+  } finally {
+    await effectConfig.closeAndDelete(effect.actorId);
+  }
+});

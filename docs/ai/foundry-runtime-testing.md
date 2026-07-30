@@ -49,6 +49,7 @@ Keep responsibilities separated:
 | `tests/foundry/setup/` | Verify the configured fixture and create the disposable world |
 | `tests/foundry/fixtures.ts` | Open the prepared world and collect module-attributable browser errors |
 | `tests/foundry/specs/<domain>/` | Store executable checks grouped by product domain |
+| `tests/foundry/licensed/` | Reserve tests that require paid ImpMal modules |
 | `tests/foundry/pages/` | Store selectors and reusable browser actions |
 | `**/__tests__/` | Store adjacent Vitest tests for Foundry-independent project code |
 | `.devcontainer/managed/` | Implement reusable bootstrap and runtime support |
@@ -67,6 +68,33 @@ Use Vitest for standalone project code that does not need Foundry. Place these t
 an adjacent `__tests__` directory. Do not unit-test Playwright helpers or page objects;
 exercise them through the live suite. Do not import test files from production entry
 points, and verify that no test code is emitted into `dist`.
+
+## Runtime Profiles
+
+The Playwright configuration currently implements one runnable project named `base`.
+It runs the tests under `tests/foundry/specs` against the public ImpMal system and
+public support modules installed by the package bootstrap.
+
+The base profile must not depend on paid module content. It may test:
+
+- module activation and Polish localization;
+- registered template and script patches;
+- runtime overrides and patched behavior available in the public system;
+- public character, patron, NPC, item, effect, chat, theme, and vehicle UI.
+
+Keep paid content tests under `tests/foundry/licensed`. That directory is reserved only;
+there is no licensed Playwright project or automated licensed-module installation yet.
+Do not add access keys, manifest URLs, or package downloads to the base bootstrap.
+
+When the licensed profile is implemented later:
+
+1. Install paid modules manually through Foundry Setup so they persist in
+   `.foundry/data`.
+2. Add an explicit Playwright project whose test match includes only
+   `tests/foundry/licensed`.
+3. Make that project opt-in and fail clearly when its required modules are missing.
+4. Reuse the base setup and page objects where possible, but keep paid fixtures and
+   assertions out of the base profile.
 
 ## Validation
 
