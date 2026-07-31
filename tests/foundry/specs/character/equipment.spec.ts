@@ -20,7 +20,7 @@ test('shows the translated empty equipment slot', async ({ foundryPage }) => {
     await characterSheet.selectTab(character.applicationId, 'equipment');
     await expect(
       characterSheet.emptySlot(character.applicationId),
-    ).toBeVisible();
+    ).toHaveText('Pusty');
   } finally {
     await characterSheet.closeAndDelete(character.actorId);
   }

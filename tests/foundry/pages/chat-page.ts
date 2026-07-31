@@ -3,14 +3,15 @@ import type { Locator, Page } from '@playwright/test';
 export class ChatPage {
   public constructor(public readonly page: Page) {}
 
-  public readonly opposedMessage = (): Locator => this.page
-    .getByText('Atakujący celuje w Obrońca', { exact: true })
-    .last()
-    .locator('..')
-    .locator('..');
+  public readonly message = (messageId: string): Locator => this.page
+    .locator(`#chat .chat-log .chat-message[data-message-id="${messageId}"]`);
 
-  public readonly ramDamage = (): Locator => this.page
-    .getByText('Obrażenia od taranowania', { exact: false })
+  public readonly opposedMessage = (messageId: string): Locator => this
+    .message(messageId)
+    .locator('.opposed');
+
+  public readonly latestMessage = (): Locator => this.page
+    .locator('#chat .chat-log .chat-message')
     .last();
 
   public async createAppliedOpposedMessage(): Promise<string> {
@@ -83,7 +84,7 @@ export class ChatPage {
       return message.id;
     });
 
-    await this.opposedMessage().waitFor({ state: 'visible' });
+    await this.message(messageId).waitFor({ state: 'visible' });
     return messageId;
   }
 

@@ -7,10 +7,11 @@ test('shows translated effect configuration labels', async ({ foundryPage }) => 
 
   try {
     await effectConfig.selectScripts(effect.applicationId);
-    await expect(effectConfig.scriptTrigger(effect.applicationId)).toBeVisible();
+    await expect(effectConfig.scriptTrigger(effect.applicationId))
+      .toHaveText('Oblicz Cechy');
 
     await effectConfig.openAdvancedConfig(effect.applicationId);
-    await expect(effectConfig.zoneTraits()).toBeVisible();
+    await expect(effectConfig.zoneTraits()).toContainText('Cechy Strefy');
   } finally {
     await effectConfig.closeAndDelete(effect.actorId);
   }

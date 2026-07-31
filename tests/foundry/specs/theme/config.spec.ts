@@ -8,9 +8,9 @@ test('shows patched Polish labels in theme configuration', async ({
   await themeConfig.open();
 
   try {
-    await expect(themeConfig.enabledLabel()).toBeVisible();
-    await expect(themeConfig.fontLabel()).toBeVisible();
-    await expect(themeConfig.effectScanLabel()).toBeVisible();
+    await expect(themeConfig.settingLabel('enabled')).toHaveText('Włączone');
+    await expect(themeConfig.settingLabel('font')).toHaveText('Czcionka');
+    await expect(themeConfig.settingLabel('scan')).toHaveText('Skan Efektów');
   } finally {
     await themeConfig.close();
   }

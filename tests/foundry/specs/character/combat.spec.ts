@@ -77,8 +77,8 @@ test('shows translated destroyed protection and compact speed text', async ({
   try {
     await characterSheet.selectTab(character.applicationId, 'combat');
     await characterSheet.expandProtectionLocation(character.applicationId, 'body');
-    await expect(characterSheet.destroyedProtection(character.applicationId))
-      .toBeVisible();
+    await expect(characterSheet.protectionArmour(character.applicationId, 'body'))
+      .toHaveText('Zniszczony');
     await expect(characterSheet.combatSpeedField(character.applicationId))
       .toHaveCSS('font-size', '12px');
     await expect(characterSheet.combatSpeedField(character.applicationId))

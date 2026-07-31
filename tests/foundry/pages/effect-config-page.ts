@@ -26,7 +26,8 @@ export class EffectConfigPage {
 
   public readonly scriptTrigger = (applicationId: string): Locator => this
     .application(applicationId)
-    .getByText('Oblicz Cechy', { exact: true });
+    .locator('.script-list .script[data-index="0"] > label')
+    .nth(1);
 
   public readonly advancedConfigButton = (applicationId: string): Locator => this
     .application(applicationId)
@@ -36,7 +37,7 @@ export class EffectConfigPage {
     .locator('.advanced-effect.warhammer');
 
   public readonly zoneTraits = (): Locator => this.advancedApplication()
-    .getByText('Cechy Strefy', { exact: true });
+    .locator('[data-action="zoneConfig"]');
 
   public async openDisposableZoneEffect(): Promise<DisposableEffect> {
     const actor = await cloneSeedActor(this.page, {

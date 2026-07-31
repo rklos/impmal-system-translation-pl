@@ -11,11 +11,8 @@ export class CharacterGenerationPage {
 
   public readonly application = (): Locator => this.page.locator('#chargen');
 
-  public readonly appV2Warning = (): Locator => this.application().getByText(
-    'Tworzenie Postaci nie zostało jeszcze zaktualizowane do AppV2, '
-      + 'możesz napotykać problemy z wyświetlaniem!',
-    { exact: true },
-  );
+  public readonly appV2Warning = (): Locator => this.application()
+    .locator('.note.warn');
 
   public async open(): Promise<void> {
     await this.actorDirectoryTab().click();

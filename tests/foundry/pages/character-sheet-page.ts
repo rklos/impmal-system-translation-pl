@@ -43,11 +43,15 @@ export class CharacterSheetPage {
 
   public readonly emptySlot = (applicationId: string): Locator => this
     .application(applicationId)
-    .getByText('Pusty', { exact: true });
+    .locator(
+      '[data-group="primary"][data-tab="equipment"] .slot.empty .empty-slot',
+    );
 
   public readonly sustainedPowers = (applicationId: string): Locator => this
     .application(applicationId)
-    .getByText('Podtrzymywane Moce', { exact: true });
+    .locator(
+      '[data-group="primary"][data-tab="powers"] .sustaining > label',
+    );
 
   public readonly addEffectOption = (applicationId: string): Locator => this
     .application(applicationId)
@@ -64,9 +68,12 @@ export class CharacterSheetPage {
     .application(applicationId)
     .locator('[data-group="primary"][data-tab="skills"] [data-key]');
 
-  public readonly destroyedProtection = (applicationId: string): Locator => this
-    .application(applicationId)
-    .getByText('Zniszczony', { exact: true });
+  public readonly protectionArmour = (
+    applicationId: string,
+    locationKey: string,
+  ): Locator => this.application(applicationId)
+    .locator(`.hit-locations .location[data-key="${locationKey}"]`)
+    .locator('[data-action="damageArmour"]');
 
   public readonly protectionLocation = (
     applicationId: string,

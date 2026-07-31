@@ -8,13 +8,18 @@ test('shows translated patron-liability visibility tooltips', async ({
   const patron = await patronSheet.openDisposablePatron();
 
   try {
-    await expect(patronSheet.hiddenLiability(patron.applicationId)).toBeVisible();
-    await expect(patronSheet.visibleLiability(patron.applicationId)).toBeVisible();
-    await expect(patronSheet.hiddenFaction(patron.applicationId)).toBeVisible();
-    await expect(patronSheet.visibleFaction(patron.applicationId)).toBeVisible();
+    await expect(patronSheet.hiddenLiability(patron.applicationId))
+      .toHaveAttribute('data-tooltip', 'Niewidoczne dla Graczy');
+    await expect(patronSheet.visibleLiability(patron.applicationId))
+      .toHaveAttribute('data-tooltip', 'Widoczne dla Graczy');
+    await expect(patronSheet.factionVisibility(patron.applicationId, 'hidden'))
+      .toHaveAttribute('data-tooltip', 'Niewidoczne dla Graczy');
+    await expect(patronSheet.factionVisibility(patron.applicationId, 'visible'))
+      .toHaveAttribute('data-tooltip', 'Widoczne dla Graczy');
 
-    await patronSheet.expandFaction(patron.applicationId, 'Widoczna frakcja');
-    await expect(patronSheet.addSource(patron.applicationId, 'visible')).toBeVisible();
+    await patronSheet.expandFaction(patron.applicationId, 'visible');
+    await expect(patronSheet.addSource(patron.applicationId, 'visible'))
+      .toHaveText('Dodaj Źródło');
   } finally {
     await patronSheet.closeAndDelete(patron.actorId);
   }

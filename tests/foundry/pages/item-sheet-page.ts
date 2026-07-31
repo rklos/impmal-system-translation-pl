@@ -23,7 +23,7 @@ export class ItemSheetPage {
 
   public readonly emptySlot = (applicationId: string): Locator => this
     .application(applicationId)
-    .getByText('Pusty', { exact: true });
+    .locator('.slot-display .slot.empty .slot-details label');
 
   public readonly editTraits = (applicationId: string): Locator => this
     .application(applicationId)

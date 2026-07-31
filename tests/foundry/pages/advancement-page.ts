@@ -12,20 +12,11 @@ export class AdvancementPage {
     .filter({ visible: true })
     .first();
 
-  public readonly itemExplanation = (): Locator => this.application()
-    .getByText(
-      'Wszystkie posiadane Przedmioty, które mają powiązany Koszt XP',
-      { exact: true },
-    );
-
-  public readonly logExplanation = (): Locator => this.application()
-    .getByText(
-      'Rejestr wszystkich zmian w sumie PD i powiązanych z nimi powodów.',
-      { exact: true },
-    );
-
-  public readonly otherExplanation = (): Locator => this.application()
-    .getByText('Różne modyfikacje ogólnej liczby wydanych XP', { exact: true });
+  public readonly explanation = (tabName: AdvancementTab): Locator => this
+    .application()
+    .locator(`section[data-group="sheet"][data-tab="${tabName}"]`)
+    .locator('.advancement-list > p')
+    .first();
 
   public async waitUntilOpen(): Promise<void> {
     await this.application().waitFor({ state: 'visible' });

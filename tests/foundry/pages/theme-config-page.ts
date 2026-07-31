@@ -5,14 +5,11 @@ export class ThemeConfigPage {
 
   public readonly application = (): Locator => this.page.locator('#theme-config');
 
-  public readonly enabledLabel = (): Locator => this.application()
-    .getByText('Włączone', { exact: true });
-
-  public readonly fontLabel = (): Locator => this.application()
-    .getByText('Czcionka', { exact: true });
-
-  public readonly effectScanLabel = (): Locator => this.application()
-    .getByText('Skan Efektów', { exact: true });
+  public readonly settingLabel = (
+    setting: 'enabled' | 'font' | 'scan',
+  ): Locator => this.application()
+    .locator(`.form-group:has([name="impmal.theme.${setting}"]) > label`)
+    .first();
 
   public async open(): Promise<void> {
     await this.page.evaluate(() => {

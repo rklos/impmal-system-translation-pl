@@ -17,37 +17,35 @@ export class PatronSheetPage {
 
   public readonly hiddenLiability = (applicationId: string): Locator => this
     .application(applicationId)
-    .locator(
-      '.list-row[data-item-id] [data-tooltip="Niewidoczne dla Graczy"]',
-    );
+    .locator('.list-row[data-item-id] [data-action="toggleProperty"]')
+    .filter({ has: this.page.locator('.fa-eye-slash') });
 
   public readonly visibleLiability = (applicationId: string): Locator => this
     .application(applicationId)
-    .locator(
-      '.list-row[data-item-id] [data-tooltip="Widoczne dla Graczy"]',
-    );
+    .locator('.list-row[data-item-id] [data-action="toggleProperty"]')
+    .filter({ has: this.page.locator('.fa-eye') });
 
-  public readonly hiddenFaction = (applicationId: string): Locator => this
+  public readonly factionVisibility = (
+    applicationId: string,
+    factionKey: string,
+  ): Locator => this
     .application(applicationId)
-    .locator('.influence [data-tooltip="Niewidoczne dla Graczy"]');
-
-  public readonly visibleFaction = (applicationId: string): Locator => this
-    .application(applicationId)
-    .locator('.influence [data-tooltip="Widoczne dla Graczy"]');
+    .locator(`.influence .list-row[data-key="${factionKey}"]`)
+    .locator('[data-action="toggleFactionVisibility"]');
 
   public readonly faction = (
     applicationId: string,
-    factionName: string,
+    factionKey: string,
   ): Locator => this.application(applicationId)
-    .locator('.influence [data-action="expandFaction"]')
-    .getByText(factionName, { exact: true });
+    .locator(`.influence .list-row[data-key="${factionKey}"]`)
+    .locator('[data-action="expandFaction"]');
 
   public readonly addSource = (
     applicationId: string,
     factionKey: string,
   ): Locator => this.application(applicationId)
     .locator(`.influence .list-row[data-key="${factionKey}"]`)
-    .getByRole('button', { name: 'Dodaj Źródło', exact: true });
+    .locator('button[data-action="createSource"]');
 
   public async openDisposablePatron(): Promise<DisposablePatron> {
     const patron = await cloneSeedActor(this.page, {
@@ -61,9 +59,9 @@ export class PatronSheetPage {
 
   public async expandFaction(
     applicationId: string,
-    factionName: string,
+    factionKey: string,
   ): Promise<void> {
-    await this.faction(applicationId, factionName).click();
+    await this.faction(applicationId, factionKey).click();
   }
 
   public async closeAndDelete(actorId: string): Promise<void> {

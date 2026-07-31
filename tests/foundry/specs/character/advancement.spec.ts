@@ -12,13 +12,19 @@ test('shows translated advancement explanations', async ({ foundryPage }) => {
     await advancement.waitUntilOpen();
 
     await advancement.selectTab('items');
-    await expect(advancement.itemExplanation()).toBeVisible();
+    await expect(advancement.explanation('items')).toHaveText(
+      'Wszystkie posiadane Przedmioty, które mają powiązany Koszt XP',
+    );
 
     await advancement.selectTab('log');
-    await expect(advancement.logExplanation()).toBeVisible();
+    await expect(advancement.explanation('log')).toHaveText(
+      'Rejestr wszystkich zmian w sumie PD i powiązanych z nimi powodów.',
+    );
 
     await advancement.selectTab('other');
-    await expect(advancement.otherExplanation()).toBeVisible();
+    await expect(advancement.explanation('other')).toHaveText(
+      'Różne modyfikacje ogólnej liczby wydanych XP',
+    );
   } finally {
     if (await advancement.application().isVisible().catch(() => false)) {
       await advancement.close();

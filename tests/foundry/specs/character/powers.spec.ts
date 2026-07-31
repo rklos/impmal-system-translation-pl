@@ -16,7 +16,7 @@ test('shows the translated sustained powers heading', async ({
     await characterSheet.selectTab(character.applicationId, 'powers');
     await expect(
       characterSheet.sustainedPowers(character.applicationId),
-    ).toBeVisible();
+    ).toHaveText('Podtrzymywane Moce');
   } finally {
     await characterSheet.closeAndDelete(character.actorId);
   }

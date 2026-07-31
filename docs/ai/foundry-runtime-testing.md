@@ -56,7 +56,10 @@ Keep responsibilities separated:
 
 In page objects, expose locators as public lazy functions based on `this.page`. Put
 reusable actions in public methods. Keep assertions in setup or test files so failures
-state the expected behavior.
+state the expected behavior. Prefer stable structure, IDs, classes, and `data-*`
+attributes over localized text when locating elements. Put expected Polish text in the
+test assertion so the behavior under test is visible in the spec. Use text to locate an
+element only when the rendered UI provides no stable structural selector.
 
 Bootstrap creates deterministic seed documents for each domain. Treat every seed as
 immutable. A test must clone its seed, modify only the clone, and delete the clone in a

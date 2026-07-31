@@ -8,7 +8,7 @@ test('shows translated item slots and the compact trait editor', async ({
   const item = await itemSheet.openDisposableProtection();
 
   try {
-    await expect(itemSheet.emptySlot(item.applicationId)).toBeVisible();
+    await expect(itemSheet.emptySlot(item.applicationId)).toHaveText('Pusty');
 
     await itemSheet.openTraits(item.applicationId);
     await expect(itemSheet.traitLabel().first())

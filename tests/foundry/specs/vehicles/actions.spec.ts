@@ -85,7 +85,7 @@ test('uses Polish text when ramming a vehicle', async ({ foundryPage }) => {
   });
 
   expect(appendTitle).toBe(' - Taranowanie');
-  await expect(chat.ramDamage()).toBeVisible();
+  await expect(chat.latestMessage()).toContainText('Obrażenia od taranowania');
 });
 
 test('uses Polish text when taking the wheel', async ({ foundryPage }) => {
