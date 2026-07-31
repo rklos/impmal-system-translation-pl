@@ -1,4 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
+import {
+  cloneSeedActor,
+  SEED_ENTITY_IDS,
+} from '../helpers/seed-entities';
 
 type DisposablePatron = {
   actorId: string;
@@ -46,75 +50,9 @@ export class PatronSheetPage {
     .getByRole('button', { name: 'Dodaj Źródło', exact: true });
 
   public async openDisposablePatron(): Promise<DisposablePatron> {
-    const patron = await this.page.evaluate(async () => {
-      const actorClass = (window as unknown as {
-        Actor: {
-          create(data: {
-            name: string;
-            system: Record<string, unknown>;
-            type: string;
-          }): Promise<{
-            createEmbeddedDocuments(
-              documentName: string,
-              data: Array<Record<string, unknown>>,
-            ): Promise<unknown>;
-            id: string;
-            sheet: {
-              id: string;
-              render(force: boolean): unknown;
-            };
-          } | undefined>;
-        };
-      }).Actor;
-      const actor = await actorClass.create({
-        name: 'Polish patron translation test',
-        system: {
-          influence: {
-            factions: {
-              hidden: {
-                hidden: true,
-                name: 'Ukryta frakcja',
-                notes: '',
-                sources: [],
-              },
-              visible: {
-                hidden: false,
-                name: 'Widoczna frakcja',
-                notes: '',
-                sources: [],
-              },
-            },
-          },
-        },
-        type: 'patron',
-      });
-      if (!actor) {
-        throw new Error('Foundry did not create the patron test actor');
-      }
-
-      await actor.createEmbeddedDocuments('Item', [
-        {
-          name: 'Hidden liability',
-          system: {
-            category: 'liability',
-            visible: false,
-          },
-          type: 'boonLiability',
-        },
-        {
-          name: 'Visible liability',
-          system: {
-            category: 'liability',
-            visible: true,
-          },
-          type: 'boonLiability',
-        },
-      ]);
-      actor.sheet.render(true);
-      return {
-        actorId: actor.id,
-        applicationId: actor.sheet.id,
-      };
+    const patron = await cloneSeedActor(this.page, {
+      name: 'Polish patron translation test',
+      seedId: SEED_ENTITY_IDS.patron,
     });
 
     await this.application(patron.applicationId).waitFor({ state: 'visible' });

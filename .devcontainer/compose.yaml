@@ -59,6 +59,7 @@ services:
       FOUNDRY_ADMIN_KEY: *foundry-admin-password
       FOUNDRY_HOT_RELOAD: "true"
       FOUNDRY_IP_DISCOVERY: "false"
+      FOUNDRY_LICENSE_KEY: ${FOUNDRY_LICENSE_KEY:?Set FOUNDRY_LICENSE_KEY before starting Foundry}
       FOUNDRY_MINIFY_STATIC_FILES: "false"
       FOUNDRY_TELEMETRY: "false"
       FOUNDRY_VERSION: "14.365"
@@ -81,27 +82,6 @@ services:
       retries: 24
       start_period: 30s
     stop_grace_period: 30s
-
-  smoke-tests:
-    build:
-      context: ..
-      dockerfile: .devcontainer/managed/workspace.Dockerfile
-    command:
-      - npm
-      - run
-      - test:foundry
-    depends_on:
-      foundry:
-        condition: service_healthy
-    environment:
-      FOUNDRY_ADMIN_PASSWORD: *foundry-admin-password
-      FOUNDRY_BASE_URL: http://foundry:30000
-    init: true
-    profiles:
-      - test
-    volumes:
-      - ..:/workspace:cached
-      - workspace-node-modules:/workspace/node_modules
 
 volumes:
   workspace-node-modules:

@@ -1,4 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
+import {
+  cloneSeedItem,
+  SEED_ENTITY_IDS,
+} from '../helpers/seed-entities';
 
 type DisposableItem = {
   applicationId: string;
@@ -34,42 +38,9 @@ export class ItemSheetPage {
     .locator('input[type="text"]');
 
   public async openDisposableProtection(): Promise<DisposableItem> {
-    const item = await this.page.evaluate(async () => {
-      const itemClass = (window as unknown as {
-        Item: {
-          create(data: {
-            name: string;
-            system: Record<string, unknown>;
-            type: string;
-          }): Promise<{
-            id: string;
-            sheet: {
-              id: string;
-              render(force: boolean): unknown;
-            };
-          } | undefined>;
-        };
-      }).Item;
-      const document = await itemClass.create({
-        name: 'Polish item translation test',
-        system: {
-          armour: 1,
-          slots: {
-            list: [{ id: null }],
-            value: 1,
-          },
-        },
-        type: 'protection',
-      });
-      if (!document) {
-        throw new Error('Foundry did not create the item sheet test document');
-      }
-
-      document.sheet.render(true);
-      return {
-        applicationId: document.sheet.id,
-        itemId: document.id,
-      };
+    const item = await cloneSeedItem(this.page, {
+      name: 'Polish item translation test',
+      seedId: SEED_ENTITY_IDS.protection,
     });
 
     await this.application(item.applicationId).waitFor({ state: 'visible' });

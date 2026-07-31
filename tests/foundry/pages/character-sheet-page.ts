@@ -1,4 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
+import {
+  cloneSeedActor,
+  SEED_ENTITY_IDS,
+} from '../helpers/seed-entities';
 
 type DisposableCharacter = {
   actorId: string;
@@ -80,43 +84,11 @@ export class CharacterSheetPage {
   public async openDisposableCharacter(
     items: CharacterItemData[] = [],
   ): Promise<DisposableCharacter> {
-    const character = await this.page.evaluate(async (itemData) => {
-      const actorClass = (window as unknown as {
-        Actor: {
-          create(data: {
-            name: string;
-            type: string;
-          }): Promise<{
-            createEmbeddedDocuments(
-              documentName: string,
-              data: Array<Record<string, unknown>>,
-            ): Promise<unknown>;
-            id: string;
-            sheet: {
-              id: string;
-              render(force: boolean): unknown;
-            };
-          } | undefined>;
-        };
-      }).Actor;
-      const actor = await actorClass.create({
-        name: 'Polish UI translation test',
-        type: 'character',
-      });
-      if (!actor) {
-        throw new Error('Foundry did not create the UI test actor');
-      }
-
-      if (itemData.length) {
-        await actor.createEmbeddedDocuments('Item', itemData);
-      }
-      actor.sheet.render(true);
-
-      return {
-        actorId: actor.id,
-        applicationId: actor.sheet.id,
-      };
-    }, items);
+    const character = await cloneSeedActor(this.page, {
+      items,
+      name: 'Polish UI translation test',
+      seedId: SEED_ENTITY_IDS.character,
+    });
 
     await this.application(character.applicationId)
       .waitFor({ state: 'visible' });

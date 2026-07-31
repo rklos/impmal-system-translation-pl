@@ -8,7 +8,7 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 - [Package Development](package-development.md) - How to create and manage packages
 - [Patching System](patching-system.md) - How to modify templates
 - [Custom Package](custom-package.md) - How to add custom functionality
-- [Foundry V14 Devcontainer](foundry-v14-devcontainer.md) - Run the translation in an isolated Foundry test instance
+- [Foundry V14 Development and Testing](foundry-v14-development-and-testing.md) - Run interactive and isolated Foundry test environments
 
 ## AI Instructions
 
@@ -20,8 +20,10 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 |---------|-------------|
 | `npm test` | Run all Foundry-independent unit tests |
 | `npm run build` | Build packages and combine translations |
+| `npm run foundry:start` | Bootstrap the persistent development environment |
 | `npm run typecheck:foundry` | Type-check the Playwright suite |
-| `npm run test:foundry:docker` | Run module-owned tests against the isolated Foundry instance |
+| `npm run test:foundry` | Run module-owned tests in an isolated Testcontainers instance |
+| `npm run test:foundry:devcontainer` | Run host tests against the persistent development instance |
 | `npm run report` | Check for missing or extra translations |
 | `npm run sync wfrp4e` | Sync with official WFRP4e translations |
 | `npm run patch download` | Download original files and remove JS files without translatable strings |

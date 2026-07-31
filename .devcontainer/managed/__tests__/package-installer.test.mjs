@@ -1,10 +1,8 @@
 import { execFile } from 'node:child_process';
 import {
-  lstat,
   mkdir,
   mkdtemp,
   readFile,
-  readlink,
   rm,
   writeFile,
 } from 'node:fs/promises';
@@ -14,8 +12,8 @@ import { promisify } from 'node:util';
 import { expect, test } from 'vitest';
 import {
   assertPackageManifest,
+  installLocalModule,
   installRemotePackage,
-  linkLocalModule,
   waitForLocalModuleBuild,
 } from '../package-installer.mjs';
 
@@ -133,7 +131,7 @@ test('installs the exact remote package into its Foundry data directory', async 
   }
 });
 
-test('links the built local module into the Foundry data directory', async () => {
+test('copies the built local module into the Foundry data directory', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'foundry-module-'));
   const localPath = path.join(root, 'dist');
   const dataRoot = path.join(root, 'data');
@@ -152,7 +150,7 @@ test('links the built local module into the Foundry data directory', async () =>
   );
 
   try {
-    await linkLocalModule({
+    await installLocalModule({
       moduleConfig: {
         id: 'impmal-system-translation-pl',
         localPath,
@@ -160,8 +158,12 @@ test('links the built local module into the Foundry data directory', async () =>
       dataRoot,
     });
 
-    expect((await lstat(targetPath)).isSymbolicLink()).toBe(true);
-    expect(await readlink(targetPath)).toBe(localPath);
+    expect(
+      await readFile(path.join(targetPath, 'module.json'), 'utf8'),
+    ).toBe(JSON.stringify({
+      id: 'impmal-system-translation-pl',
+      version: '3.0.0-alpha',
+    }));
   } finally {
     await rm(root, { recursive: true, force: true });
   }

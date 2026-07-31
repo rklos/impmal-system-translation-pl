@@ -1,4 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
+import {
+  cloneSeedActor,
+  SEED_ENTITY_IDS,
+} from '../helpers/seed-entities';
 
 type DisposableNpc = {
   actorId: string;
@@ -19,34 +23,9 @@ export class NpcSheetPage {
     );
 
   public async openDisposableNpc(): Promise<DisposableNpc> {
-    const npc = await this.page.evaluate(async () => {
-      const actorClass = (window as unknown as {
-        Actor: {
-          create(data: {
-            name: string;
-            type: string;
-          }): Promise<{
-            id: string;
-            sheet: {
-              id: string;
-              render(force: boolean): unknown;
-            };
-          } | undefined>;
-        };
-      }).Actor;
-      const actor = await actorClass.create({
-        name: 'Polish NPC layout test',
-        type: 'npc',
-      });
-      if (!actor) {
-        throw new Error('Foundry did not create the NPC layout test actor');
-      }
-
-      actor.sheet.render(true);
-      return {
-        actorId: actor.id,
-        applicationId: actor.sheet.id,
-      };
+    const npc = await cloneSeedActor(this.page, {
+      name: 'Polish NPC layout test',
+      seedId: SEED_ENTITY_IDS.npc,
     });
 
     await this.application(npc.applicationId).waitFor({ state: 'visible' });

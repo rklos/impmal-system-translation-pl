@@ -3,11 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const testDirectory = path.dirname(fileURLToPath(import.meta.url));
-const baseURL = process.env.FOUNDRY_BASE_URL ?? 'http://127.0.0.1:30000';
 const authFile = path.join(testDirectory, '.auth/gm.json');
 
 export default defineConfig({
   testDir: testDirectory,
+  globalSetup: path.join(testDirectory, 'bootstrap/global-setup.ts'),
   outputDir: path.resolve(testDirectory, '../../test-results/foundry'),
   fullyParallel: false,
   workers: 1,
@@ -30,7 +30,6 @@ export default defineConfig({
     ],
   ],
   use: {
-    baseURL,
     viewport: {
       width: 1440,
       height: 900,
@@ -44,13 +43,8 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'setup',
-      testMatch: /setup\/.*\.setup\.ts/,
-    },
-    {
       name: 'base',
       testMatch: /specs\/.*\.spec\.ts/,
-      dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
         viewport: {

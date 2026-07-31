@@ -1,7 +1,7 @@
 # Foundry Runtime Testing
 
-Use this playbook when changing the Foundry devcontainer, package bootstrap, page
-objects, or browser smoke tests.
+Use this playbook when changing the Foundry devcontainer, Testcontainers runtime,
+package bootstrap, page objects, or browser smoke tests.
 
 ## Ownership Boundary
 
@@ -9,7 +9,7 @@ Treat Foundry VTT, ImpMal, and required support modules as test fixtures. Do not
 tests for their UI, data models, or business behavior unless this repository modifies
 that behavior.
 
-Use the setup project to verify fixture preconditions once:
+Use the shared bootstrap to verify fixture preconditions once:
 
 - exact Foundry VTT, ImpMal, and remote module versions;
 - the disposable world ID and ImpMal system ID;
@@ -46,17 +46,22 @@ Keep responsibilities separated:
 
 | Path | Responsibility |
 |------|----------------|
-| `tests/foundry/setup/` | Verify the configured fixture and create the disposable world |
+| `tests/foundry/bootstrap/` | Build, start the selected runtime, create the world, and seed fixtures |
 | `tests/foundry/fixtures.ts` | Open the prepared world and collect module-attributable browser errors |
 | `tests/foundry/specs/<domain>/` | Store executable checks grouped by product domain |
 | `tests/foundry/licensed/` | Reserve tests that require paid ImpMal modules |
 | `tests/foundry/pages/` | Store selectors and reusable browser actions |
 | `**/__tests__/` | Store adjacent Vitest tests for Foundry-independent project code |
-| `.devcontainer/managed/` | Implement reusable bootstrap and runtime support |
+| `.devcontainer/managed/` | Install and validate Foundry packages |
 
 In page objects, expose locators as public lazy functions based on `this.page`. Put
 reusable actions in public methods. Keep assertions in setup or test files so failures
 state the expected behavior.
+
+Bootstrap creates deterministic seed documents for each domain. Treat every seed as
+immutable. A test must clone its seed, modify only the clone, and delete the clone in a
+`finally` block. Never reuse a mutated actor, item, effect, or embedded document across
+tests.
 
 Organize Playwright specs by product domain, such as `character`, `effects`, `patches`,
 `theme`, or `vehicles`. Keep programmatic and UI checks for the same domain together.
@@ -71,9 +76,21 @@ points, and verify that no test code is emitted into `dist`.
 
 ## Runtime Profiles
 
-The Playwright configuration currently implements one runnable project named `base`.
-It runs the tests under `tests/foundry/specs` against the public ImpMal system and
-public support modules installed by the package bootstrap.
+The Playwright configuration implements one runnable project named `base`. It runs the
+tests under `tests/foundry/specs` against the public ImpMal system and support modules
+installed by the shared bootstrap.
+
+Playwright always runs on the host. Its global setup selects the runtime through
+`FOUNDRY_TEST_RUNTIME`:
+
+- `testcontainer` is the default. It creates temporary data, starts Foundry through
+  Testcontainers, and removes both after the suite.
+- `devcontainer` targets the persistent development Foundry service and leaves it
+  running after the suite.
+
+Both modes require `FOUNDRY_LICENSE_KEY`. Pass it to the container without writing it
+to tracked configuration or logs. Use a stable container hostname and let the shared
+browser bootstrap accept the EULA when required.
 
 The base profile must not depend on paid module content. It may test:
 
@@ -116,10 +133,16 @@ Build the current module:
 npm run build
 ```
 
-Run the disposable smoke-test container against the persistent Foundry instance:
+Run host Playwright against an isolated Foundry instance:
 
 ```bash
-npm run test:foundry:docker
+npm run test:foundry
+```
+
+Run the same suite against the persistent development instance when required:
+
+```bash
+npm run test:foundry:devcontainer
 ```
 
 Attempt the repository lint command and report its known loader blocker if it remains:
@@ -135,11 +158,11 @@ git diff --check
 ```
 
 The change is ready for review when managed tests and type-check pass, the build
-succeeds, the live smoke suite proves the local module behavior, and Foundry remains
-available for later test runs.
+succeeds, the isolated suite proves the local module behavior, and the persistent mode
+also bootstraps successfully when runtime infrastructure changed.
 
 ## Related Documentation
 
-- [Foundry V14 Devcontainer](../foundry-v14-devcontainer.md) - Human setup and command reference
+- [Foundry V14 Development and Testing](../foundry-v14-development-and-testing.md) - Human setup and command reference
 - [Repository Guidelines](repository-guidelines.md) - Repository-wide validation rules
 - [Tool Development](tool-development.md) - Development tool design and network rules

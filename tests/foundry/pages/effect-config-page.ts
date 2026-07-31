@@ -1,4 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
+import {
+  cloneSeedActor,
+  SEED_ENTITY_IDS,
+} from '../helpers/seed-entities';
 
 type DisposableEffect = {
   actorId: string;
@@ -35,13 +39,15 @@ export class EffectConfigPage {
     .getByText('Cechy Strefy', { exact: true });
 
   public async openDisposableZoneEffect(): Promise<DisposableEffect> {
-    const effect = await this.page.evaluate(async () => {
-      const actorClass = (window as unknown as {
-        Actor: {
-          create(data: {
-            name: string;
-            type: string;
-          }): Promise<{
+    const actor = await cloneSeedActor(this.page, {
+      name: 'Polish effect translation test',
+      render: false,
+      seedId: SEED_ENTITY_IDS.effects,
+    });
+    const effect = await this.page.evaluate(async (actorId) => {
+      const game = (window as unknown as {
+        game: {
+          actors: Map<string, {
             createEmbeddedDocuments(
               documentName: string,
               data: Array<Record<string, unknown>>,
@@ -52,19 +58,14 @@ export class EffectConfigPage {
                 render(options: { force: boolean }): unknown;
               };
             }>>;
-            id: string;
-          } | undefined>;
+          }>;
         };
-      }).Actor;
-      const actor = await actorClass.create({
-        name: 'Polish effect translation test',
-        type: 'character',
-      });
-      if (!actor) {
-        throw new Error('Foundry did not create the effect test actor');
+      }).game;
+      const effectActor = game.actors.get(actorId);
+      if (!effectActor) {
+        throw new Error('Foundry did not retain the effect test actor');
       }
-
-      const [activeEffect] = await actor.createEmbeddedDocuments('ActiveEffect', [{
+      const [activeEffect] = await effectActor.createEmbeddedDocuments('ActiveEffect', [{
         name: 'Polish effect translation test',
         system: {
           scriptData: [{
@@ -87,11 +88,11 @@ export class EffectConfigPage {
 
       activeEffect.sheet.render({ force: true });
       return {
-        actorId: actor.id,
+        actorId,
         applicationId: activeEffect.sheet.id,
         effectId: activeEffect.id,
       };
-    });
+    }, actor.actorId);
 
     await this.application(effect.applicationId).waitFor({ state: 'visible' });
     return effect;

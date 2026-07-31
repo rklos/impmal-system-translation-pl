@@ -1,10 +1,8 @@
 import { execFile } from 'node:child_process';
 import {
-  lstat,
   mkdir,
   mkdtemp,
   readFile,
-  readlink,
   rm,
   writeFile,
 } from 'node:fs/promises';
@@ -127,8 +125,9 @@ test('prepares every configured Foundry package', async () => {
       dataPath,
       'Data/modules/impmal-system-translation-pl',
     );
-    expect((await lstat(localModulePath)).isSymbolicLink()).toBe(true);
-    expect(await readlink(localModulePath)).toBe(localPath);
+    expect(
+      await readFile(path.join(localModulePath, 'module.json'), 'utf8'),
+    ).toBe(JSON.stringify({ id: 'impmal-system-translation-pl' }));
   } finally {
     await rm(root, { recursive: true, force: true });
   }

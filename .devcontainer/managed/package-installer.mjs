@@ -1,13 +1,13 @@
 import { execFile } from 'node:child_process';
 import {
   access,
+  cp,
   mkdir,
   mkdtemp,
   readFile,
   readdir,
   rename,
   rm,
-  symlink,
   writeFile,
 } from 'node:fs/promises';
 import path from 'node:path';
@@ -177,7 +177,7 @@ export async function installRemotePackage({
   }
 }
 
-export async function linkLocalModule({
+export async function installLocalModule({
   moduleConfig,
   dataRoot,
 }) {
@@ -195,7 +195,7 @@ export async function linkLocalModule({
 
   await mkdir(modulesRoot, { recursive: true });
   await rm(targetDirectory, { recursive: true, force: true });
-  await symlink(moduleConfig.localPath, targetDirectory, 'dir');
+  await cp(moduleConfig.localPath, targetDirectory, { recursive: true });
 }
 
 export async function waitForLocalModuleBuild(

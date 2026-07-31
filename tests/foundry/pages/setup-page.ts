@@ -16,6 +16,14 @@ export class FoundrySetupPage {
     .locator('#eula-form, #license-title')
     .first();
 
+  public readonly eulaAgreement = (): Locator => this.page
+    .locator('#eula-form input[type="checkbox"]')
+    .first();
+
+  public readonly eulaSubmitButton = (): Locator => this.page
+    .locator('#eula-form button[type="submit"]')
+    .first();
+
   public readonly adminPassword = (): Locator => this.page
     .locator('input[name="adminPassword"], input#key')
     .first();
@@ -114,14 +122,12 @@ export class FoundrySetupPage {
         .catch(() => false)
     ) {
       throw new Error(
-        'Foundry VTT is not activated. Open http://localhost:30000, activate the licensed test instance, complete the EULA, then rerun npm run test:foundry:docker.',
+        'Foundry VTT did not activate from FOUNDRY_LICENSE_KEY. Verify the key and stable runtime hostname, then rerun the bootstrap.',
       );
     }
 
     if (await this.eula().isVisible({ timeout: 1_000 }).catch(() => false)) {
-      throw new Error(
-        'Foundry VTT requires EULA confirmation. Open http://localhost:30000, complete the first-run screens, then rerun npm run test:foundry:docker.',
-      );
+      await this.acceptEula();
     }
 
     if (
@@ -298,10 +304,19 @@ export class FoundrySetupPage {
     } catch (error) {
       if (!password) {
         throw new Error(
-          'The Foundry test instance has an admin password. Set FOUNDRY_ADMIN_PASSWORD before running npm run test:foundry:docker, or remove the password from this isolated instance.',
+          'The Foundry test instance rejected FOUNDRY_ADMIN_PASSWORD.',
         );
       }
       throw error;
     }
+  }
+
+  private async acceptEula(): Promise<void> {
+    const agreement = this.eulaAgreement();
+    if (await agreement.count()) {
+      await agreement.check();
+    }
+    await this.eulaSubmitButton().click();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 }

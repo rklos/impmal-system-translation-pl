@@ -24,8 +24,9 @@ upstream repositories and versions belong in their `src/packages/<package>/index
 | `tools/commands/` | Reporting, synchronization, and patch CLI commands |
 | `tools.config.ts` | Tool configuration for patchable packages |
 | `.vite/` | Build-time patch loading |
-| `.devcontainer/` | Isolated Foundry VTT runtime and package bootstrap |
-| `tests/foundry/` | Foundry fixture setup and module-owned browser smoke tests |
+| `.devcontainer/` | Interactive workspace, persistent Foundry runtime, and package bootstrap |
+| `tests/foundry/bootstrap/` | Shared Foundry bootstrap and runtime adapters |
+| `tests/foundry/` | Module-owned host Playwright tests and Foundry fixtures |
 | `**/__tests__/` | Adjacent Vitest tests for Foundry-independent project code |
 | `docs/` | Human documentation |
 | `docs/ai/` | Task-focused AI instructions |
@@ -83,8 +84,10 @@ The established change boundaries are:
 | `npm ci` | Install the exact dependency set from `package-lock.json` |
 | `npm test` | Run all Foundry-independent Vitest tests |
 | `npm run build` | Type-check, build, and combine translation JSON files |
+| `npm run foundry:start` | Bootstrap the persistent development environment |
 | `npm run typecheck:foundry` | Type-check the Playwright suite |
-| `npm run test:foundry:docker` | Run module-owned browser tests against the isolated Foundry instance |
+| `npm run test:foundry` | Run host Playwright against an isolated Testcontainers runtime |
+| `npm run test:foundry:devcontainer` | Run host Playwright against the persistent development runtime |
 | `npx eslint .` | Attempt to lint TypeScript and JavaScript with the repository configuration |
 | `npm run report` | Compare supported upstream versions with their latest releases |
 | `npm run sync wfrp4e` | Import WHLib translations from the WFRP4e Polish project |

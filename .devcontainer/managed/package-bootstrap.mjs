@@ -2,7 +2,7 @@ import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import {
   installRemotePackage,
-  linkLocalModule,
+  installLocalModule,
   waitForLocalModuleBuild,
 } from './package-installer.mjs';
 
@@ -26,7 +26,7 @@ export async function prepareFoundryPackages({
   for (const moduleConfig of config.modules) {
     if (moduleConfig.source === 'local') {
       await waitForLocalModuleBuild(moduleConfig);
-      await linkLocalModule({
+      await installLocalModule({
         moduleConfig,
         dataRoot: packageDataRoot,
       });
