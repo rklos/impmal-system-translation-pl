@@ -95,6 +95,11 @@ Both modes require `FOUNDRY_LICENSE_KEY`. Pass it to the container without writi
 to tracked configuration or logs. Use a stable container hostname and let the shared
 browser bootstrap accept the EULA when required.
 
+Log each runtime, package, world-bootstrap, and teardown stage from the test bootstrap.
+Do not stream the Foundry container output during normal runs. Never print the license
+key or other credentials. Run the isolated container as the host UID and GID so its
+temporary bind-mounted data and cache directories remain writable.
+
 The base profile must not depend on paid module content. It may test:
 
 - module activation and Polish localization;

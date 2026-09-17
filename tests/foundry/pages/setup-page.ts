@@ -7,22 +7,17 @@ type SetupTab = 'worlds' | 'systems' | 'modules';
 export class FoundrySetupPage {
   public constructor(public readonly page: Page) {}
 
-  public readonly licenseActivation = (): Locator => this.page
-    .getByRole('heading', { name: 'License Key Activation' })
-    .or(this.page.getByPlaceholder('XXXX-XXXX-XXXX-XXXX-XXXX-XXXX'))
-    .first();
+  public readonly licenseActivation = (): Locator => this.page.locator(
+    '#license-key',
+  );
 
-  public readonly eula = (): Locator => this.page
-    .locator('#eula-form, #license-title')
-    .first();
+  public readonly eula = (): Locator => this.page.locator('#eula');
 
   public readonly eulaAgreement = (): Locator => this.page
-    .locator('#eula-form input[type="checkbox"]')
-    .first();
+    .locator('#eula-agree');
 
   public readonly eulaSubmitButton = (): Locator => this.page
-    .locator('#eula-form button[type="submit"]')
-    .first();
+    .locator('#eula button#sign');
 
   public readonly adminPassword = (): Locator => this.page
     .locator('input[name="adminPassword"], input#key')
@@ -116,25 +111,15 @@ export class FoundrySetupPage {
     await this.page.goto('/setup');
     await this.page.waitForLoadState('domcontentloaded');
 
-    if (
-      await this.licenseActivation()
-        .isVisible({ timeout: 1_000 })
-        .catch(() => false)
-    ) {
-      throw new Error(
-        'Foundry VTT did not activate from FOUNDRY_LICENSE_KEY. Verify the key and stable runtime hostname, then rerun the bootstrap.',
-      );
+    if (this.currentViewIs('license')) {
+      await this.handleLicense();
     }
 
-    if (await this.eula().isVisible({ timeout: 1_000 }).catch(() => false)) {
-      await this.acceptEula();
-    }
-
-    if (
-      await this.adminPassword()
-        .isVisible({ timeout: 1_000 })
-        .catch(() => false)
-    ) {
+    if (this.currentViewIs('auth')) {
+      await this.adminPassword().waitFor({
+        state: 'visible',
+        timeout: 30_000,
+      });
       await this.authenticateAdministrator();
     }
 
@@ -311,12 +296,32 @@ export class FoundrySetupPage {
     }
   }
 
+  private currentViewIs(view: 'auth' | 'license'): boolean {
+    return new URL(this.page.url()).pathname.endsWith(`/${view}`);
+  }
+
+  private async handleLicense(): Promise<void> {
+    const licenseView = this.licenseActivation().or(this.eula()).first();
+    await licenseView.waitFor({ state: 'visible', timeout: 30_000 });
+
+    if (await this.licenseActivation().isVisible()) {
+      throw new Error(
+        'Foundry VTT did not activate from FOUNDRY_LICENSE_KEY. Verify the key and stable runtime hostname, then rerun the bootstrap.',
+      );
+    }
+
+    await this.acceptEula();
+  }
+
   private async acceptEula(): Promise<void> {
     const agreement = this.eulaAgreement();
-    if (await agreement.count()) {
-      await agreement.check();
-    }
+    await agreement.waitFor({ state: 'visible', timeout: 30_000 });
+    await agreement.check();
     await this.eulaSubmitButton().click();
+    await this.page.waitForURL(
+      (url) => !url.pathname.endsWith('/license'),
+      { timeout: 30_000 },
+    );
     await this.page.waitForLoadState('domcontentloaded');
   }
 }

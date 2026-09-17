@@ -138,6 +138,10 @@ npm run test:foundry:ui
 Reports and traces are written to ignored `playwright-report` and
 `test-results` directories.
 
+Bootstrap prints colored status lines for each build, package, runtime, world setup,
+and teardown stage. It does not stream the Foundry container output during normal runs
+or print license keys and passwords.
+
 ## Entity isolation
 
 Bootstrap creates immutable seed documents with deterministic IDs for the
@@ -230,6 +234,7 @@ matching data copy.
 | `FOUNDRY_LICENSE_KEY` is missing | Export the license key in the same shell before starting Foundry or Playwright |
 | Foundry archive is missing | Place `foundryvtt-14.365.zip` under `.foundry/cache` |
 | Playwright cannot launch Chromium | Run `npx playwright install chromium` |
+| Isolated Foundry does not become ready | Check the bootstrap error after the last `[foundry]` stage and verify the archive, bind-mount permissions, and license key |
 | A package version does not match | Check the manifest URL and exact version in `.devcontainer/foundry-test.config.json` |
 | The local module is missing | Run `npm run build`, then rerun the bootstrap |
 | A test changes another test's result | Confirm that it clones a seed and deletes only the clone |

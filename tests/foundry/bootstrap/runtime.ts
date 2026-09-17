@@ -9,6 +9,7 @@ import {
 } from 'testcontainers';
 import { loadFoundryTestConfig } from '../helpers/config';
 import { runCommand } from './command';
+import { logFoundry } from './logging';
 
 export type FoundryRuntimeName = 'devcontainer' | 'testcontainer';
 
@@ -37,16 +38,25 @@ export async function prepareFoundryRuntime(
 ): Promise<StartedFoundryRuntime> {
   const repositoryRoot = process.cwd();
   process.env.FOUNDRY_ADMIN_PASSWORD = ADMIN_PASSWORD;
+  logFoundry(`Preparing the ${runtimeName} runtime.`);
+  logFoundry('Building the translation module.');
   await runCommand('npm', ['run', 'build']);
+  logFoundry('Translation module build completed.', 'success');
 
   if (runtimeName === 'devcontainer') {
     const dataPath = path.join(repositoryRoot, '.foundry/data');
     await preparePackages(repositoryRoot, dataPath);
     const baseURL = `http://127.0.0.1:${FOUNDRY_PORT}`;
     if (await isFoundryReady(baseURL)) {
+      logFoundry(
+        `Reusing the development Foundry instance at ${baseURL}.`,
+        'success',
+      );
       return {
         baseURL,
-        stop: async () => {},
+        stop: async () => {
+          logFoundry('Leaving the development Foundry instance running.');
+        },
       };
     }
     if (!process.env.FOUNDRY_LICENSE_KEY) {
@@ -54,6 +64,7 @@ export async function prepareFoundryRuntime(
         'FOUNDRY_LICENSE_KEY must be set before starting the development Foundry runtime',
       );
     }
+    logFoundry('Starting the development workspace and Foundry services.');
     await runCommand('docker', [
       'compose',
       '-f',
@@ -64,9 +75,12 @@ export async function prepareFoundryRuntime(
       'workspace',
       'foundry',
     ]);
+    logFoundry(`Development Foundry is ready at ${baseURL}.`, 'success');
     return {
       baseURL,
-      stop: async () => {},
+      stop: async () => {
+        logFoundry('Leaving the development Foundry instance running.');
+      },
     };
   }
 
@@ -94,6 +108,7 @@ async function preparePackages(
   repositoryRoot: string,
   dataPath: string,
 ): Promise<void> {
+  logFoundry('Preparing the pinned Foundry packages and local module build.');
   await mkdir(dataPath, { recursive: true });
   await runCommand(process.execPath, [
     '.devcontainer/managed/run-package-bootstrap.mjs',
@@ -108,6 +123,7 @@ async function preparePackages(
       ),
     },
   });
+  logFoundry('Foundry packages are ready.', 'success');
 }
 
 async function startTestcontainer(
@@ -129,19 +145,22 @@ async function startTestcontainer(
     const gid = typeof process.getgid === 'function'
       ? String(process.getgid())
       : '1000';
+    const containerUser = `${uid}:${gid}`;
+    logFoundry(
+      `Starting isolated Foundry container ${FOUNDRY_IMAGE} as ${containerUser}.`,
+    );
     container = await new GenericContainer(FOUNDRY_IMAGE)
       .withHostname('impmal-foundry-v14-test')
+      .withUser(containerUser)
       .withEnvironment({
         CONTAINER_CACHE: '/data/container_cache',
         CONTAINER_PRESERVE_CONFIG: 'false',
         FOUNDRY_ADMIN_KEY: ADMIN_PASSWORD,
-        FOUNDRY_GID: gid,
         FOUNDRY_HOT_RELOAD: 'true',
         FOUNDRY_IP_DISCOVERY: 'false',
         FOUNDRY_LICENSE_KEY: licenseKey,
         FOUNDRY_MINIFY_STATIC_FILES: 'false',
         FOUNDRY_TELEMETRY: 'false',
-        FOUNDRY_UID: uid,
         FOUNDRY_VERSION: config.foundry.version,
       })
       .withBindMounts([
@@ -155,23 +174,37 @@ async function startTestcontainer(
         },
       ])
       .withExposedPorts(FOUNDRY_PORT)
-      .withWaitStrategy(Wait.forHttp('/', FOUNDRY_PORT))
+      .withWaitStrategy(Wait.forHttp('/api/status', FOUNDRY_PORT, {
+        abortOnContainerExit: true,
+      }))
       .withStartupTimeout(180_000)
       .start();
 
     const baseURL = `http://${container.getHost()}:${
       container.getMappedPort(FOUNDRY_PORT)
     }`;
+    logFoundry(`Isolated Foundry is ready at ${baseURL}.`, 'success');
     return {
       baseURL,
       stop: async () => {
-        await container?.stop({ timeout: 30_000 });
-        await rm(dataPath, { recursive: true, force: true });
+        logFoundry('Stopping the isolated Foundry container.');
+        try {
+          await container?.stop({ timeout: 30_000 });
+        } finally {
+          logFoundry('Removing the isolated Foundry data directory.');
+          await rm(dataPath, { recursive: true, force: true });
+          logFoundry('Isolated Foundry teardown completed.', 'success');
+        }
       },
     };
   } catch (error) {
+    logFoundry(
+      'Isolated Foundry startup failed. Cleaning up its resources.',
+      'error',
+    );
     await container?.stop({ timeout: 30_000 }).catch(() => undefined);
     await rm(dataPath, { recursive: true, force: true });
+    logFoundry('Failed isolated runtime cleanup completed.', 'success');
     throw error;
   }
 }
