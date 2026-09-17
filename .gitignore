@@ -3,6 +3,7 @@
 /dist
 /fvtt
 /.foundry
+/.env
 /playwright-report
 /test-results
 /tests/foundry/.auth

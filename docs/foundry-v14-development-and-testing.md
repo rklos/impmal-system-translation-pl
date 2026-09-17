@@ -40,7 +40,14 @@ archive, license key, runtime data, or test data.
 
 ## License and EULA
 
-Set the license key in the shell that starts the development runtime or tests:
+Copy `.env.example` to `.env` in the project root and add the license key:
+
+```dotenv
+FOUNDRY_LICENSE_KEY=your-license-key
+```
+
+The local `.env` file is ignored by Git. A key set in the shell takes precedence over
+the value in that file:
 
 ```bash
 read -s FOUNDRY_LICENSE_KEY
@@ -48,7 +55,8 @@ export FOUNDRY_LICENSE_KEY
 ```
 
 You may load the value from your normal secret manager instead. Do not add it to
-the repository, Compose file, package scripts, or an environment file.
+the repository, Compose file, package scripts, or an environment file other than
+the ignored root `.env`.
 
 The bootstrap passes `FOUNDRY_LICENSE_KEY` directly to the Foundry container. It
 uses a stable hostname because Foundry binds activation to the hostname. The
@@ -231,7 +239,7 @@ matching data copy.
 
 | Problem | Solution |
 |---------|----------|
-| `FOUNDRY_LICENSE_KEY` is missing | Export the license key in the same shell before starting Foundry or Playwright |
+| `FOUNDRY_LICENSE_KEY` is missing | Add the license key to the ignored root `.env`, or export it in the same shell before starting Foundry or Playwright |
 | Foundry archive is missing | Place `foundryvtt-14.365.zip` under `.foundry/cache` |
 | Playwright cannot launch Chromium | Run `npx playwright install chromium` |
 | Isolated Foundry does not become ready | Check the bootstrap error after the last `[foundry]` stage and verify the archive, bind-mount permissions, and license key |

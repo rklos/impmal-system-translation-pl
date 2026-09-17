@@ -9,6 +9,7 @@ import {
 } from 'testcontainers';
 import { loadFoundryTestConfig } from '../helpers/config';
 import { runCommand } from './command';
+import { loadFoundryEnvironment } from './environment';
 import { logFoundry } from './logging';
 
 export type FoundryRuntimeName = 'devcontainer' | 'testcontainer';
@@ -37,6 +38,7 @@ export async function prepareFoundryRuntime(
   runtimeName: FoundryRuntimeName,
 ): Promise<StartedFoundryRuntime> {
   const repositoryRoot = process.cwd();
+  loadFoundryEnvironment();
   process.env.FOUNDRY_ADMIN_PASSWORD = ADMIN_PASSWORD;
   logFoundry(`Preparing the ${runtimeName} runtime.`);
   logFoundry('Building the translation module.');
