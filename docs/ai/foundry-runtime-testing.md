@@ -153,7 +153,7 @@ Run the same suite against the persistent development instance when required:
 npm run test:foundry:devcontainer
 ```
 
-Attempt the repository lint command and report its known loader blocker if it remains:
+Run the repository lint command:
 
 ```bash
 npx eslint .

@@ -14,6 +14,15 @@ export class ChatPage {
     .locator('#chat .chat-log .chat-message')
     .last();
 
+  public readonly chatTab = (): Locator => this.page
+    .locator('#ui-right [data-tab="chat"], #sidebar-tabs [data-tab="chat"]')
+    .filter({ visible: true })
+    .first();
+
+  public async openChat(): Promise<void> {
+    await this.chatTab().click();
+  }
+
   public async createAppliedOpposedMessage(): Promise<string> {
     const messageId = await this.page.evaluate(async () => {
       const foundry = (window as unknown as {
