@@ -12,7 +12,7 @@ import { runCommand } from './command';
 import { loadFoundryEnvironment } from './environment';
 import { logFoundry } from './logging';
 
-export type FoundryRuntimeName = 'devcontainer' | 'testcontainer';
+export type FoundryRuntimeName = 'compose' | 'testcontainer';
 
 export type StartedFoundryRuntime = {
   baseURL: string;
@@ -20,15 +20,23 @@ export type StartedFoundryRuntime = {
 };
 
 const ADMIN_PASSWORD = 'impmal-test-admin';
-const COMPOSE_FILE = '.devcontainer/compose.yaml';
+const COMPOSE_FILE = 'compose.yaml';
 const FOUNDRY_IMAGE = 'docker.io/felddy/foundryvtt:14.365.0';
-const FOUNDRY_PORT = 30_000;
+const FOUNDRY_CONTAINER_PORT = 30_000;
+
+export function readComposePort(): number {
+  const port = Number(process.env.FOUNDRY_COMPOSE_PORT ?? FOUNDRY_CONTAINER_PORT);
+  if (!Number.isInteger(port) || port < 1 || port > 65_535) {
+    throw new Error('FOUNDRY_COMPOSE_PORT must be a valid TCP port');
+  }
+  return port;
+}
 
 export function readFoundryRuntimeName(): FoundryRuntimeName {
   const runtimeName = process.env.FOUNDRY_TEST_RUNTIME ?? 'testcontainer';
-  if (runtimeName !== 'devcontainer' && runtimeName !== 'testcontainer') {
+  if (runtimeName !== 'compose' && runtimeName !== 'testcontainer') {
     throw new Error(
-      'FOUNDRY_TEST_RUNTIME must be either "devcontainer" or "testcontainer"',
+      'FOUNDRY_TEST_RUNTIME must be either "compose" or "testcontainer"',
     );
   }
   return runtimeName;
@@ -45,28 +53,26 @@ export async function prepareFoundryRuntime(
   await runCommand('npm', ['run', 'build']);
   logFoundry('Translation module build completed.', 'success');
 
-  if (runtimeName === 'devcontainer') {
-    const dataPath = path.join(repositoryRoot, '.foundry/data');
-    await preparePackages(repositoryRoot, dataPath);
-    const baseURL = `http://127.0.0.1:${FOUNDRY_PORT}`;
+  if (runtimeName === 'compose') {
+    const baseURL = `http://127.0.0.1:${readComposePort()}`;
     if (await isFoundryReady(baseURL)) {
       logFoundry(
-        `Reusing the development Foundry instance at ${baseURL}.`,
+        `Reusing the persistent Compose Foundry instance at ${baseURL}.`,
         'success',
       );
       return {
         baseURL,
         stop: async () => {
-          logFoundry('Leaving the development Foundry instance running.');
+          logFoundry('Leaving the persistent Compose Foundry instance running.');
         },
       };
     }
     if (!process.env.FOUNDRY_LICENSE_KEY) {
       throw new Error(
-        'FOUNDRY_LICENSE_KEY must be set before starting the development Foundry runtime',
+        'FOUNDRY_LICENSE_KEY must be set before starting the persistent Compose Foundry runtime',
       );
     }
-    logFoundry('Starting the development workspace and Foundry services.');
+    logFoundry('Starting the persistent Compose Foundry service.');
     await runCommand('docker', [
       'compose',
       '-f',
@@ -74,14 +80,13 @@ export async function prepareFoundryRuntime(
       'up',
       '--detach',
       '--wait',
-      'workspace',
       'foundry',
     ]);
-    logFoundry(`Development Foundry is ready at ${baseURL}.`, 'success');
+    logFoundry(`Persistent Compose Foundry is ready at ${baseURL}.`, 'success');
     return {
       baseURL,
       stop: async () => {
-        logFoundry('Leaving the development Foundry instance running.');
+        logFoundry('Leaving the persistent Compose Foundry instance running.');
       },
     };
   }
@@ -113,7 +118,7 @@ async function preparePackages(
   logFoundry('Preparing the pinned Foundry packages and local module build.');
   await mkdir(dataPath, { recursive: true });
   await runCommand(process.execPath, [
-    '.devcontainer/managed/run-package-bootstrap.mjs',
+    'tools/foundry/run-package-bootstrap.mjs',
   ], {
     env: {
       ...process.env,
@@ -121,7 +126,7 @@ async function preparePackages(
       FOUNDRY_REPOSITORY_ROOT: repositoryRoot,
       FOUNDRY_TEST_CONFIG: path.join(
         repositoryRoot,
-        '.devcontainer/foundry-test.config.json',
+        'tools/foundry/foundry-test.config.json',
       ),
     },
   });
@@ -175,15 +180,15 @@ async function startTestcontainer(
           target: '/data',
         },
       ])
-      .withExposedPorts(FOUNDRY_PORT)
-      .withWaitStrategy(Wait.forHttp('/api/status', FOUNDRY_PORT, {
+      .withExposedPorts(FOUNDRY_CONTAINER_PORT)
+      .withWaitStrategy(Wait.forHttp('/api/status', FOUNDRY_CONTAINER_PORT, {
         abortOnContainerExit: true,
       }))
       .withStartupTimeout(180_000)
       .start();
 
     const baseURL = `http://${container.getHost()}:${
-      container.getMappedPort(FOUNDRY_PORT)
+      container.getMappedPort(FOUNDRY_CONTAINER_PORT)
     }`;
     logFoundry(`Isolated Foundry is ready at ${baseURL}.`, 'success');
     return {

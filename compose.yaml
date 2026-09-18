@@ -3,48 +3,19 @@ name: impmal-translation-dev
 x-foundry-admin-password: &foundry-admin-password impmal-test-admin
 
 services:
-  workspace:
-    build:
-      context: ..
-      dockerfile: .devcontainer/managed/workspace.Dockerfile
-    command:
-      - sh
-      - -c
-      - npm ci && npm run build && touch /tmp/impmal-workspace-ready && exec sleep infinity
-    environment:
-      FOUNDRY_ADMIN_PASSWORD: *foundry-admin-password
-      FOUNDRY_BASE_URL: http://foundry:30000
-    healthcheck:
-      test:
-        - CMD
-        - test
-        - -f
-        - /tmp/impmal-workspace-ready
-      interval: 2s
-      timeout: 2s
-      retries: 150
-      start_period: 5s
-    init: true
-    volumes:
-      - ..:/workspace:cached
-      - workspace-node-modules:/workspace/node_modules
-
   package-bootstrap:
     image: docker.io/felddy/foundryvtt:14.365.0
-    depends_on:
-      workspace:
-        condition: service_healthy
     entrypoint:
       - node
-      - /workspace/.devcontainer/managed/run-package-bootstrap.mjs
+      - /workspace/tools/foundry/run-package-bootstrap.mjs
     environment:
       FOUNDRY_DATA_PATH: /data
       FOUNDRY_REPOSITORY_ROOT: /workspace
-      FOUNDRY_TEST_CONFIG: /workspace/.devcontainer/foundry-test.config.json
+      FOUNDRY_TEST_CONFIG: /workspace/tools/foundry/foundry-test.config.json
     volumes:
-      - ..:/workspace:ro
-      - ../.foundry/cache:/workspace/.foundry/cache
-      - ../.foundry/data:/data
+      - .:/workspace:ro
+      - ./.foundry/cache:/workspace/.foundry/cache
+      - ./.foundry/data:/data
 
   foundry:
     image: docker.io/felddy/foundryvtt:14.365.0
@@ -64,11 +35,11 @@ services:
       FOUNDRY_TELEMETRY: "false"
       FOUNDRY_VERSION: "14.365"
     volumes:
-      - ..:/workspace:ro
-      - ../.foundry/cache:/data/container_cache
-      - ../.foundry/data:/data
+      - .:/workspace:ro
+      - ./.foundry/cache:/data/container_cache
+      - ./.foundry/data:/data
     ports:
-      - 127.0.0.1:30000:30000
+      - 127.0.0.1:${FOUNDRY_COMPOSE_PORT:-30000}:30000
     healthcheck:
       test:
         - CMD
@@ -82,6 +53,3 @@ services:
       retries: 24
       start_period: 30s
     stop_grace_period: 30s
-
-volumes:
-  workspace-node-modules:

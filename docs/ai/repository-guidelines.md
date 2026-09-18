@@ -24,7 +24,8 @@ upstream repositories and versions belong in their `src/packages/<package>/index
 | `tools/commands/` | Reporting, synchronization, and patch CLI commands |
 | `tools.config.ts` | Tool configuration for patchable packages |
 | `.vite/` | Build-time patch loading |
-| `.devcontainer/` | Interactive workspace, persistent Foundry runtime, and package bootstrap |
+| `compose.yaml` | Persistent Foundry runtime for local browser testing |
+| `tools/foundry/` | Foundry package bootstrap and pinned runtime configuration |
 | `tests/foundry/bootstrap/` | Shared Foundry bootstrap and runtime adapters |
 | `tests/foundry/` | Module-owned host Playwright tests and Foundry fixtures |
 | `**/__tests__/` | Adjacent Vitest tests for Foundry-independent project code |
@@ -87,7 +88,7 @@ The established change boundaries are:
 | `npm run foundry:start` | Bootstrap the persistent development environment |
 | `npm run typecheck:foundry` | Type-check the Playwright suite |
 | `npm run test:foundry` | Run host Playwright against an isolated Testcontainers runtime |
-| `npm run test:foundry:devcontainer` | Run host Playwright against the persistent development runtime |
+| `npm run test:foundry:compose` | Run host Playwright against the persistent Compose runtime |
 | `npx eslint .` | Lint TypeScript and JavaScript with the repository configuration |
 | `npm run report` | Compare supported upstream versions with their latest releases |
 | `npm run sync wfrp4e` | Import WHLib translations from the WFRP4e Polish project |

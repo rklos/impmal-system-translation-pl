@@ -29,7 +29,7 @@ export type FoundryTestConfig = {
 export function loadFoundryTestConfig(): FoundryTestConfig {
   const configPath = path.resolve(
     process.cwd(),
-    '.devcontainer/foundry-test.config.json',
+    'tools/foundry/foundry-test.config.json',
   );
 
   return JSON.parse(readFileSync(configPath, 'utf8')) as FoundryTestConfig;

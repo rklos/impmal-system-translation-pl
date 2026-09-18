@@ -2,17 +2,15 @@
 
 This project uses two Foundry VTT runtime modes:
 
-- A long-running devcontainer for interactive development.
+- A long-running Docker Compose service for interactive development.
 - A temporary Testcontainers instance for isolated Playwright runs.
 
-Playwright always runs directly on the host. It never runs in the workspace or
-Foundry containers.
+Playwright always runs directly on the host. It never runs in the Foundry container.
 
 ## Requirements
 
 - Node.js and npm
 - Docker with Docker Compose
-- A Dev Containers compatible editor for interactive container development
 - A licensed Foundry VTT Node.js archive for version 14.365
 - A Foundry VTT license key available through `FOUNDRY_LICENSE_KEY`
 - Network access for public Foundry packages
@@ -78,7 +76,7 @@ The command:
 1. Builds the project on the host.
 2. Installs the pinned public system and modules.
 3. Copies `dist` into the persistent Foundry data directory.
-4. Starts the workspace and Foundry services.
+4. Starts the Foundry service.
 5. Waits for Foundry to become ready.
 6. Accepts the EULA when required.
 7. Recreates the disposable Polish test world.
@@ -87,8 +85,20 @@ The command:
 
 Open `http://localhost:30000` after the command finishes.
 
-The development data persists under `.foundry/data`. The editor devcontainer
-remains available for interactive commands, but tests run from the host.
+The development data persists under `.foundry/data`. Install and run project tools on
+the host. Tests also run from the host.
+
+`npm run foundry:start` resets the disposable test world every time it runs. The
+Foundry container, installed packages, and package cache remain available between runs.
+Use the running world for manual debugging. Start a test run to reset it back to the
+seeded baseline.
+
+If port `30000` is occupied, set `FOUNDRY_COMPOSE_PORT` in `.env` and use the same
+value when opening Foundry or running Compose tests. This changes only the host port:
+
+```bash
+FOUNDRY_COMPOSE_PORT=30001 npm run foundry:start
+```
 
 ## Run the checks
 
@@ -124,18 +134,21 @@ This is the default mode. Playwright global setup:
 To run host Playwright against the long-running development instance instead:
 
 ```bash
-npm run test:foundry:devcontainer
+npm run test:foundry:compose
 ```
 
 The equivalent explicit toggle is:
 
 ```bash
-FOUNDRY_TEST_RUNTIME=devcontainer npm run test:foundry
+FOUNDRY_TEST_RUNTIME=compose npm run test:foundry
 ```
 
-The accepted values are `testcontainer` and `devcontainer`. The devcontainer
-mode resets and prepares the test world but leaves the development services
-running after the suite.
+The accepted values are `testcontainer` and `compose`. The Compose mode resets and
+prepares the test world but leaves the Foundry service running after the suite.
+
+When the Compose service is stopped, `test:foundry:compose` starts it and performs one
+world bootstrap. When it is already running, the command resets the existing test world
+through the same bootstrap before running Playwright.
 
 Use Playwright UI mode when investigating a browser failure:
 
@@ -204,12 +217,12 @@ bootstrap must not download paid ImpMal modules or store private manifest URLs.
 
 ## Configuration and updates
 
-Pinned package versions, manifest URLs, and the disposable world ID are defined
-in `.devcontainer/foundry-test.config.json`.
+Pinned package versions, manifest URLs, and the disposable world ID are defined in
+`tools/foundry/foundry-test.config.json`.
 
-The development image and Foundry version are defined in
-`.devcontainer/compose.yaml`. The Testcontainers adapter uses the same exact
-image and version in `tests/foundry/bootstrap/runtime.ts`.
+The development image and Foundry version are defined in `compose.yaml`. The
+Testcontainers adapter uses the same exact image and version in
+`tests/foundry/bootstrap/runtime.ts`.
 
 When updating Foundry or an installed package:
 
@@ -243,7 +256,7 @@ matching data copy.
 | Foundry archive is missing | Place `foundryvtt-14.365.zip` under `.foundry/cache` |
 | Playwright cannot launch Chromium | Run `npx playwright install chromium` |
 | Isolated Foundry does not become ready | Check the bootstrap error after the last `[foundry]` stage and verify the archive, bind-mount permissions, and license key |
-| A package version does not match | Check the manifest URL and exact version in `.devcontainer/foundry-test.config.json` |
+| A package version does not match | Check the manifest URL and exact version in `tools/foundry/foundry-test.config.json` |
 | The local module is missing | Run `npm run build`, then rerun the bootstrap |
 | A test changes another test's result | Confirm that it clones a seed and deletes only the clone |
 | A test runtime remains after failure | Testcontainers normally removes it automatically; inspect Docker only if the host process was forcibly terminated |

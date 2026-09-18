@@ -1,3 +1,3 @@
 import { bootstrapFoundry } from './bootstrap';
 
-await bootstrapFoundry('devcontainer');
+await bootstrapFoundry('compose');

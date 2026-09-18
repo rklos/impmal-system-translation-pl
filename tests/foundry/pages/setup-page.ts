@@ -111,6 +111,15 @@ export class FoundrySetupPage {
     await this.page.goto('/setup');
     await this.page.waitForLoadState('domcontentloaded');
 
+    if (this.currentViewIs('join')) {
+      await this.returnToSetupButton().click();
+      await this.adminPassword().waitFor({
+        state: 'visible',
+        timeout: 30_000,
+      });
+      await this.authenticateAdministrator();
+    }
+
     if (this.currentViewIs('license')) {
       await this.handleLicense();
     }
@@ -278,11 +287,7 @@ export class FoundrySetupPage {
   private async authenticateAdministrator(): Promise<void> {
     const password = process.env.FOUNDRY_ADMIN_PASSWORD ?? '';
     await this.adminPassword().fill(password);
-    if (this.page.url().includes('/join')) {
-      await this.returnToSetupButton().click();
-    } else {
-      await this.adminPassword().press('Enter');
-    }
+    await this.adminPassword().press('Enter');
 
     try {
       await this.page.waitForURL(/\/setup/, { timeout: 10_000 });
@@ -296,7 +301,7 @@ export class FoundrySetupPage {
     }
   }
 
-  private currentViewIs(view: 'auth' | 'license'): boolean {
+  private currentViewIs(view: 'auth' | 'join' | 'license'): boolean {
     return new URL(this.page.url()).pathname.endsWith(`/${view}`);
   }
 

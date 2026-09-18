@@ -12,11 +12,11 @@
     "bump-version": "tsx tools/bump-version.ts",
     "auto-import-styles": "tsx tools/auto-import-styles.ts",
     "scaffold": "npx yo fvtt:warhammer-translation",
-    "foundry:start": "tsx tests/foundry/bootstrap/start-devcontainer.ts",
+    "foundry:start": "tsx tests/foundry/bootstrap/start-compose.ts",
     "typecheck:foundry": "tsc --noEmit -p tests/foundry/tsconfig.json",
     "test": "vitest run",
     "test:foundry": "playwright test -c tests/foundry/playwright.config.ts",
-    "test:foundry:devcontainer": "FOUNDRY_TEST_RUNTIME=devcontainer playwright test -c tests/foundry/playwright.config.ts",
+    "test:foundry:compose": "FOUNDRY_TEST_RUNTIME=compose playwright test -c tests/foundry/playwright.config.ts",
     "test:foundry:ui": "playwright test -c tests/foundry/playwright.config.ts --ui"
   },
   "repository": {

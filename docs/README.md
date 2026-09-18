@@ -23,7 +23,7 @@ This is the documentation hub for the FoundryVTT System Translation project. The
 | `npm run foundry:start` | Bootstrap the persistent development environment |
 | `npm run typecheck:foundry` | Type-check the Playwright suite |
 | `npm run test:foundry` | Run module-owned tests in an isolated Testcontainers instance |
-| `npm run test:foundry:devcontainer` | Run host tests against the persistent development instance |
+| `npm run test:foundry:compose` | Run host tests against the persistent Compose instance |
 | `npm run report` | Check for missing or extra translations |
 | `npm run sync wfrp4e` | Sync with official WFRP4e translations |
 | `npm run patch download` | Download original files and remove JS files without translatable strings |

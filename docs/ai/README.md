@@ -22,7 +22,7 @@ repository. Start here, then load only the playbooks required for the current ta
 | Add custom translations, scripts, or styles | [Translation Maintenance](translation-maintenance.md) | [Custom Package](../custom-package.md) |
 | Translate or synchronize language files | [Translation Maintenance](translation-maintenance.md) | [Translation Guide](../translation-guide.md) |
 | Add or change development tools | [Tool Development](tool-development.md) | [Package Development](../package-development.md) |
-| Change the Foundry devcontainer or browser smoke tests | [Foundry Runtime Testing](foundry-runtime-testing.md) | [Foundry V14 Development and Testing](../foundry-v14-development-and-testing.md) |
+| Change the Foundry Compose runtime or browser smoke tests | [Foundry Runtime Testing](foundry-runtime-testing.md) | [Foundry V14 Development and Testing](../foundry-v14-development-and-testing.md) |
 | Change dependencies or build configuration | [Repository Guidelines](repository-guidelines.md) | [Package Development](../package-development.md) |
 | Add or revise documentation | [Documentation Maintenance](documentation-maintenance.md) | [Documentation Hub](../README.md) |
 | Upgrade Foundry VTT, ImpMal, WHLib, or Babele | [Upgrade and Patch Maintenance](upgrade-and-patch-maintenance.md) | [Patching System](../patching-system.md) |

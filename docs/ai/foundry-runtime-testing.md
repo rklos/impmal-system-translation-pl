@@ -1,6 +1,6 @@
 # Foundry Runtime Testing
 
-Use this playbook when changing the Foundry devcontainer, Testcontainers runtime,
+Use this playbook when changing the persistent Foundry Compose runtime, Testcontainers runtime,
 package bootstrap, page objects, or browser smoke tests.
 
 ## Ownership Boundary
@@ -52,7 +52,7 @@ Keep responsibilities separated:
 | `tests/foundry/licensed/` | Reserve tests that require paid ImpMal modules |
 | `tests/foundry/pages/` | Store selectors and reusable browser actions |
 | `**/__tests__/` | Store adjacent Vitest tests for Foundry-independent project code |
-| `.devcontainer/managed/` | Install and validate Foundry packages |
+| `tools/foundry/` | Install and validate Foundry packages |
 
 In page objects, expose locators as public lazy functions based on `this.page`. Put
 reusable actions in public methods. Keep assertions in setup or test files so failures
@@ -88,8 +88,8 @@ Playwright always runs on the host. Its global setup selects the runtime through
 
 - `testcontainer` is the default. It creates temporary data, starts Foundry through
   Testcontainers, and removes both after the suite.
-- `devcontainer` targets the persistent development Foundry service and leaves it
-  running after the suite.
+- `compose` targets the persistent development Foundry service. It resets and seeds
+  the disposable world before the suite, then leaves the service running.
 
 Both modes require `FOUNDRY_LICENSE_KEY`. Pass it to the container without writing it
 to tracked configuration or logs. Use a stable container hostname and let the shared
@@ -150,7 +150,7 @@ npm run test:foundry
 Run the same suite against the persistent development instance when required:
 
 ```bash
-npm run test:foundry:devcontainer
+npm run test:foundry:compose
 ```
 
 Run the repository lint command:
