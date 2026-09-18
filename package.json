@@ -35,7 +35,7 @@
     "@foundryvtt/foundryvtt-cli": "1.1.0",
     "@octokit/core": "7.0.3",
     "@playwright/test": "1.62.0",
-    "@rklos/eslint-configs": "github:rklos/eslint-configs#3.1.5",
+    "@rklos/eslint-configs": "github:rklos/eslint-configs#23d629e6213ced8d9df0638fa4da193148b43ae4",
     "@types/node": "24.13.3",
     "chalk": "5.4.1",
     "discord.js": "14.21.0",

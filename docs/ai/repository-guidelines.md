@@ -88,7 +88,7 @@ The established change boundaries are:
 | `npm run typecheck:foundry` | Type-check the Playwright suite |
 | `npm run test:foundry` | Run host Playwright against an isolated Testcontainers runtime |
 | `npm run test:foundry:devcontainer` | Run host Playwright against the persistent development runtime |
-| `npx eslint .` | Attempt to lint TypeScript and JavaScript with the repository configuration |
+| `npx eslint .` | Lint TypeScript and JavaScript with the repository configuration |
 | `npm run report` | Compare supported upstream versions with their latest releases |
 | `npm run sync wfrp4e` | Import WHLib translations from the WFRP4e Polish project |
 | `npm run sync source` | Merge local translations into current upstream language files |
@@ -123,10 +123,6 @@ Choose checks based on the changed files:
 | Patch files | Exact-release patch audit, `npm run build`, and runtime smoke test |
 | Compatibility metadata | Upstream release verification and `npm run build` |
 | Devcontainer or Foundry browser tests | `npm test`, browser-test type-check, project build, and live smoke test |
-
-The current ESLint command exits while loading `import/no-unresolved` with ESLint 10.0.3,
-before it checks project files. Run it so a future configuration fix is detected. Until
-then, report this as an existing validation blocker rather than claiming that lint passed.
 
 Read command output and inspect `git diff`. A zero exit code is not sufficient when a tool
 catches errors and continues.
